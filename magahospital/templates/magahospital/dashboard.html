@@ -1,0 +1,72 @@
+{% extends 'magahospital/base.html' %}
+{% load static %}
+
+{% block content %}
+
+<h2 class="mb-4">Staff Dashboard</h2>
+
+<div class="row">
+
+  <!-- Reception (Admin only) -->
+  {% if is_admin %}
+  <div class="col-md-3">
+    <div class="card p-3 text-center shadow">
+      <h5>Reception</h5>
+      <a href="{% url 'patient_list' %}" class="btn btn-primary mt-2">Open</a>
+    </div>
+  </div>
+  {% endif %}
+
+  <!-- Doctor -->
+  {% if is_doctor or is_admin %}
+  <div class="col-md-3">
+    <div class="card p-3 text-center shadow">
+      <h5>Doctor</h5>
+      <a href="{% url 'patient_list' %}" class="btn btn-success mt-2">Open</a>
+    </div>
+  </div>
+  {% endif %}
+
+  <!-- Lab -->
+  {% if is_lab or is_admin %}
+  <div class="col-md-3">
+    <div class="card p-3 text-center shadow">
+      <h5>Lab</h5>
+      <a href="{% url 'patient_list' %}" class="btn btn-warning mt-2">Open</a>
+    </div>
+  </div>
+  {% endif %}
+
+  <!-- Dispense -->
+  {% if is_dispense or is_admin %}
+  <div class="col-md-3">
+    <div class="card p-3 text-center shadow">
+      <h5>Dispense</h5>
+      <a href="{% url 'patient_list' %}" class="btn btn-danger mt-2">Open</a>
+    </div>
+  </div>
+  {% endif %}
+
+  <!-- Prescription -->
+  {% if is_doctor or is_admin %}
+  <div class="col-md-3">
+    <div class="card p-3 text-center shadow">
+      <h5>Prescription</h5>
+      <a href="{% url 'patient_list' %}" class="btn btn-danger mt-2">Open</a>
+    </div>
+  </div>
+  {% endif %}
+
+  <!-- Admin Panel -->
+  {% if is_admin %}
+  <div class="col-md-3">
+    <div class="card p-3 text-center shadow">
+      <h5>Admin Panel</h5>
+      <a href="{% url 'admin:index' %}" class="btn btn-dark mt-2">Open</a>
+    </div>
+  </div>
+  {% endif %}
+
+</div>
+
+{% endblock %}

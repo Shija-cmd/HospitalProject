@@ -1,0 +1,71 @@
+{% extends 'magahospital/base.html' %}
+{% load static %}
+{% block content %}
+
+<h2>Visit Details</h2>
+
+<div class="card p-3 mb-3">
+  <p><strong>Patient:</strong> {{ visit.patient.firstname }} {{ visit.patient.secondname }}</p>
+  <p><strong>Date:</strong> {{ visit.date }}</p>
+</div>
+
+<!-- Doctor -->
+<div class="card p-3 mb-3">
+  <h4>Doctor</h4>
+  <a href="{% url 'add_doctor' visit.id %}" class="btn btn-primary btn-sm mb-2">Add Doctor</a>
+
+  {% if doctor %}
+    <p><strong>History:</strong> {{ doctor.history }}</p>
+    <p><strong>Diagnosis:</strong> {{ doctor.diagnosis }}</p>
+  {% else %}
+    <p>No doctor data</p>
+  {% endif %}
+</div>
+
+<!-- Labs -->
+<div class="card p-3 mb-3">
+  <h4>Labs</h4>
+  <a href="{% url 'add_lab' visit.id %}" class="btn btn-success btn-sm mb-2">Add Lab</a>
+
+  <ul class="list-group">
+    {% for lab in labs %}
+      <li class="list-group-item">
+        {{ lab.get_lab_type_display }} - {{ lab.results }}
+      </li>
+    {% empty %}
+      <li class="list-group-item">No labs</li>
+    {% endfor %}
+  </ul>
+</div>
+
+<!-- Prescriptions -->
+<div class="card p-3 mb-3">
+  <h4>Prescriptions</h4>
+  <a href="{% url 'add_prescription' visit.id %}" class="btn btn-warning btn-sm mb-2">Add</a>
+
+  <ul class="list-group">
+    {% for p in prescriptions %}
+      <li class="list-group-item">{{ p.medication }}</li>
+    {% empty %}
+      <li class="list-group-item">No prescriptions</li>
+    {% endfor %}
+  </ul>
+</div>
+
+<!-- Dispense -->
+<div class="card p-3 mb-3">
+  <h4>Dispense</h4>
+  <a href="{% url 'add_dispense' visit.id %}" class="btn btn-danger btn-sm mb-2">Add</a>
+
+  <ul class="list-group">
+    {% for d in dispenses %}
+      <li class="list-group-item">
+        {{ d.medication_given }} - {{ d.quantity }}
+      </li>
+    {% empty %}
+      <li class="list-group-item">No records</li>
+    {% endfor %}
+  </ul>
+</div>
+
+{% endblock %}

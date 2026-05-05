@@ -1,0 +1,91 @@
+{% extends 'magahospital/base.html' %}
+{% load static %}
+{% block content %}
+
+<h2>Patient History</h2>
+
+<div class="card p-3 mb-3">
+  <h4>{{ patient.firstname }} {{ patient.secondname }}</h4>
+  <p><strong>ID:</strong> {{ patient.idno }}</p>
+  <p><strong>Age:</strong> {{ patient.age }}</p>
+  <p><strong>Address:</strong> {{ patient.address }}</p>
+</div>
+
+<hr>
+
+<form method="GET" class="row mb-3">
+
+  <div class="col-md-3">
+    <input type="date" name="start" class="form-control"
+           value="{{ request.GET.start }}">
+  </div>
+
+  <div class="col-md-3">
+    <input type="date" name="end" class="form-control"
+           value="{{ request.GET.end }}">
+  </div>
+
+  <div class="col-md-2">
+    <button type="submit" class="btn btn-primary">Filter</button>
+  </div>
+
+</form>
+
+<h3>Visits</h3>
+
+{% for visit in visits %}
+  <div class="card p-3 mb-3 shadow-sm">
+
+    <h5>Visit Date: {{ visit.date }}</h5>
+
+    <!-- Doctor -->
+    <h6>Doctor</h6>
+    {% if visit.doctor %}
+      <p><strong>History:</strong> {{ visit.doctor.history }}</p>
+      <p><strong>Diagnosis:</strong> {{ visit.doctor.diagnosis }}</p>
+    {% else %}
+      <p>No doctor record</p>
+    {% endif %}
+
+    <!-- Labs -->
+    <h6>Labs</h6>
+    <ul>
+      {% for lab in visit.labs.all %}
+        <li>{{ lab.get_lab_type_display }} - {{ lab.results }}</li>
+      {% empty %}
+        <li>No labs</li>
+      {% endfor %}
+    </ul>
+
+    <!-- Prescriptions -->
+    <h6>Prescriptions</h6>
+    <ul>
+      {% for p in visit.prescriptions.all %}
+        <li>{{ p.medication }}</li>
+      {% empty %}
+        <li>No prescriptions</li>
+      {% endfor %}
+    </ul>
+
+    <!-- Dispense -->
+    <h6>Dispensed</h6>
+    <ul>
+      {% for d in visit.dispenses.all %}
+        <li>{{ d.medication_given }} - {{ d.quantity }}</li>
+      {% empty %}
+        <li>No records</li>
+      {% endfor %}
+    </ul>
+
+    <a href="{% url 'visit_detail' visit.id %}" class="btn btn-primary btn-sm mt-2">
+      Open Visit
+    </a>
+
+  </div>
+{% empty %}
+  <p>No visits found</p>
+{% endfor %}
+
+<a href="{% url 'patient_list' %}" class="btn btn-secondary mt-3">⬅ Back</a>
+
+{% endblock %}

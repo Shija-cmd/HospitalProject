@@ -5,15 +5,14 @@ from django.utils import timezone
 
 
 # Create your models here.
+# -------------------------
+# CONSTANTS
+# -------------------------
+
 SEX = [
-    ('M', 'M'),
-    ('F', 'F'),
+    ('M', 'Male'),
+    ('F', 'Female'),
 ]
-def generate_random_code():
-    while True:
-        code = ''.join(random.choices(string.ascii_uppercase + string.digits, k=9))
-        if not Lab.objects.filter(idno=code).exists():
-            return code
 
 LAB = [
     (1, 'LAB 1'),
@@ -22,76 +21,106 @@ LAB = [
     (4, 'LAB 4'),
     (5, 'LAB 5'),
 ]
-class Receiption(models.Model):
-    idno = models.CharField(max_length=9, default=generate_random_code, db_index=True, editable = False, primary_key= True)
-    firstname = models.CharField(max_length=200, null = True)
-    secondname = models.CharField(max_length=200, null = True)
-    age = models.IntegerField(null = True)
-    address = models.CharField(max_length=200, null = True)
-    sex = models.CharField(choices=SEX)
-    date = models.DateTimeField(default=timezone.now)
-    
+
+
+# -------------------------
+# HELPERS
+# -------------------------
+
+def generate_random_code():
+    return ''.join(random.choices(string.ascii_uppercase + string.digits, k=9))
+
+
+# -------------------------
+# MODELS
+# -------------------------
+
+# Patient (Reception)
+class Patient(models.Model):
+    idno = models.CharField(
+        max_length=9,
+        unique=True,
+        default=generate_random_code,
+        editable=False
+    )
+    firstname = models.CharField(max_length=200)
+    secondname = models.CharField(max_length=200)
+    age = models.IntegerField()
+    address = models.CharField(max_length=200)
+    sex = models.CharField(max_length=1, choices=SEX)
+    created_at = models.DateTimeField(default=timezone.now)
+
     def __str__(self):
-        return f"{self.idno}"
-    
-class Doctor_one(models.Model):
-    idno = models.OneToOneField(Receiption, primary_key = True, on_delete=models.CASCADE)
-    firstname = models.CharField(max_length=200, null = True)
-    secondname = models.CharField(max_length=200, null = True)
-    age = models.IntegerField(null = True)
-    address = models.CharField(max_length=200, null = True)
-    sex = models.CharField(choices=SEX)
+        return f"{self.idno} - {self.firstname} {self.secondname}"
+
+
+# Visit (supports multiple visits per patient)
+class Visit(models.Model):
+    patient = models.ForeignKey(
+        Patient,
+        on_delete=models.CASCADE,
+        related_name="visits"
+    )
     date = models.DateTimeField(default=timezone.now)
-    history = models.TextField(null=True, blank=True)
-    lab_tests = models.TextField(null = True)
-    
+
     def __str__(self):
-        return f"{self.idno.idno} - {self.firstname} {self.secondname}"
-    
+        return f"{self.patient.idno} - {self.date}"
+
+
+# Doctor (one per visit)
+class Doctor(models.Model):
+    visit = models.OneToOneField(
+        Visit,
+        on_delete=models.CASCADE,
+        related_name="doctor"
+    )
+    history = models.TextField(blank=True, null=True)
+    diagnosis = models.TextField(blank=True, null=True)
+
+    def __str__(self):
+        return f"Doctor - {self.visit}"
+
+
+# Lab (multiple per visit)
 class Lab(models.Model):
-    idno = models.OneToOneField(Doctor_one, primary_key = True, on_delete=models.CASCADE)
-    firstname = models.CharField(max_length=200, null=True)
-    secondname = models.CharField(max_length=200, null = True)
-    age = models.IntegerField(null = True)
-    address = models.CharField(max_length=200, null = True)
-    sex = models.CharField(choices=SEX)
-    date = models.DateTimeField(default=timezone.now)
-    history = models.TextField(null=True, blank=True)
-    lab_tests = models.TextField(null = True)
-    lab_results = models.TextField(null = True)
-    
+    visit = models.ForeignKey(
+    Visit,
+    on_delete=models.CASCADE,
+    related_name='labs'
+)
+    lab_type = models.IntegerField(choices=LAB)
+    results = models.TextField(blank=True, null=True)
+    created_at = models.DateTimeField(default=timezone.now)
+
     def __str__(self):
-        return f"{self.idno.idno} - {self.firstname} {self.secondname}"
-    
-class Med_Prescription(models.Model):
-    idno = models.OneToOneField(Lab, primary_key = True, on_delete=models.CASCADE)
-    firstname = models.CharField(max_length=200, null=True)
-    secondname = models.CharField(max_length=200, null = True)
-    age = models.IntegerField(null = True)
-    address = models.CharField(max_length=200, null = True)
-    sex = models.CharField(choices=SEX)
-    date = models.DateTimeField(default=timezone.now)
-    history = models.TextField(null=True, blank=True)
-    lab_tests = models.TextField(null = True)
-    lab_results = models.TextField(null = True)
-    medical_prescription = models.TextField(null = True)
-    
+        return f"Lab {self.lab_type} - {self.visit}"
+
+
+# Prescription (multiple per visit)
+class Prescription(models.Model):
+    visit = models.ForeignKey(
+        Visit,
+        on_delete=models.CASCADE,
+        related_name="prescriptions"
+    )
+    medication = models.TextField()
+    notes = models.TextField(blank=True, null=True)
+    created_at = models.DateTimeField(default=timezone.now)
+
     def __str__(self):
-        return f"{self.idno.idno}"
-    
-class Dispense_Medics(models.Model):
-    idno = models.OneToOneField(Med_Prescription, primary_key = True, on_delete=models.CASCADE)
-    firstname = models.CharField(max_length=200, null=True)
-    secondname = models.CharField(max_length=200, null = True)
-    age = models.IntegerField(null = True)
-    address = models.CharField(max_length=200, null = True)
-    sex = models.CharField(choices=SEX)
-    date = models.DateTimeField(default=timezone.now)
-    history = models.TextField(null=True, blank=True)
-    lab_tests = models.TextField(null = True)
-    lab_results = models.TextField(null = True)
-    medical_prescription = models.TextField(null = True)
-    dispense_medication = models.TextField(null = True)
-    
+        return f"Prescription - {self.visit}"
+
+
+# Dispense (multiple per visit)
+class Dispense(models.Model):
+    visit = models.ForeignKey(
+        Visit,
+        on_delete=models.CASCADE,
+        related_name="dispenses"
+    )
+    medication_given = models.TextField()
+    quantity = models.CharField(max_length=100, blank=True, null=True)
+    created_at = models.DateTimeField(default=timezone.now)
+
     def __str__(self):
-        return f"{self.idno.idno}"
+        return f"Dispense - {self.visit}"

@@ -1,12 +1,14 @@
 from django.contrib import admin
-from .models import Receiption, Doctor_one, Lab, Med_Prescription, Dispense_Medics
+from .models import Patient, Visit, Doctor, Lab, Prescription, Dispense
 
 # Register your models here.
-admin.site.register(Receiption)
-admin.site.register(Doctor_one)
+
+admin.site.register(Patient)
+admin.site.register(Visit)
+admin.site.register(Doctor)
 admin.site.register(Lab)
-admin.site.register(Med_Prescription)
-admin.site.register(Dispense_Medics)
+admin.site.register(Prescription)
+admin.site.register(Dispense)
 
 admin.site.site_header = "Admin Panel"
 admin.site.site_title = "Maga Hospital Admin"

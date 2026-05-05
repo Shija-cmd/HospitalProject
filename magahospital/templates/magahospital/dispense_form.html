@@ -1,0 +1,17 @@
+{% extends 'magahospital/base.html' %}
+{% load static %}
+{% block content %}
+
+<h2>Dispense Medication</h2>
+
+<form method="POST" class="card p-4 shadow">
+  {% csrf_token %}
+
+  {{ form.as_p }}
+
+  <button type="submit" class="btn btn-success">Save</button>
+</form>
+
+<a href="{% url 'visit_detail' visit.id %}" class="btn btn-secondary mt-3">⬅ Back</a>
+
+{% endblock %}

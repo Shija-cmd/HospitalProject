@@ -10,4 +10,5 @@ class MagahospitalConfig(AppConfig):
     name = 'magahospital'
 
     def ready(self):
-        import magahospital.signals  # Replace 'magahospital' with your app name
+       # import magahospital.signals  # Replace 'magahospital' with your app name
+       pass
