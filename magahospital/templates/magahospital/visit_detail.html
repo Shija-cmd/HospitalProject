@@ -1,71 +1,318 @@
 {% extends 'magahospital/base.html' %}
 {% load static %}
+
 {% block content %}
 
-<h2>Visit Details</h2>
+<style>
 
-<div class="card p-3 mb-3">
-  <p><strong>Patient:</strong> {{ visit.patient.firstname }} {{ visit.patient.secondname }}</p>
-  <p><strong>Date:</strong> {{ visit.date }}</p>
+    .page-title{
+        font-size:2.4rem;
+        font-weight:700;
+        color:#0f172a;
+        margin-bottom:30px;
+    }
+
+    /* MAIN CARD */
+    .custom-card{
+        border:none;
+        border-radius:20px;
+        background:#fff;
+        box-shadow:0 10px 30px rgba(0,0,0,0.06);
+        padding:25px;
+        margin-bottom:25px;
+        transition:0.3s;
+    }
+
+    .custom-card:hover{
+        transform:translateY(-3px);
+        box-shadow:0 14px 35px rgba(0,0,0,0.08);
+    }
+
+    /* SECTION HEADERS */
+    .section-header{
+        display:flex;
+        justify-content:space-between;
+        align-items:center;
+        margin-bottom:20px;
+        flex-wrap:wrap;
+        gap:10px;
+    }
+
+    .section-title{
+        font-size:1.7rem;
+        font-weight:700;
+        color:#0f172a;
+        margin:0;
+    }
+
+    /* SMALL ACTION BUTTONS */
+    .action-btn{
+        border-radius:10px;
+        padding:8px 18px;
+        font-weight:600;
+        font-size:14px;
+        transition:0.3s;
+    }
+
+    .action-btn:hover{
+        transform:translateY(-2px);
+    }
+
+    /* PATIENT INFO */
+    .info-item{
+        margin-bottom:12px;
+        font-size:16px;
+    }
+
+    .info-label{
+        font-weight:700;
+        color:#0f172a;
+    }
+
+    /* LIST GROUP */
+    .list-group-item{
+        border:none;
+        border-radius:12px !important;
+        margin-bottom:10px;
+        background:#f8fafc;
+        padding:15px;
+        font-size:15px;
+    }
+
+    /* EMPTY DATA */
+    .empty-data{
+        color:#64748b;
+        font-style:italic;
+    }
+
+    /* ICONS */
+    .section-icon{
+        margin-right:8px;
+    }
+
+    /* RESPONSIVE */
+    @media(max-width:768px){
+
+        .page-title{
+            font-size:2rem;
+        }
+
+        .section-title{
+            font-size:1.4rem;
+        }
+
+        .section-header{
+            flex-direction:column;
+            align-items:flex-start;
+        }
+
+    }
+
+</style>
+
+<!-- PAGE TITLE -->
+<h2 class="page-title">
+    <i class="bi bi-journal-medical me-2"></i>
+    Visit Details
+</h2>
+
+<!-- VISIT INFO -->
+<div class="custom-card">
+
+    <div class="info-item">
+        <span class="info-label">
+            <i class="bi bi-person-fill me-1"></i>
+            Patient:
+        </span>
+
+        {{ visit.patient.firstname }} {{ visit.patient.secondname }}
+    </div>
+
+    <div class="info-item">
+        <span class="info-label">
+            <i class="bi bi-calendar-event me-1"></i>
+            Date:
+        </span>
+
+        {{ visit.date }}
+    </div>
+
 </div>
 
-<!-- Doctor -->
-<div class="card p-3 mb-3">
-  <h4>Doctor</h4>
-  <a href="{% url 'add_doctor' visit.id %}" class="btn btn-primary btn-sm mb-2">Add Doctor</a>
+<!-- DOCTOR -->
+<div class="custom-card">
 
-  {% if doctor %}
-    <p><strong>History:</strong> {{ doctor.history }}</p>
-    <p><strong>Diagnosis:</strong> {{ doctor.diagnosis }}</p>
-  {% else %}
-    <p>No doctor data</p>
-  {% endif %}
+    <div class="section-header">
+
+        <h4 class="section-title">
+            <i class="bi bi-heart-pulse-fill text-primary section-icon"></i>
+            Doctor
+        </h4>
+
+        <a href="{% url 'add_doctor' visit.id %}" 
+           class="btn btn-primary action-btn">
+
+            <i class="bi bi-plus-circle me-1"></i>
+            Add Doctor
+
+        </a>
+
+    </div>
+
+    {% if doctor %}
+
+        <div class="list-group">
+
+            <div class="list-group-item">
+                <strong>History:</strong>
+                {{ doctor.history }}
+            </div>
+
+            <div class="list-group-item">
+                <strong>Diagnosis:</strong>
+                {{ doctor.diagnosis }}
+            </div>
+
+        </div>
+
+    {% else %}
+
+        <p class="empty-data">
+            No doctor data available.
+        </p>
+
+    {% endif %}
+
 </div>
 
-<!-- Labs -->
-<div class="card p-3 mb-3">
-  <h4>Labs</h4>
-  <a href="{% url 'add_lab' visit.id %}" class="btn btn-success btn-sm mb-2">Add Lab</a>
+<!-- LABS -->
+<div class="custom-card">
 
-  <ul class="list-group">
-    {% for lab in labs %}
-      <li class="list-group-item">
-        {{ lab.get_lab_type_display }} - {{ lab.results }}
-      </li>
-    {% empty %}
-      <li class="list-group-item">No labs</li>
-    {% endfor %}
-  </ul>
+    <div class="section-header">
+
+        <h4 class="section-title">
+            <i class="bi bi-flask text-success section-icon"></i>
+            Laboratory
+        </h4>
+
+        <a href="{% url 'add_lab' visit.id %}" 
+           class="btn btn-success action-btn">
+
+            <i class="bi bi-plus-circle me-1"></i>
+            Add Lab
+
+        </a>
+
+    </div>
+
+    <ul class="list-group">
+
+        {% for lab in labs %}
+
+        <li class="list-group-item">
+
+            <strong>{{ lab.get_lab_type_display }}</strong>
+            <br>
+            {{ lab.results }}
+
+        </li>
+
+        {% empty %}
+
+        <li class="list-group-item empty-data">
+            No laboratory records available.
+        </li>
+
+        {% endfor %}
+
+    </ul>
+
 </div>
 
-<!-- Prescriptions -->
-<div class="card p-3 mb-3">
-  <h4>Prescriptions</h4>
-  <a href="{% url 'add_prescription' visit.id %}" class="btn btn-warning btn-sm mb-2">Add</a>
+<!-- PRESCRIPTIONS -->
+<div class="custom-card">
 
-  <ul class="list-group">
-    {% for p in prescriptions %}
-      <li class="list-group-item">{{ p.medication }}</li>
-    {% empty %}
-      <li class="list-group-item">No prescriptions</li>
-    {% endfor %}
-  </ul>
+    <div class="section-header">
+
+        <h4 class="section-title">
+            <i class="bi bi-file-earmark-medical-fill text-warning section-icon"></i>
+            Prescriptions
+        </h4>
+
+        <a href="{% url 'add_prescription' visit.id %}" 
+           class="btn btn-warning action-btn">
+
+            <i class="bi bi-plus-circle me-1"></i>
+            Add Prescription
+
+        </a>
+
+    </div>
+
+    <ul class="list-group">
+
+        {% for p in prescriptions %}
+
+        <li class="list-group-item">
+            {{ p.medication }}
+        </li>
+
+        {% empty %}
+
+        <li class="list-group-item empty-data">
+            No prescriptions available.
+        </li>
+
+        {% endfor %}
+
+    </ul>
+
 </div>
 
-<!-- Dispense -->
-<div class="card p-3 mb-3">
-  <h4>Dispense</h4>
-  <a href="{% url 'add_dispense' visit.id %}" class="btn btn-danger btn-sm mb-2">Add</a>
+<!-- DISPENSE -->
+<div class="custom-card">
 
-  <ul class="list-group">
-    {% for d in dispenses %}
-      <li class="list-group-item">
-        {{ d.medication_given }} - {{ d.quantity }}
-      </li>
-    {% empty %}
-      <li class="list-group-item">No records</li>
-    {% endfor %}
-  </ul>
+    <div class="section-header">
+
+        <h4 class="section-title">
+            <i class="bi bi-capsule-pill text-danger section-icon"></i>
+            Dispense
+        </h4>
+
+        <a href="{% url 'add_dispense' visit.id %}" 
+           class="btn btn-danger action-btn">
+
+            <i class="bi bi-plus-circle me-1"></i>
+            Add Dispense
+
+        </a>
+
+    </div>
+
+    <ul class="list-group">
+
+        {% for d in dispenses %}
+
+        <li class="list-group-item">
+
+            <strong>{{ d.medication_given }}</strong>
+            <br>
+
+            Quantity:
+            {{ d.quantity }}
+
+        </li>
+
+        {% empty %}
+
+        <li class="list-group-item empty-data">
+            No dispense records available.
+        </li>
+
+        {% endfor %}
+
+    </ul>
+
 </div>
 
 {% endblock %}

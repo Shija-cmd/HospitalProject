@@ -46,22 +46,49 @@ def register(request):
 def index(request):
     return render(request, 'magahospital/index.html')
 
+
+
 # =========================
 # DASHBOARD (PRIVATE)
 # =========================
 
 @login_required
 def dashboard(request):
+
     user = request.user
 
     context = {
-        'is_doctor': user.groups.filter(name='Doctor').exists(),
-        'is_lab': user.groups.filter(name='Lab').exists(),
-        'is_dispense': user.groups.filter(name='Dispense').exists(),
+
+        # ADMIN
         'is_admin': user.is_superuser,
+
+        # RECEPTION
+        'is_reception': user.groups.filter(
+            name='Receptions'
+        ).exists(),
+
+        # DOCTOR
+        'is_doctor': user.groups.filter(
+            name='Doctor'
+        ).exists(),
+
+        # LAB
+        'is_lab': user.groups.filter(
+            name='Lab'
+        ).exists(),
+
+        # DISPENSE
+        'is_dispense': user.groups.filter(
+            name='Dispense'
+        ).exists(),
+
     }
 
-    return render(request, 'magahospital/dashboard.html', context)
+    return render(
+        request,
+        'magahospital/dashboard.html',
+        context
+    )
 
 def login_view(request):
     if request.method == 'POST':
@@ -131,14 +158,36 @@ def create_patient(request):
 
 
 # =========================
-# 3. CREATE VISIT
+# 3. CREATE / OPEN ACTIVE VISIT
 # =========================
 
 @login_required
 def create_visit(request, patient_id):
-    patient = get_object_or_404(Patient, idno=patient_id)
-    visit = Visit.objects.create(patient=patient)
-    return redirect('visit_detail', visit_id=visit.id)
+
+    patient = get_object_or_404(
+        Patient,
+        idno=patient_id
+    )
+
+    # CHECK FOR LATEST VISIT
+    latest_visit = patient.visits.order_by('-date').first()
+
+    # IF VISIT EXISTS -> OPEN IT
+    if latest_visit:
+        return redirect(
+            'visit_detail',
+            visit_id=latest_visit.id
+        )
+
+    # OTHERWISE CREATE NEW VISIT
+    visit = Visit.objects.create(
+        patient=patient
+    )
+
+    return redirect(
+        'visit_detail',
+        visit_id=visit.id
+    )
 
 
 # =========================

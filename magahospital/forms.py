@@ -10,23 +10,48 @@ from .models import Patient, Doctor, Lab, Prescription, Dispense
 # =========================
 
 class CustomLoginForm(AuthenticationForm):
+
     username = forms.CharField(
-        widget=forms.TextInput(attrs={'class': 'form-control'})
+        widget=forms.TextInput(attrs={
+            'class': 'form-control',
+            'placeholder': 'Enter username'
+        })
     )
+
     password = forms.CharField(
-        widget=forms.PasswordInput(attrs={'class': 'form-control'})
+        widget=forms.PasswordInput(attrs={
+            'class': 'form-control',
+            'placeholder': 'Enter password'
+        })
     )
 
 
 class CustomRegisterForm(UserCreationForm):
+
+    username = forms.CharField(
+        widget=forms.TextInput(attrs={
+            'class': 'form-control',
+            'placeholder': 'Enter username'
+        })
+    )
+
+    password1 = forms.CharField(
+        widget=forms.PasswordInput(attrs={
+            'class': 'form-control',
+            'placeholder': 'Enter password'
+        })
+    )
+
+    password2 = forms.CharField(
+        widget=forms.PasswordInput(attrs={
+            'class': 'form-control',
+            'placeholder': 'Confirm password'
+        })
+    )
+
     class Meta:
         model = User
         fields = ['username', 'password1', 'password2']
-
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        for field in self.fields.values():
-            field.widget.attrs['class'] = 'form-control'
 
 
 # =========================
@@ -34,14 +59,39 @@ class CustomRegisterForm(UserCreationForm):
 # =========================
 
 class PatientForm(forms.ModelForm):
+
     class Meta:
         model = Patient
         fields = ['firstname', 'secondname', 'age', 'address', 'sex']
 
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        for field in self.fields.values():
-            field.widget.attrs['class'] = 'form-control'
+        widgets = {
+
+            'firstname': forms.TextInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'Enter first name'
+            }),
+
+            'secondname': forms.TextInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'Enter second name'
+            }),
+
+            'age': forms.NumberInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'Enter age'
+            }),
+
+            'address': forms.Textarea(attrs={
+                'class': 'form-control',
+                'rows': 3,
+                'placeholder': 'Enter address'
+            }),
+
+            'sex': forms.Select(attrs={
+                'class': 'form-select'
+            }),
+
+        }
 
 
 # =========================
@@ -49,14 +99,26 @@ class PatientForm(forms.ModelForm):
 # =========================
 
 class DoctorForm(forms.ModelForm):
+
     class Meta:
         model = Doctor
         fields = ['history', 'diagnosis']
 
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        for field in self.fields.values():
-            field.widget.attrs['class'] = 'form-control'
+        widgets = {
+
+            'history': forms.Textarea(attrs={
+                'class': 'form-control',
+                'rows': 5,
+                'placeholder': 'Enter patient history...'
+            }),
+
+            'diagnosis': forms.Textarea(attrs={
+                'class': 'form-control',
+                'rows': 4,
+                'placeholder': 'Enter diagnosis details...'
+            }),
+
+        }
 
 
 # =========================
@@ -64,14 +126,24 @@ class DoctorForm(forms.ModelForm):
 # =========================
 
 class LabForm(forms.ModelForm):
+
     class Meta:
         model = Lab
         fields = ['lab_type', 'results']
 
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        for field in self.fields.values():
-            field.widget.attrs['class'] = 'form-control'
+        widgets = {
+
+            'lab_type': forms.Select(attrs={
+                'class': 'form-select'
+            }),
+
+            'results': forms.Textarea(attrs={
+                'class': 'form-control',
+                'rows': 4,
+                'placeholder': 'Enter laboratory results...'
+            }),
+
+        }
 
 
 # =========================
@@ -79,14 +151,25 @@ class LabForm(forms.ModelForm):
 # =========================
 
 class PrescriptionForm(forms.ModelForm):
+
     class Meta:
         model = Prescription
         fields = ['medication', 'notes']
 
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        for field in self.fields.values():
-            field.widget.attrs['class'] = 'form-control'
+        widgets = {
+
+            'medication': forms.TextInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'Enter medication'
+            }),
+
+            'notes': forms.Textarea(attrs={
+                'class': 'form-control',
+                'rows': 3,
+                'placeholder': 'Additional prescription notes...'
+            }),
+
+        }
 
 
 # =========================
@@ -94,11 +177,21 @@ class PrescriptionForm(forms.ModelForm):
 # =========================
 
 class DispenseForm(forms.ModelForm):
+
     class Meta:
         model = Dispense
         fields = ['medication_given', 'quantity']
 
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        for field in self.fields.values():
-            field.widget.attrs['class'] = 'form-control'
+        widgets = {
+
+            'medication_given': forms.TextInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'Enter medication name'
+            }),
+
+            'quantity': forms.NumberInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'Enter quantity'
+            }),
+
+        }

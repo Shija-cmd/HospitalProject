@@ -1,17 +1,148 @@
 {% extends 'magahospital/base.html' %}
 {% load static %}
+
 {% block content %}
 
-<h2>Dispense Medication</h2>
+<style>
 
-<form method="POST" class="card p-4 shadow">
-  {% csrf_token %}
+    .form-container{
+        max-width:850px;
+        margin:auto;
+    }
 
-  {{ form.as_p }}
+    /* TITLE */
+    .form-title{
+        font-size:2.3rem;
+        font-weight:700;
+        color:#0f172a;
+        margin-bottom:25px;
+    }
 
-  <button type="submit" class="btn btn-success">Save</button>
-</form>
+    /* CARD */
+    .custom-form-card{
+        border:none;
+        border-radius:22px;
+        background:#fff;
+        padding:35px;
+        box-shadow:0 12px 35px rgba(0,0,0,0.08);
+        transition:0.3s;
+    }
 
-<a href="{% url 'visit_detail' visit.id %}" class="btn btn-secondary mt-3">⬅ Back</a>
+    .custom-form-card:hover{
+        transform:translateY(-3px);
+        box-shadow:0 18px 40px rgba(0,0,0,0.1);
+    }
+
+    /* LABELS */
+    label{
+        font-weight:600;
+        color:#334155;
+        margin-bottom:8px;
+    }
+
+    /* INPUTS */
+    .form-control,
+    .form-select{
+        border-radius:14px;
+        border:1px solid #dbe1ea;
+        padding:12px 15px;
+        transition:0.3s;
+        box-shadow:none;
+    }
+
+    .form-control:focus,
+    .form-select:focus{
+        border-color:#dc3545;
+        box-shadow:0 0 0 0.15rem rgba(220,53,69,0.15);
+    }
+
+    /* FORM SPACING */
+    form p{
+        margin-bottom:20px;
+    }
+
+    /* BUTTON GROUP */
+    .button-group{
+        display:flex;
+        gap:12px;
+        margin-top:25px;
+        flex-wrap:wrap;
+    }
+
+    /* BUTTONS */
+    .save-btn{
+        border-radius:12px;
+        padding:10px 24px;
+        font-weight:600;
+        transition:0.3s;
+    }
+
+    .save-btn:hover{
+        transform:translateY(-2px);
+    }
+
+    .back-btn{
+        border-radius:12px;
+        padding:10px 22px;
+        font-weight:600;
+    }
+
+    /* RESPONSIVE */
+    @media(max-width:768px){
+
+        .form-title{
+            font-size:1.9rem;
+        }
+
+        .custom-form-card{
+            padding:25px;
+        }
+
+    }
+
+</style>
+
+<div class="form-container">
+
+    <!-- TITLE -->
+    <h2 class="form-title">
+
+        <i class="bi bi-capsule-pill text-danger me-2"></i>
+
+        Dispense Medication
+
+    </h2>
+
+    <!-- FORM -->
+    <form method="POST" class="custom-form-card">
+
+        {% csrf_token %}
+
+        {{ form.as_p }}
+
+        <!-- BUTTONS -->
+        <div class="button-group">
+
+            <button type="submit"
+                    class="btn btn-danger save-btn">
+
+                <i class="bi bi-check-circle me-1"></i>
+                Save Dispense
+
+            </button>
+
+            <a href="{% url 'visit_detail' visit.id %}"
+               class="btn btn-secondary back-btn">
+
+                <i class="bi bi-arrow-left me-1"></i>
+                Back
+
+            </a>
+
+        </div>
+
+    </form>
+
+</div>
 
 {% endblock %}

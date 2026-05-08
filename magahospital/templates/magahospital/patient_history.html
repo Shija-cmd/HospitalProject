@@ -1,91 +1,396 @@
 {% extends 'magahospital/base.html' %}
 {% load static %}
+
 {% block content %}
 
-<h2>Patient History</h2>
+<style>
 
-<div class="card p-3 mb-3">
-  <h4>{{ patient.firstname }} {{ patient.secondname }}</h4>
-  <p><strong>ID:</strong> {{ patient.idno }}</p>
-  <p><strong>Age:</strong> {{ patient.age }}</p>
-  <p><strong>Address:</strong> {{ patient.address }}</p>
+    .page-title{
+        font-size:2.5rem;
+        font-weight:700;
+        color:#0f172a;
+        margin-bottom:30px;
+    }
+
+    /* MAIN CARDS */
+    .custom-card{
+        border:none;
+        border-radius:20px;
+        background:#fff;
+        padding:25px;
+        box-shadow:0 10px 30px rgba(0,0,0,0.06);
+        margin-bottom:25px;
+        transition:0.3s;
+    }
+
+    .custom-card:hover{
+        transform:translateY(-3px);
+        box-shadow:0 15px 35px rgba(0,0,0,0.08);
+    }
+
+    /* PATIENT HEADER */
+    .patient-name{
+        font-size:1.8rem;
+        font-weight:700;
+        color:#0f172a;
+        margin-bottom:20px;
+    }
+
+    .patient-info{
+        margin-bottom:10px;
+        color:#475569;
+        font-size:15px;
+    }
+
+    .patient-info strong{
+        color:#0f172a;
+    }
+
+    /* FILTER FORM */
+    .filter-card{
+        border:none;
+        border-radius:18px;
+        background:#fff;
+        padding:20px;
+        box-shadow:0 8px 25px rgba(0,0,0,0.05);
+        margin-bottom:30px;
+    }
+
+    .form-control{
+        height:48px;
+        border-radius:12px;
+        border:1px solid #dbe1ea;
+    }
+
+    .form-control:focus{
+        border-color:#0d6efd;
+        box-shadow:0 0 0 0.15rem rgba(13,110,253,0.15);
+    }
+
+    /* SMALL BUTTONS */
+    .action-btn{
+        border-radius:10px;
+        padding:10px 18px;
+        font-weight:600;
+        transition:0.3s;
+    }
+
+    .action-btn:hover{
+        transform:translateY(-2px);
+    }
+
+    /* SECTION TITLE */
+    .section-title{
+        font-size:2rem;
+        font-weight:700;
+        color:#0f172a;
+        margin-bottom:25px;
+    }
+
+    /* VISIT HEADER */
+    .visit-date{
+        font-size:1.2rem;
+        font-weight:700;
+        color:#0f172a;
+        margin-bottom:20px;
+    }
+
+    /* CONTENT BLOCKS */
+    .detail-box{
+        background:#f8fafc;
+        border-radius:14px;
+        padding:15px 18px;
+        margin-bottom:18px;
+    }
+
+    .detail-title{
+        font-size:16px;
+        font-weight:700;
+        margin-bottom:10px;
+        color:#0f172a;
+    }
+
+    .detail-text{
+        color:#475569;
+        font-size:15px;
+    }
+
+    /* LIST STYLE */
+    .custom-list{
+        padding-left:18px;
+        margin-bottom:0;
+    }
+
+    .custom-list li{
+        margin-bottom:8px;
+        color:#475569;
+    }
+
+    /* EMPTY TEXT */
+    .empty-text{
+        color:#94a3b8;
+        font-style:italic;
+    }
+
+    /* BACK BUTTON */
+    .back-btn{
+        border-radius:12px;
+        padding:10px 20px;
+        font-weight:600;
+    }
+
+    /* RESPONSIVE */
+    @media(max-width:768px){
+
+        .page-title{
+            font-size:2rem;
+        }
+
+        .patient-name{
+            font-size:1.5rem;
+        }
+
+    }
+
+</style>
+
+<!-- PAGE TITLE -->
+<h2 class="page-title">
+    <i class="bi bi-clock-history me-2"></i>
+    Patient History
+</h2>
+
+<!-- PATIENT INFO -->
+<div class="custom-card">
+
+    <h4 class="patient-name">
+        <i class="bi bi-person-circle me-2"></i>
+        {{ patient.firstname }} {{ patient.secondname }}
+    </h4>
+
+    <div class="patient-info">
+        <strong>ID:</strong> {{ patient.idno }}
+    </div>
+
+    <div class="patient-info">
+        <strong>Age:</strong> {{ patient.age }}
+    </div>
+
+    <div class="patient-info">
+        <strong>Address:</strong> {{ patient.address }}
+    </div>
+
 </div>
 
-<hr>
+<!-- FILTER -->
+<div class="filter-card">
 
-<form method="GET" class="row mb-3">
+    <form method="GET" class="row g-3 align-items-end">
 
-  <div class="col-md-3">
-    <input type="date" name="start" class="form-control"
-           value="{{ request.GET.start }}">
-  </div>
+        <div class="col-md-4">
 
-  <div class="col-md-3">
-    <input type="date" name="end" class="form-control"
-           value="{{ request.GET.end }}">
-  </div>
+            <label class="form-label fw-semibold">
+                Start Date
+            </label>
 
-  <div class="col-md-2">
-    <button type="submit" class="btn btn-primary">Filter</button>
-  </div>
+            <input type="date"
+                   name="start"
+                   class="form-control"
+                   value="{{ request.GET.start }}">
 
-</form>
+        </div>
 
-<h3>Visits</h3>
+        <div class="col-md-4">
+
+            <label class="form-label fw-semibold">
+                End Date
+            </label>
+
+            <input type="date"
+                   name="end"
+                   class="form-control"
+                   value="{{ request.GET.end }}">
+
+        </div>
+
+        <div class="col-md-4">
+
+            <button type="submit"
+                    class="btn btn-primary action-btn">
+
+                <i class="bi bi-funnel-fill me-1"></i>
+                Filter Visits
+
+            </button>
+
+        </div>
+
+    </form>
+
+</div>
+
+<!-- VISITS -->
+<h3 class="section-title">
+    <i class="bi bi-journal-medical me-2"></i>
+    Visits
+</h3>
 
 {% for visit in visits %}
-  <div class="card p-3 mb-3 shadow-sm">
 
-    <h5>Visit Date: {{ visit.date }}</h5>
+<div class="custom-card">
 
-    <!-- Doctor -->
-    <h6>Doctor</h6>
-    {% if visit.doctor %}
-      <p><strong>History:</strong> {{ visit.doctor.history }}</p>
-      <p><strong>Diagnosis:</strong> {{ visit.doctor.diagnosis }}</p>
-    {% else %}
-      <p>No doctor record</p>
-    {% endif %}
+    <!-- DATE -->
+    <div class="visit-date">
 
-    <!-- Labs -->
-    <h6>Labs</h6>
-    <ul>
-      {% for lab in visit.labs.all %}
-        <li>{{ lab.get_lab_type_display }} - {{ lab.results }}</li>
-      {% empty %}
-        <li>No labs</li>
-      {% endfor %}
-    </ul>
+        <i class="bi bi-calendar-event me-2 text-primary"></i>
 
-    <!-- Prescriptions -->
-    <h6>Prescriptions</h6>
-    <ul>
-      {% for p in visit.prescriptions.all %}
-        <li>{{ p.medication }}</li>
-      {% empty %}
-        <li>No prescriptions</li>
-      {% endfor %}
-    </ul>
+        Visit Date:
+        {{ visit.date }}
 
-    <!-- Dispense -->
-    <h6>Dispensed</h6>
-    <ul>
-      {% for d in visit.dispenses.all %}
-        <li>{{ d.medication_given }} - {{ d.quantity }}</li>
-      {% empty %}
-        <li>No records</li>
-      {% endfor %}
-    </ul>
+    </div>
 
-    <a href="{% url 'visit_detail' visit.id %}" class="btn btn-primary btn-sm mt-2">
-      Open Visit
+    <!-- DOCTOR -->
+    <div class="detail-box">
+
+        <div class="detail-title">
+            <i class="bi bi-heart-pulse-fill text-primary me-2"></i>
+            Doctor
+        </div>
+
+        {% if visit.doctor %}
+
+            <div class="detail-text">
+                <strong>History:</strong>
+                {{ visit.doctor.history }}
+            </div>
+
+            <div class="detail-text mt-2">
+                <strong>Diagnosis:</strong>
+                {{ visit.doctor.diagnosis }}
+            </div>
+
+        {% else %}
+
+            <div class="empty-text">
+                No doctor record available.
+            </div>
+
+        {% endif %}
+
+    </div>
+
+    <!-- LABS -->
+    <div class="detail-box">
+
+        <div class="detail-title">
+            <i class="bi bi-flask text-success me-2"></i>
+            Laboratory
+        </div>
+
+        <ul class="custom-list">
+
+            {% for lab in visit.labs.all %}
+
+                <li>
+                    {{ lab.get_lab_type_display }} - {{ lab.results }}
+                </li>
+
+            {% empty %}
+
+                <li class="empty-text">
+                    No laboratory records.
+                </li>
+
+            {% endfor %}
+
+        </ul>
+
+    </div>
+
+    <!-- PRESCRIPTIONS -->
+    <div class="detail-box">
+
+        <div class="detail-title">
+            <i class="bi bi-file-earmark-medical-fill text-warning me-2"></i>
+            Prescriptions
+        </div>
+
+        <ul class="custom-list">
+
+            {% for p in visit.prescriptions.all %}
+
+                <li>{{ p.medication }}</li>
+
+            {% empty %}
+
+                <li class="empty-text">
+                    No prescriptions available.
+                </li>
+
+            {% endfor %}
+
+        </ul>
+
+    </div>
+
+    <!-- DISPENSE -->
+    <div class="detail-box">
+
+        <div class="detail-title">
+            <i class="bi bi-capsule-pill text-danger me-2"></i>
+            Dispensed
+        </div>
+
+        <ul class="custom-list">
+
+            {% for d in visit.dispenses.all %}
+
+                <li>
+                    {{ d.medication_given }} - {{ d.quantity }}
+                </li>
+
+            {% empty %}
+
+                <li class="empty-text">
+                    No dispense records.
+                </li>
+
+            {% endfor %}
+
+        </ul>
+
+    </div>
+
+    <!-- BUTTON -->
+    <a href="{% url 'visit_detail' visit.id %}"
+       class="btn btn-primary action-btn">
+
+        <i class="bi bi-box-arrow-up-right me-1"></i>
+        Open Visit
+
     </a>
 
-  </div>
+</div>
+
 {% empty %}
-  <p>No visits found</p>
+
+<div class="custom-card text-center">
+
+    <p class="empty-text mb-0">
+        No visits found for this patient.
+    </p>
+
+</div>
+
 {% endfor %}
 
-<a href="{% url 'patient_list' %}" class="btn btn-secondary mt-3">⬅ Back</a>
+<!-- BACK -->
+<a href="{% url 'patient_list' %}"
+   class="btn btn-secondary back-btn">
+
+    <i class="bi bi-arrow-left me-1"></i>
+    Back to Patients
+
+</a>
 
 {% endblock %}

@@ -3,69 +3,331 @@
 
 {% block content %}
 
-<h2 class="mb-4">Staff Dashboard</h2>
+<style>
 
-<div class="row">
+    body{
+        background:#f4f7fb;
+    }
 
-  <!-- Reception (Admin only) -->
-  {% if is_admin %}
-  <div class="col-md-3">
-    <div class="card p-3 text-center shadow">
-      <h5>Reception</h5>
-      <a href="{% url 'patient_list' %}" class="btn btn-primary mt-2">Open</a>
+    .dashboard-header{
+        margin-bottom:40px;
+    }
+
+    .dashboard-title{
+        font-size:2.5rem;
+        font-weight:700;
+        color:#0f172a;
+        margin-bottom:10px;
+    }
+
+    .dashboard-subtitle{
+        color:#64748b;
+        font-size:16px;
+    }
+
+    /* DASHBOARD CARD */
+    .dashboard-card{
+        border:none;
+        border-radius:22px;
+        padding:30px 20px;
+        background:#fff;
+        transition:0.4s ease;
+        position:relative;
+        overflow:hidden;
+        height:100%;
+    }
+
+    .dashboard-card:hover{
+        transform:translateY(-10px);
+        box-shadow:0 18px 40px rgba(0,0,0,0.12);
+    }
+
+    .dashboard-card::before{
+        content:'';
+        position:absolute;
+        top:0;
+        left:0;
+        width:100%;
+        height:6px;
+    }
+
+    .border-blue::before{
+        background:#0d6efd;
+    }
+
+    .border-green::before{
+        background:#198754;
+    }
+
+    .border-yellow::before{
+        background:#ffc107;
+    }
+
+    .border-red::before{
+        background:#dc3545;
+    }
+
+    .border-dark::before{
+        background:#0f172a;
+    }
+
+    /* ICON BOX */
+    .icon-box{
+        width:85px;
+        height:85px;
+        border-radius:50%;
+        display:flex;
+        align-items:center;
+        justify-content:center;
+        margin:0 auto 20px;
+        font-size:35px;
+    }
+
+    .icon-blue{
+        background:#e0edff;
+        color:#0d6efd;
+    }
+
+    .icon-green{
+        background:#dcfce7;
+        color:#198754;
+    }
+
+    .icon-yellow{
+        background:#fff3cd;
+        color:#ffc107;
+    }
+
+    .icon-red{
+        background:#ffe4e6;
+        color:#dc3545;
+    }
+
+    .icon-dark{
+        background:#e2e8f0;
+        color:#0f172a;
+    }
+
+    /* CARD TITLE */
+    .dashboard-card h5{
+        font-weight:700;
+        margin-bottom:10px;
+        color:#0f172a;
+    }
+
+    .dashboard-card p{
+        font-size:14px;
+        color:#64748b;
+        margin-bottom:20px;
+    }
+
+    /* BUTTONS */
+    .dashboard-btn{
+        border-radius:12px;
+        padding:10px;
+        font-weight:600;
+        transition:0.3s;
+    }
+
+    .dashboard-btn:hover{
+        transform:translateY(-2px);
+    }
+
+    /* RESPONSIVE */
+    @media(max-width:768px){
+
+        .dashboard-title{
+            font-size:2rem;
+        }
+
+    }
+
+</style>
+
+<!-- DASHBOARD HEADER -->
+<div class="dashboard-header">
+
+    <h2 class="dashboard-title">
+        <i class="bi bi-speedometer2 me-2"></i>
+        Staff Dashboard
+    </h2>
+
+    <p class="dashboard-subtitle">
+        Welcome to Magadulla Hospital Management System
+    </p>
+
+</div>
+
+<!-- DASHBOARD ROW -->
+<div class="row g-4">
+
+    <!-- Reception -->
+    {% if is_reception or is_admin %}
+    <div class="col-lg-3 col-md-6">
+
+        <div class="card dashboard-card border-blue shadow-sm text-center">
+
+            <div class="icon-box icon-blue">
+                <i class="bi bi-person-lines-fill"></i>
+            </div>
+
+            <h5>Reception</h5>
+
+            <p>
+                Manage patient registration and appointments.
+            </p>
+
+            <a href="{% url 'patient_list' %}" 
+               class="btn btn-primary dashboard-btn">
+
+               Open Module
+
+            </a>
+
+        </div>
+
     </div>
-  </div>
-  {% endif %}
+    {% endif %}
 
-  <!-- Doctor -->
-  {% if is_doctor or is_admin %}
-  <div class="col-md-3">
-    <div class="card p-3 text-center shadow">
-      <h5>Doctor</h5>
-      <a href="{% url 'patient_list' %}" class="btn btn-success mt-2">Open</a>
-    </div>
-  </div>
-  {% endif %}
+    <!-- Doctor -->
+    {% if is_doctor or is_admin %}
+    <div class="col-lg-3 col-md-6">
 
-  <!-- Lab -->
-  {% if is_lab or is_admin %}
-  <div class="col-md-3">
-    <div class="card p-3 text-center shadow">
-      <h5>Lab</h5>
-      <a href="{% url 'patient_list' %}" class="btn btn-warning mt-2">Open</a>
-    </div>
-  </div>
-  {% endif %}
+        <div class="card dashboard-card border-green shadow-sm text-center">
 
-  <!-- Dispense -->
-  {% if is_dispense or is_admin %}
-  <div class="col-md-3">
-    <div class="card p-3 text-center shadow">
-      <h5>Dispense</h5>
-      <a href="{% url 'patient_list' %}" class="btn btn-danger mt-2">Open</a>
-    </div>
-  </div>
-  {% endif %}
+            <div class="icon-box icon-green">
+                <i class="bi bi-heart-pulse-fill"></i>
+            </div>
 
-  <!-- Prescription -->
-  {% if is_doctor or is_admin %}
-  <div class="col-md-3">
-    <div class="card p-3 text-center shadow">
-      <h5>Prescription</h5>
-      <a href="{% url 'patient_list' %}" class="btn btn-danger mt-2">Open</a>
-    </div>
-  </div>
-  {% endif %}
+            <h5>Doctor</h5>
 
-  <!-- Admin Panel -->
-  {% if is_admin %}
-  <div class="col-md-3">
-    <div class="card p-3 text-center shadow">
-      <h5>Admin Panel</h5>
-      <a href="{% url 'admin:index' %}" class="btn btn-dark mt-2">Open</a>
+            <p>
+                Access patient consultations and diagnosis tools.
+            </p>
+
+            <a href="{% url 'patient_list' %}" 
+               class="btn btn-success dashboard-btn">
+
+               Open Module
+
+            </a>
+
+        </div>
+
     </div>
-  </div>
-  {% endif %}
+    {% endif %}
+
+    <!-- Laboratory -->
+    {% if is_lab or is_admin %}
+    <div class="col-lg-3 col-md-6">
+
+        <div class="card dashboard-card border-yellow shadow-sm text-center">
+
+            <div class="icon-box icon-yellow">
+                <i class="bi bi-flask"></i>
+            </div>
+
+            <h5>Laboratory</h5>
+
+            <p>
+                Perform laboratory testing and medical analysis.
+            </p>
+
+            <a href="{% url 'patient_list' %}" 
+               class="btn btn-warning dashboard-btn">
+
+               Open Module
+
+            </a>
+
+        </div>
+
+    </div>
+    {% endif %}
+
+    <!-- Dispense -->
+    {% if is_dispense or is_admin %}
+    <div class="col-lg-3 col-md-6">
+
+        <div class="card dashboard-card border-red shadow-sm text-center">
+
+            <div class="icon-box icon-red">
+                <i class="bi bi-capsule-pill"></i>
+            </div>
+
+            <h5>Dispense</h5>
+
+            <p>
+                Manage medicine dispensing and pharmacy records.
+            </p>
+
+            <a href="{% url 'patient_list' %}" 
+               class="btn btn-danger dashboard-btn">
+
+               Open Module
+
+            </a>
+
+        </div>
+
+    </div>
+    {% endif %}
+
+    <!-- Prescription -->
+    {% if is_doctor or is_admin %}
+    <div class="col-lg-3 col-md-6">
+
+        <div class="card dashboard-card border-red shadow-sm text-center">
+
+            <div class="icon-box icon-red">
+                <i class="bi bi-file-earmark-medical-fill"></i>
+            </div>
+
+            <h5>Prescription</h5>
+
+            <p>
+                Create and manage patient prescriptions securely.
+            </p>
+
+            <a href="{% url 'patient_list' %}" 
+               class="btn btn-danger dashboard-btn">
+
+               Open Module
+
+            </a>
+
+        </div>
+
+    </div>
+    {% endif %}
+
+    <!-- Admin -->
+    {% if is_admin %}
+    <div class="col-lg-3 col-md-6">
+
+        <div class="card dashboard-card border-dark shadow-sm text-center">
+
+            <div class="icon-box icon-dark">
+                <i class="bi bi-shield-lock-fill"></i>
+            </div>
+
+            <h5>Admin Panel</h5>
+
+            <p>
+                Full system administration and user management.
+            </p>
+
+            <a href="{% url 'admin:index' %}" 
+               class="btn btn-dark dashboard-btn">
+
+               Open Panel
+
+            </a>
+
+        </div>
+
+    </div>
+    {% endif %}
 
 </div>
 
