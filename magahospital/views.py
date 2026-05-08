@@ -21,8 +21,12 @@ def group_required(group_name):
             if request.user.is_superuser or request.user.groups.filter(name=group_name).exists():
                 return view_func(request, *args, **kwargs)
 
-            # Not allowed
-            return HttpResponseForbidden("Not allowed")
+            # Nice forbidden page
+            return render(
+                request,
+                'magahospital/not_allowed.html',
+                status=403
+            )
 
         return _wrapped_view
     return decorator
@@ -334,3 +338,13 @@ def patient_history(request, patient_id):
         'patient': patient,
         'visits': visits
     })  
+    
+    # =========================
+    # 10. GLOBAL 403 HANDLER
+    # =========================
+    def custom_403(request, exception):
+        return render(
+            request,
+            'magahospital/not_allowed.html',
+            status=403
+        )

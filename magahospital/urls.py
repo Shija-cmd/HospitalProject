@@ -48,3 +48,8 @@ urlpatterns = [
     # =========================
     path('dispense/<int:visit_id>/', views.add_dispense, name='add_dispense'),
 ]
+
+# =========================
+# GLOBAL HANDLER 
+# =========================
+handler403 = 'magahospital.views.custom_403'
