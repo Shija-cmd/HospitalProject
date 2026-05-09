@@ -1,0 +1,116 @@
+{% extends 'magahospital/base.html' %}
+
+{% block content %}
+
+<div class="container mt-4">
+
+    <h2 class="mb-4 text-success">
+        Doctor Queue
+    </h2>
+
+    <div class="card shadow-sm border-0">
+
+        <div class="card-body">
+
+            <table class="table table-hover align-middle">
+
+                <thead class="table-dark">
+
+                    <tr>
+                        <th>Patient ID</th>
+                        <th>Patient</th>
+                        <th>Visit Date</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                    {% for visit in visits %}
+
+                    <tr>
+
+                        <td>
+                            {{ visit.patient.idno }}
+                        </td>
+
+                        <td>
+                            {{ visit.patient.firstname }}
+                            {{ visit.patient.secondname }}
+                        </td>
+
+                        <td>
+                            {{ visit.date }}
+                        </td>
+
+                        <td>
+
+                            {% if visit.status == "Doctor" %}
+
+                                <span class="badge bg-primary">
+                                    Doctor Consultation
+                                </span>
+
+                            {% elif visit.status == "Prescription" %}
+
+                                <span class="badge bg-info text-dark">
+                                    Prescription Review
+                                </span>
+
+                            {% endif %}
+
+                        </td>
+
+                        <td>
+
+                            {% if visit.status == "Doctor" %}
+
+                                <a href="{% url 'add_doctor' visit.id %}"
+                                   class="btn btn-primary btn-sm">
+
+                                   Open Consultation
+
+                                </a>
+
+                            {% elif visit.status == "Prescription" %}
+
+                                <a href="{% url 'add_prescription' visit.id %}"
+                                   class="btn btn-info btn-sm">
+
+                                   Add Prescription
+
+                                </a>
+
+                            {% endif %}
+
+                        </td>
+
+                    </tr>
+
+                    {% empty %}
+
+                    <tr>
+
+                        <td colspan="5" class="text-center text-muted">
+
+                            No patients waiting for doctor.
+
+                        </td>
+
+                    </tr>
+
+                    {% endfor %}
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

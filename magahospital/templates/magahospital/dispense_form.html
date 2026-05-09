@@ -102,6 +102,75 @@
 
 </style>
 
+<form method="POST">
+    {% csrf_token %}
+    <!-- PRESCRIPTION DETAILS -->
+<div class="card shadow-sm border-0 mb-4">
+
+    <div class="card-body">
+
+        <h4 class="text-danger mb-3">
+            Prescription Information
+        </h4>
+
+        <p>
+            <strong>Patient:</strong>
+            {{ visit.patient.firstname }}
+            {{ visit.patient.secondname }}
+        </p>
+
+        {% if visit.doctor %}
+
+            <p>
+                <strong>Diagnosis:</strong>
+                <br>
+                {{ visit.doctor.diagnosis }}
+            </p>
+
+        {% endif %}
+
+        <hr>
+
+        <h5 class="text-primary mb-3">
+            Doctor Prescriptions
+        </h5>
+
+        {% for prescription in visit.prescriptions.all %}
+
+            <div class="alert alert-info">
+
+                <strong>Medication:</strong>
+
+                <br>
+
+                {{ prescription.medication }}
+
+                {% if prescription.notes %}
+
+                    <hr>
+
+                    <strong>Instructions:</strong>
+
+                    <br>
+
+                    {{ prescription.notes }}
+
+                {% endif %}
+
+            </div>
+
+        {% empty %}
+
+            <p class="text-muted">
+                No prescriptions available.
+            </p>
+
+        {% endfor %}
+
+    </div>
+
+</div>
+
 <div class="form-container">
 
     <!-- TITLE -->

@@ -3,70 +3,287 @@
 
 {% block content %}
 
-<h2 class="mb-3">Patients</h2>
+<style>
 
-<a href="{% url 'create_patient' %}" class="btn btn-primary mb-3">
-  + Add Patient
-</a>
+    .page-title{
+        font-weight:700;
+        color:#0f172a;
+    }
 
-<!-- 🔍 SEARCH + FILTER -->
-<form method="GET" class="row mb-3">
+    .table-card{
+        background:#fff;
+        border:none;
+        border-radius:20px;
+        box-shadow:0 10px 25px rgba(0,0,0,0.05);
+        overflow:hidden;
+    }
 
-  <div class="col-md-4">
-    <input type="text" name="q" class="form-control"
-           placeholder="Search name or ID"
-           value="{{ request.GET.q }}">
-  </div>
+    .custom-table th{
+        background:#0f172a;
+        color:#fff;
+        border:none;
+        padding:14px;
+        font-size:15px;
+    }
 
-  <div class="col-md-3">
-    <select name="sex" class="form-select">
-      <option value="">All</option>
-      <option value="M" {% if request.GET.sex == "M" %}selected{% endif %}>Male</option>
-      <option value="F" {% if request.GET.sex == "F" %}selected{% endif %}>Female</option>
-    </select>
-  </div>
+    .custom-table td{
+        vertical-align:middle;
+        padding:14px;
+    }
 
-  <div class="col-md-2">
-    <button type="submit" class="btn btn-primary">Search</button>
-  </div>
+    .badge-status{
+        padding:8px 14px;
+        border-radius:30px;
+        font-size:13px;
+        font-weight:600;
+    }
 
-</form>
+    .search-card{
+        background:#fff;
+        border:none;
+        border-radius:18px;
+        box-shadow:0 8px 20px rgba(0,0,0,0.05);
+        padding:20px;
+    }
 
-<!-- 📋 PATIENT TABLE -->
-<table class="table table-bordered table-striped">
-  <thead class="table-dark">
-    <tr>
-      <th>ID</th>
-      <th>Name</th>
-      <th>Actions</th>
-    </tr>
-  </thead>
+    .btn-custom{
+        border-radius:10px;
+        font-weight:600;
+    }
 
-  <tbody>
-  {% for patient in patients %}
-    <tr>
-      <td>{{ patient.idno }}</td>
-      <td>{{ patient.firstname }} {{ patient.secondname }}</td>
-      <td>
+</style>
 
-        <!-- Create Visit -->
-        <a href="{% url 'create_visit' patient.idno %}" class="btn btn-success btn-sm">
-          Create Visit
-        </a>
+<!-- PAGE TITLE -->
+<div class="d-flex justify-content-between align-items-center mb-4">
 
-        <!-- View History -->
-        <a href="{% url 'patient_history' patient.idno %}" class="btn btn-info btn-sm">
-          History
-        </a>
+    <h2 class="page-title">
+        <i class="bi bi-people-fill me-2"></i>
+        Patients
+    </h2>
 
-      </td>
-    </tr>
-  {% empty %}
-    <tr>
-      <td colspan="3" class="text-center">No patients found</td>
-    </tr>
-  {% endfor %}
-  </tbody>
-</table>
+    <a href="{% url 'create_patient' %}"
+       class="btn btn-primary btn-custom">
+
+        <i class="bi bi-plus-circle me-1"></i>
+        Add Patient
+
+    </a>
+
+</div>
+
+<!-- SEARCH -->
+<div class="search-card mb-4">
+
+    <form method="GET" class="row g-3">
+
+        <div class="col-md-5">
+
+            <input type="text"
+                   name="q"
+                   class="form-control"
+                   placeholder="Search patient name or ID"
+                   value="{{ request.GET.q }}">
+
+        </div>
+
+        <div class="col-md-3">
+
+            <select name="sex" class="form-select">
+
+                <option value="">All Sex</option>
+
+                <option value="M"
+                    {% if request.GET.sex == "M" %}
+                        selected
+                    {% endif %}
+                >
+                    Male
+                </option>
+
+                <option value="F"
+                    {% if request.GET.sex == "F" %}
+                        selected
+                    {% endif %}
+                >
+                    Female
+                </option>
+
+            </select>
+
+        </div>
+
+        <div class="col-md-2">
+
+            <button type="submit"
+                    class="btn btn-dark w-100 btn-custom">
+
+                <i class="bi bi-search me-1"></i>
+                Search
+
+            </button>
+
+        </div>
+
+    </form>
+
+</div>
+
+<!-- PATIENT TABLE -->
+<div class="table-card">
+
+    <table class="table table-hover custom-table mb-0">
+
+        <thead>
+
+            <tr>
+
+                <th>ID</th>
+
+                <th>Patient Name</th>
+
+                <th>Sex</th>
+
+                <th>Status</th>
+
+                <th>Actions</th>
+
+            </tr>
+
+        </thead>
+
+        <tbody>
+
+        {% for patient in patients %}
+
+            <tr>
+
+                <td>
+
+                    <strong>
+                        {{ patient.idno }}
+                    </strong>
+
+                </td>
+
+                <td>
+
+                    {{ patient.firstname }}
+                    {{ patient.secondname }}
+
+                </td>
+
+                <td>
+
+                    {% if patient.sex == "M" %}
+
+                        Male
+
+                    {% else %}
+
+                        Female
+
+                    {% endif %}
+
+                </td>
+
+                <!-- STATUS -->
+<td>
+
+{% with latest_visit=patient.current_visit %}
+
+    {% if latest_visit %}
+
+        {% if latest_visit.status == "Doctor" %}
+
+            <span class="badge bg-primary">
+                Waiting For Doctor
+            </span>
+
+        {% elif latest_visit.status == "Lab" %}
+
+            <span class="badge bg-warning text-dark">
+                Waiting For Laboratory
+            </span>
+
+        {% elif latest_visit.status == "Prescription" %}
+
+            <span class="badge bg-info text-dark">
+                Waiting For Prescription
+            </span>
+
+        {% elif latest_visit.status == "Dispense" %}
+
+            <span class="badge bg-danger">
+                Waiting For Dispense
+            </span>
+
+        {% elif latest_visit.status == "Completed" %}
+
+            <span class="badge bg-success">
+                Completed
+            </span>
+
+        {% else %}
+
+            <span class="badge bg-secondary">
+                {{ latest_visit.status }}
+            </span>
+
+        {% endif %}
+
+    {% else %}
+
+        <span class="badge bg-secondary">
+            No Visit
+        </span>
+
+    {% endif %}
+
+{% endwith %}
+
+</td>
+
+                <!-- ACTIONS -->
+                <td>
+
+                    <a href="{% url 'create_visit' patient.idno %}"
+                       class="btn btn-success btn-sm btn-custom">
+
+                        <i class="bi bi-plus-circle"></i>
+                        Visit
+
+                    </a>
+
+                    <a href="{% url 'patient_history' patient.idno %}"
+                       class="btn btn-info btn-sm btn-custom">
+
+                        <i class="bi bi-clock-history"></i>
+                        History
+
+                    </a>
+
+                </td>
+
+            </tr>
+
+        {% empty %}
+
+            <tr>
+
+                <td colspan="5" class="text-center p-4">
+
+                    No patients found
+
+                </td>
+
+            </tr>
+
+        {% endfor %}
+
+        </tbody>
+
+    </table>
+
+</div>
 
 {% endblock %}

@@ -1,0 +1,95 @@
+{% extends 'magahospital/base.html' %}
+
+{% block content %}
+
+<div class="container mt-4">
+
+    <h2 class="mb-4 text-warning">
+        Laboratory Queue
+    </h2>
+
+    <div class="card shadow-sm border-0">
+
+        <div class="card-body">
+
+            <table class="table table-hover align-middle">
+
+                <thead class="table-dark">
+
+                    <tr>
+                        <th>Patient ID</th>
+                        <th>Patient</th>
+                        <th>Visit Date</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                    {% for visit in visits %}
+
+                    <tr>
+
+                        <td>
+                            {{ visit.patient.idno }}
+                        </td>
+
+                        <td>
+                            {{ visit.patient.firstname }}
+                            {{ visit.patient.secondname }}
+                        </td>
+
+                        <td>
+                            {{ visit.date }}
+                        </td>
+
+                        <td>
+
+                            <span class="badge bg-warning text-dark">
+
+                                Waiting For Laboratory
+
+                            </span>
+
+                        </td>
+
+                        <td>
+
+                            <a href="{% url 'add_lab' visit.id %}"
+                               class="btn btn-warning btn-sm">
+
+                               Open Laboratory
+
+                            </a>
+
+                        </td>
+
+                    </tr>
+
+                    {% empty %}
+
+                    <tr>
+
+                        <td colspan="5" class="text-center text-muted">
+
+                            No patients waiting for laboratory.
+
+                        </td>
+
+                    </tr>
+
+                    {% endfor %}
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

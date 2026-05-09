@@ -6,16 +6,17 @@
 <style>
 
     body{
-        background:#f4f7fb;
+        background:#f1f5f9;
     }
 
+    /* HEADER */
     .dashboard-header{
-        margin-bottom:40px;
+        margin-bottom:35px;
     }
 
     .dashboard-title{
-        font-size:2.5rem;
-        font-weight:700;
+        font-size:2.6rem;
+        font-weight:800;
         color:#0f172a;
         margin-bottom:10px;
     }
@@ -25,20 +26,48 @@
         font-size:16px;
     }
 
+    /* TOP INFO CARDS */
+    .top-card{
+        background:#fff;
+        border:none;
+        border-radius:20px;
+        padding:22px;
+        box-shadow:0 8px 25px rgba(0,0,0,0.05);
+        transition:0.3s;
+        height:100%;
+    }
+
+    .top-card:hover{
+        transform:translateY(-4px);
+    }
+
+    .top-card h6{
+        color:#64748b;
+        font-size:14px;
+        margin-bottom:10px;
+    }
+
+    .top-card h3{
+        font-weight:800;
+        color:#0f172a;
+        margin:0;
+    }
+
     /* DASHBOARD CARD */
     .dashboard-card{
         border:none;
-        border-radius:22px;
+        border-radius:24px;
         padding:30px 20px;
         background:#fff;
         transition:0.4s ease;
         position:relative;
         overflow:hidden;
         height:100%;
+        box-shadow:0 8px 25px rgba(0,0,0,0.05);
     }
 
     .dashboard-card:hover{
-        transform:translateY(-10px);
+        transform:translateY(-8px);
         box-shadow:0 18px 40px rgba(0,0,0,0.12);
     }
 
@@ -71,7 +100,7 @@
         background:#0f172a;
     }
 
-    /* ICON BOX */
+    /* ICONS */
     .icon-box{
         width:85px;
         height:85px;
@@ -80,11 +109,11 @@
         align-items:center;
         justify-content:center;
         margin:0 auto 20px;
-        font-size:35px;
+        font-size:34px;
     }
 
     .icon-blue{
-        background:#e0edff;
+        background:#dbeafe;
         color:#0d6efd;
     }
 
@@ -94,8 +123,8 @@
     }
 
     .icon-yellow{
-        background:#fff3cd;
-        color:#ffc107;
+        background:#fef9c3;
+        color:#ca8a04;
     }
 
     .icon-red{
@@ -108,7 +137,7 @@
         color:#0f172a;
     }
 
-    /* CARD TITLE */
+    /* TITLES */
     .dashboard-card h5{
         font-weight:700;
         margin-bottom:10px;
@@ -119,9 +148,10 @@
         font-size:14px;
         color:#64748b;
         margin-bottom:20px;
+        min-height:45px;
     }
 
-    /* BUTTONS */
+    /* BUTTON */
     .dashboard-btn{
         border-radius:12px;
         padding:10px;
@@ -133,7 +163,25 @@
         transform:translateY(-2px);
     }
 
-    /* RESPONSIVE */
+    /* USER BADGE */
+    .role-badge{
+        display:inline-block;
+        padding:8px 16px;
+        border-radius:30px;
+        background:#0d6efd;
+        color:#fff;
+        font-size:14px;
+        font-weight:600;
+        margin-top:10px;
+    }
+
+    /* CLOCK */
+    .clock{
+        font-size:1.1rem;
+        font-weight:700;
+        color:#0f172a;
+    }
+
     @media(max-width:768px){
 
         .dashboard-title{
@@ -144,7 +192,7 @@
 
 </style>
 
-<!-- DASHBOARD HEADER -->
+<!-- HEADER -->
 <div class="dashboard-header">
 
     <h2 class="dashboard-title">
@@ -153,19 +201,238 @@
     </h2>
 
     <p class="dashboard-subtitle">
-        Welcome to Magadulla Hospital Management System
+        Welcome back, {{ request.user.username }}
     </p>
+
+    {% if is_admin %}
+        <span class="role-badge">Administrator</span>
+
+    {% elif is_doctor %}
+        <span class="role-badge bg-success">
+            Doctor Department
+        </span>
+
+    {% elif is_lab %}
+        <span class="role-badge bg-warning text-dark">
+            Laboratory Department
+        </span>
+
+    {% elif is_dispense %}
+        <span class="role-badge bg-danger">
+            Dispense Department
+        </span>
+
+    {% elif is_reception %}
+        <span class="role-badge bg-primary">
+            Reception Department
+        </span>
+    {% endif %}
 
 </div>
 
-<!-- DASHBOARD ROW -->
+<!-- DASHBOARD STATISTICS -->
+<div class="mt-3 mb-5">
+
+    <h5 class="fw-bold text-dark mb-3">
+        Hospital Statistics
+    </h5>
+
+    <!-- FIRST ROW -->
+    <div class="row g-3">
+
+        <!-- TOTAL PATIENTS -->
+        <div class="col-md-4">
+
+            <div class="card shadow-sm border-0 h-100">
+
+                <div class="card-body py-3">
+
+                    <h6 class="text-muted mb-1">
+                        Total Patients
+                    </h6>
+
+                    <h3 class="fw-bold mb-0">
+                        {{ total_patients }}
+                    </h3>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- WAITING DOCTOR -->
+        <div class="col-md-4">
+
+            <div class="card shadow-sm border-0 h-100">
+
+                <div class="card-body py-3">
+
+                    <h6 class="text-muted mb-1">
+                        Waiting Doctor
+                    </h6>
+
+                    <h3 class="fw-bold mb-0">
+                        {{ doctor_waiting }}
+                    </h3>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- WAITING LAB -->
+        <div class="col-md-4">
+
+            <div class="card shadow-sm border-0 h-100">
+
+                <div class="card-body py-3">
+
+                    <h6 class="text-muted mb-1">
+                        Waiting Lab
+                    </h6>
+
+                    <h3 class="fw-bold mb-0">
+                        {{ lab_waiting }}
+                    </h3>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- SECOND ROW -->
+    <div class="row g-3 mt-1">
+
+        <!-- WAITING PRESCRIPTION -->
+        <div class="col-md-4">
+
+            <div class="card shadow-sm border-0 h-100">
+
+                <div class="card-body py-3">
+
+                    <h6 class="text-muted mb-1">
+                        Waiting Prescription
+                    </h6>
+
+                    <h3 class="fw-bold mb-0">
+                        {{ prescription_waiting }}
+                    </h3>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- WAITING DISPENSE -->
+        <div class="col-md-4">
+
+            <div class="card shadow-sm border-0 h-100">
+
+                <div class="card-body py-3">
+
+                    <h6 class="text-muted mb-1">
+                        Waiting Dispense
+                    </h6>
+
+                    <h3 class="fw-bold mb-0">
+                        {{ dispense_waiting }}
+                    </h3>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- COMPLETED VISITS -->
+        <div class="col-md-4">
+
+            <div class="card shadow-sm border-0 h-100">
+
+                <div class="card-body py-3">
+
+                    <h6 class="text-muted mb-1">
+                        Completed Visits
+                    </h6>
+
+                    <h3 class="fw-bold mb-0">
+                        {{ completed_visits }}
+                    </h3>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- TOP ROW -->
+<div class="row g-4 mb-4">
+
+    <div class="col-md-4">
+
+        <div class="top-card">
+
+            <h6>
+                <i class="bi bi-person-circle me-1"></i>
+                Logged In User
+            </h6>
+
+            <h3>{{ request.user.username }}</h3>
+
+        </div>
+
+    </div>
+
+    <div class="col-md-4">
+
+        <div class="top-card">
+
+            <h6>
+                <i class="bi bi-calendar-event me-1"></i>
+                Today's Date
+            </h6>
+
+            <h3 id="today-date"></h3>
+
+        </div>
+
+    </div>
+
+    <div class="col-md-4">
+
+        <div class="top-card">
+
+            <h6>
+                <i class="bi bi-clock-history me-1"></i>
+                Current Time
+            </h6>
+
+            <h3 class="clock" id="clock"></h3>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- MODULES -->
 <div class="row g-4">
 
     <!-- Reception -->
     {% if is_reception or is_admin %}
-    <div class="col-lg-3 col-md-6">
+    <div class="col-lg-4 col-md-6">
 
-        <div class="card dashboard-card border-blue shadow-sm text-center">
+        <div class="dashboard-card border-blue text-center">
 
             <div class="icon-box icon-blue">
                 <i class="bi bi-person-lines-fill"></i>
@@ -174,11 +441,11 @@
             <h5>Reception</h5>
 
             <p>
-                Manage patient registration and appointments.
+                Register patients and manage hospital visits efficiently.
             </p>
 
             <a href="{% url 'patient_list' %}" 
-               class="btn btn-primary dashboard-btn">
+               class="btn btn-primary dashboard-btn w-100">
 
                Open Module
 
@@ -191,9 +458,9 @@
 
     <!-- Doctor -->
     {% if is_doctor or is_admin %}
-    <div class="col-lg-3 col-md-6">
+    <div class="col-lg-4 col-md-6">
 
-        <div class="card dashboard-card border-green shadow-sm text-center">
+        <div class="dashboard-card border-green text-center">
 
             <div class="icon-box icon-green">
                 <i class="bi bi-heart-pulse-fill"></i>
@@ -202,11 +469,11 @@
             <h5>Doctor</h5>
 
             <p>
-                Access patient consultations and diagnosis tools.
+                Review consultations, diagnosis, and prescriptions.
             </p>
 
-            <a href="{% url 'patient_list' %}" 
-               class="btn btn-success dashboard-btn">
+            <a href="{% url 'doctor_queue' %}" 
+               class="btn btn-success dashboard-btn w-100">
 
                Open Module
 
@@ -219,9 +486,9 @@
 
     <!-- Laboratory -->
     {% if is_lab or is_admin %}
-    <div class="col-lg-3 col-md-6">
+    <div class="col-lg-4 col-md-6">
 
-        <div class="card dashboard-card border-yellow shadow-sm text-center">
+        <div class="dashboard-card border-yellow text-center">
 
             <div class="icon-box icon-yellow">
                 <i class="bi bi-flask"></i>
@@ -230,11 +497,11 @@
             <h5>Laboratory</h5>
 
             <p>
-                Perform laboratory testing and medical analysis.
+                Perform and manage laboratory investigations.
             </p>
 
-            <a href="{% url 'patient_list' %}" 
-               class="btn btn-warning dashboard-btn">
+            <a href="{% url 'lab_queue' %}" 
+               class="btn btn-warning dashboard-btn w-100">
 
                Open Module
 
@@ -247,9 +514,9 @@
 
     <!-- Dispense -->
     {% if is_dispense or is_admin %}
-    <div class="col-lg-3 col-md-6">
+    <div class="col-lg-4 col-md-6">
 
-        <div class="card dashboard-card border-red shadow-sm text-center">
+        <div class="dashboard-card border-red text-center">
 
             <div class="icon-box icon-red">
                 <i class="bi bi-capsule-pill"></i>
@@ -258,39 +525,11 @@
             <h5>Dispense</h5>
 
             <p>
-                Manage medicine dispensing and pharmacy records.
+                Manage medication dispensing and pharmacy workflow.
             </p>
 
-            <a href="{% url 'patient_list' %}" 
-               class="btn btn-danger dashboard-btn">
-
-               Open Module
-
-            </a>
-
-        </div>
-
-    </div>
-    {% endif %}
-
-    <!-- Prescription -->
-    {% if is_doctor or is_admin %}
-    <div class="col-lg-3 col-md-6">
-
-        <div class="card dashboard-card border-red shadow-sm text-center">
-
-            <div class="icon-box icon-red">
-                <i class="bi bi-file-earmark-medical-fill"></i>
-            </div>
-
-            <h5>Prescription</h5>
-
-            <p>
-                Create and manage patient prescriptions securely.
-            </p>
-
-            <a href="{% url 'patient_list' %}" 
-               class="btn btn-danger dashboard-btn">
+            <a href="{% url 'dispense_queue' %}" 
+               class="btn btn-danger dashboard-btn w-100">
 
                Open Module
 
@@ -303,9 +542,9 @@
 
     <!-- Admin -->
     {% if is_admin %}
-    <div class="col-lg-3 col-md-6">
+    <div class="col-lg-4 col-md-6">
 
-        <div class="card dashboard-card border-dark shadow-sm text-center">
+        <div class="dashboard-card border-dark text-center">
 
             <div class="icon-box icon-dark">
                 <i class="bi bi-shield-lock-fill"></i>
@@ -314,11 +553,11 @@
             <h5>Admin Panel</h5>
 
             <p>
-                Full system administration and user management.
+                Full hospital administration and user management.
             </p>
 
             <a href="{% url 'admin:index' %}" 
-               class="btn btn-dark dashboard-btn">
+               class="btn btn-dark dashboard-btn w-100">
 
                Open Panel
 
@@ -330,5 +569,24 @@
     {% endif %}
 
 </div>
+
+<script>
+
+    function updateClock(){
+
+        const now = new Date();
+
+        document.getElementById('clock').innerHTML =
+            now.toLocaleTimeString();
+
+        document.getElementById('today-date').innerHTML =
+            now.toDateString();
+    }
+
+    setInterval(updateClock,1000);
+
+    updateClock();
+
+</script>
 
 {% endblock %}

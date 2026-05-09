@@ -1,4 +1,5 @@
 {% extends 'magahospital/base.html' %}
+{% load group_tags %}
 {% load static %}
 
 {% block content %}
@@ -45,7 +46,7 @@
         margin:0;
     }
 
-    /* SMALL ACTION BUTTONS */
+    /* ACTION BUTTONS */
     .action-btn{
         border-radius:10px;
         padding:8px 18px;
@@ -60,13 +61,21 @@
 
     /* PATIENT INFO */
     .info-item{
-        margin-bottom:12px;
+        margin-bottom:14px;
         font-size:16px;
     }
 
     .info-label{
         font-weight:700;
         color:#0f172a;
+    }
+
+    /* STATUS BADGE */
+    .status-badge{
+        font-size:14px;
+        padding:8px 16px;
+        border-radius:30px;
+        font-weight:600;
     }
 
     /* LIST GROUP */
@@ -116,43 +125,108 @@
     Visit Details
 </h2>
 
+<!--Downloading pdf-->
+<div class="mb-4">
+
+    <a href="{% url 'visit_report_pdf' visit.id %}"
+       class="btn btn-dark">
+
+        <i class="bi bi-file-earmark-pdf"></i>
+
+        Download Visit Report
+
+    </a>
+
+</div>
+
 <!-- VISIT INFO -->
 <div class="custom-card">
 
     <div class="info-item">
+
         <span class="info-label">
             <i class="bi bi-person-fill me-1"></i>
             Patient:
         </span>
 
-        {{ visit.patient.firstname }} {{ visit.patient.secondname }}
+        {{ visit.patient.firstname }}
+        {{ visit.patient.secondname }}
+
     </div>
 
     <div class="info-item">
+
         <span class="info-label">
             <i class="bi bi-calendar-event me-1"></i>
             Date:
         </span>
 
         {{ visit.date }}
+
     </div>
 
-</div>
+    <!-- VISIT STATUS -->
+<div class="info-item">
 
+    <span class="info-label">
+        <i class="bi bi-activity me-1"></i>
+        Visit Status:
+    </span>
+
+    {% if visit.status == "Doctor" %}
+
+        <span class="badge bg-primary status-badge">
+            Waiting For Doctor
+        </span>
+
+    {% elif visit.status == "Lab" %}
+
+        <span class="badge bg-warning text-dark status-badge">
+            Waiting For Laboratory
+        </span>
+
+    {% elif visit.status == "Prescription" %}
+
+        <span class="badge bg-info status-badge">
+            Waiting For Prescription
+        </span>
+
+    {% elif visit.status == "Dispense" %}
+
+        <span class="badge bg-danger status-badge">
+            Waiting For Dispense
+        </span>
+
+    {% elif visit.status == "Completed" %}
+
+        <span class="badge bg-success status-badge">
+            Visit Completed
+        </span>
+
+    {% endif %}
+
+</div>
+</div>
 <!-- DOCTOR -->
+{% if request.user|has_group:"Doctor" or request.user.is_superuser %}
+
 <div class="custom-card">
 
     <div class="section-header">
 
         <h4 class="section-title">
+
             <i class="bi bi-heart-pulse-fill text-primary section-icon"></i>
+
             Doctor
+
         </h4>
 
         <a href="{% url 'add_doctor' visit.id %}" 
            class="btn btn-primary action-btn">
 
             <i class="bi bi-plus-circle me-1"></i>
+
             Add Doctor
 
         </a>
@@ -164,13 +238,21 @@
         <div class="list-group">
 
             <div class="list-group-item">
+
                 <strong>History:</strong>
+                <br>
+
                 {{ doctor.history }}
+
             </div>
 
             <div class="list-group-item">
+
                 <strong>Diagnosis:</strong>
+                <br>
+
                 {{ doctor.diagnosis }}
+
             </div>
 
         </div>
@@ -185,20 +267,28 @@
 
 </div>
 
+{% endif %}
+
 <!-- LABS -->
+{% if request.user|has_group:"Lab" or request.user.is_superuser %}
+
 <div class="custom-card">
 
     <div class="section-header">
 
         <h4 class="section-title">
+
             <i class="bi bi-flask text-success section-icon"></i>
+
             Laboratory
+
         </h4>
 
         <a href="{% url 'add_lab' visit.id %}" 
            class="btn btn-success action-btn">
 
             <i class="bi bi-plus-circle me-1"></i>
+
             Add Lab
 
         </a>
@@ -211,8 +301,12 @@
 
         <li class="list-group-item">
 
-            <strong>{{ lab.get_lab_type_display }}</strong>
-            <br>
+            <strong>
+                {{ lab.get_lab_type_display }}
+            </strong>
+
+            <br><br>
+
             {{ lab.results }}
 
         </li>
@@ -220,7 +314,9 @@
         {% empty %}
 
         <li class="list-group-item empty-data">
+
             No laboratory records available.
+
         </li>
 
         {% endfor %}
@@ -229,20 +325,28 @@
 
 </div>
 
+{% endif %}
+
 <!-- PRESCRIPTIONS -->
+{% if request.user|has_group:"Doctor" or request.user.is_superuser %}
+
 <div class="custom-card">
 
     <div class="section-header">
 
         <h4 class="section-title">
+
             <i class="bi bi-file-earmark-medical-fill text-warning section-icon"></i>
+
             Prescriptions
+
         </h4>
 
         <a href="{% url 'add_prescription' visit.id %}" 
            class="btn btn-warning action-btn">
 
             <i class="bi bi-plus-circle me-1"></i>
+
             Add Prescription
 
         </a>
@@ -254,13 +358,27 @@
         {% for p in prescriptions %}
 
         <li class="list-group-item">
+
             {{ p.medication }}
+
+            {% if p.notes %}
+
+                <br><br>
+
+                <strong>Notes:</strong>
+
+                {{ p.notes }}
+
+            {% endif %}
+
         </li>
 
         {% empty %}
 
         <li class="list-group-item empty-data">
+
             No prescriptions available.
+
         </li>
 
         {% endfor %}
@@ -269,20 +387,28 @@
 
 </div>
 
+{% endif %}
+
 <!-- DISPENSE -->
+{% if request.user|has_group:"Dispense" or request.user.is_superuser %}
+
 <div class="custom-card">
 
     <div class="section-header">
 
         <h4 class="section-title">
+
             <i class="bi bi-capsule-pill text-danger section-icon"></i>
+
             Dispense
+
         </h4>
 
         <a href="{% url 'add_dispense' visit.id %}" 
            class="btn btn-danger action-btn">
 
             <i class="bi bi-plus-circle me-1"></i>
+
             Add Dispense
 
         </a>
@@ -295,8 +421,11 @@
 
         <li class="list-group-item">
 
-            <strong>{{ d.medication_given }}</strong>
-            <br>
+            <strong>
+                {{ d.medication_given }}
+            </strong>
+
+            <br><br>
 
             Quantity:
             {{ d.quantity }}
@@ -306,7 +435,9 @@
         {% empty %}
 
         <li class="list-group-item empty-data">
+
             No dispense records available.
+
         </li>
 
         {% endfor %}
@@ -314,5 +445,7 @@
     </ul>
 
 </div>
+
+{% endif %}
 
 {% endblock %}

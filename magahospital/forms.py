@@ -171,27 +171,52 @@ class PrescriptionForm(forms.ModelForm):
 
         }
 
-
-# =========================
-# 5. DISPENSE FORM
-# =========================
+# =========================================
+# DISPENSE FORM
+# =========================================
 
 class DispenseForm(forms.ModelForm):
 
     class Meta:
+
         model = Dispense
-        fields = ['medication_given', 'quantity']
+
+        fields = [
+            'medication_given',
+            'quantity'
+        ]
+
+        labels = {
+
+            'medication_given': 'Medication Given',
+
+            'quantity': 'Dosage Instructions'
+
+        }
 
         widgets = {
 
-            'medication_given': forms.TextInput(attrs={
-                'class': 'form-control',
-                'placeholder': 'Enter medication name'
-            }),
+            'medication_given': forms.Textarea(
+                attrs={
+                    'class': 'form-control',
+                    'rows': 4,
+                    'placeholder': (
+                        'Example:\n'
+                        'Panadol\n'
+                        'Azithromycin\n'
+                        'Vitamin C'
+                    )
+                }
+            ),
 
-            'quantity': forms.NumberInput(attrs={
-                'class': 'form-control',
-                'placeholder': 'Enter quantity'
-            }),
+            'quantity': forms.TextInput(
+                attrs={
+                    'class': 'form-control',
+                    'placeholder': (
+                        'Example: 2*3/7 or '
+                        '1 tablet OD for 5 days'
+                    )
+                }
+            ),
 
         }
