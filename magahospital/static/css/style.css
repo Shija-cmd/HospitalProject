@@ -1,0 +1,149 @@
+/* AI NAV BUTTON */
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:'Poppins', sans-serif;
+    background:#f4f7fb;
+    color:#333;
+}
+
+/* NAVBAR */
+.navbar{
+    background: linear-gradient(90deg, #0f172a, #1e293b) !important;
+    padding:14px 0;
+    box-shadow:0 2px 15px rgba(0,0,0,0.1);
+}
+
+.navbar-brand{
+    font-size:1.5rem;
+    font-weight:700;
+    color:#fff !important;
+    letter-spacing:0.5px;
+}
+
+.navbar-brand i{
+    color:#0d6efd;
+}
+
+/* AI NAV BUTTON */
+.ai-nav-btn{
+    background:#0d6efd;
+    color:#fff !important;
+    padding:10px 18px;
+    border-radius:8px;
+    text-decoration:none;
+    font-weight:bold;
+    transition:0.3s;
+}
+
+.ai-nav-btn:hover{
+    background:#0056d2;
+    color:#fff !important;
+    transform:translateY(-2px);
+}
+
+/* USER AREA */
+.user-section{
+    display:flex;
+    align-items:center;
+    gap:15px;
+}
+
+.welcome-box{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    background:rgba(255,255,255,0.08);
+    padding:8px 15px;
+    border-radius:50px;
+}
+
+.avatar{
+    width:40px;
+    height:40px;
+    border-radius:50%;
+    background:#0d6efd;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:#fff;
+    font-size:18px;
+}
+
+.welcome-text{
+    line-height:1.2;
+}
+
+.welcome-text small{
+    display:block;
+    color:#cbd5e1;
+    font-size:11px;
+    letter-spacing:1px;
+}
+
+.welcome-text span{
+    color:#fff;
+    font-size:14px;
+    font-weight:600;
+}
+
+/* ROLE BADGE */
+.role-badge{
+    font-size:11px;
+    padding:5px 10px;
+    border-radius:20px;
+    font-weight:600;
+}
+
+/* BUTTONS */
+.nav-btn{
+    border-radius:10px;
+    padding:8px 15px;
+    font-weight:500;
+    transition:0.3s;
+}
+
+.nav-btn:hover{
+    transform:translateY(-2px);
+}
+
+/* MAIN CONTENT */
+.main-content{
+    padding-top:40px;
+    min-height:85vh;
+}
+
+/* FOOTER */
+footer{
+    background:#0f172a;
+    color:#fff;
+    text-align:center;
+    padding:20px 0;
+    margin-top:40px;
+}
+
+footer p{
+    margin:0;
+    font-size:14px;
+    color:#cbd5e1;
+}
+
+/* MOBILE */
+@media(max-width:768px){
+
+    .user-section{
+        flex-direction:column;
+        align-items:flex-start;
+        margin-top:15px;
+        gap:10px;
+    }
+
+    .welcome-box{
+        width:100%;
+    }
+
+}

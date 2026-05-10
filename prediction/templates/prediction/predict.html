@@ -1,0 +1,101 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>
+        STD Prediction
+    </title>
+
+    <link rel="stylesheet" href="{% static 'css/prediction.css' %}">
+
+</head>
+
+<body>
+
+    <div class="form-container">
+
+        <h2>
+            STD Prediction System
+        </h2>
+
+        <form method="POST">
+
+            {% csrf_token %}
+
+            {{ form.as_p }}
+
+            <button type="submit" class="predict-btn">
+                Predict
+            </button>
+
+        </form>
+
+        {% if prediction %}
+
+        <div class="result-box">
+
+            <h2>
+                Prediction Result
+            </h2>
+
+            <h3>
+                {{ prediction }}
+            </h3>
+
+            <p class="confidence-text"
+            style="color: {{ confidence_color }};">
+
+        <strong>
+        Prediction Confidence:
+        </strong>
+
+        {{ confidence }}%
+
+</p>
+
+            {% if prediction == "Potential Infection Detected" %}
+
+                <p class="warning-text">
+                    Please visit a healthcare professional for further diagnosis and treatment.
+                </p>
+
+            {% else %}
+
+                <p class="safe-text">
+                    Low infection risk detected. Continue maintaining good health practices.
+                </p>
+
+            {% endif %}
+
+        </div>
+
+        {% endif %}
+
+    <div class="form-container">    
+        <div class="disclaimer">
+
+        <strong>
+        Medical Disclaimer:
+        </strong>
+
+        This prediction system is intended for educational and preliminary screening purposes only.
+        It is not a substitute for professional medical diagnosis or treatment.
+        Please consult a qualified healthcare provider for proper medical advice.
+
+</div>
+    </div>
+<div class="back-home-container">
+
+    <a href="/" class="back-btn">
+
+        ← Back to Home
+
+    </a>
+
+</div>
+</body>
+
+</html>

@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'magahospital',
     'widget_tweaks',
+    'prediction',
 ]
 
 MIDDLEWARE = [
