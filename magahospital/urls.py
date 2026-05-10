@@ -1,6 +1,7 @@
 from django.contrib import admin
 from django.urls import path
 from magahospital import views
+from .views import chatbot_response
 
 
 urlpatterns = [
@@ -146,7 +147,13 @@ urlpatterns = [
         views.add_dispense,
         name='add_dispense'
     ),
+    
+    path(
+        'chatbot/', chatbot_response, 
+        name='chatbot'),
 ]
+
+
 
 
 # =========================

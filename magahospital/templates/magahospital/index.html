@@ -14,6 +14,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
+  <link rel="stylesheet" href="{% static 'css/chatbot.css' %}">
   <style>
 
     *{
@@ -394,5 +395,31 @@
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
+<!-- CHATBOT BUTTON -->
+<div class="chat-circle" id="chat-toggle">
+    💬
+</div>
+
+<!-- CHATBOT BOX -->
+<div class="chat-box" id="chat-box">
+
+    <div class="chat-header">
+        AI Assistant
+        <span id="close-chat">✖</span>
+    </div>
+
+    <div class="chat-body" id="chat-body">
+        <div class="bot-message">
+            Hello 👋 How can I help you?
+        </div>
+    </div>
+
+    <div class="chat-footer">
+        <input type="text" id="chat-input" placeholder="Type message...">
+        <button id="send-btn">Send</button>
+    </div>
+
+</div>
+<script src="{% static 'js/chatbot.js' %}"></script>
 </body>
 </html>

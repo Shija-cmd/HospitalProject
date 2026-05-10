@@ -6,6 +6,9 @@ from django.db.models import Q
 from django.template.loader import get_template
 from xhtml2pdf import pisa
 from django.http import HttpResponse
+from .models import ChatMessage
+from .models import ChatFAQ
+import time
 
 from .models import (
     Patient,
@@ -24,6 +27,9 @@ from .forms import (
     DispenseForm
 )
 
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+import json
 
 # =========================================
 # GROUP HELPER
@@ -830,3 +836,47 @@ def visit_report_pdf(request, visit_id):
         )
 
     return response
+
+#=========================================
+# CHATBOT RESPONSE
+#=========================================
+def chatbot_response(request):
+
+    if request.method == "POST":
+
+        data = json.loads(request.body)
+
+        user_message = data.get("message", "")
+
+        message = user_message.lower()
+
+        faq = None
+
+        for item in ChatFAQ.objects.all():
+
+            if item.question.lower() in message:
+
+                faq = item
+
+                break
+
+        if faq:
+            bot_reply = faq.answer
+        else:
+            bot_reply = "Sorry, I could not find an answer to your question."
+
+        time.sleep(1.5)
+        
+        ChatMessage.objects.create(
+            user=request.user if request.user.is_authenticated else None,
+            user_message=user_message,
+            bot_response=bot_reply
+        )
+
+        return JsonResponse({
+            "response": bot_reply
+        })
+
+    return JsonResponse({
+        "response": "Invalid request"
+    })
