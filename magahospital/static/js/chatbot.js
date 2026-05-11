@@ -25,28 +25,54 @@ function getCookie(name) {
     return cookieValue;
 
 }
+
 const chatToggle = document.getElementById("chat-toggle");
 const chatBox = document.getElementById("chat-box");
 const closeChat = document.getElementById("close-chat");
 
+/* AUTO POPUP AFTER 3 SECONDS */
+window.addEventListener("load", () => {
+
+    if (!sessionStorage.getItem("chatbotShown")) {
+
+        setTimeout(() => {
+
+            chatBox.style.display = "flex";
+
+            sessionStorage.setItem("chatbotShown", "true");
+
+        }, 3000);
+
+    }
+
+});
+
+/* TOGGLE CHAT */
 if(chatToggle && chatBox){
 
     chatToggle.onclick = () => {
 
         if(chatBox.style.display === "flex"){
+
             chatBox.style.display = "none";
+
         } else {
+
             chatBox.style.display = "flex";
+
         }
 
     };
 
 }
 
+/* CLOSE CHAT */
 if(closeChat){
 
     closeChat.onclick = () => {
+
         chatBox.style.display = "none";
+
     };
 
 }
@@ -59,92 +85,109 @@ if(sendBtn){
 
     function sendMessage() {
 
-    const message = chatInput.value.trim();
+        const message = chatInput.value.trim();
 
-    if(message === "") return;
+        if(message === "") return;
 
-    // USER MESSAGE
-    const userDiv = document.createElement("div");
-    userDiv.className = "user-message";
-    userDiv.innerText = message;
+        // USER MESSAGE
+        const userDiv = document.createElement("div");
 
-    chatBody.appendChild(userDiv);
+        userDiv.className = "user-message";
 
-    // BOT MESSAGE
-    const botDiv = document.createElement("div");
-    botDiv.className = "bot-message";
-    let dots = 0;
+        userDiv.innerText = message;
 
-    const typingAnimation = setInterval(() => {
+        chatBody.appendChild(userDiv);
 
-    dots = (dots + 1) % 4;
+        // BOT MESSAGE
+        const botDiv = document.createElement("div");
 
-    botDiv.innerText = "Typing" + ".".repeat(dots);
+        botDiv.className = "bot-message";
 
-}, 500);
+        let dots = 0;
 
-    chatBody.appendChild(botDiv);
+        const typingAnimation = setInterval(() => {
 
-    // SCROLL
-    chatBody.scrollTo({
+            dots = (dots + 1) % 4;
+
+            botDiv.innerText = "Typing" + ".".repeat(dots);
+
+        }, 500);
+
+        chatBody.appendChild(botDiv);
+
+        // SCROLL
+        chatBody.scrollTo({
+
             top: chatBody.scrollHeight,
+
             behavior: "smooth"
+
         });
 
-    // CLEAR INPUT
-    chatInput.value = "";
+        // CLEAR INPUT
+        chatInput.value = "";
 
-    // FETCH REQUEST
-    fetch("/chatbot/", {
+        // FETCH REQUEST
+        fetch("/chatbot/", {
 
-        method: "POST",
+            method: "POST",
 
-        headers: {
-            "Content-Type": "application/json",
-            "X-CSRFToken": getCookie("csrftoken")
-        },
+            headers: {
 
-        body: JSON.stringify({
-            message: message
+                "Content-Type": "application/json",
+
+                "X-CSRFToken": getCookie("csrftoken")
+
+            },
+
+            body: JSON.stringify({
+
+                message: message
+
+            })
+
         })
 
-    })
+        .then(response => response.json())
 
-    .then(response => response.json())
+        .then(data => {
 
-    .then(data => {
-        clearInterval(typingAnimation);
-        botDiv.innerText = data.response;
+            clearInterval(typingAnimation);
 
-        chatBody.scrollTo({
-            top: chatBody.scrollHeight,
-            behavior: "smooth"
+            botDiv.innerText = data.response;
+
+            chatBody.scrollTo({
+
+                top: chatBody.scrollHeight,
+
+                behavior: "smooth"
+
+            });
+
+        })
+
+        .catch(error => {
+
+            console.error("Fetch Error:", error);
+
+            botDiv.innerText = "Server error";
+
         });
-
-    })
-
-    .catch(error => {
-
-        console.error("Fetch Error:", error);
-
-        botDiv.innerText = "Server error";
-
-    });
-
-}
-
-// BUTTON CLICK
-sendBtn.onclick = sendMessage;
-
-// ENTER KEY
-chatInput.addEventListener("keypress", function(event) {
-
-    if(event.key === "Enter") {
-
-        sendMessage();
 
     }
 
-});
+    // BUTTON CLICK
+    sendBtn.onclick = sendMessage;
+
+    // ENTER KEY
+    chatInput.addEventListener("keypress", function(event) {
+
+        if(event.key === "Enter") {
+
+            sendMessage();
+
+        }
+
+    });
 
 }
