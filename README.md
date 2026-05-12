@@ -6,6 +6,13 @@ Designed with scalability, security, and real hospital workflow in mind.
 
 ---
 
+# 🌐 Live Demo
+
+🚀 Live System:
+https://hospitalproject-3s82.onrender.com/
+
+For demo access or collaboration, feel free to contact me.
+
 # ✨ Core Features
 
 ## 👨‍⚕️ Multi-Department Workflow
