@@ -843,61 +843,6 @@ def visit_report_pdf(request, visit_id):
 
 def chatbot_response(request):
 
-    if request.method == "POST":
-
-        try:
-
-            data = json.loads(request.body)
-
-            user_message = data.get("message", "")
-
-            message = user_message.lower()
-
-            faq = None
-
-            for item in ChatFAQ.objects.all():
-
-                if item.question.lower() in message:
-
-                    faq = item
-
-                    break
-
-            if faq:
-
-                bot_reply = faq.answer
-
-            else:
-
-                bot_reply = "Sorry, I could not find an answer to your question."
-
-            time.sleep(1.5)
-
-            # SAVE CHAT SAFELY
-            try:
-
-                ChatMessage.objects.create(
-                    user=request.user if request.user.is_authenticated else None,
-                    user_message=user_message,
-                    bot_response=bot_reply
-                )
-
-            except Exception as db_error:
-
-                print("Chat save error:", db_error)
-
-            return JsonResponse({
-                "response": bot_reply
-            })
-
-        except Exception as e:
-
-            print("Chatbot error:", e)
-
-            return JsonResponse({
-                "response": f"Server Error: {str(e)}"
-            })
-
     return JsonResponse({
-        "response": "Invalid request"
+        "response": "Chatbot backend working"
     })
