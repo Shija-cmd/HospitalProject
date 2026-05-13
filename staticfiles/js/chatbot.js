@@ -150,71 +150,49 @@ if (sendBtn && chatInput && chatBody) {
         /* FETCH REQUEST */
         fetch("/chatbot/", {
 
-            method: "POST",
+    method: "POST",
 
-            headers: {
+    headers: {
 
-                "Content-Type": "application/json",
+        "Content-Type": "application/json",
 
-                "X-CSRFToken": getCookie("csrftoken")
+        "X-CSRFToken": getCookie("csrftoken")
 
-            },
+    },
 
-            body: JSON.stringify({
+    body: JSON.stringify({
 
-                message: message
+        message: message
 
-            })
+    })
 
-        })
+})
 
-        .then(response => {
+.then(async response => {
 
-            if (!response.ok) {
+    clearInterval(typingAnimation);
 
-                throw new Error("HTTP Error: " + response.status);
+    console.log("STATUS:", response.status);
 
-            }
+    console.log("HEADERS:", response.headers);
 
-            return response.json();
+    const rawText = await response.text();
 
-        })
+    console.log("RAW RESPONSE:", rawText);
 
-        .then(data => {
+    botDiv.innerText = rawText;
 
-            clearInterval(typingAnimation);
+})
 
-            botDiv.innerText = data.response || "No response from server.";
+.catch(error => {
 
-            chatBody.scrollTo({
+    clearInterval(typingAnimation);
 
-                top: chatBody.scrollHeight,
+    console.error("FETCH ERROR:", error);
 
-                behavior: "smooth"
+    botDiv.innerText = error.toString();
 
-            });
-
-        })
-
-        .catch(error => {
-
-            clearInterval(typingAnimation);
-
-            console.error("Fetch Error:", error);
-
-            botDiv.innerText = "Sorry, server error occurred.";
-
-            chatBody.scrollTo({
-
-                top: chatBody.scrollHeight,
-
-                behavior: "smooth"
-
-            });
-
-        });
-
-    }
+});
 
 
     /* BUTTON CLICK */
