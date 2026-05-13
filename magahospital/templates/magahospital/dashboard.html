@@ -377,9 +377,18 @@
 <!-- Staff Management -->
 {% if request.user.is_superuser %}
 
-<a href="{% url 'staff_management' %}" class="btn btn-dark">
-    Staff Management
-</a>
+<div class="admin-actions mt-4">
+
+    <h5 class="mb-3">Admin Actions</h5>
+
+    <a href="{% url 'staff_management' %}"
+       class="btn btn-dark">
+
+        Staff Management
+
+    </a>
+
+</div>
 
 {% endif %}
 <!--End Staff Management-->
