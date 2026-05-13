@@ -28,7 +28,7 @@ from .forms import (
 )
 
 from django.http import JsonResponse
-from django.views.decorators.csrf import csrf_exempt
+#from django.views.decorators.csrf import csrf_exempt
 import json
 
 # =========================================
@@ -841,7 +841,7 @@ def visit_report_pdf(request, visit_id):
 # CHATBOT RESPONSE
 # =========================================
 
-@csrf_exempt
+#@csrf_exempt
 def chatbot_response(request):
 
     if request.method == "POST":
