@@ -837,45 +837,66 @@ def visit_report_pdf(request, visit_id):
 
     return response
 
-#=========================================
+# =========================================
 # CHATBOT RESPONSE
-#=========================================
+# =========================================
+
 def chatbot_response(request):
 
     if request.method == "POST":
 
-        data = json.loads(request.body)
+        try:
 
-        user_message = data.get("message", "")
+            data = json.loads(request.body)
 
-        message = user_message.lower()
+            user_message = data.get("message", "")
 
-        faq = None
+            message = user_message.lower()
 
-        for item in ChatFAQ.objects.all():
+            faq = None
 
-            if item.question.lower() in message:
+            for item in ChatFAQ.objects.all():
 
-                faq = item
+                if item.question.lower() in message:
 
-                break
+                    faq = item
 
-        if faq:
-            bot_reply = faq.answer
-        else:
-            bot_reply = "Sorry, I could not find an answer to your question."
+                    break
 
-        time.sleep(1.5)
-        
-        ChatMessage.objects.create(
-            user=request.user if request.user.is_authenticated else None,
-            user_message=user_message,
-            bot_response=bot_reply
-        )
+            if faq:
 
-        return JsonResponse({
-            "response": bot_reply
-        })
+                bot_reply = faq.answer
+
+            else:
+
+                bot_reply = "Sorry, I could not find an answer to your question."
+
+            time.sleep(1.5)
+
+            # SAVE CHAT SAFELY
+            try:
+
+                ChatMessage.objects.create(
+                    user=request.user if request.user.is_authenticated else None,
+                    user_message=user_message,
+                    bot_response=bot_reply
+                )
+
+            except Exception as db_error:
+
+                print("Chat save error:", db_error)
+
+            return JsonResponse({
+                "response": bot_reply
+            })
+
+        except Exception as e:
+
+            print("Chatbot error:", e)
+
+            return JsonResponse({
+                "response": f"Server Error: {str(e)}"
+            })
 
     return JsonResponse({
         "response": "Invalid request"
