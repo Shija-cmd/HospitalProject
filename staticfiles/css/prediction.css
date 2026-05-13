@@ -1,0 +1,138 @@
+body{
+    background: #f5f7fa;
+    font-family: Arial, sans-serif;
+}
+
+.form-container{
+    max-width: 600px;
+    margin: 40px auto;
+    background: white;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.form-container h2{
+    text-align: center;
+    color: #0d6efd;
+}
+
+.predict-btn{
+    width: auto;
+    padding: 12px;
+    background: #0d6efd;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.predict-btn:hover{
+    background: #0056d2;
+}
+
+.result-box{
+    margin-top: 25px;
+    padding: 20px;
+    background: #f8f9fa;
+    border-radius: 12px;
+}
+
+.warning-text{
+    color: red;
+    font-weight: bold;
+}
+
+.safe-text{
+    color: green;
+    font-weight: bold;
+}
+
+/* FORM FIELDS */
+form p{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
+}
+
+form label{
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+form input,
+form select,
+form textarea{
+    width: 100%;
+    padding: 8px, 12px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    font-size: 15px;
+    box-sizing: border-box;
+}
+
+/* TEXTAREA */
+form textarea{
+    min-height: 80px;
+    resize: vertical;
+}
+
+/* INPUT FOCUS */
+form input:focus,
+form select:focus,
+form textarea:focus{
+    border-color: #0d6efd;
+    outline: none;
+    box-shadow: 0 0 5px rgba(13,110,253,0.3);
+}
+
+body{
+    background: #f5f7fa;
+    font-family: Arial, sans-serif;
+}
+
+/* DISCLAIMER */
+.disclaimer{
+    margin-top: 25px;
+    padding: 15px;
+    background: #fff3cd;
+    border-left: 5px solid #ffc107;
+    border-radius: 10px;
+    color: #856404;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+.confidence-text{
+    margin-top: 10px;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+/* BACK BUTTON CONTAINER */
+.back-home-container{
+    text-align:center;
+    margin-top:25px;
+}
+
+/* BACK BUTTON */
+.back-btn{
+    display:inline-block;
+    background:#0d6efd;
+    color:#fff !important;
+    padding:12px 24px;
+    border-radius:10px;
+    text-decoration:none !important;
+    font-weight:600;
+    transition:0.3s;
+    border:none;
+}
+
+/* HOVER */
+.back-btn:hover{
+    background:#0056d2;
+    color:#fff !important;
+    transform:translateY(-2px);
+}
