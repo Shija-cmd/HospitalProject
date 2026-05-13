@@ -157,14 +157,20 @@ if (sendBtn && chatInput && chatBody) {
             });
 
 
-            console.log("STATUS:", response.status);
+            if (!response.ok) {
 
-            const rawText = await response.text();
+                throw new Error(
+                    "Server returned status " + response.status
+                );
 
-            console.log("RAW RESPONSE:", rawText);
+            }
 
 
-            botDiv.innerText = rawText;
+            const data = await response.json();
+
+            console.log("CHATBOT RESPONSE:", data);
+
+            botDiv.innerText = data.response;
 
         }
 
@@ -172,7 +178,8 @@ if (sendBtn && chatInput && chatBody) {
 
             console.error("FETCH ERROR:", error);
 
-            botDiv.innerText = error.toString();
+            botDiv.innerText =
+                "Sorry, server error occurred.";
 
         }
 
