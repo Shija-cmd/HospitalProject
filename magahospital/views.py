@@ -9,6 +9,9 @@ from django.http import HttpResponse
 from .models import ChatMessage
 from .models import ChatFAQ
 import time
+from django.contrib.auth.models import User, Group
+from django.contrib.auth.hashers import make_password
+from django.contrib import messages
 
 from .models import (
     Patient,
@@ -876,3 +879,64 @@ def chatbot_response(request):
     return JsonResponse({
         "response": "Invalid request"
     })
+    
+    # =========================================
+# STAFF MANAGEMENT
+# =========================================
+
+@login_required
+def staff_management(request):
+
+    if not request.user.is_superuser:
+
+        return render(
+            request,
+            'magahospital/not_allowed.html',
+            status=403
+        )
+
+    users = User.objects.all().order_by('-id')
+
+    groups = Group.objects.all()
+
+    if request.method == 'POST':
+
+        username = request.POST.get('username')
+
+        password = request.POST.get('password')
+
+        group_name = request.POST.get('group')
+
+        if User.objects.filter(username=username).exists():
+
+            messages.error(
+                request,
+                'Username already exists.'
+            )
+
+            return redirect('staff_management')
+
+        user = User.objects.create(
+            username=username,
+            password=make_password(password)
+        )
+
+        group = Group.objects.get(name=group_name)
+
+        user.groups.add(group)
+
+        messages.success(
+            request,
+            f'Staff account for {username} created successfully.'
+        )
+
+        return redirect('staff_management')
+
+    return render(
+        request,
+        'magahospital/staff_management.html',
+        {
+            'users': users,
+            'groups': groups
+        }
+    )

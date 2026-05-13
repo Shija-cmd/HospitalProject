@@ -145,6 +145,17 @@ urlpatterns = [
     path(
         'chatbot/', chatbot_response, 
         name='chatbot'),
+    
+    #=========================
+    # 7. STAFF MANAGEMENT
+    #=========================
+    
+    path(
+    'staff-management/',
+    views.staff_management,
+    name='staff_management'
+),
+
 ]
 
 

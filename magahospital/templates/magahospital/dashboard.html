@@ -374,6 +374,15 @@
     </div>
 
 </div>
+<!-- Staff Management -->
+{% if request.user.is_superuser %}
+
+<a href="{% url 'staff_management' %}" class="btn btn-dark">
+    Staff Management
+</a>
+
+{% endif %}
+<!--End Staff Management-->
 
 <!-- TOP ROW -->
 <div class="row g-4 mb-4">
