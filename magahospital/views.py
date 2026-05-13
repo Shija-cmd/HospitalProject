@@ -841,6 +841,7 @@ def visit_report_pdf(request, visit_id):
 # CHATBOT RESPONSE
 # =========================================
 
+@csrf_exempt
 def chatbot_response(request):
 
     if request.method == "POST":
