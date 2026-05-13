@@ -26,9 +26,16 @@ function getCookie(name) {
 
 }
 
+
+/* ELEMENTS */
 const chatToggle = document.getElementById("chat-toggle");
 const chatBox = document.getElementById("chat-box");
 const closeChat = document.getElementById("close-chat");
+
+const sendBtn = document.getElementById("send-btn");
+const chatInput = document.getElementById("chat-input");
+const chatBody = document.getElementById("chat-body");
+
 
 /* AUTO POPUP AFTER 3 SECONDS */
 window.addEventListener("load", () => {
@@ -37,9 +44,13 @@ window.addEventListener("load", () => {
 
         setTimeout(() => {
 
-            chatBox.style.display = "flex";
+            if (chatBox) {
 
-            sessionStorage.setItem("chatbotShown", "true");
+                chatBox.style.display = "flex";
+
+                sessionStorage.setItem("chatbotShown", "true");
+
+            }
 
         }, 3000);
 
@@ -47,12 +58,13 @@ window.addEventListener("load", () => {
 
 });
 
+
 /* TOGGLE CHAT */
-if(chatToggle && chatBox){
+if (chatToggle && chatBox) {
 
     chatToggle.onclick = () => {
 
-        if(chatBox.style.display === "flex"){
+        if (chatBox.style.display === "flex") {
 
             chatBox.style.display = "none";
 
@@ -66,8 +78,9 @@ if(chatToggle && chatBox){
 
 }
 
+
 /* CLOSE CHAT */
-if(closeChat){
+if (closeChat && chatBox) {
 
     closeChat.onclick = () => {
 
@@ -77,19 +90,18 @@ if(closeChat){
 
 }
 
-const sendBtn = document.getElementById("send-btn");
-const chatInput = document.getElementById("chat-input");
-const chatBody = document.getElementById("chat-body");
 
-if(sendBtn){
+/* SEND MESSAGE FUNCTION */
+if (sendBtn && chatInput && chatBody) {
 
     function sendMessage() {
 
         const message = chatInput.value.trim();
 
-        if(message === "") return;
+        if (message === "") return;
 
-        // USER MESSAGE
+
+        /* USER MESSAGE */
         const userDiv = document.createElement("div");
 
         userDiv.className = "user-message";
@@ -98,11 +110,18 @@ if(sendBtn){
 
         chatBody.appendChild(userDiv);
 
-        // BOT MESSAGE
+
+        /* BOT MESSAGE */
         const botDiv = document.createElement("div");
 
         botDiv.className = "bot-message";
 
+        botDiv.innerText = "Typing";
+
+        chatBody.appendChild(botDiv);
+
+
+        /* TYPING ANIMATION */
         let dots = 0;
 
         const typingAnimation = setInterval(() => {
@@ -113,9 +132,8 @@ if(sendBtn){
 
         }, 500);
 
-        chatBody.appendChild(botDiv);
 
-        // SCROLL
+        /* SCROLL */
         chatBody.scrollTo({
 
             top: chatBody.scrollHeight,
@@ -124,10 +142,12 @@ if(sendBtn){
 
         });
 
-        // CLEAR INPUT
+
+        /* CLEAR INPUT */
         chatInput.value = "";
 
-        // FETCH REQUEST
+
+        /* FETCH REQUEST */
         fetch("/chatbot/", {
 
             method: "POST",
@@ -148,13 +168,23 @@ if(sendBtn){
 
         })
 
-        .then(response => response.json())
+        .then(response => {
+
+            if (!response.ok) {
+
+                throw new Error("HTTP Error: " + response.status);
+
+            }
+
+            return response.json();
+
+        })
 
         .then(data => {
 
             clearInterval(typingAnimation);
 
-            botDiv.innerText = data.response;
+            botDiv.innerText = data.response || "No response from server.";
 
             chatBody.scrollTo({
 
@@ -168,21 +198,35 @@ if(sendBtn){
 
         .catch(error => {
 
+            clearInterval(typingAnimation);
+
             console.error("Fetch Error:", error);
 
-            botDiv.innerText = "Server error";
+            botDiv.innerText = "Sorry, server error occurred.";
+
+            chatBody.scrollTo({
+
+                top: chatBody.scrollHeight,
+
+                behavior: "smooth"
+
+            });
 
         });
 
     }
 
-    // BUTTON CLICK
+
+    /* BUTTON CLICK */
     sendBtn.onclick = sendMessage;
 
-    // ENTER KEY
+
+    /* ENTER KEY */
     chatInput.addEventListener("keypress", function(event) {
 
-        if(event.key === "Enter") {
+        if (event.key === "Enter") {
+
+            event.preventDefault();
 
             sendMessage();
 
