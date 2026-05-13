@@ -28,7 +28,6 @@ from .forms import (
 )
 
 from django.http import JsonResponse
-#from django.views.decorators.csrf import csrf_exempt
 import json
 
 # =========================================
@@ -45,30 +44,6 @@ def user_in_group(user, group_name):
 # =========================================
 # AUTH VIEWS
 # =========================================
-
-def register(request):
-
-    if request.method == 'POST':
-
-        form = UserCreationForm(request.POST)
-
-        if form.is_valid():
-
-            user = form.save()
-
-            login(request, user)
-
-            return redirect('index')
-
-    else:
-
-        form = UserCreationForm()
-
-    return render(
-        request,
-        'magahospital/register.html',
-        {'form': form}
-    )
 
 
 def index(request):
@@ -841,7 +816,6 @@ def visit_report_pdf(request, visit_id):
 # CHATBOT RESPONSE
 # =========================================
 
-#@csrf_exempt
 def chatbot_response(request):
 
     if request.method == "POST":
