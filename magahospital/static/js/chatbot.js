@@ -12,7 +12,9 @@ function getCookie(name) {
 
             if (cookie.substring(0, name.length + 1) === (name + '=')) {
 
-                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                cookieValue = decodeURIComponent(
+                    cookie.substring(name.length + 1)
+                );
 
                 break;
 
@@ -37,7 +39,7 @@ const chatInput = document.getElementById("chat-input");
 const chatBody = document.getElementById("chat-body");
 
 
-/* AUTO POPUP AFTER 3 SECONDS */
+/* AUTO POPUP */
 window.addEventListener("load", () => {
 
     if (!sessionStorage.getItem("chatbotShown")) {
@@ -48,7 +50,10 @@ window.addEventListener("load", () => {
 
                 chatBox.style.display = "flex";
 
-                sessionStorage.setItem("chatbotShown", "true");
+                sessionStorage.setItem(
+                    "chatbotShown",
+                    "true"
+                );
 
             }
 
@@ -62,7 +67,7 @@ window.addEventListener("load", () => {
 /* TOGGLE CHAT */
 if (chatToggle && chatBox) {
 
-    chatToggle.onclick = () => {
+    chatToggle.addEventListener("click", () => {
 
         if (chatBox.style.display === "flex") {
 
@@ -74,7 +79,7 @@ if (chatToggle && chatBox) {
 
         }
 
-    };
+    });
 
 }
 
@@ -82,23 +87,23 @@ if (chatToggle && chatBox) {
 /* CLOSE CHAT */
 if (closeChat && chatBox) {
 
-    closeChat.onclick = () => {
+    closeChat.addEventListener("click", () => {
 
         chatBox.style.display = "none";
 
-    };
+    });
 
 }
 
 
-/* SEND MESSAGE FUNCTION */
+/* SEND MESSAGE */
 if (sendBtn && chatInput && chatBody) {
 
-    function sendMessage() {
+    async function sendMessage() {
 
         const message = chatInput.value.trim();
 
-        if (message === "") return;
+        if (!message) return;
 
 
         /* USER MESSAGE */
@@ -116,87 +121,69 @@ if (sendBtn && chatInput && chatBody) {
 
         botDiv.className = "bot-message";
 
-        botDiv.innerText = "Typing";
+        botDiv.innerText = "Typing...";
 
         chatBody.appendChild(botDiv);
 
 
-        /* TYPING ANIMATION */
-        let dots = 0;
-
-        const typingAnimation = setInterval(() => {
-
-            dots = (dots + 1) % 4;
-
-            botDiv.innerText = "Typing" + ".".repeat(dots);
-
-        }, 500);
-
-
         /* SCROLL */
-        chatBody.scrollTo({
-
-            top: chatBody.scrollHeight,
-
-            behavior: "smooth"
-
-        });
+        chatBody.scrollTop = chatBody.scrollHeight;
 
 
         /* CLEAR INPUT */
         chatInput.value = "";
 
 
-        /* FETCH REQUEST */
-        fetch("/chatbot/", {
+        try {
 
-    method: "POST",
+            const response = await fetch("/chatbot/", {
 
-    headers: {
+                method: "POST",
 
-        "Content-Type": "application/json",
+                headers: {
 
-        "X-CSRFToken": getCookie("csrftoken")
+                    "Content-Type": "application/json",
 
-    },
+                    "X-CSRFToken": getCookie("csrftoken")
 
-    body: JSON.stringify({
+                },
 
-        message: message
+                body: JSON.stringify({
 
-    })
+                    message: message
 
-})
+                })
 
-.then(async response => {
+            });
 
-    clearInterval(typingAnimation);
 
-    console.log("STATUS:", response.status);
+            console.log("STATUS:", response.status);
 
-    console.log("HEADERS:", response.headers);
+            const rawText = await response.text();
 
-    const rawText = await response.text();
+            console.log("RAW RESPONSE:", rawText);
 
-    console.log("RAW RESPONSE:", rawText);
 
-    botDiv.innerText = rawText;
+            botDiv.innerText = rawText;
 
-})
+        }
 
-.catch(error => {
+        catch (error) {
 
-    clearInterval(typingAnimation);
+            console.error("FETCH ERROR:", error);
 
-    console.error("FETCH ERROR:", error);
+            botDiv.innerText = error.toString();
 
-    botDiv.innerText = error.toString();
+        }
 
-});
+
+        chatBody.scrollTop = chatBody.scrollHeight;
+
+    }
 
 
     /* BUTTON CLICK */
-    sendBtn.onclick = sendMessage;
+    sendBtn.addEventListener("click", sendMessage);
 
 
     /* ENTER KEY */
