@@ -87,6 +87,13 @@ class Patient(models.Model):
 
     def __str__(self):
         return f"{self.firstname} {self.secondname}"
+        
+    @property
+    def current_visit(self):
+
+        return self.visits.exclude(
+            status='Completed'
+        ).order_by('-date').first()
 
 
 # =====================================
