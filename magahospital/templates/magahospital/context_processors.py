@@ -2,6 +2,18 @@ def user_roles(request):
 
     user = request.user
 
+    if not user.is_authenticated:
+
+        return {
+
+            'is_admin': False,
+            'is_reception': False,
+            'is_doctor': False,
+            'is_lab': False,
+            'is_dispense': False,
+
+        }
+
     return {
 
         'is_admin': user.is_superuser,
