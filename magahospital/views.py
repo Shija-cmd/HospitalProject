@@ -1,5 +1,3 @@
-from urllib import request
-
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import login, logout
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
@@ -174,7 +172,7 @@ def doctor_queue(request):
             'Doctor',
             'Prescription'
         ]
-    ).order_by('-date')
+    ).order_by('date')
 
     return render(
         request,
@@ -194,7 +192,7 @@ def lab_queue(request):
 
     visits = Visit.objects.filter(
         status='Lab'
-    ).order_by('-date')
+    ).order_by('date')
 
     return render(
         request,
@@ -214,7 +212,7 @@ def dispense_queue(request):
 
     visits = Visit.objects.filter(
         status='Dispense'
-    ).order_by('-date')
+    ).order_by('date')
 
     return render(
         request,
@@ -744,7 +742,8 @@ def visit_report_pdf(request, visit_id):
 # PATIENT LIST
 # =========================================
 
-@login_required
+@role_required('Receptions')
+def patient_list(request):
 def patient_list(request):
 
     query = request.GET.get('q')
@@ -767,7 +766,7 @@ def patient_list(request):
 
         patient.latest_visit = Visit.objects.filter(
             patient=patient
-    ).order_by('-date').first()
+    ).order_by('date').last()
 
     return render(
         request,
@@ -790,7 +789,7 @@ def log_action(user, action):
 
     )
     
-    # =========================================
+# =========================================
 # CUSTOM 403 ERROR
 # =========================================
 
