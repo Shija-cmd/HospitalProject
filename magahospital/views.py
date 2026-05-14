@@ -267,7 +267,7 @@ def create_visit(request, patient_id):
 
     patient = get_object_or_404(
         Patient,
-        idno=patient_id
+        id=patient_id
     )
 
     visit = Visit.objects.create(
@@ -581,7 +581,7 @@ def patient_history(request, patient_id):
 
     patient = get_object_or_404(
         Patient,
-        idno=patient_id
+        id=patient_id
     )
 
     visits = Visit.objects.filter(
