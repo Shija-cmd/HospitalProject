@@ -737,6 +737,43 @@ def visit_report_pdf(request, visit_id):
     )
 
     return response
+
+# =========================================
+# PATIENT LIST
+# =========================================
+
+@login_required
+def patient_list(request):
+
+    query = request.GET.get('q')
+
+    patients = Patient.objects.all().order_by('-idno')
+
+    if query:
+
+        patients = patients.filter(
+
+            Q(firstname__icontains=query) |
+
+            Q(secondname__icontains=query) |
+
+            Q(idno__icontains=query)
+
+        )
+
+    return render(
+
+        request,
+
+        'magahospital/patient_list.html',
+
+        {
+
+            'patients': patients
+
+        }
+
+    )
 #=========================================
 # AUDIT LOG
 #=========================================
