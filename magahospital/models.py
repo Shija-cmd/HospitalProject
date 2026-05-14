@@ -266,4 +266,33 @@ class ChatFAQ(models.Model):
     answer = models.TextField()
 
     def __str__(self):
-        return self.question    
+        return self.question 
+    
+    from django.contrib.auth.models import User
+
+#======================================
+# AUDIT LOG MODEL
+#======================================
+class AuditLog(models.Model):
+
+    user = models.ForeignKey(
+        User,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True
+    )
+
+    action = models.CharField(
+        max_length=255
+    )
+
+    timestamp = models.DateTimeField(
+        auto_now_add=True
+    )
+
+    def __str__(self):
+
+        if self.user:
+            return f"{self.user.username} - {self.action}"
+
+        return self.action   

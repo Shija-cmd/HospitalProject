@@ -32,6 +32,7 @@ from .forms import (
 
 from django.http import JsonResponse
 import json
+from .models import AuditLog
 
 # =========================================
 # GROUP HELPER
@@ -344,7 +345,15 @@ def create_patient(request):
 
         if form.is_valid():
 
-            form.save()
+            patient = form.save()
+
+            log_action(
+
+                request.user,
+
+                f"Created patient {patient.firstname} {patient.secondname}"
+
+        )
 
             return redirect('patient_list')
 
@@ -390,6 +399,14 @@ def create_visit(request, patient_id):
     visit = Visit.objects.create(
         patient=patient,
         status='Doctor'
+    )
+    
+    log_action(
+
+        request.user,
+
+        f"Created visit for patient {patient.firstname} {patient.secondname}"
+
     )
 
     return redirect(
@@ -481,6 +498,13 @@ def add_doctor(request, visit_id):
             doctor.visit = visit
 
             doctor.save()
+            log_action(
+
+            request.user,
+
+                f"Added doctor consultation for Visit #{visit.id}"
+
+            )
 
             visit.status = 'Lab'
 
@@ -545,6 +569,14 @@ def add_lab(request, visit_id):
             lab.visit = visit
 
             lab.save()
+            
+            log_action(
+
+                request.user,
+
+                f"Added lab results for Visit #{visit.id}"
+
+            )
 
             visit.status = 'Prescription'
 
@@ -609,6 +641,13 @@ def add_prescription(request, visit_id):
             prescription.visit = visit
 
             prescription.save()
+            log_action(
+
+            request.user,
+
+                f"Added prescription for Visit #{visit.id}"
+
+            )
             
             visit.status = 'Dispense'
             visit.save()
@@ -673,6 +712,13 @@ def add_dispense(request, visit_id):
             dispense.visit = visit
 
             dispense.save()
+            log_action(
+
+                request.user,
+
+                f"Dispensed medication for Visit #{visit.id}"
+
+        ) 
 
             visit.status = 'Completed'
 
@@ -939,4 +985,17 @@ def staff_management(request):
             'users': users,
             'groups': groups
         }
+    )
+
+#=========================================
+# AUDIT LOG
+#=========================================
+def log_action(user, action):
+
+    AuditLog.objects.create(
+
+        user=user,
+
+        action=action
+
     )
