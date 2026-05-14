@@ -701,6 +701,42 @@ def chatbot_response(request):
         'response': 'Invalid request'
     })
 
+# =========================================
+# VISIT REPORT PDF
+# =========================================
+
+@login_required
+def visit_report_pdf(request, visit_id):
+
+    visit = get_object_or_404(
+        Visit,
+        id=visit_id
+    )
+
+    template = get_template(
+        'magahospital/pdf_template.html'
+    )
+
+    html = template.render({
+        'visit': visit
+    })
+
+    response = HttpResponse(
+        content_type='application/pdf'
+    )
+
+    response[
+        'Content-Disposition'
+    ] = (
+        f'filename=\"visit_{visit.id}.pdf\"'
+    )
+
+    pisa.CreatePDF(
+        html,
+        dest=response
+    )
+
+    return response
 #=========================================
 # AUDIT LOG
 #=========================================
