@@ -785,4 +785,16 @@ def log_action(user, action):
 
         action=action
 
+    )
+    
+    # =========================================
+# CUSTOM 403 ERROR
+# =========================================
+
+def custom_403(request, exception):
+
+    return render(
+        request,
+        'magahospital/not_allowed.html',
+        status=403
     )  
