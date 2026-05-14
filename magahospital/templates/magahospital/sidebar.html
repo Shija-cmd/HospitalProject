@@ -2,6 +2,8 @@
 
     <h2 class="sidebar-title">
 
+        <i class="bi bi-hospital me-2"></i>
+
         Maga HMS
 
     </h2>
@@ -11,9 +13,13 @@
 
 
         <!-- PATIENTS -->
+        {% if is_reception or is_admin %}
+
         <li>
 
             <a href="{% url 'patient_list' %}">
+
+                <i class="bi bi-people-fill me-2"></i>
 
                 Patients
 
@@ -21,11 +27,17 @@
 
         </li>
 
+        {% endif %}
+
 
         <!-- DOCTOR -->
+        {% if is_doctor or is_admin %}
+
         <li>
 
             <a href="{% url 'doctor_queue' %}">
+
+                <i class="bi bi-heart-pulse-fill me-2"></i>
 
                 Doctor Queue
 
@@ -33,11 +45,17 @@
 
         </li>
 
+        {% endif %}
+
 
         <!-- LAB -->
+        {% if is_lab or is_admin %}
+
         <li>
 
             <a href="{% url 'lab_queue' %}">
+
+                <i class="bi bi-flask me-2"></i>
 
                 Lab Queue
 
@@ -45,17 +63,25 @@
 
         </li>
 
+        {% endif %}
+
 
         <!-- DISPENSE -->
+        {% if is_dispense or is_admin %}
+
         <li>
 
             <a href="{% url 'dispense_queue' %}">
+
+                <i class="bi bi-capsule-pill me-2"></i>
 
                 Dispense Queue
 
             </a>
 
         </li>
+
+        {% endif %}
 
 
         <!-- STAFF MANAGEMENT -->
@@ -64,6 +90,8 @@
         <li>
 
             <a href="{% url 'staff_management' %}">
+
+                <i class="bi bi-person-gear me-2"></i>
 
                 Staff Management
 
