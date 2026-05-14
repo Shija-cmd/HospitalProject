@@ -111,10 +111,31 @@ body{
     transform:translateY(-2px);
 }
 
-/* MAIN CONTENT */
+/* MAIN CONTENT AREA */
 .main-content{
-    padding-top:40px;
-    min-height:85vh;
+
+    margin-left:260px;
+
+    padding:30px;
+
+    width:100%;
+
+    min-height:100vh;
+
+}
+
+
+/* MOBILE RESPONSIVE */
+@media(max-width:768px){
+
+    .main-content{
+
+        margin-left:0;
+
+        padding:15px;
+
+    }
+
 }
 
 /* FOOTER */
