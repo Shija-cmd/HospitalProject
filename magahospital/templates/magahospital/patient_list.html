@@ -246,7 +246,7 @@
                 <!-- ACTIONS -->
                 <td>
 
-                    <a href="{% url 'create_visit' patient.idno %}"
+                    <a href="{% url 'create_visit' patient.id %}"
                        class="btn btn-success btn-sm btn-custom">
 
                         <i class="bi bi-plus-circle"></i>
@@ -254,7 +254,7 @@
 
                     </a>
 
-                    <a href="{% url 'patient_history' patient.idno %}"
+                    <a href="{% url 'patient_history' patient.id %}"
                        class="btn btn-info btn-sm btn-custom">
 
                         <i class="bi bi-clock-history"></i>
