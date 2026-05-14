@@ -33,6 +33,7 @@ from .forms import (
 from django.http import JsonResponse
 import json
 from .models import AuditLog
+from .decorators import role_required
 
 # =========================================
 # GROUP HELPER
@@ -163,22 +164,8 @@ def dashboard(request):
 # DOCTOR QUEUE
 # =========================================
 
-@login_required
+@role_required('Doctor')
 def doctor_queue(request):
-
-    if not (
-        request.user.is_superuser or
-        user_in_group(
-            request.user,
-            'Doctor'
-        )
-    ):
-
-        return render(
-            request,
-            'magahospital/not_allowed.html',
-            status=403
-        )
 
     visits = Visit.objects.filter(
         status__in=[
@@ -200,22 +187,8 @@ def doctor_queue(request):
 # LAB QUEUE
 # =========================================
 
-@login_required
+@role_required('Lab')
 def lab_queue(request):
-
-    if not (
-        request.user.is_superuser or
-        user_in_group(
-            request.user,
-            'Lab'
-        )
-    ):
-
-        return render(
-            request,
-            'magahospital/not_allowed.html',
-            status=403
-        )
 
     visits = Visit.objects.filter(
         status='Lab'
@@ -234,22 +207,8 @@ def lab_queue(request):
 # DISPENSE QUEUE
 # =========================================
 
-@login_required
+@role_required('Dispense')
 def dispense_queue(request):
-
-    if not (
-        request.user.is_superuser or
-        user_in_group(
-            request.user,
-            'Dispense'
-        )
-    ):
-
-        return render(
-            request,
-            'magahospital/not_allowed.html',
-            status=403
-        )
 
     visits = Visit.objects.filter(
         status='Dispense'
@@ -265,79 +224,11 @@ def dispense_queue(request):
 
 
 # =========================================
-# 1. PATIENT LIST
+# CREATE PATIENT
 # =========================================
 
-@login_required
-def patient_list(request):
-
-    query = request.GET.get('q')
-
-    sex = request.GET.get('sex')
-
-    patients = Patient.objects.prefetch_related(
-        'visits'
-    ).all().order_by(
-        '-created_at'
-    )
-
-    # SEARCH
-    if query:
-
-        patients = patients.filter(
-
-            Q(firstname__icontains=query) |
-            Q(secondname__icontains=query) |
-            Q(idno__icontains=query)
-
-        )
-
-    # FILTER SEX
-    if sex:
-
-        patients = patients.filter(
-            sex=sex
-        )
-
-    # CONVERT TO LIST
-    patients = list(patients)
-
-    # ATTACH LATEST VISIT
-    for patient in patients:
-
-        patient.current_visit = Visit.objects.filter(
-        patient=patient
-    ).order_by('-id').first()
-
-    return render(
-        request,
-        'magahospital/patient_list.html',
-        {
-            'patients': patients
-        }
-    )
-
-
-# =========================================
-# 2. CREATE PATIENT
-# =========================================
-
-@login_required
+@role_required('Receptions')
 def create_patient(request):
-
-    if not (
-        request.user.is_superuser or
-        user_in_group(
-            request.user,
-            'Receptions'
-        )
-    ):
-
-        return render(
-            request,
-            'magahospital/not_allowed.html',
-            status=403
-        )
 
     if request.method == 'POST':
 
@@ -348,12 +239,9 @@ def create_patient(request):
             patient = form.save()
 
             log_action(
-
                 request.user,
-
                 f"Created patient {patient.firstname} {patient.secondname}"
-
-        )
+            )
 
             return redirect('patient_list')
 
@@ -371,25 +259,11 @@ def create_patient(request):
 
 
 # =========================================
-# 3. CREATE NEW VISIT
+# CREATE VISIT
 # =========================================
 
-@login_required
+@role_required('Receptions')
 def create_visit(request, patient_id):
-
-    if not (
-        request.user.is_superuser or
-        user_in_group(
-            request.user,
-            'Receptions'
-        )
-    ):
-
-        return render(
-            request,
-            'magahospital/not_allowed.html',
-            status=403
-        )
 
     patient = get_object_or_404(
         Patient,
@@ -400,13 +274,10 @@ def create_visit(request, patient_id):
         patient=patient,
         status='Doctor'
     )
-    
+
     log_action(
-
         request.user,
-
         f"Created visit for patient {patient.firstname} {patient.secondname}"
-
     )
 
     return redirect(
@@ -416,62 +287,11 @@ def create_visit(request, patient_id):
 
 
 # =========================================
-# 4. VISIT DETAIL
+# ADD DOCTOR
 # =========================================
 
-@login_required
-def visit_detail(request, visit_id):
-
-    visit = get_object_or_404(
-        Visit,
-        id=visit_id
-    )
-
-    doctor = getattr(
-        visit,
-        'doctor',
-        None
-    )
-
-    labs = visit.labs.all()
-
-    prescriptions = visit.prescriptions.all()
-
-    dispenses = visit.dispenses.all()
-
-    return render(
-        request,
-        'magahospital/visit_detail.html',
-        {
-            'visit': visit,
-            'doctor': doctor,
-            'labs': labs,
-            'prescriptions': prescriptions,
-            'dispenses': dispenses,
-        }
-    )
-
-
-# =========================================
-# 5. ADD / UPDATE DOCTOR
-# =========================================
-
-@login_required
+@role_required('Doctor')
 def add_doctor(request, visit_id):
-
-    if not (
-        request.user.is_superuser or
-        user_in_group(
-            request.user,
-            'Doctor'
-        )
-    ):
-
-        return render(
-            request,
-            'magahospital/not_allowed.html',
-            status=403
-        )
 
     visit = get_object_or_404(
         Visit,
@@ -498,12 +318,10 @@ def add_doctor(request, visit_id):
             doctor.visit = visit
 
             doctor.save()
+
             log_action(
-
-            request.user,
-
+                request.user,
                 f"Added doctor consultation for Visit #{visit.id}"
-
             )
 
             visit.status = 'Lab'
@@ -531,25 +349,11 @@ def add_doctor(request, visit_id):
 
 
 # =========================================
-# 6. ADD LAB
+# ADD LAB
 # =========================================
 
-@login_required
+@role_required('Lab')
 def add_lab(request, visit_id):
-
-    if not (
-        request.user.is_superuser or
-        user_in_group(
-            request.user,
-            'Lab'
-        )
-    ):
-
-        return render(
-            request,
-            'magahospital/not_allowed.html',
-            status=403
-        )
 
     visit = get_object_or_404(
         Visit,
@@ -569,13 +373,10 @@ def add_lab(request, visit_id):
             lab.visit = visit
 
             lab.save()
-            
+
             log_action(
-
                 request.user,
-
                 f"Added lab results for Visit #{visit.id}"
-
             )
 
             visit.status = 'Prescription'
@@ -601,25 +402,11 @@ def add_lab(request, visit_id):
 
 
 # =========================================
-# 7. ADD PRESCRIPTION
+# ADD PRESCRIPTION
 # =========================================
 
-@login_required
+@role_required('Doctor')
 def add_prescription(request, visit_id):
-
-    if not (
-        request.user.is_superuser or
-        user_in_group(
-            request.user,
-            'Doctor'
-        )
-    ):
-
-        return render(
-            request,
-            'magahospital/not_allowed.html',
-            status=403
-        )
 
     visit = get_object_or_404(
         Visit,
@@ -641,14 +428,12 @@ def add_prescription(request, visit_id):
             prescription.visit = visit
 
             prescription.save()
+
             log_action(
-
-            request.user,
-
+                request.user,
                 f"Added prescription for Visit #{visit.id}"
-
             )
-            
+
             visit.status = 'Dispense'
             visit.save()
 
@@ -672,25 +457,11 @@ def add_prescription(request, visit_id):
 
 
 # =========================================
-# 8. ADD DISPENSE
+# ADD DISPENSE
 # =========================================
 
-@login_required
+@role_required('Dispense')
 def add_dispense(request, visit_id):
-
-    if not (
-        request.user.is_superuser or
-        user_in_group(
-            request.user,
-            'Dispense'
-        )
-    ):
-
-        return render(
-            request,
-            'magahospital/not_allowed.html',
-            status=403
-        )
 
     visit = get_object_or_404(
         Visit,
@@ -712,13 +483,11 @@ def add_dispense(request, visit_id):
             dispense.visit = visit
 
             dispense.save()
+
             log_action(
-
                 request.user,
-
                 f"Dispensed medication for Visit #{visit.id}"
-
-        ) 
+            )
 
             visit.status = 'Completed'
 
@@ -743,203 +512,11 @@ def add_dispense(request, visit_id):
 
 
 # =========================================
-# 9. PATIENT HISTORY
-# =========================================
-
-@login_required
-def patient_history(request, patient_id):
-
-    patient = get_object_or_404(
-        Patient,
-        idno=patient_id
-    )
-
-    visits = patient.visits.all().order_by(
-        '-date'
-    )
-
-    start = request.GET.get('start')
-
-    end = request.GET.get('end')
-
-    if start:
-
-        visits = visits.filter(
-            date__gte=start
-        )
-
-    if end:
-
-        visits = visits.filter(
-            date__lte=end
-        )
-
-    return render(
-        request,
-        'magahospital/patient_history.html',
-        {
-            'patient': patient,
-            'visits': visits
-        }
-    )
-
-
-# =========================================
-# GLOBAL 403 HANDLER
-# =========================================
-
-def custom_403(request, exception):
-
-    return render(
-        request,
-        'magahospital/not_allowed.html',
-        status=403
-    )
-    
-    # =========================================
-# PDF VISIT REPORT
-# =========================================
-
-@login_required
-def visit_report_pdf(request, visit_id):
-
-    visit = get_object_or_404(
-        Visit,
-        id=visit_id
-    )
-
-    doctor = getattr(
-        visit,
-        'doctor',
-        None
-    )
-
-    labs = visit.labs.all()
-
-    prescriptions = visit.prescriptions.all()
-
-    dispenses = visit.dispenses.all()
-
-    template_path = 'magahospital/visit_report_pdf.html'
-
-    context = {
-
-        'visit': visit,
-        'doctor': doctor,
-        'labs': labs,
-        'prescriptions': prescriptions,
-        'dispenses': dispenses,
-
-    }
-
-    response = HttpResponse(
-        content_type='application/pdf'
-    )
-
-    response[
-        'Content-Disposition'
-    ] = f'filename="visit_{visit.id}.pdf"'
-
-    template = get_template(
-        template_path
-    )
-
-    html = template.render(
-        context
-    )
-
-    pisa_status = pisa.CreatePDF(
-        html,
-        dest=response
-    )
-
-    if pisa_status.err:
-
-        return HttpResponse(
-            'PDF generation error'
-        )
-
-    return response
-
-# =========================================
-# CHATBOT RESPONSE
-# =========================================
-
-def chatbot_response(request):
-
-    if request.method == "POST":
-
-        try:
-
-            data = json.loads(request.body)
-
-            user_message = data.get("message", "")
-
-            message = user_message.lower()
-
-            faq = None
-
-            for item in ChatFAQ.objects.all():
-
-                if item.question.lower() in message:
-
-                    faq = item
-
-                    break
-
-            if faq:
-
-                bot_reply = faq.answer
-
-            else:
-
-                bot_reply = "Sorry, I could not find an answer to your question."
-
-            time.sleep(1.5)
-
-            # SAVE CHAT SAFELY
-            try:
-
-                ChatMessage.objects.create(
-                    user=request.user if request.user.is_authenticated else None,
-                    user_message=user_message,
-                    bot_response=bot_reply
-                )
-
-            except Exception as db_error:
-
-                print("Chat save error:", db_error)
-
-            return JsonResponse({
-                "response": bot_reply
-            })
-
-        except Exception as e:
-
-            print("Chatbot error:", e)
-
-            return JsonResponse({
-                "response": f"Server Error: {str(e)}"
-            })
-
-    return JsonResponse({
-        "response": "Invalid request"
-    })
-    
-    # =========================================
 # STAFF MANAGEMENT
 # =========================================
 
-@login_required
+@role_required('Admin')
 def staff_management(request):
-
-    if not request.user.is_superuser:
-
-        return render(
-            request,
-            'magahospital/not_allowed.html',
-            status=403
-        )
 
     users = User.objects.all().order_by('-id')
 
