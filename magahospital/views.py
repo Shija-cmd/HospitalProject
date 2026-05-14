@@ -658,13 +658,13 @@ def generate_pdf(request, visit_id):
 
         'visit': visit,
 
-        'doctor': doctor,
+        'doctor': getattr(visit, 'doctor', None),
 
-        'labs': labs,
+        'labs': visit.labs.all(),
 
-        'prescriptions': prescriptions,
+        'prescriptions': visit.prescriptions.all(),
 
-        'dispenses': dispenses
+        'dispenses': visit.dispenses.all(),
 
     })
 
