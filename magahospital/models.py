@@ -91,9 +91,9 @@ class Patient(models.Model):
 @property
 def current_visit(self):
 
-    return self.visits.order_by(
-        '-date'
-    ).first()
+    return Visit.objects.filter(
+        patient=self
+    ).order_by('-date').first()
 
 
 # =====================================
