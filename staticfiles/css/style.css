@@ -111,19 +111,18 @@ body{
     transform:translateY(-2px);
 }
 
-/* MAIN CONTENT AREA */
+/* MAIN CONTENT */
 .main-content{
 
-    margin-left:260px;
+    margin-left:290px;
 
-    padding:30px;
+    padding:100px 30px 30px;
 
     width:100%;
 
     min-height:100vh;
 
 }
-
 
 /* MOBILE RESPONSIVE */
 @media(max-width:768px){
@@ -192,15 +191,17 @@ footer p{
 
     position: fixed;
 
-    top: 70px;
+    top: 85px;
 
-    left: 0;
+    left: 15px;
 
-    height: 100vh;
+    height: calc(100vh - 100px);
 
     overflow-y: auto;
 
-    box-shadow: 4px 0 15px rgba(0,0,0,0.08);
+    border-radius: 20px;
+
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
 
 }
 
