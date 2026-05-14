@@ -189,7 +189,7 @@
                 <!-- STATUS -->
 <td>
 
-{% with latest_visit=patient.current_visit %}
+{% with latest_visit=patient.visit_set.last %}
 
     {% if latest_visit %}
 
