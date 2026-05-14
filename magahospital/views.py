@@ -1,3 +1,5 @@
+from urllib import request
+
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import login, logout
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
@@ -761,19 +763,20 @@ def patient_list(request):
 
         )
 
+    for patient in patients:
+
+        patient.latest_visit = Visit.objects.filter(
+            patient=patient
+    ).order_by('-date').first()
+
     return render(
-
         request,
-
         'magahospital/patient_list.html',
-
         {
-
-            'patients': patients
-
+        'patients': patients
         }
-
     )
+    
 #=========================================
 # AUDIT LOG
 #=========================================
