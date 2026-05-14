@@ -636,6 +636,11 @@ def visit_report_pdf(request, visit_id):
     template = get_template(
         'magahospital/visit_report_pdf.html'
     )
+    
+    print("DOCTOR:", getattr(visit, 'doctor', None))
+    print("LABS:", list(visit.labs.all()))
+    print("PRESCRIPTIONS:", list(visit.prescriptions.all()))
+    print("DISPENSES:", list(visit.dispenses.all()))
 
     html = template.render({
 
