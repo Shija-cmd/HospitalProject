@@ -744,7 +744,6 @@ def visit_report_pdf(request, visit_id):
 
 @role_required('Receptions')
 def patient_list(request):
-def patient_list(request):
 
     query = request.GET.get('q')
 
