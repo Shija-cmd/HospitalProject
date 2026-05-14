@@ -139,10 +139,23 @@
 </nav>
 
 <!-- MAIN CONTENT -->
-<div class="container main-content">
+<!-- MAIN LAYOUT -->
+<div class="main-layout">
 
-    {% block content %}
-    {% endblock %}
+    <!-- SIDEBAR -->
+    {% include 'magahospital/sidebar.html' %}
+
+    <!-- MAIN CONTENT -->
+    <div class="main-content">
+
+        <div class="container-fluid">
+
+            {% block content %}
+            {% endblock %}
+
+        </div>
+
+    </div>
 
 </div>
 

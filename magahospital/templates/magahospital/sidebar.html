@@ -1,0 +1,79 @@
+<div class="sidebar">
+
+    <h2 class="sidebar-title">
+
+        Maga HMS
+
+    </h2>
+
+
+    <ul class="sidebar-links">
+
+
+        <!-- PATIENTS -->
+        <li>
+
+            <a href="{% url 'patient_list' %}">
+
+                Patients
+
+            </a>
+
+        </li>
+
+
+        <!-- DOCTOR -->
+        <li>
+
+            <a href="{% url 'doctor_queue' %}">
+
+                Doctor Queue
+
+            </a>
+
+        </li>
+
+
+        <!-- LAB -->
+        <li>
+
+            <a href="{% url 'lab_queue' %}">
+
+                Lab Queue
+
+            </a>
+
+        </li>
+
+
+        <!-- DISPENSE -->
+        <li>
+
+            <a href="{% url 'dispense_queue' %}">
+
+                Dispense Queue
+
+            </a>
+
+        </li>
+
+
+        <!-- STAFF MANAGEMENT -->
+        {% if request.user.is_superuser %}
+
+        <li>
+
+            <a href="{% url 'staff_management' %}">
+
+                Staff Management
+
+            </a>
+
+        </li>
+
+        {% endif %}
+
+
+    </ul>
+
+</div>
