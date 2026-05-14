@@ -494,7 +494,8 @@ def add_dispense(request, visit_id):
             visit.save()
 
             return redirect(
-                'dispense_queue'
+                'visit_detail',
+                visit_id=visit.id
             )
 
     else:
