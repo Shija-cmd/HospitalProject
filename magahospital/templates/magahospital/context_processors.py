@@ -1,8 +1,6 @@
 def user_roles(request):
 
-    user = request.user
-
-    if not user.is_authenticated:
+    if not request.user.is_authenticated:
 
         return {
 
@@ -13,6 +11,8 @@ def user_roles(request):
             'is_dispense': False,
 
         }
+
+    user = request.user
 
     return {
 
