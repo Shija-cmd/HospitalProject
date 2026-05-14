@@ -633,7 +633,7 @@ def generate_pdf(request, visit_id):
     )
 
     template = get_template(
-        'magahospital/pdf_template.html'
+        'magahospital/visit_report_pdf.html'
     )
 
     html = template.render({
@@ -715,7 +715,7 @@ def visit_report_pdf(request, visit_id):
     )
 
     template = get_template(
-        'magahospital/pdf_template.html'
+        'magahospital/visit_report_pdf.html'
     )
 
     html = template.render({
