@@ -69,7 +69,7 @@ urlpatterns = [
     # =========================
 
     path(
-        'visit/create/<str:patient_id>/',
+        'visit/create/<int:patient_id>/',
         views.create_visit,
         name='create_visit'
     ),
