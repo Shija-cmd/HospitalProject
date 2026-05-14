@@ -1,3 +1,4 @@
+from django import template
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import login, logout
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
@@ -636,8 +637,35 @@ def generate_pdf(request, visit_id):
         'magahospital/visit_report_pdf.html'
     )
 
+    doctor = Doctor.objects.filter(
+        visit=visit
+    ).first()
+
+    labs = Lab.objects.filter(
+        visit=visit
+    )
+
+    prescriptions = Prescription.objects.filter(
+    visit=visit
+)
+
+    dispenses = Dispense.objects.filter(
+        visit=visit
+    )
+
+
     html = template.render({
-        'visit': visit
+
+        'visit': visit,
+
+        'doctor': doctor,
+
+        'labs': labs,
+
+        'prescriptions': prescriptions,
+
+        'dispenses': dispenses
+
     })
 
     response = HttpResponse(
