@@ -48,6 +48,13 @@ X_FRAME_OPTIONS = "DENY"
 # Enable this ONLY after SSL certificate becomes active on Render
 SECURE_SSL_REDIRECT = True
 
+# SESSION SECURITY
+SESSION_COOKIE_AGE = 1800
+
+SESSION_SAVE_EVERY_REQUEST = True
+
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True
+
 
 # Application definition
 INSTALLED_APPS = [
