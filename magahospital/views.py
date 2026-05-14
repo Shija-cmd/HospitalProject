@@ -515,8 +515,16 @@ def add_dispense(request, visit_id):
 # STAFF MANAGEMENT
 # =========================================
 
-@role_required('Admin')
+@login_required
 def staff_management(request):
+
+    if not request.user.is_superuser:
+
+        return render(
+            request,
+            'magahospital/not_allowed.html',
+            status=403
+        )
 
     users = User.objects.all().order_by('-id')
 

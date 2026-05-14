@@ -28,13 +28,9 @@ def role_required(group_name):
                 )
 
             return render(
-
                 request,
-
                 'magahospital/not_allowed.html',
-
                 status=403
-
             )
 
         return wrapper
