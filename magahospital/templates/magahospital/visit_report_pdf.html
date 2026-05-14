@@ -43,6 +43,9 @@
 </head>
 
 <body>
+    <h1 style="color:red;">
+    PDF TEMPLATE TEST
+</h1>
 
     <div class="title">
 
@@ -53,70 +56,62 @@
     </div>
 
     <!-- PATIENT INFO -->
-<div class="section">
+    <div class="section">
 
-    <h2>Patient Information</h2>
+        <h2>Patient Information</h2>
 
-    <p>
-        <strong>Name:</strong>
-        {{ visit.patient.firstname }}
-        {{ visit.patient.secondname }}
-    </p>
+        <p>
+            <strong>Name:</strong>
+            {{ visit.patient.firstname }}
+            {{ visit.patient.secondname }}
+        </p>
 
-    <p>
-        <strong>Patient ID:</strong>
-        {{ visit.patient.idno }}
-    </p>
+        <p>
+            <strong>Patient ID:</strong>
+            {{ visit.patient.idno }}
+        </p>
 
-    <p>
-        <strong>Visit Date:</strong>
-        {{ visit.date }}
-    </p>
+        <p>
+            <strong>Visit Date:</strong>
+            {{ visit.date }}
+        </p>
 
-    <p>
-        <strong>Status:</strong>
-        {{ visit.status }}
-    </p>
+        <p>
+            <strong>Status:</strong>
+            {{ visit.status }}
+        </p>
 
-</div>
+    </div>
 
+    <!-- DOCTOR -->
+    <div class="section">
 
-<!-- DOCTOR NOTES -->
-<div class="section">
+        <h2>Doctor Notes</h2>
 
-    <h2>Doctor Notes</h2>
+        {% if doctor %}
 
-    {% if doctor %}
+            <p>
+                <strong>History:</strong>
+                {{ doctor.history }}
+            </p>
 
-        <table>
+            <p>
+                <strong>Diagnosis:</strong>
+                {{ doctor.diagnosis }}
+            </p>
 
-            <tr>
-                <th>History</th>
-                <td>{{ doctor.history }}</td>
-            </tr>
+        {% else %}
 
-            <tr>
-                <th>Diagnosis</th>
-                <td>{{ doctor.diagnosis }}</td>
-            </tr>
+            <p>No doctor notes available.</p>
 
-        </table>
+        {% endif %}
 
-    {% else %}
+    </div>
 
-        <p>No doctor notes available.</p>
+    <!-- LAB RESULTS -->
+    <div class="section">
 
-    {% endif %}
-
-</div>
-
-
-<!-- LAB RESULTS -->
-<div class="section">
-
-    <h2>Laboratory Results</h2>
-
-    {% if labs %}
+        <h2>Laboratory Results</h2>
 
         <table>
 
@@ -130,7 +125,7 @@
             <tr>
 
                 <td>
-                    {{ lab.lab_type }}
+                    {{ lab.get_lab_type_display }}
                 </td>
 
                 <td>
@@ -139,25 +134,26 @@
 
             </tr>
 
+            {% empty %}
+
+            <tr>
+
+                <td colspan="2">
+                    No lab results
+                </td>
+
+            </tr>
+
             {% endfor %}
 
         </table>
 
-    {% else %}
+    </div>
 
-        <p>No laboratory results available.</p>
+    <!-- PRESCRIPTIONS -->
+    <div class="section">
 
-    {% endif %}
-
-</div>
-
-
-<!-- PRESCRIPTIONS -->
-<div class="section">
-
-    <h2>Prescriptions</h2>
-
-    {% if prescriptions %}
+        <h2>Prescriptions</h2>
 
         <table>
 
@@ -180,31 +176,32 @@
 
             </tr>
 
+            {% empty %}
+
+            <tr>
+
+                <td colspan="2">
+                    No prescriptions
+                </td>
+
+            </tr>
+
             {% endfor %}
 
         </table>
 
-    {% else %}
+    </div>
 
-        <p>No prescriptions available.</p>
+    <!-- DISPENSE -->
+    <div class="section">
 
-    {% endif %}
-
-</div>
-
-
-<!-- DISPENSE RECORDS -->
-<div class="section">
-
-    <h2>Dispense Records</h2>
-
-    {% if dispenses %}
+        <h2>Dispense Records</h2>
 
         <table>
 
             <tr>
-                <th>Medication Given</th>
-                <th>Quantity</th>
+                <th>Medication</th>
+                <th>Instructions</th>
             </tr>
 
             {% for d in dispenses %}
@@ -221,17 +218,22 @@
 
             </tr>
 
+            {% empty %}
+
+            <tr>
+
+                <td colspan="2">
+                    No dispense records
+                </td>
+
+            </tr>
+
             {% endfor %}
 
         </table>
 
-    {% else %}
-
-        <p>No dispense records available.</p>
-
-    {% endif %}
-
-</div>
+    </div>
 
 </body>
+
 </html>
