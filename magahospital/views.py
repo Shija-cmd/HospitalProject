@@ -584,3 +584,45 @@ def log_action(user, action):
         action=action
 
     )
+    
+    # =========================================
+# CHATBOT RESPONSE
+# =========================================
+
+def chatbot_response(request):
+
+    if request.method == 'POST':
+
+        data = json.loads(request.body)
+
+        user_message = data.get(
+            'message',
+            ''
+        ).strip()
+
+        ChatMessage.objects.create(
+            user_message=user_message
+        )
+
+        faqs = ChatFAQ.objects.all()
+
+        response = (
+            "Sorry, I could not find an answer "
+            "to your question."
+        )
+
+        for faq in faqs:
+
+            if faq.question.lower() in user_message.lower():
+
+                response = faq.answer
+
+                break
+
+        return JsonResponse({
+            'response': response
+        })
+
+    return JsonResponse({
+        'response': 'Invalid request'
+    })
