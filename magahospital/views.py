@@ -647,11 +647,17 @@ def generate_pdf(request, visit_id):
             None
         ),
 
-        'labs': visit.labs.all(),
+        'labs': list(
+            visit.labs.all()
+        ),
 
-        'prescriptions': visit.prescriptions.all(),
+        'prescriptions': list(
+            visit.prescriptions.all()
+        ),
 
-        'dispenses': visit.dispenses.all(),
+        'dispenses': list(
+            visit.dispenses.all()
+        ),
 
     })
 
