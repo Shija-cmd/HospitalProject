@@ -637,10 +637,6 @@ def visit_report_pdf(request, visit_id):
         'magahospital/visit_report_pdf.html'
     )
     
-    print("DOCTOR:", getattr(visit, 'doctor', None))
-    print("LABS:", list(visit.labs.all()))
-    print("PRESCRIPTIONS:", list(visit.prescriptions.all()))
-    print("DISPENSES:", list(visit.dispenses.all()))
 
     html = template.render({
 
@@ -727,43 +723,6 @@ def chatbot_response(request):
     return JsonResponse({
         'response': 'Invalid request'
     })
-
-# =========================================
-# VISIT REPORT PDF
-# =========================================
-
-@login_required
-def visit_report_pdf(request, visit_id):
-
-    visit = get_object_or_404(
-        Visit,
-        id=visit_id
-    )
-
-    template = get_template(
-        'magahospital/visit_report_pdf.html'
-    )
-
-    html = template.render({
-        'visit': visit
-    })
-
-    response = HttpResponse(
-        content_type='application/pdf'
-    )
-
-    response[
-        'Content-Disposition'
-    ] = (
-        f'filename=\"visit_{visit.id}.pdf\"'
-    )
-
-    pisa.CreatePDF(
-        html,
-        dest=response
-    )
-
-    return response
 
 # =========================================
 # PATIENT LIST
