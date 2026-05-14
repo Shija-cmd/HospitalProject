@@ -571,21 +571,93 @@ def staff_management(request):
             'groups': groups
         }
     )
-
-#=========================================
-# AUDIT LOG
-#=========================================
-def log_action(user, action):
-
-    AuditLog.objects.create(
-
-        user=user,
-
-        action=action
-
-    )
     
     # =========================================
+# PATIENT HISTORY
+# =========================================
+
+@login_required
+def patient_history(request, patient_id):
+
+    patient = get_object_or_404(
+        Patient,
+        idno=patient_id
+    )
+
+    visits = Visit.objects.filter(
+        patient=patient
+    ).order_by('-date')
+
+    return render(
+        request,
+        'magahospital/patient_history.html',
+        {
+            'patient': patient,
+            'visits': visits
+        }
+    )
+
+
+# =========================================
+# VISIT DETAIL
+# =========================================
+
+@login_required
+def visit_detail(request, visit_id):
+
+    visit = get_object_or_404(
+        Visit,
+        id=visit_id
+    )
+
+    return render(
+        request,
+        'magahospital/visit_detail.html',
+        {
+            'visit': visit
+        }
+    )
+
+
+# =========================================
+# PDF GENERATION
+# =========================================
+
+@login_required
+def generate_pdf(request, visit_id):
+
+    visit = get_object_or_404(
+        Visit,
+        id=visit_id
+    )
+
+    template = get_template(
+        'magahospital/pdf_template.html'
+    )
+
+    html = template.render({
+        'visit': visit
+    })
+
+    response = HttpResponse(
+        content_type='application/pdf'
+    )
+
+    response[
+        'Content-Disposition'
+    ] = (
+        f'filename=\"visit_{visit.id}.pdf\"'
+    )
+
+    pisa.CreatePDF(
+        html,
+        dest=response
+    )
+
+    return response
+
+
+# =========================================
 # CHATBOT RESPONSE
 # =========================================
 
@@ -593,7 +665,9 @@ def chatbot_response(request):
 
     if request.method == 'POST':
 
-        data = json.loads(request.body)
+        data = json.loads(
+            request.body
+        )
 
         user_message = data.get(
             'message',
@@ -607,8 +681,8 @@ def chatbot_response(request):
         faqs = ChatFAQ.objects.all()
 
         response = (
-            "Sorry, I could not find an answer "
-            "to your question."
+            'Sorry, I could not find an answer '
+            'to your question.'
         )
 
         for faq in faqs:
@@ -626,3 +700,16 @@ def chatbot_response(request):
     return JsonResponse({
         'response': 'Invalid request'
     })
+
+#=========================================
+# AUDIT LOG
+#=========================================
+def log_action(user, action):
+
+    AuditLog.objects.create(
+
+        user=user,
+
+        action=action
+
+    )  
