@@ -637,28 +637,15 @@ def generate_pdf(request, visit_id):
         'magahospital/visit_report_pdf.html'
     )
 
-    doctor = Doctor.objects.filter(
-        visit=visit
-    ).first()
-
-    labs = Lab.objects.filter(
-        visit=visit
-    )
-
-    prescriptions = Prescription.objects.filter(
-    visit=visit
-)
-
-    dispenses = Dispense.objects.filter(
-        visit=visit
-    )
-
-
     html = template.render({
 
         'visit': visit,
 
-        'doctor': getattr(visit, 'doctor', None),
+        'doctor': getattr(
+            visit,
+            'doctor',
+            None
+        ),
 
         'labs': visit.labs.all(),
 
@@ -675,7 +662,7 @@ def generate_pdf(request, visit_id):
     response[
         'Content-Disposition'
     ] = (
-        f'filename=\"visit_{visit.id}.pdf\"'
+        f'filename="visit_{visit.id}.pdf"'
     )
 
     pisa.CreatePDF(
