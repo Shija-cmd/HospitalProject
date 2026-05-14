@@ -626,7 +626,7 @@ def visit_detail(request, visit_id):
 # =========================================
 
 @login_required
-def generate_pdf(request, visit_id):
+def visit_report_pdf(request, visit_id):
 
     visit = get_object_or_404(
         Visit,
