@@ -338,90 +338,67 @@ widgets = {
 #=========================================
 #Prediction form with its widgets
 #=========================================
-class PredictionForm(forms.Form):
+class PredictionForm(forms.ModelForm):
 
-    age = forms.IntegerField(
+    class Meta:
 
-        widget=forms.NumberInput(
-            attrs={
-                'class': 'form-control',
-                'placeholder': 'Enter age'
-            }
-        )
+        model = Patient
 
-    )
+        fields = [
 
-    gender = forms.ChoiceField(
+            'umri',
+            'jinsia',
+            'DALILI1',
+            'DALILI2',
+            'DALILI3',
+            'DALILI4',
+            'DALILI5',
 
-        choices=[
-            ('Male', 'Male'),
-            ('Female', 'Female')
-        ],
+        ]
 
-        widget=forms.Select(
-            attrs={
-                'class': 'form-select'
-            }
-        )
+        widgets = {
 
-    )
+            'umri': forms.NumberInput(
+                attrs={
+                    'class': 'form-control',
+                    'placeholder': 'Enter age'
+                }
+            ),
 
-    fever = forms.ChoiceField(
+            'jinsia': forms.Select(
+                attrs={
+                    'class': 'form-select'
+                }
+            ),
 
-        choices=[
-            (1, 'Yes'),
-            (0, 'No')
-        ],
+            'DALILI1': forms.Select(
+                attrs={
+                    'class': 'form-select'
+                }
+            ),
 
-        widget=forms.Select(
-            attrs={
-                'class': 'form-select'
-            }
-        )
+            'DALILI2': forms.Select(
+                attrs={
+                    'class': 'form-select'
+                }
+            ),
 
-    )
+            'DALILI3': forms.Select(
+                attrs={
+                    'class': 'form-select'
+                }
+            ),
 
-    weight_loss = forms.ChoiceField(
+            'DALILI4': forms.Select(
+                attrs={
+                    'class': 'form-select'
+                }
+            ),
 
-        choices=[
-            (1, 'Yes'),
-            (0, 'No')
-        ],
+            'DALILI5': forms.Select(
+                attrs={
+                    'class': 'form-select'
+                }
+            ),
 
-        widget=forms.Select(
-            attrs={
-                'class': 'form-select'
-            }
-        )
-
-    )
-
-    skin_rash = forms.ChoiceField(
-
-        choices=[
-            (1, 'Yes'),
-            (0, 'No')
-        ],
-
-        widget=forms.Select(
-            attrs={
-                'class': 'form-select'
-            }
-        )
-
-    )
-
-    fatigue = forms.ChoiceField(
-
-        choices=[
-            (1, 'Yes'),
-            (0, 'No')
-        ],
-
-        widget=forms.Select(
-            attrs={
-                'class': 'form-select'
-            }
-        )
-
-    )
+        }
