@@ -200,7 +200,9 @@ class Prescription(models.Model):
         related_name='prescriptions'
     )
 
-    medication = models.TextField()
+    medication = models.CharField(
+        max_length=255
+    )
 
     notes = models.TextField(
         blank=True,
@@ -228,7 +230,9 @@ class Dispense(models.Model):
         related_name='dispenses'
     )
 
-    medication_given = models.TextField()
+    medication_given = models.CharField(
+    max_length=255
+)
 
     quantity = models.CharField(
         max_length=100,
