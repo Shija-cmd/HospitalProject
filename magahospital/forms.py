@@ -277,10 +277,11 @@ widgets = {
 #=========================================
 widgets = {
 
-            'medication_given': forms.TextInput(
+            'medication_given': forms.Textarea(
                 attrs={
                     'class': 'form-control',
-                    'placeholder': 'e.g. Amoxicillin 500mg'
+                    'rows': 3,
+                    'placeholder': 'e.g. Amoxicillin 500mg\nParacetamol 1g'
                 }
             ),
 
