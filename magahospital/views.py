@@ -317,6 +317,8 @@ def add_doctor(request, visit_id):
             )
 
             doctor.visit = visit
+            
+            doctor.doctor = request.user
 
             doctor.save()
 
@@ -658,8 +660,6 @@ def visit_report_pdf(request, visit_id):
         'dispenses': list(
             visit.dispenses.all()
     ),
-
-        'doctor_name': request.user.get_full_name(),
 
 }
 

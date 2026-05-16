@@ -138,6 +138,13 @@ class Doctor(models.Model):
         on_delete=models.CASCADE,
         related_name='doctor'
     )
+    
+    doctor = models.ForeignKey(
+        User,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True
+    )
 
     history = models.TextField(
         blank=True,
