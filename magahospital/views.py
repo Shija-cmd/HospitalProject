@@ -636,33 +636,34 @@ def visit_report_pdf(request, visit_id):
     template = get_template(
         'magahospital/visit_report_pdf.html'
     )
-    
 
-    html = template.render({
+    context = {
 
         'visit': visit,
 
         'doctor': getattr(
             visit,
-        'doctor',
-        None
-    ),
+            'doctor',
+            None
+        ),
 
         'labs': list(
             visit.labs.all()
-    ),
+        ),
 
         'prescriptions': list(
             visit.prescriptions.all()
-    ),
+        ),
 
         'dispenses': list(
             visit.dispenses.all()
-    ),
+        ),
 
         'generated_by': request.user,
 
-    })
+    }
+
+    html = template.render(context)
 
     response = HttpResponse(
         content_type='application/pdf'
@@ -678,8 +679,6 @@ def visit_report_pdf(request, visit_id):
         html,
         dest=response
     )
-    
-    'generated_by': request.user
 
     return response
 
