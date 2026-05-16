@@ -643,25 +643,25 @@ def visit_report_pdf(request, visit_id):
 
         'doctor': getattr(
             visit,
-            'doctor',
-            None
-        ),
+        'doctor',
+        None
+    ),
 
         'labs': list(
             visit.labs.all()
-        ),
+    ),
 
         'prescriptions': list(
             visit.prescriptions.all()
-        ),
+    ),
 
         'dispenses': list(
             visit.dispenses.all()
-        ),
+    ),
 
-        'generated_by': request.user,
+        'doctor_name': request.user.get_full_name(),
 
-    }
+}
 
     html = template.render(context)
 
