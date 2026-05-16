@@ -317,25 +317,23 @@ widgets = {
 #=========================================
 #Widgets for lab_form from .forms import 
 #=========================================
-<div class="row">
+widgets = {
 
-    <div class="col-md-4 mb-4">
+    'lab_type': forms.Select(
+        attrs={
+            'class': 'form-select'
+        }
+    ),
 
-        <label>Lab Type</label>
+    'results': forms.Textarea(
+        attrs={
+            'class': 'form-control',
+            'rows': 4,
+            'placeholder': 'Enter laboratory results'
+        }
+    ),
 
-        {{ form.lab_type }}
-
-    </div>
-
-    <div class="col-md-8 mb-4">
-
-        <label>Laboratory Results</label>
-
-        {{ form.results }}
-
-    </div>
-
-</div>
+}
 
 #=========================================
 #Prediction form with its widgets
