@@ -643,24 +643,26 @@ def visit_report_pdf(request, visit_id):
         'visit': visit,
 
         'doctor': getattr(
-            visit,
-            'doctor',
-            None
-        ),
+        visit,
+        'doctor',
+        None
+    ),
 
         'labs': list(
-            visit.labs.all()
-        ),
+        visit.labs.all()
+    ),
 
         'prescriptions': list(
-            visit.prescriptions.all()
-        ),
+        visit.prescriptions.all()
+    ),
 
         'dispenses': list(
-            visit.dispenses.all()
-        ),
+        visit.dispenses.all()
+    ),
 
-    })
+    'generated_by': request.user,
+
+})
 
     response = HttpResponse(
         content_type='application/pdf'
@@ -676,6 +678,8 @@ def visit_report_pdf(request, visit_id):
         html,
         dest=response
     )
+    
+    'generated_by': request.user
 
     return response
 
