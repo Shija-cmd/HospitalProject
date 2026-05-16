@@ -122,7 +122,30 @@
 
         {% csrf_token %}
 
-        {{ form.as_p }}
+        <div class="row">
+
+    <div class="col-md-12 mb-4">
+
+        <label>Patient History</label>
+
+        {{ form.history }}
+
+    </div>
+
+</div>
+
+
+<div class="row">
+
+    <div class="col-md-12 mb-4">
+
+        <label>Diagnosis</label>
+
+        {{ form.diagnosis }}
+
+    </div>
+
+</div>
 
         <!-- BUTTONS -->
         <div class="button-group">

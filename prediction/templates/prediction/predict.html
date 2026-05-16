@@ -25,7 +25,51 @@
 
             {% csrf_token %}
 
-            {{ form.as_p }}
+            <div class="form-grid">
+
+    <div class="form-group">
+
+        <label>Age</label>
+        {{ form.age }}
+
+    </div>
+
+    <div class="form-group">
+
+        <label>Gender</label>
+        {{ form.gender }}
+
+    </div>
+
+    <div class="form-group">
+
+        <label>Fever</label>
+        {{ form.fever }}
+
+    </div>
+
+    <div class="form-group">
+
+        <label>Weight Loss</label>
+        {{ form.weight_loss }}
+
+    </div>
+
+    <div class="form-group">
+
+        <label>Skin Rash</label>
+        {{ form.skin_rash }}
+
+    </div>
+
+    <div class="form-group">
+
+        <label>Fatigue</label>
+        {{ form.fatigue }}
+
+    </div>
+
+</div>
 
             <button type="submit" class="predict-btn">
                 Predict

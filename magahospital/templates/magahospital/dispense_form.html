@@ -102,8 +102,6 @@
 
 </style>
 
-<form method="POST">
-    {% csrf_token %}
     <!-- PRESCRIPTION DETAILS -->
 <div class="card shadow-sm border-0 mb-4">
 
@@ -187,7 +185,25 @@
 
         {% csrf_token %}
 
-        {{ form.as_p }}
+        <div class="row">
+
+    <div class="col-md-8 mb-4">
+
+        <label>Medication Given</label>
+
+        {{ form.medication_given }}
+
+    </div>
+
+    <div class="col-md-4 mb-4">
+
+        <label>Quantity</label>
+
+        {{ form.quantity }}
+
+    </div>
+
+</div>
 
         <!-- BUTTONS -->
         <div class="button-group">

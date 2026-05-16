@@ -106,8 +106,6 @@
 
 </style>
 
-<form method="POST">
-    {% csrf_token %}
     <!-- PATIENT & LAB RESULTS -->
 <div class="card shadow-sm border-0 mb-4">
 
@@ -181,7 +179,30 @@
 
         {% csrf_token %}
 
-        {{ form.as_p }}
+        <div class="row">
+
+    <div class="col-md-12 mb-4">
+
+        <label>Medication</label>
+
+        {{ form.medication }}
+
+    </div>
+
+</div>
+
+
+<div class="row">
+
+    <div class="col-md-12 mb-4">
+
+        <label>Prescription Notes</label>
+
+        {{ form.notes }}
+
+    </div>
+
+</div>
 
         <!-- BUTTONS -->
         <div class="button-group">

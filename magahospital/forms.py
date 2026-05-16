@@ -250,3 +250,180 @@ class DispenseForm(forms.ModelForm):
     ),
 
 }
+        
+#=========================================
+#Widgets for create_doctor from         
+#=========================================
+widgets = {
+
+    'history': forms.Textarea(
+        attrs={
+            'class': 'form-control',
+            'rows': 4
+        }
+    ),
+
+    'diagnosis': forms.Textarea(
+        attrs={
+            'class': 'form-control',
+            'rows': 4
+        }
+    ),
+
+}
+
+#=========================================
+#Widgets for dispense_form from 
+#=========================================
+widgets = {
+
+    'medication_given': forms.Textarea(
+        attrs={
+            'class': 'form-control',
+            'rows': 3
+        }
+    ),
+
+    'quantity': forms.TextInput(
+        attrs={
+            'class': 'form-control'
+        }
+    ),
+
+}
+
+#=========================================
+#Widgets for prescription_form from 
+#=========================================
+
+widgets = {
+
+    'medication': forms.Textarea(
+        attrs={
+            'class': 'form-control',
+            'rows': 3
+        }
+    ),
+
+    'notes': forms.Textarea(
+        attrs={
+            'class': 'form-control',
+            'rows': 3
+        }
+    ),
+
+}
+
+#=========================================
+#Widgets for lab_form from .forms import 
+#=========================================
+<div class="row">
+
+    <div class="col-md-4 mb-4">
+
+        <label>Lab Type</label>
+
+        {{ form.lab_type }}
+
+    </div>
+
+    <div class="col-md-8 mb-4">
+
+        <label>Laboratory Results</label>
+
+        {{ form.results }}
+
+    </div>
+
+</div>
+
+#=========================================
+#Prediction form with its widgets
+#=========================================
+class PredictionForm(forms.Form):
+
+    age = forms.IntegerField(
+
+        widget=forms.NumberInput(
+            attrs={
+                'class': 'form-control',
+                'placeholder': 'Enter age'
+            }
+        )
+
+    )
+
+    gender = forms.ChoiceField(
+
+        choices=[
+            ('Male', 'Male'),
+            ('Female', 'Female')
+        ],
+
+        widget=forms.Select(
+            attrs={
+                'class': 'form-select'
+            }
+        )
+
+    )
+
+    fever = forms.ChoiceField(
+
+        choices=[
+            (1, 'Yes'),
+            (0, 'No')
+        ],
+
+        widget=forms.Select(
+            attrs={
+                'class': 'form-select'
+            }
+        )
+
+    )
+
+    weight_loss = forms.ChoiceField(
+
+        choices=[
+            (1, 'Yes'),
+            (0, 'No')
+        ],
+
+        widget=forms.Select(
+            attrs={
+                'class': 'form-select'
+            }
+        )
+
+    )
+
+    skin_rash = forms.ChoiceField(
+
+        choices=[
+            (1, 'Yes'),
+            (0, 'No')
+        ],
+
+        widget=forms.Select(
+            attrs={
+                'class': 'form-select'
+            }
+        )
+
+    )
+
+    fatigue = forms.ChoiceField(
+
+        choices=[
+            (1, 'Yes'),
+            (0, 'No')
+        ],
+
+        widget=forms.Select(
+            attrs={
+                'class': 'form-select'
+            }
+        )
+
+    )
