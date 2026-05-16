@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.views.generic.edit import CreateView
 from django.urls import reverse_lazy
 from .models import Patient
+from .forms import PredictionForm
 
 
 # Create your views here.
@@ -9,20 +10,7 @@ class PatientCreate(CreateView):
 
     model = Patient
 
-    fields = [
-        'jina_la_kwanza',
-        'jina_la_pili',
-        'simu',
-        'anwani',
-        'jinsia',
-        'umri',
-        'DALILI1',
-        'DALILI2',
-        'DALILI3',
-        'DALILI4',
-        'DALILI5',
-        'hospitali'
-    ]
+    form_class = PredictionForm
 
     template_name = 'prediction/predict.html'
 
