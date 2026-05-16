@@ -277,20 +277,22 @@ widgets = {
 #=========================================
 widgets = {
 
-    'medication_given': forms.Textarea(
-        attrs={
-            'class': 'form-control',
-            'rows': 3
-        }
-    ),
+            'medication_given': forms.Textarea(
+                attrs={
+                    'class': 'form-control',
+                    'rows': 4,
+                    'placeholder': 'Enter medication dispensed'
+                }
+            ),
 
-    'quantity': forms.TextInput(
-        attrs={
-            'class': 'form-control'
-        }
-    ),
+            'quantity': forms.NumberInput(
+                attrs={
+                    'class': 'form-control',
+                    'placeholder': 'Quantity'
+                }
+            ),
 
-}
+        }
 
 #=========================================
 #Widgets for prescription_form from 

@@ -185,19 +185,25 @@
 
         {% csrf_token %}
 
-        <div class="row">
+        <div class="row align-items-start">
 
+    <!-- MEDICATION -->
     <div class="col-md-8 mb-4">
 
-        <label>Medication Given</label>
+        <label class="form-label">
+            Medication Given
+        </label>
 
         {{ form.medication_given }}
 
     </div>
 
+    <!-- QUANTITY -->
     <div class="col-md-4 mb-4">
 
-        <label>Quantity</label>
+        <label class="form-label">
+            Quantity
+        </label>
 
         {{ form.quantity }}
 
