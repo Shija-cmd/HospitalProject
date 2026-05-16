@@ -177,6 +177,25 @@ class PrescriptionForm(forms.ModelForm):
 
 class DispenseForm(forms.ModelForm):
 
+    medication_given = forms.CharField(
+        widget=forms.Textarea(
+            attrs={
+                'class': 'form-control',
+                'rows': 3,
+                'placeholder': 'e.g. Amoxicillin 500mg\nParacetamol 1g'
+            }
+        )
+    )
+
+    quantity = forms.CharField(
+        widget=forms.TextInput(
+            attrs={
+                'class': 'form-control',
+                'placeholder': 'e.g. 2×3 after meals'
+            }
+        )
+    )
+
     class Meta:
 
         model = Dispense
@@ -185,14 +204,6 @@ class DispenseForm(forms.ModelForm):
             'medication_given',
             'quantity'
         ]
-
-        labels = {
-
-            'medication_given': 'Medication Given',
-
-            'quantity': 'Dosage Instructions'
-
-        }
 
 #=========================================
 #Widgets for create_patient from .forms import 
@@ -271,28 +282,6 @@ widgets = {
     ),
 
 }
-
-#=========================================
-#Widgets for dispense_form from 
-#=========================================
-widgets = {
-
-            'medication_given': forms.Textarea(
-                attrs={
-                    'class': 'form-control',
-                    'rows': 3,
-                    'placeholder': 'e.g. Amoxicillin 500mg\nParacetamol 1g'
-                }
-            ),
-
-            'quantity': forms.TextInput(
-                attrs={
-                    'class': 'form-control',
-                    'placeholder': 'e.g. 2×3 after meals'
-                }
-            ),
-
-        }
 
 #=========================================
 #Widgets for prescription_form from 
