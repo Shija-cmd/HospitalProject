@@ -149,46 +149,90 @@ body{
 
     margin-top:35px;
 
-    padding:25px;
+    padding:35px;
 
-    background:#f8f9fa;
+    background:#ffffff;
 
-    border-radius:16px;
+    border-radius:20px;
 
-    box-shadow:0 4px 15px rgba(0,0,0,0.05);
+    box-shadow:0 8px 25px rgba(0,0,0,0.08);
 
-}
+    text-align:center;
 
-/* WARNING TEXT */
-.warning-text{
-
-    color:red;
-
-    font-weight:bold;
-
-    margin-top:15px;
+    border-top:6px solid #0d6efd;
 
 }
 
-/* SAFE TEXT */
-.safe-text{
+/* RESULT TITLE */
+.result-box h2{
 
-    color:green;
+    color:#0d6efd;
 
-    font-weight:bold;
+    font-size:2rem;
 
-    margin-top:15px;
+    margin-bottom:20px;
+
+    font-weight:700;
+
+}
+
+/* PREDICTION TEXT */
+.result-box h3{
+
+    font-size:1.6rem;
+
+    margin-bottom:20px;
+
+    font-weight:700;
 
 }
 
 /* CONFIDENCE */
 .confidence-text{
 
-    margin-top:15px;
+    margin-top:10px;
 
-    font-size:16px;
+    font-size:18px;
 
-    font-weight:bold;
+    font-weight:700;
+
+}
+
+/* WARNING */
+.warning-text{
+
+    margin-top:20px;
+
+    background:#fff5f5;
+
+    color:#dc3545;
+
+    padding:15px;
+
+    border-radius:12px;
+
+    font-weight:600;
+
+    border-left:5px solid #dc3545;
+
+}
+
+/* SAFE RESULT */
+.safe-text{
+
+    margin-top:20px;
+
+    background:#f0fff4;
+
+    color:#198754;
+
+    padding:15px;
+
+    border-radius:12px;
+
+    font-weight:600;
+
+    border-left:5px solid #198754;
 
 }
 
@@ -197,19 +241,21 @@ body{
 
     margin-top:30px;
 
-    padding:18px;
+    padding:20px;
 
-    background:#fff3cd;
+    background:#fff8db;
 
-    border-left:5px solid #ffc107;
+    border-left:6px solid #ffc107;
 
-    border-radius:12px;
+    border-radius:14px;
 
     color:#856404;
 
-    font-size:14px;
+    font-size:15px;
 
-    line-height:1.7;
+    line-height:1.8;
+
+    box-shadow:0 4px 12px rgba(0,0,0,0.05);
 
 }
 
