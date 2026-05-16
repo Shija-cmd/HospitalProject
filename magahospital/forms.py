@@ -277,18 +277,17 @@ widgets = {
 #=========================================
 widgets = {
 
-            'medication_given': forms.Textarea(
+            'medication_given': forms.TextInput(
                 attrs={
                     'class': 'form-control',
-                    'rows': 4,
-                    'placeholder': 'Enter medication dispensed'
+                    'placeholder': 'e.g. Amoxicillin 500mg'
                 }
             ),
 
-            'quantity': forms.NumberInput(
+            'quantity': forms.TextInput(
                 attrs={
                     'class': 'form-control',
-                    'placeholder': 'Quantity'
+                    'placeholder': 'e.g. 2×3 after meals'
                 }
             ),
 
