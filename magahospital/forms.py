@@ -194,6 +194,9 @@ class DispenseForm(forms.ModelForm):
 
         }
 
+#=========================================
+#Widgets for create_patient from .forms import 
+#=========================================
         widgets = {
 
             'medication_given': forms.Textarea(
@@ -220,3 +223,30 @@ class DispenseForm(forms.ModelForm):
             ),
 
         }
+        
+        widgets = {
+
+    'firstname': forms.TextInput(
+        attrs={'class': 'form-control'}
+    ),
+
+    'secondname': forms.TextInput(
+        attrs={'class': 'form-control'}
+    ),
+
+    'age': forms.NumberInput(
+        attrs={'class': 'form-control'}
+    ),
+
+    'sex': forms.Select(
+        attrs={'class': 'form-select'}
+    ),
+
+    'address': forms.Textarea(
+        attrs={
+            'class': 'form-control',
+            'rows': 3
+        }
+    ),
+
+}

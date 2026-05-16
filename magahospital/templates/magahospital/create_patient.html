@@ -122,7 +122,54 @@
 
         {% csrf_token %}
 
-        {{ form.as_p }}
+        <div class="row">
+
+    <div class="col-md-6 mb-3">
+
+        <label>First Name</label>
+        {{ form.firstname }}
+
+    </div>
+
+    <div class="col-md-6 mb-3">
+
+        <label>Last Name</label>
+        {{ form.secondname }}
+
+    </div>
+
+</div>
+
+
+<div class="row">
+
+    <div class="col-md-6 mb-3">
+
+        <label>Age</label>
+        {{ form.age }}
+
+    </div>
+
+    <div class="col-md-6 mb-3">
+
+        <label>Gender</label>
+        {{ form.sex }}
+
+    </div>
+
+</div>
+
+
+<div class="row">
+
+    <div class="col-md-12 mb-3">
+
+        <label>Address</label>
+        {{ form.address }}
+
+    </div>
+
+</div>
 
         <!-- BUTTONS -->
         <div class="button-group">
