@@ -25,13 +25,18 @@ LAB = [
 VISIT_STATUS = [
 
     ('Doctor', 'Doctor'),
+
     ('Lab', 'Lab'),
+
     ('Prescription', 'Prescription'),
+
+    ('Cashier', 'Cashier'),
+
     ('Dispense', 'Dispense'),
+
     ('Completed', 'Completed'),
 
 ]
-
 
 # =====================================
 # HELPERS
@@ -222,6 +227,68 @@ class Prescription(models.Model):
 
     def __str__(self):
         return f"Prescription - Visit {self.visit.id}"
+    
+# =====================================
+# BILLING MODEL
+# =====================================
+
+class Bill(models.Model):
+
+    visit = models.OneToOneField(
+        Visit,
+        on_delete=models.CASCADE,
+        related_name='bill'
+    )
+
+    consultation_fee = models.DecimalField(
+        max_digits=10,
+        decimal_places=2,
+        default=0
+    )
+
+    lab_fee = models.DecimalField(
+        max_digits=10,
+        decimal_places=2,
+        default=0
+    )
+
+    medication_fee = models.DecimalField(
+        max_digits=10,
+        decimal_places=2,
+        default=0
+    )
+
+    total_amount = models.DecimalField(
+        max_digits=10,
+        decimal_places=2,
+        default=0
+    )
+
+    is_paid = models.BooleanField(
+        default=False
+    )
+
+    created_at = models.DateTimeField(
+        default=timezone.now
+    )
+
+    def save(self, *args, **kwargs):
+
+        self.total_amount = (
+
+            self.consultation_fee +
+
+            self.lab_fee +
+
+            self.medication_fee
+
+        )
+
+        super().save(*args, **kwargs)
+
+    def __str__(self):
+
+        return f"Bill - Visit {self.visit.id}"    
 
 
 # =====================================
