@@ -170,6 +170,70 @@ class PrescriptionForm(forms.ModelForm):
             }),
 
         }
+        
+# =========================
+# 5. BILL FORM
+# =========================        
+class BillForm(forms.ModelForm):
+
+    class Meta:
+
+        model = Bill
+
+        fields = [
+
+            'consultation_fee',
+
+            'lab_fee',
+
+            'medication_fee',
+
+            'is_paid'
+
+        ]
+
+        labels = {
+
+            'consultation_fee': 'Consultation Fee',
+
+            'lab_fee': 'Laboratory Fee',
+
+            'medication_fee': 'Medication Fee',
+
+            'is_paid': 'Payment Completed'
+
+        }
+
+        widgets = {
+
+            'consultation_fee': forms.NumberInput(
+                attrs={
+                    'class': 'form-control',
+                    'placeholder': 'Consultation fee'
+                }
+            ),
+
+            'lab_fee': forms.NumberInput(
+                attrs={
+                    'class': 'form-control',
+                    'placeholder': 'Laboratory fee'
+                }
+            ),
+
+            'medication_fee': forms.NumberInput(
+                attrs={
+                    'class': 'form-control',
+                    'placeholder': 'Medication fee'
+                }
+            ),
+
+            'is_paid': forms.CheckboxInput(
+                attrs={
+                    'class': 'form-check-input'
+                }
+            ),
+
+        }        
 
 # =========================================
 # DISPENSE FORM

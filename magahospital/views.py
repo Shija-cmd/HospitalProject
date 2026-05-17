@@ -20,6 +20,7 @@ from .models import (
     Doctor,
     Lab,
     Prescription,
+    Bill,
     Dispense
 )
 
@@ -28,6 +29,7 @@ from .forms import (
     DoctorForm,
     LabForm,
     PrescriptionForm,
+    BillForm,
     DispenseForm
 )
 
@@ -437,7 +439,7 @@ def add_prescription(request, visit_id):
                 f"Added prescription for Visit #{visit.id}"
             )
 
-            visit.status = 'Dispense'
+            visit.status = 'Cashier'
             visit.save()
 
             return redirect(
@@ -787,4 +789,87 @@ def custom_403(request, exception):
         request,
         'magahospital/not_allowed.html',
         status=403
-    )  
+    )
+    
+# =========================================
+# CASHIER QUEUE
+# =========================================
+
+@role_required('Cashier')
+def cashier_queue(request):
+
+    visits = Visit.objects.filter(
+        status='Cashier'
+    ).order_by('date')
+
+    return render(
+        request,
+        'magahospital/cashier_queue.html',
+        {
+            'visits': visits
+        }
+    )
+    
+# =========================================
+# ADD BILL
+# =========================================
+
+@role_required('Cashier')
+def add_bill(request, visit_id):
+
+    visit = get_object_or_404(
+        Visit,
+        id=visit_id
+    )
+
+    bill, created = Bill.objects.get_or_create(
+        visit=visit
+    )
+
+    if request.method == 'POST':
+
+        form = BillForm(
+            request.POST,
+            instance=bill
+        )
+
+        if form.is_valid():
+
+            bill = form.save(
+                commit=False
+            )
+
+            bill.visit = visit
+
+            bill.save()
+
+            log_action(
+                request.user,
+                f"Processed payment for Visit #{visit.id}"
+            )
+
+            if bill.is_paid:
+
+                visit.status = 'Dispense'
+
+                visit.save()
+
+            return redirect(
+                'cashier_queue'
+            )
+
+    else:
+
+        form = BillForm(
+            instance=bill
+        )
+
+    return render(
+        request,
+        'magahospital/bill_form.html',
+        {
+            'form': form,
+            'visit': visit,
+            'bill': bill
+        }
+    )          
