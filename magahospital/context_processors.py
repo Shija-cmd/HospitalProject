@@ -5,9 +5,15 @@ def user_roles(request):
         return {
 
             'is_admin': False,
+
             'is_reception': False,
+
             'is_doctor': False,
+
             'is_lab': False,
+
+            'is_cashier': False,
+
             'is_dispense': False,
 
         }
@@ -28,6 +34,10 @@ def user_roles(request):
 
         'is_lab': user.groups.filter(
             name='Lab'
+        ).exists(),
+
+        'is_cashier': user.groups.filter(
+            name='Cashier'
         ).exists(),
 
         'is_dispense': user.groups.filter(
