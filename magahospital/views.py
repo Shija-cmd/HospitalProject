@@ -472,19 +472,21 @@ def add_dispense(request, visit_id):
         Visit,
         id=visit_id
     )
-    
+
+    # CHECK PAYMENT
     if not hasattr(visit, 'bill') or not visit.bill.is_paid:
 
         messages.error(
-        request,
-        'Patient payment has not been completed.'
-    )
+            request,
+            'Patient payment has not been completed.'
+        )
 
-    return redirect(
-        'visit_detail',
-        visit_id=visit.id
-    )
+        return redirect(
+            'visit_detail',
+            visit_id=visit.id
+        )
 
+    # HANDLE FORM
     if request.method == 'POST':
 
         form = DispenseForm(
@@ -510,9 +512,9 @@ def add_dispense(request, visit_id):
 
             visit.save()
 
-        return redirect(
-            'visit_detail',
-            visit_id=visit.id
+            return redirect(
+                'visit_detail',
+                visit_id=visit.id
             )
 
     else:
@@ -527,7 +529,6 @@ def add_dispense(request, visit_id):
             'visit': visit
         }
     )
-
 
 # =========================================
 # STAFF MANAGEMENT
