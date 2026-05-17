@@ -472,6 +472,18 @@ def add_dispense(request, visit_id):
         Visit,
         id=visit_id
     )
+    
+    if not hasattr(visit, 'bill') or not visit.bill.is_paid:
+
+        messages.error(
+        request,
+        'Patient payment has not been completed.'
+    )
+
+    return redirect(
+        'visit_detail',
+        visit_id=visit.id
+    )
 
     if request.method == 'POST':
 
