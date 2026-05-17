@@ -121,21 +121,39 @@
 
 <!-- PAGE TITLE -->
 <h2 class="page-title">
+
     <i class="bi bi-journal-medical me-2"></i>
+
     Visit Details
+
 </h2>
 
-<!--Downloading pdf-->
-<div class="mb-4">
+<!-- ACTION BUTTONS -->
+<div class="mb-4 d-flex flex-wrap gap-2">
 
+    <!-- PDF -->
     <a href="{% url 'visit_report_pdf' visit.id %}"
-    class="btn btn-dark">
+    class="btn btn-dark action-btn">
 
-        <i class="bi bi-file-earmark-pdf"></i>
+        <i class="bi bi-file-earmark-pdf me-1"></i>
 
         Download Visit Report
 
     </a>
+
+    <!-- BILL -->
+    {% if visit.status == 'Cashier' %}
+
+    <a href="{% url 'add_bill' visit.id %}"
+    class="btn btn-success action-btn">
+
+        <i class="bi bi-cash-coin me-1"></i>
+
+        Create Bill
+
+    </a>
+
+    {% endif %}
 
 </div>
 
@@ -145,11 +163,15 @@
     <div class="info-item">
 
         <span class="info-label">
+
             <i class="bi bi-person-fill me-1"></i>
+
             Patient:
+
         </span>
 
         {{ visit.patient.firstname }}
+
         {{ visit.patient.secondname }}
 
     </div>
@@ -157,8 +179,11 @@
     <div class="info-item">
 
         <span class="info-label">
+
             <i class="bi bi-calendar-event me-1"></i>
+
             Date:
+
         </span>
 
         {{ visit.date }}
@@ -166,47 +191,70 @@
     </div>
 
     <!-- VISIT STATUS -->
-<div class="info-item">
+    <div class="info-item">
 
-    <span class="info-label">
-        <i class="bi bi-activity me-1"></i>
-        Visit Status:
-    </span>
+        <span class="info-label">
 
-    {% if visit.status == "Doctor" %}
+            <i class="bi bi-activity me-1"></i>
 
-        <span class="badge bg-primary status-badge">
-            Waiting For Doctor
+            Visit Status:
+
         </span>
 
-    {% elif visit.status == "Lab" %}
+        {% if visit.status == "Doctor" %}
 
-        <span class="badge bg-warning text-dark status-badge">
-            Waiting For Laboratory
-        </span>
+            <span class="badge bg-primary status-badge">
 
-    {% elif visit.status == "Prescription" %}
+                Waiting For Doctor
 
-        <span class="badge bg-info status-badge">
-            Waiting For Prescription
-        </span>
+            </span>
 
-    {% elif visit.status == "Dispense" %}
+        {% elif visit.status == "Lab" %}
 
-        <span class="badge bg-danger status-badge">
-            Waiting For Dispense
-        </span>
+            <span class="badge bg-warning text-dark status-badge">
 
-    {% elif visit.status == "Completed" %}
+                Waiting For Laboratory
 
-        <span class="badge bg-success status-badge">
-            Visit Completed
-        </span>
+            </span>
 
-    {% endif %}
+        {% elif visit.status == "Prescription" %}
+
+            <span class="badge bg-info status-badge">
+
+                Waiting For Prescription
+
+            </span>
+
+        {% elif visit.status == "Cashier" %}
+
+            <span class="badge bg-success status-badge">
+
+                Waiting For Payment
+
+            </span>
+
+        {% elif visit.status == "Dispense" %}
+
+            <span class="badge bg-danger status-badge">
+
+                Waiting For Dispense
+
+            </span>
+
+        {% elif visit.status == "Completed" %}
+
+            <span class="badge bg-success status-badge">
+
+                Visit Completed
+
+            </span>
+
+        {% endif %}
+
+    </div>
 
 </div>
-</div>
+
 <!-- DOCTOR -->
 {% if request.user|has_group:"Doctor" or request.user.is_superuser %}
 
@@ -240,6 +288,7 @@
             <div class="list-group-item">
 
                 <strong>History:</strong>
+
                 <br>
 
                 {{ doctor.history }}
@@ -249,6 +298,7 @@
             <div class="list-group-item">
 
                 <strong>Diagnosis:</strong>
+
                 <br>
 
                 {{ doctor.diagnosis }}
@@ -260,7 +310,9 @@
     {% else %}
 
         <p class="empty-data">
+
             No doctor data available.
+
         </p>
 
     {% endif %}
@@ -302,7 +354,9 @@
         <li class="list-group-item">
 
             <strong>
+
                 {{ lab.get_lab_type_display }}
+
             </strong>
 
             <br><br>
@@ -343,7 +397,7 @@
         </h4>
 
         <a href="{% url 'add_prescription' visit.id %}" 
-           class="btn btn-warning action-btn">
+        class="btn btn-warning action-btn">
 
             <i class="bi bi-plus-circle me-1"></i>
 
@@ -390,101 +444,103 @@
 {% endif %}
 
 <!-- BILLING INFORMATION -->
-<div class="card shadow-sm border-0 mb-4">
+<div class="custom-card">
 
-    <div class="card-body">
+    <div class="section-header">
 
-        <h4 class="text-success mb-3">
+        <h4 class="section-title">
+
+            <i class="bi bi-cash-stack text-success section-icon"></i>
 
             Billing Information
 
         </h4>
 
-        {% if visit.bill %}
-
-            <table class="table">
-
-                <tr>
-
-                    <th>Consultation Fee</th>
-
-                    <td>{{ visit.bill.consultation_fee }}</td>
-
-                </tr>
-
-                <tr>
-
-                    <th>Lab Fee</th>
-
-                    <td>{{ visit.bill.lab_fee }}</td>
-
-                </tr>
-
-                <tr>
-
-                    <th>Medication Fee</th>
-
-                    <td>{{ visit.bill.medication_fee }}</td>
-
-                </tr>
-
-                <tr class="table-success">
-
-                    <th>Total Amount</th>
-
-                    <td>
-
-                        <strong>
-
-                            {{ visit.bill.total_amount }}
-
-                        </strong>
-
-                    </td>
-
-                </tr>
-
-                <tr>
-
-                    <th>Payment Status</th>
-
-                    <td>
-
-                        {% if visit.bill.is_paid %}
-
-                            <span class="badge bg-success">
-
-                                Paid
-
-                            </span>
-
-                        {% else %}
-
-                            <span class="badge bg-danger">
-
-                                Unpaid
-
-                            </span>
-
-                        {% endif %}
-
-                    </td>
-
-                </tr>
-
-            </table>
-
-        {% else %}
-
-            <p class="text-muted">
-
-                No billing information available.
-
-            </p>
-
-        {% endif %}
-
     </div>
+
+    {% if visit.bill %}
+
+        <table class="table">
+
+            <tr>
+
+                <th>Consultation Fee</th>
+
+                <td>{{ visit.bill.consultation_fee }}</td>
+
+            </tr>
+
+            <tr>
+
+                <th>Lab Fee</th>
+
+                <td>{{ visit.bill.lab_fee }}</td>
+
+            </tr>
+
+            <tr>
+
+                <th>Medication Fee</th>
+
+                <td>{{ visit.bill.medication_fee }}</td>
+
+            </tr>
+
+            <tr class="table-success">
+
+                <th>Total Amount</th>
+
+                <td>
+
+                    <strong>
+
+                        {{ visit.bill.total_amount }}
+
+                    </strong>
+
+                </td>
+
+            </tr>
+
+            <tr>
+
+                <th>Payment Status</th>
+
+                <td>
+
+                    {% if visit.bill.is_paid %}
+
+                        <span class="badge bg-success">
+
+                            Paid
+
+                        </span>
+
+                    {% else %}
+
+                        <span class="badge bg-danger">
+
+                            Unpaid
+
+                        </span>
+
+                    {% endif %}
+
+                </td>
+
+            </tr>
+
+        </table>
+
+    {% else %}
+
+        <p class="text-muted">
+
+            No billing information available.
+
+        </p>
+
+    {% endif %}
 
 </div>
 
@@ -504,7 +560,7 @@
         </h4>
 
         <a href="{% url 'add_dispense' visit.id %}" 
-           class="btn btn-danger action-btn">
+        class="btn btn-danger action-btn">
 
             <i class="bi bi-plus-circle me-1"></i>
 
@@ -521,12 +577,15 @@
         <li class="list-group-item">
 
             <strong>
+
                 {{ d.medication_given }}
+
             </strong>
 
             <br><br>
 
             Quantity:
+
             {{ d.quantity }}
 
         </li>

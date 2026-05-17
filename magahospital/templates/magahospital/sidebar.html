@@ -8,9 +8,7 @@
 
     </h2>
 
-
     <ul class="sidebar-links">
-
 
         <!-- RECEPTION -->
         {% if is_reception or is_admin %}
@@ -29,7 +27,6 @@
 
         {% endif %}
 
-
         <!-- DOCTOR -->
         {% if is_doctor or is_admin %}
 
@@ -46,7 +43,6 @@
         </li>
 
         {% endif %}
-
 
         <!-- LAB -->
         {% if is_lab or is_admin %}
@@ -65,6 +61,22 @@
 
         {% endif %}
 
+        <!-- CASHIER -->
+        {% if is_cashier or is_admin %}
+
+        <li>
+
+            <a href="{% url 'cashier_queue' %}">
+
+                <i class="bi bi-cash-stack me-2"></i>
+
+                Cashier Queue
+
+            </a>
+
+        </li>
+
+        {% endif %}
 
         <!-- DISPENSE -->
         {% if is_dispense or is_admin %}
@@ -83,7 +95,6 @@
 
         {% endif %}
 
-
         <!-- STAFF MANAGEMENT -->
         {% if request.user.is_superuser %}
 
@@ -100,7 +111,6 @@
         </li>
 
         {% endif %}
-
 
     </ul>
 
