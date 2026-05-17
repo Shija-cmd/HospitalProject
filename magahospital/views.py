@@ -510,9 +510,9 @@ def add_dispense(request, visit_id):
 
             visit.save()
 
-            return redirect(
-                'visit_detail',
-                visit_id=visit.id
+        return redirect(
+            'visit_detail',
+            visit_id=visit.id
             )
 
     else:
