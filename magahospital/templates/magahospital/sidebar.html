@@ -27,6 +27,23 @@
 
         {% endif %}
 
+        <!-- VITALS -->
+        {% if is_vitals or is_admin %}
+
+        <li>
+
+            <a href="{% url 'vital_queue' %}">
+
+                <i class="bi bi-heart-pulse me-2"></i>
+
+                Vitals Queue
+
+            </a>
+
+        </li>
+
+        {% endif %}
+
         <!-- DOCTOR -->
         {% if is_doctor or is_admin %}
 
@@ -54,6 +71,23 @@
                 <i class="bi bi-eyedropper me-2"></i>
 
                 Process Lab Tests
+
+            </a>
+
+        </li>
+
+        {% endif %}
+
+        <!-- PROCEDURES -->
+        {% if is_doctor or is_admin %}
+
+        <li>
+
+            <a href="#">
+
+                <i class="bi bi-bandaid me-2"></i>
+
+                Procedures
 
             </a>
 
@@ -95,6 +129,36 @@
 
         {% endif %}
 
+        <!-- PHARMACY STOCK -->
+        {% if is_dispense or is_admin %}
+
+        <li>
+
+            <a href="{% url 'stock_list' %}">
+
+                <i class="bi bi-box-seam me-2"></i>
+
+                Pharmacy Stock
+
+            </a>
+
+        </li>
+
+        {% endif %}
+
+        <!-- APPOINTMENTS -->
+        <li>
+
+            <a href="{% url 'appointment_list' %}">
+
+                <i class="bi bi-calendar-check me-2"></i>
+
+                Appointments
+
+            </a>
+
+        </li>
+
         <!-- STAFF MANAGEMENT -->
         {% if request.user.is_superuser %}
 
@@ -115,32 +179,3 @@
     </ul>
 
 </div>
-
-<!-- VITALS -->
-{% if is_vitals or is_admin %}
-
-<li>
-
-    <a href="{% url 'vital_queue' %}">
-
-        <i class="bi bi-heart-pulse me-2"></i>
-
-        Vitals Queue
-
-    </a>
-
-</li>
-
-{% endif %}
-
-<li>
-
-    <a href="{% url 'appointment_list' %}">
-
-        <i class="bi bi-calendar-check me-2"></i>
-
-        Appointments
-
-    </a>
-
-</li>
