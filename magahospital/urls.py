@@ -190,6 +190,12 @@ urlpatterns = [
     ),
     
     path(
+        'stock/',
+        views.stock_list,
+        name='stock_list'
+    ),
+    
+    path(
         'appointments/',
         views.appointment_list,
         name='appointment_list'
