@@ -193,75 +193,71 @@
     <!-- VISIT STATUS -->
     <div class="info-item">
 
-        <span class="info-label">
+    <span class="info-label">
 
-            <i class="bi bi-activity me-1"></i>
+        <i class="bi bi-activity me-1"></i>
 
-            Visit Status:
+        Visit Status:
 
-        </span>
+    </span>
 
-        {% if visit.status == "Vitals" %}
+    {% if visit.status == "Vitals" %}
 
-            <span class="badge bg-info status-badge">
+        <span class="badge bg-info status-badge">
 
             Waiting For Vitals
 
         </span>
 
-        {% elif visit.status == "Doctor" %}
+    {% elif visit.status == "Doctor" %}
 
-        {% if visit.status == "Doctor" %}
+        <span class="badge bg-primary status-badge">
 
-            <span class="badge bg-primary status-badge">
+            Waiting For Doctor
 
-                Waiting For Doctor
+        </span>
 
-            </span>
+    {% elif visit.status == "Lab" %}
 
-        {% elif visit.status == "Lab" %}
+        <span class="badge bg-warning text-dark status-badge">
 
-            <span class="badge bg-warning text-dark status-badge">
+            Waiting For Laboratory
 
-                Waiting For Laboratory
+        </span>
 
-            </span>
+    {% elif visit.status == "Prescription" %}
 
-        {% elif visit.status == "Prescription" %}
+        <span class="badge bg-info status-badge">
 
-            <span class="badge bg-info status-badge">
+            Waiting For Prescription
 
-                Waiting For Prescription
+        </span>
 
-            </span>
+    {% elif visit.status == "Cashier" %}
 
-        {% elif visit.status == "Cashier" %}
+        <span class="badge bg-success status-badge">
 
-            <span class="badge bg-success status-badge">
+            Waiting For Payment
 
-                Waiting For Payment
+        </span>
 
-            </span>
+    {% elif visit.status == "Dispense" %}
 
-        {% elif visit.status == "Dispense" %}
+        <span class="badge bg-danger status-badge">
 
-            <span class="badge bg-danger status-badge">
+            Waiting For Dispense
 
-                Waiting For Dispense
+        </span>
 
-            </span>
+    {% elif visit.status == "Completed" %}
 
-        {% elif visit.status == "Completed" %}
+        <span class="badge bg-success status-badge">
 
-            <span class="badge bg-success status-badge">
+            Visit Completed
 
-                Visit Completed
+        </span>
 
-            </span>
-
-        {% endif %}
-
-    </div>
+    {% endif %}
 
 </div>
 
