@@ -22,7 +22,8 @@ from .models import (
     Prescription,
     Bill,
     Dispense,
-    Vital
+    Vital,
+    Procedure
 )
 
 from .forms import (
@@ -32,7 +33,8 @@ from .forms import (
     PrescriptionForm,
     BillForm,
     DispenseForm,
-    VitalForm
+    VitalForm,
+    ProcedureForm
 )
 
 from django.http import JsonResponse
@@ -960,4 +962,73 @@ def add_vital(request, visit_id):
             'form': form,
             'visit': visit
         }
-    )            
+    )
+    
+# =====================================
+# ADD PROCEDURE
+# =====================================
+
+@login_required
+def add_procedure(request, visit_id):
+
+    visit = get_object_or_404(
+        Visit,
+        id=visit_id
+    )
+
+    if request.method == 'POST':
+
+        form = ProcedureForm(
+            request.POST
+        )
+
+        if form.is_valid():
+
+            procedure = form.save(
+                commit=False
+            )
+
+            procedure.visit = visit
+
+            procedure.performed_by = request.user
+
+            procedure.save()
+
+            log_action(
+                request.user,
+                f"Added procedure for Visit #{visit.id}"
+            )
+
+            return redirect(
+                'visit_detail',
+                visit_id=visit.id
+            )
+
+    else:
+
+        form = ProcedureForm()
+
+    return render(
+        request,
+        'magahospital/procedure_form.html',
+        {
+            'form': form,
+            'visit': visit
+        }
+    )
+
+# =====================================
+# STOCK LIST
+# =====================================    
+@login_required
+def stock_list(request):
+
+    medicines = MedicineStock.objects.all()
+
+    return render(
+        request,
+        'magahospital/stock_list.html',
+        {
+            'medicines': medicines
+        }
+    )                

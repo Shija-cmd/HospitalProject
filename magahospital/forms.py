@@ -390,6 +390,10 @@ widgets = {
 
 }
 
+#=========================================
+#VITAL FORM
+#=========================================
+
 class VitalForm(forms.ModelForm):
 
     class Meta:
@@ -476,3 +480,99 @@ class VitalForm(forms.ModelForm):
             ),
 
         }
+#=========================================
+#PROCEDURE FORM
+#=========================================        
+class ProcedureForm(forms.ModelForm):
+
+    class Meta:
+
+        model = Procedure
+
+        fields = [
+
+            'procedure_name',
+
+            'notes',
+
+            'cost'
+
+        ]
+
+        widgets = {
+
+            'procedure_name': forms.TextInput(
+                attrs={
+                    'class': 'form-control',
+                    'placeholder': 'Procedure name'
+                }
+            ),
+
+            'notes': forms.Textarea(
+                attrs={
+                    'class': 'form-control',
+                    'rows': 4,
+                    'placeholder': 'Procedure notes'
+                }
+            ),
+
+            'cost': forms.NumberInput(
+                attrs={
+                    'class': 'form-control',
+                    'placeholder': 'Procedure cost'
+                }
+            ),
+
+        }
+
+#=========================================
+#MEDICINE STOCK FORM
+#=========================================        
+class MedicineStockForm(forms.ModelForm):
+
+    class Meta:
+
+        model = MedicineStock
+
+        fields = '__all__'
+
+        widgets = {
+
+            'medicine_name': forms.TextInput(
+                attrs={
+                    'class': 'form-control'
+                }
+            ),
+
+            'quantity': forms.NumberInput(
+                attrs={
+                    'class': 'form-control'
+                }
+            ),
+
+            'unit_price': forms.NumberInput(
+                attrs={
+                    'class': 'form-control'
+                }
+            ),
+
+            'expiry_date': forms.DateInput(
+                attrs={
+                    'class': 'form-control',
+                    'type': 'date'
+                }
+            ),
+
+            'batch_number': forms.TextInput(
+                attrs={
+                    'class': 'form-control'
+                }
+            ),
+
+            'low_stock_alert': forms.NumberInput(
+                attrs={
+                    'class': 'form-control'
+                }
+            ),
+
+        }                

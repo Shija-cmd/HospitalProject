@@ -181,6 +181,12 @@ urlpatterns = [
         'add-vital/<int:visit_id>/',
         views.add_vital,
         name='add_vital'
+    ),
+    
+    path(
+        'add-procedure/<int:visit_id>/',
+        views.add_procedure,
+        name='add_procedure'
     ), 
 ]
 
