@@ -115,3 +115,20 @@
     </ul>
 
 </div>
+
+<!-- VITALS -->
+{% if is_vitals or is_admin %}
+
+<li>
+
+    <a href="{% url 'vital_queue' %}">
+
+        <i class="bi bi-heart-pulse me-2"></i>
+
+        Vitals Queue
+
+    </a>
+
+</li>
+
+{% endif %}

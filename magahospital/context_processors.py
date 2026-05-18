@@ -15,6 +15,8 @@ def user_roles(request):
             'is_cashier': False,
 
             'is_dispense': False,
+            
+            'is_vitals': False,
 
         }
 
@@ -42,6 +44,10 @@ def user_roles(request):
 
         'is_dispense': user.groups.filter(
             name='Dispense'
+        ).exists(),
+        
+        'is_vitals': user.groups.filter(
+            name='Vitals'
         ).exists(),
 
     }

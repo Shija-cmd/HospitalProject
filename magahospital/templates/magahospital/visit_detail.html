@@ -255,6 +255,87 @@
 
 </div>
 
+<!-- VITALS -->
+<div class="custom-card">
+
+    <div class="section-header">
+
+        <h4 class="section-title">
+
+            🩺 Vitals
+
+        </h4>
+
+    </div>
+
+    {% if visit.vital %}
+
+        <div class="row">
+
+            <div class="col-md-4 mb-3">
+
+                <strong>BP:</strong>
+
+                {{ visit.vital.blood_pressure }}
+
+            </div>
+
+            <div class="col-md-4 mb-3">
+
+                <strong>Temperature:</strong>
+
+                {{ visit.vital.temperature }}
+
+            </div>
+
+            <div class="col-md-4 mb-3">
+
+                <strong>Pulse:</strong>
+
+                {{ visit.vital.pulse_rate }}
+
+            </div>
+
+            <div class="col-md-4 mb-3">
+
+                <strong>Weight:</strong>
+
+                {{ visit.vital.weight }} KG
+
+            </div>
+
+            <div class="col-md-4 mb-3">
+
+                <strong>Height:</strong>
+
+                {{ visit.vital.height }} CM
+
+            </div>
+
+            <div class="col-md-4 mb-3">
+
+                <strong>BMI:</strong>
+
+                {{ visit.vital.bmi }}
+
+                ({{ visit.vital.bmi_status }})
+
+            </div>
+
+        </div>
+
+    {% else %}
+
+        <p class="text-muted">
+
+            No vitals recorded.
+
+        </p>
+
+    {% endif %}
+
+</div>
+
 <!-- DOCTOR -->
 {% if request.user|has_group:"Doctor" or request.user.is_superuser %}
 

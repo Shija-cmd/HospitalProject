@@ -4,6 +4,10 @@ from .models import ChatMessage
 from .models import ChatFAQ
 from .models import AuditLog
 from .models import Bill
+from .models import Vital
+from .models import Procedure
+from .models import MedicineStock
+from .models import Appointment
 
 
 
@@ -19,6 +23,10 @@ admin.site.register(ChatMessage)
 admin.site.register(ChatFAQ)
 admin.site.register(AuditLog)
 admin.site.register(Bill)
+admin.site.register(Vital)
+admin.site.register(Procedure)
+admin.site.register(MedicineStock)
+admin.site.register(Appointment)
 
 admin.site.site_header = "Admin Panel"
 admin.site.site_title = "Maga Hospital Admin"

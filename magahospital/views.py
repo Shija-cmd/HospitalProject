@@ -21,7 +21,8 @@ from .models import (
     Lab,
     Prescription,
     Bill,
-    Dispense
+    Dispense,
+    Vital
 )
 
 from .forms import (
@@ -30,7 +31,8 @@ from .forms import (
     LabForm,
     PrescriptionForm,
     BillForm,
-    DispenseForm
+    DispenseForm,
+    VitalForm
 )
 
 from django.http import JsonResponse
@@ -275,7 +277,7 @@ def create_visit(request, patient_id):
 
     visit = Visit.objects.create(
         patient=patient,
-        status='Doctor'
+        status='Vitals'
     )
 
     log_action(
@@ -885,4 +887,77 @@ def add_bill(request, visit_id):
             'visit': visit,
             'bill': bill
         }
-    )          
+    )
+    
+# =====================================
+# VITALS QUEUE
+# =====================================
+
+@role_required('Vitals')
+def vital_queue(request):
+
+    visits = Visit.objects.filter(
+        status='Vitals'
+    ).order_by('date')
+
+    return render(
+        request,
+        'magahospital/vital_queue.html',
+        {
+            'visits': visits
+        }
+    )  
+    
+# =====================================
+# ADD VITALS
+# =====================================
+
+@role_required('Vitals')
+def add_vital(request, visit_id):
+
+    visit = get_object_or_404(
+        Visit,
+        id=visit_id
+    )
+
+    if request.method == 'POST':
+
+        form = VitalForm(
+            request.POST
+        )
+
+        if form.is_valid():
+
+            vital = form.save(
+                commit=False
+            )
+
+            vital.visit = visit
+
+            vital.save()
+
+            visit.status = 'Doctor'
+
+            visit.save()
+
+            log_action(
+                request.user,
+                f"Added vitals for Visit #{visit.id}"
+            )
+
+            return redirect(
+                'vital_queue'
+            )
+
+    else:
+
+        form = VitalForm()
+
+    return render(
+        request,
+        'magahospital/vital_form.html',
+        {
+            'form': form,
+            'visit': visit
+        }
+    )            

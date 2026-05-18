@@ -46,7 +46,6 @@ urlpatterns = [
         name='visit_report_pdf'
     ),
 
-
     # =========================
     # 1. PATIENTS
     # =========================
@@ -154,7 +153,7 @@ urlpatterns = [
         'staff-management/',
         views.staff_management,
         name='staff_management'
-),
+    ),
     
     #=========================
     # 8. CASHIER QUEUE
@@ -163,13 +162,26 @@ urlpatterns = [
         'cashier/',
         views.cashier_queue,
         name='cashier_queue'
-),
+    ),
 
     path(
         'bill/<int:visit_id>/',
         views.add_bill,
         name='add_bill'
-),
+    ),
+    
+    
+    path(
+        'vitals/',
+        views.vital_queue,
+        name='vital_queue'
+    ),
+
+    path(
+        'add-vital/<int:visit_id>/',
+        views.add_vital,
+        name='add_vital'
+    ), 
 ]
 
 # =========================

@@ -389,3 +389,90 @@ widgets = {
     ),
 
 }
+
+class VitalForm(forms.ModelForm):
+
+    class Meta:
+
+        model = Vital
+
+        fields = [
+
+            'blood_pressure',
+
+            'temperature',
+
+            'pulse_rate',
+
+            'oxygen_saturation',
+
+            'respiratory_rate',
+
+            'weight',
+
+            'height',
+
+            'notes'
+
+        ]
+
+        widgets = {
+
+            'blood_pressure': forms.TextInput(
+                attrs={
+                    'class': 'form-control',
+                    'placeholder': '120/80'
+                }
+            ),
+
+            'temperature': forms.NumberInput(
+                attrs={
+                    'class': 'form-control',
+                    'placeholder': '36.5'
+                }
+            ),
+
+            'pulse_rate': forms.NumberInput(
+                attrs={
+                    'class': 'form-control',
+                    'placeholder': '72'
+                }
+            ),
+
+            'oxygen_saturation': forms.NumberInput(
+                attrs={
+                    'class': 'form-control',
+                    'placeholder': '98'
+                }
+            ),
+
+            'respiratory_rate': forms.NumberInput(
+                attrs={
+                    'class': 'form-control',
+                    'placeholder': '16'
+                }
+            ),
+
+            'weight': forms.NumberInput(
+                attrs={
+                    'class': 'form-control',
+                    'placeholder': '70'
+                }
+            ),
+
+            'height': forms.NumberInput(
+                attrs={
+                    'class': 'form-control',
+                    'placeholder': '170'
+                }
+            ),
+
+            'notes': forms.Textarea(
+                attrs={
+                    'class': 'form-control',
+                    'rows': 4,
+                    'placeholder': 'Additional notes'
+                }
+            ),
+
+        }

@@ -23,6 +23,7 @@ LAB = [
 ]
 
 VISIT_STATUS = [
+    ('Vitals', 'Vitals'),
 
     ('Doctor', 'Doctor'),
 
@@ -380,4 +381,248 @@ class AuditLog(models.Model):
         if self.user:
             return f"{self.user.username} - {self.action}"
 
-        return self.action   
+        return self.action
+    
+# =====================================
+# VITALS / TRIAGE
+# =====================================
+
+class Vital(models.Model):
+
+    visit = models.OneToOneField(
+        Visit,
+        on_delete=models.CASCADE,
+        related_name='vital'
+    )
+
+    blood_pressure = models.CharField(
+        max_length=50,
+        blank=True,
+        null=True
+    )
+
+    temperature = models.DecimalField(
+        max_digits=4,
+        decimal_places=1,
+        blank=True,
+        null=True
+    )
+
+    pulse_rate = models.PositiveIntegerField(
+        blank=True,
+        null=True
+    )
+
+    oxygen_saturation = models.PositiveIntegerField(
+        blank=True,
+        null=True
+    )
+
+    respiratory_rate = models.PositiveIntegerField(
+        blank=True,
+        null=True
+    )
+
+    weight = models.DecimalField(
+        max_digits=5,
+        decimal_places=1,
+        blank=True,
+        null=True,
+        help_text="Weight in KG"
+    )
+
+    height = models.DecimalField(
+        max_digits=5,
+        decimal_places=1,
+        blank=True,
+        null=True,
+        help_text="Height in CM"
+    )
+
+    bmi = models.DecimalField(
+        max_digits=5,
+        decimal_places=2,
+        blank=True,
+        null=True
+    )
+
+    notes = models.TextField(
+        blank=True,
+        null=True
+    )
+
+    created_at = models.DateTimeField(
+        default=timezone.now
+    )
+
+    def save(self, *args, **kwargs):
+
+        if self.weight and self.height:
+
+            height_in_meters = self.height / 100
+
+            self.bmi = round(
+
+                self.weight /
+
+                (height_in_meters ** 2),
+
+                2
+
+            )
+
+        super().save(*args, **kwargs)
+
+    def bmi_status(self):
+
+        if not self.bmi:
+
+            return ""
+
+        if self.bmi < 18.5:
+
+            return "Underweight"
+
+        elif self.bmi < 25:
+
+            return "Normal"
+
+        elif self.bmi < 30:
+
+            return "Overweight"
+
+        return "Obese"
+
+    def __str__(self):
+
+        return f"Vitals - Visit {self.visit.id}"
+    
+# =====================================
+# PHARMACY STOCK
+# =====================================
+
+class MedicineStock(models.Model):
+
+    medicine_name = models.CharField(
+        max_length=200
+    )
+
+    quantity = models.PositiveIntegerField(
+        default=0
+    )
+
+    unit_price = models.DecimalField(
+        max_digits=10,
+        decimal_places=2
+    )
+
+    expiry_date = models.DateField()
+
+    batch_number = models.CharField(
+        max_length=100,
+        blank=True,
+        null=True
+    )
+
+    low_stock_alert = models.PositiveIntegerField(
+        default=10
+    )
+
+    created_at = models.DateTimeField(
+        default=timezone.now
+    )
+
+    def is_low_stock(self):
+
+        return self.quantity <= self.low_stock_alert
+
+    def __str__(self):
+
+        return self.medicine_name
+    
+# =====================================
+# APPOINTMENTS
+# =====================================
+
+class Appointment(models.Model):
+
+    STATUS = (
+
+        ('Pending', 'Pending'),
+
+        ('Completed', 'Completed'),
+
+        ('Missed', 'Missed'),
+
+    )
+
+    patient = models.ForeignKey(
+        Patient,
+        on_delete=models.CASCADE,
+        related_name='appointments'
+    )
+
+    appointment_date = models.DateField()
+
+    appointment_time = models.TimeField()
+
+    reason = models.TextField(
+        blank=True,
+        null=True
+    )
+
+    status = models.CharField(
+        max_length=20,
+        choices=STATUS,
+        default='Pending'
+    )
+
+    created_at = models.DateTimeField(
+        default=timezone.now
+    )
+
+    def __str__(self):
+
+        return f"{self.patient} - {self.appointment_date}" 
+    
+# =====================================
+# PROCEDURES
+# =====================================
+
+class Procedure(models.Model):
+
+    visit = models.ForeignKey(
+        Visit,
+        on_delete=models.CASCADE,
+        related_name='procedures'
+    )
+
+    procedure_name = models.CharField(
+        max_length=200
+    )
+
+    notes = models.TextField(
+        blank=True,
+        null=True
+    )
+
+    cost = models.DecimalField(
+        max_digits=10,
+        decimal_places=2,
+        default=0
+    )
+
+    performed_by = models.ForeignKey(
+        User,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True
+    )
+
+    created_at = models.DateTimeField(
+        default=timezone.now
+    )
+
+    def __str__(self):
+
+        return self.procedure_name                   
