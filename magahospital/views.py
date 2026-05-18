@@ -24,6 +24,7 @@ from .models import (
     Dispense,
     Vital,
     Procedure,
+    MedicineStock,
     Appointment
 )
 
