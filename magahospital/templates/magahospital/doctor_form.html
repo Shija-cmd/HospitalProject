@@ -117,6 +117,87 @@
 
     </h2>
 
+    <!-- VITALS -->
+<div class="card shadow-sm mb-4 border-0">
+
+    <div class="card-body">
+
+        <h4 class="text-primary mb-3">
+
+            🩺 Patient Vitals
+
+        </h4>
+
+        {% if visit.vital %}
+
+            <div class="row">
+
+                <div class="col-md-4 mb-2">
+
+                    <strong>BP:</strong>
+
+                    {{ visit.vital.blood_pressure }}
+
+                </div>
+
+                <div class="col-md-4 mb-2">
+
+                    <strong>Temperature:</strong>
+
+                    {{ visit.vital.temperature }}
+
+                </div>
+
+                <div class="col-md-4 mb-2">
+
+                    <strong>Pulse:</strong>
+
+                    {{ visit.vital.pulse_rate }}
+
+                </div>
+
+                <div class="col-md-4 mb-2">
+
+                    <strong>Weight:</strong>
+
+                    {{ visit.vital.weight }} KG
+
+                </div>
+
+                <div class="col-md-4 mb-2">
+
+                    <strong>Height:</strong>
+
+                    {{ visit.vital.height }} CM
+
+                </div>
+
+                <div class="col-md-4 mb-2">
+
+                    <strong>BMI:</strong>
+
+                    {{ visit.vital.bmi }}
+
+                    ({{ visit.vital.bmi_status }})
+
+                </div>
+
+            </div>
+
+        {% else %}
+
+            <p class="text-muted">
+
+                No vitals recorded.
+
+            </p>
+
+        {% endif %}
+
+    </div>
+
+</div>
+
     <!-- FORM CARD -->
     <form method="POST" class="custom-form-card">
 
@@ -159,7 +240,7 @@
             </button>
 
             <a href="{% url 'visit_detail' visit.id %}"
-               class="btn btn-secondary back-btn">
+            class="btn btn-secondary back-btn">
 
                 <i class="bi bi-arrow-left me-1"></i>
                 Back
