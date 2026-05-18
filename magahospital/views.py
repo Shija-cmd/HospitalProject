@@ -641,10 +641,22 @@ def visit_detail(request, visit_id):
         'magahospital/visit_detail.html',
         {
             'visit': visit,
+
+            'doctor': getattr(
+                visit,
+                'doctor',
+                None
+            ),
+
+            'labs': visit.labs.all(),
+
+            'prescriptions': visit.prescriptions.all(),
+
+            'dispenses': visit.dispenses.all(),
+
             'procedures': visit.procedures.all(),
         }
     )
-
 
 # =========================================
 # PDF GENERATION
