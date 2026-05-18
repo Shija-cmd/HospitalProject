@@ -469,6 +469,7 @@
 
 {% endif %}
 
+{% if request.user|has_group:"Doctor" or request.user.is_superuser %}
 <!-- PROCEDURES -->
 <div class="custom-card">
 
@@ -530,6 +531,7 @@
     </ul>
 
 </div>
+{% endif %}
 
 <!-- PRESCRIPTIONS -->
 {% if request.user|has_group:"Doctor" or request.user.is_superuser %}
