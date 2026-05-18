@@ -201,6 +201,16 @@
 
         </span>
 
+        {% if visit.status == "Vitals" %}
+
+            <span class="badge bg-info status-badge">
+
+            Waiting For Vitals
+
+        </span>
+
+        {% elif visit.status == "Doctor" %}
+
         {% if visit.status == "Doctor" %}
 
             <span class="badge bg-primary status-badge">
