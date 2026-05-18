@@ -35,6 +35,7 @@ CSRF_TRUSTED_ORIGINS = [
     "http://localhost:8000",
     "https://shijajuma.website",
     "https://www.shijajuma.website",
+    "https://*.onrender.com",
 ]
 
 
@@ -47,6 +48,9 @@ X_FRAME_OPTIONS = "DENY"
 
 # Enable this ONLY after SSL certificate becomes active on Render
 SECURE_SSL_REDIRECT = True
+SECURE_PROXY_SSL_HEADER = (
+    ('HTTP_X_FORWARDED_PROTO', 'https')
+)
 
 # SESSION SECURITY
 SESSION_COOKIE_AGE = 1800
