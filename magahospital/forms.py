@@ -2,7 +2,7 @@ from django import forms
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth.models import User
 
-from .models import Patient, Doctor, Lab, Prescription, Dispense, Bill, Vital
+from .models import Patient, Doctor, Lab, Prescription, Dispense, Bill, Vital, Procedure, MedicineStock, Appointment
 
 
 # =========================
@@ -575,4 +575,57 @@ class MedicineStockForm(forms.ModelForm):
                 }
             ),
 
-        }                
+        }   
+        
+#=========================================
+#APPOINTMENT FORM
+#=========================================
+class AppointmentForm(forms.ModelForm):
+
+    class Meta:
+
+        model = Appointment
+
+        fields = [
+
+            'patient',
+
+            'appointment_date',
+
+            'appointment_time',
+
+            'reason'
+
+        ]
+
+        widgets = {
+
+            'patient': forms.Select(
+                attrs={
+                    'class': 'form-select'
+                }
+            ),
+
+            'appointment_date': forms.DateInput(
+                attrs={
+                    'class': 'form-control',
+                    'type': 'date'
+                }
+            ),
+
+            'appointment_time': forms.TimeInput(
+                attrs={
+                    'class': 'form-control',
+                    'type': 'time'
+                }
+            ),
+
+            'reason': forms.Textarea(
+                attrs={
+                    'class': 'form-control',
+                    'rows': 4,
+                    'placeholder': 'Appointment reason'
+                }
+            ),
+
+        }             

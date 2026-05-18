@@ -187,6 +187,18 @@ urlpatterns = [
         'add-procedure/<int:visit_id>/',
         views.add_procedure,
         name='add_procedure'
+    ),
+    
+    path(
+        'appointments/',
+        views.appointment_list,
+        name='appointment_list'
+    ),
+
+    path(
+        'add-appointment/',
+        views.add_appointment,
+        name='add_appointment'
     ), 
 ]
 

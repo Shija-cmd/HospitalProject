@@ -23,7 +23,8 @@ from .models import (
     Bill,
     Dispense,
     Vital,
-    Procedure
+    Procedure,
+    Appointment
 )
 
 from .forms import (
@@ -34,7 +35,8 @@ from .forms import (
     BillForm,
     DispenseForm,
     VitalForm,
-    ProcedureForm
+    ProcedureForm,
+    AppointmentForm
 )
 
 from django.http import JsonResponse
@@ -1031,4 +1033,62 @@ def stock_list(request):
         {
             'medicines': medicines
         }
-    )                
+    )
+    
+# =====================================
+# APPOINTMENT LIST
+# =====================================
+
+@login_required
+def appointment_list(request):
+
+    appointments = Appointment.objects.all().order_by(
+        'appointment_date',
+        'appointment_time'
+    )
+
+    return render(
+        request,
+        'magahospital/appointment_list.html',
+        {
+            'appointments': appointments
+        }
+    )
+    
+# =====================================
+# ADD APPOINTMENT
+# =====================================
+
+@login_required
+def add_appointment(request):
+
+    if request.method == 'POST':
+
+        form = AppointmentForm(
+            request.POST
+        )
+
+        if form.is_valid():
+
+            appointment = form.save()
+
+            log_action(
+                request.user,
+                f"Created appointment for {appointment.patient}"
+            )
+
+            return redirect(
+                'appointment_list'
+            )
+
+    else:
+
+        form = AppointmentForm()
+
+    return render(
+        request,
+        'magahospital/appointment_form.html',
+        {
+            'form': form
+        }
+    )                        

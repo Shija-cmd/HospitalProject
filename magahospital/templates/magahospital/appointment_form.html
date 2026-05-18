@@ -1,0 +1,80 @@
+{% extends 'magahospital/base.html' %}
+
+{% block content %}
+
+<div class="container mt-4">
+
+    <div class="card shadow-lg border-0">
+
+        <div class="card-body p-4">
+
+            <h2 class="mb-4 text-primary">
+
+                📅 Add Appointment
+
+            </h2>
+
+            <form method="POST">
+
+                {% csrf_token %}
+
+                <div class="mb-3">
+
+                    <label>
+                        Patient
+                    </label>
+
+                    {{ form.patient }}
+
+                </div>
+
+                <div class="row">
+
+                    <div class="col-md-6 mb-3">
+
+                        <label>
+                            Appointment Date
+                        </label>
+
+                        {{ form.appointment_date }}
+
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+
+                        <label>
+                            Appointment Time
+                        </label>
+
+                        {{ form.appointment_time }}
+
+                    </div>
+
+                </div>
+
+                <div class="mb-3">
+
+                    <label>
+                        Reason
+                    </label>
+
+                    {{ form.reason }}
+
+                </div>
+
+                <button type="submit"
+                        class="btn btn-primary">
+
+                    Save Appointment
+
+                </button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}
