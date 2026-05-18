@@ -469,68 +469,6 @@
 
 {% endif %}
 
-<!-- PRESCRIPTIONS -->
-{% if request.user|has_group:"Doctor" or request.user.is_superuser %}
-
-<div class="custom-card">
-
-    <div class="section-header">
-
-        <h4 class="section-title">
-
-            <i class="bi bi-file-earmark-medical-fill text-warning section-icon"></i>
-
-            Prescriptions
-
-        </h4>
-
-        <a href="{% url 'add_prescription' visit.id %}" 
-        class="btn btn-warning action-btn">
-
-            <i class="bi bi-plus-circle me-1"></i>
-
-            Add Prescription
-
-        </a>
-
-    </div>
-
-    <ul class="list-group">
-
-        {% for p in prescriptions %}
-
-        <li class="list-group-item">
-
-            {{ p.medication }}
-
-            {% if p.notes %}
-
-                <br><br>
-
-                <strong>Notes:</strong>
-
-                {{ p.notes }}
-
-            {% endif %}
-
-        </li>
-
-        {% empty %}
-
-        <li class="list-group-item empty-data">
-
-            No prescriptions available.
-
-        </li>
-
-        {% endfor %}
-
-    </ul>
-
-</div>
-
-{% endif %}
-
 <!-- PROCEDURES -->
 <div class="custom-card">
 
@@ -592,6 +530,68 @@
     </ul>
 
 </div>
+
+<!-- PRESCRIPTIONS -->
+{% if request.user|has_group:"Doctor" or request.user.is_superuser %}
+
+<div class="custom-card">
+
+    <div class="section-header">
+
+        <h4 class="section-title">
+
+            <i class="bi bi-file-earmark-medical-fill text-warning section-icon"></i>
+
+            Prescriptions
+
+        </h4>
+
+        <a href="{% url 'add_prescription' visit.id %}" 
+        class="btn btn-warning action-btn">
+
+            <i class="bi bi-plus-circle me-1"></i>
+
+            Add Prescription
+
+        </a>
+
+    </div>
+
+    <ul class="list-group">
+
+        {% for p in prescriptions %}
+
+        <li class="list-group-item">
+
+            {{ p.medication }}
+
+            {% if p.notes %}
+
+                <br><br>
+
+                <strong>Notes:</strong>
+
+                {{ p.notes }}
+
+            {% endif %}
+
+        </li>
+
+        {% empty %}
+
+        <li class="list-group-item empty-data">
+
+            No prescriptions available.
+
+        </li>
+
+        {% endfor %}
+
+    </ul>
+
+</div>
+
+{% endif %}
 
 <!-- BILLING INFORMATION -->
 <div class="custom-card">
