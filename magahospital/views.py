@@ -640,7 +640,8 @@ def visit_detail(request, visit_id):
         request,
         'magahospital/visit_detail.html',
         {
-            'visit': visit
+            'visit': visit,
+            'procedures': visit.procedures.all(),
         }
     )
 

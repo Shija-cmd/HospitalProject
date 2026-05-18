@@ -524,6 +524,68 @@
 
 {% endif %}
 
+<!-- PROCEDURES -->
+<div class="custom-card">
+
+    <div class="section-header">
+
+        <h4 class="section-title">
+
+            <i class="bi bi-bandaid text-warning section-icon"></i>
+
+            Procedures
+
+        </h4>
+
+        <a href="{% url 'add_procedure' visit.id %}"
+        class="btn btn-warning action-btn">
+
+            <i class="bi bi-plus-circle me-1"></i>
+
+            Add Procedure
+
+        </a>
+
+    </div>
+
+    <ul class="list-group">
+
+        {% for procedure in procedures %}
+
+        <li class="list-group-item">
+
+            <strong>
+
+                {{ procedure.procedure_name }}
+
+            </strong>
+
+            <br><br>
+
+            {{ procedure.notes }}
+
+            <br><br>
+
+            Cost:
+
+            {{ procedure.cost }}
+
+        </li>
+
+        {% empty %}
+
+        <li class="list-group-item empty-data">
+
+            No procedures available.
+
+        </li>
+
+        {% endfor %}
+
+    </ul>
+
+</div>
+
 <!-- BILLING INFORMATION -->
 <div class="custom-card">
 
