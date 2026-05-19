@@ -13,7 +13,7 @@
         </h2>
 
         <a href="{% url 'add_appointment' %}"
-           class="btn btn-primary">
+        class="btn btn-primary">
 
             Add Appointment
 
@@ -40,6 +40,8 @@
                         <th>Reason</th>
 
                         <th>Status</th>
+
+                        <th>Action</th>
 
                     </tr>
 
@@ -100,6 +102,29 @@
                                 <span class="badge bg-danger">
 
                                     Missed
+
+                                </span>
+
+                            {% endif %}
+
+                        </td>
+
+                        <td>
+
+                            {% if appointment.status == 'Pending' %}
+
+                                <a href="{% url 'create_visit' appointment.patient.id %}"
+                                class="btn btn-success btn-sm">
+
+                                    Create Visit
+
+                                </a>
+
+                            {% else %}
+
+                                <span class="text-muted">
+
+                                    Completed
 
                                 </span>
 

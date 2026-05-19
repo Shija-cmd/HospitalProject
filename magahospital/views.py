@@ -284,6 +284,11 @@ def create_visit(request, patient_id):
         patient=patient,
         status='Vitals'
     )
+    
+    Appointment.objects.filter(
+        patient=patient,
+        status='Pending'
+    ).update(status='Completed')
 
     log_action(
         request.user,
