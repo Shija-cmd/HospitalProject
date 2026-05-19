@@ -140,6 +140,10 @@ def dashboard(request):
 
         # DASHBOARD STATISTICS
         'total_patients': Patient.objects.count(),
+        
+        'vitals_waiting': Visit.objects.filter(
+            status='Vitals'
+        ).count(),
 
         'doctor_waiting': Visit.objects.filter(
             status='Doctor'
