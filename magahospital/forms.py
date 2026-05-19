@@ -231,22 +231,29 @@ class BillForm(forms.ModelForm):
                     'class': 'form-control',
                     'placeholder': 'Laboratory fee'
                 }
-            ),
+        ),
 
             'medication_fee': forms.NumberInput(
                 attrs={
                     'class': 'form-control',
                     'placeholder': 'Medication fee'
                 }
-            ),
+        ),
+
+            'procedure_fee': forms.NumberInput(
+                attrs={
+                    'class': 'form-control',
+                    'placeholder': 'Procedure fee'
+                }
+        ),
 
             'is_paid': forms.CheckboxInput(
                 attrs={
-                    'class': 'form-check-input'
+                'class': 'form-check-input'
                 }
-            ),
+        ),
 
-        }        
+    }        
 
 # =========================================
 # DISPENSE FORM
