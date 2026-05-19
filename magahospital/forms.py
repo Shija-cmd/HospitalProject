@@ -198,6 +198,8 @@ class BillForm(forms.ModelForm):
             'lab_fee',
 
             'medication_fee',
+            
+            'procedure_fee',
 
             'is_paid'
 
