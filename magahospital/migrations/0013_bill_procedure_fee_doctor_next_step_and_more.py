@@ -15,15 +15,4 @@ class Migration(migrations.Migration):
             name='procedure_fee',
             field=models.DecimalField(decimal_places=2, default=0, max_digits=10),
         ),
-        
-        migrations.AddField(
-            model_name='doctor',
-            name='procedure_name',
-            field=models.CharField(blank=True, max_length=200, null=True),
-        ),
-        migrations.AddField(
-            model_name='doctor',
-            name='procedure_notes',
-            field=models.TextField(blank=True, null=True),
-        ),
     ]
