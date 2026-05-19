@@ -8,3 +8,7 @@ class Migration(migrations.Migration):
     dependencies = [
         ('magahospital', '0013_bill_procedure_fee_doctor_next_step_and_more'),
     ]
+    
+    operations = [
+        
+    ]
