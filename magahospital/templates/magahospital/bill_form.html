@@ -104,12 +104,12 @@
 
                 {% csrf_token %}
 
-                <div class="row">
+                <div class="row g-3">
 
                     <!-- CONSULTATION -->
-                    <div class="col-md-3 mb-3">
+                    <div class="col-md-6 col-lg-3">
 
-                        <label>
+                        <label class="form-label fw-semibold">
 
                             Consultation Fee
 
@@ -120,9 +120,9 @@
                     </div>
 
                     <!-- LAB -->
-                    <div class="col-md-3 mb-3">
+                    <div class="col-md-6 col-lg-3">
 
-                        <label>
+                        <label class="form-label fw-semibold">
 
                             Lab Fee
 
@@ -133,9 +133,9 @@
                     </div>
 
                     <!-- MEDICATION -->
-                    <div class="col-md-3 mb-3">
+                    <div class="col-md-6 col-lg-3">
 
-                        <label>
+                        <label class="form-label fw-semibold">
 
                             Medication Fee
 
@@ -146,9 +146,9 @@
                     </div>
 
                     <!-- PROCEDURE -->
-                    <div class="col-md-3 mb-3">
+                    <div class="col-md-6 col-lg-3">
 
-                        <label>
+                        <label class="form-label fw-semibold">
 
                             Procedure Fee
 
@@ -161,11 +161,11 @@
                 </div>
 
                 <!-- PAYMENT -->
-                <div class="form-check mb-4">
+                <div class="form-check mt-4 mb-4">
 
                     {{ form.is_paid }}
 
-                    <label class="form-check-label">
+                    <label class="form-check-label ms-2">
 
                         Payment Completed
 
@@ -188,7 +188,9 @@
 
                 <!-- BUTTON -->
                 <button type="submit"
-                        class="btn btn-success">
+                        class="btn btn-success px-4 py-2">
+
+                    <i class="bi bi-check-circle me-1"></i>
 
                     Save Payment
 
