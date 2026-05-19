@@ -284,6 +284,12 @@ class Bill(models.Model):
         decimal_places=2,
         default=0
     )
+    
+    procedure_fee = models.DecimalField(
+        max_digits=10,
+        decimal_places=2,
+        default=0
+    )
 
     total_amount = models.DecimalField(
         max_digits=10,
@@ -307,9 +313,11 @@ class Bill(models.Model):
 
             self.lab_fee +
 
-            self.medication_fee
+            self.medication_fee +
 
-        )
+            self.procedure_fee
+
+    )
 
         super().save(*args, **kwargs)
 
