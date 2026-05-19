@@ -15,14 +15,4 @@ class Migration(migrations.Migration):
             name='next_step',
             field=models.CharField(choices=[('Lab', 'Send To Laboratory'), ('Cashier', 'Send To Cashier')], default='Cashier', max_length=20),
         ),
-        migrations.AddField(
-            model_name='doctor',
-            name='procedure_name',
-            field=models.CharField(blank=True, max_length=200, null=True),
-        ),
-        migrations.AddField(
-            model_name='doctor',
-            name='procedure_notes',
-            field=models.TextField(blank=True, null=True),
-        ),
     ]
