@@ -173,11 +173,26 @@ class Doctor(models.Model):
         null=True
     )
 
+    NEXT_STEP_CHOICES = [
+
+        ('Lab', 'Send To Laboratory'),
+
+        ('Cashier', 'Send To Cashier'),
+
+    ]
+
+    next_step = models.CharField(
+        max_length=20,
+        choices=NEXT_STEP_CHOICES,
+        default='Cashier'
+    )
+
     created_at = models.DateTimeField(
         default=timezone.now
     )
 
     def __str__(self):
+
         return f"Doctor Record - Visit {self.visit.id}"
 
 

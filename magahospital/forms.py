@@ -102,7 +102,7 @@ class DoctorForm(forms.ModelForm):
 
     class Meta:
         model = Doctor
-        fields = ['history', 'diagnosis', 'procedure_name', 'procedure_notes']
+        fields = ['history', 'diagnosis', 'procedure_name', 'procedure_notes', 'next_step']
 
         widgets = {
 

@@ -345,7 +345,7 @@ def add_doctor(request, visit_id):
                 f"Added doctor consultation for Visit #{visit.id}"
             )
 
-            visit.status = 'Lab'
+            visit.status = doctor.next_step
 
             visit.save()
 
