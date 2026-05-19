@@ -144,7 +144,7 @@ class Doctor(models.Model):
         on_delete=models.CASCADE,
         related_name='doctor'
     )
-    
+
     doctor = models.ForeignKey(
         User,
         on_delete=models.SET_NULL,
@@ -158,6 +158,17 @@ class Doctor(models.Model):
     )
 
     diagnosis = models.TextField(
+        blank=True,
+        null=True
+    )
+
+    procedure_name = models.CharField(
+        max_length=200,
+        blank=True,
+        null=True
+    )
+
+    procedure_notes = models.TextField(
         blank=True,
         null=True
     )
