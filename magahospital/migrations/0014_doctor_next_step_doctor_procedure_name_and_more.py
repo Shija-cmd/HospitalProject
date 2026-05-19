@@ -8,16 +8,3 @@ class Migration(migrations.Migration):
     dependencies = [
         ('magahospital', '0013_bill_procedure_fee_doctor_next_step_and_more'),
     ]
-
-    operations = [
-        migrations.AddField(
-            model_name='doctor',
-            name='procedure_name',
-            field=models.CharField(blank=True, max_length=200, null=True),
-        ),
-        migrations.AddField(
-            model_name='doctor',
-            name='procedure_notes',
-            field=models.TextField(blank=True, null=True),
-        ),
-    ]
