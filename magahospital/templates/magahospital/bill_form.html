@@ -14,6 +14,7 @@
 
             </h2>
 
+            <!-- PATIENT -->
             <div class="alert alert-info">
 
                 <strong>Patient:</strong>
@@ -24,44 +25,145 @@
 
             </div>
 
+            <!-- PRESCRIBED MEDICINES -->
+            <h5 class="mb-3">
+
+                💊 Prescribed Medicines
+
+            </h5>
+
+            <ul class="list-group mb-4">
+
+                {% for prescription in visit.prescriptions.all %}
+
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+
+                        <span>
+
+                            {{ prescription.medicine_name }}
+
+                        </span>
+
+                    </li>
+
+                {% empty %}
+
+                    <li class="list-group-item">
+
+                        No medicines prescribed
+
+                    </li>
+
+                {% endfor %}
+
+            </ul>
+
+            <!-- PROCEDURES -->
+            <h5 class="mb-3">
+
+                🏥 Procedures
+
+            </h5>
+
+            <ul class="list-group mb-4">
+
+                {% if visit.doctor.procedure_name %}
+
+                    <li class="list-group-item">
+
+                        <strong>
+
+                            {{ visit.doctor.procedure_name }}
+
+                        </strong>
+
+                        <br>
+
+                        <small class="text-muted">
+
+                            {{ visit.doctor.procedure_notes }}
+
+                        </small>
+
+                    </li>
+
+                {% else %}
+
+                    <li class="list-group-item">
+
+                        No procedures added
+
+                    </li>
+
+                {% endif %}
+
+            </ul>
+
+            <!-- BILL FORM -->
             <form method="POST">
 
                 {% csrf_token %}
 
                 <div class="row">
 
-                    <div class="col-md-4 mb-3">
+                    <!-- CONSULTATION -->
+                    <div class="col-md-3 mb-3">
 
                         <label>
+
                             Consultation Fee
+
                         </label>
 
                         {{ form.consultation_fee }}
 
                     </div>
 
-                    <div class="col-md-4 mb-3">
+                    <!-- LAB -->
+                    <div class="col-md-3 mb-3">
 
                         <label>
+
                             Lab Fee
+
                         </label>
 
                         {{ form.lab_fee }}
 
                     </div>
 
-                    <div class="col-md-4 mb-3">
+                    <!-- MEDICATION -->
+                    <div class="col-md-3 mb-3">
 
                         <label>
+
                             Medication Fee
+
                         </label>
 
                         {{ form.medication_fee }}
 
                     </div>
 
+                    <!-- PROCEDURE -->
+                    <div class="col-md-3 mb-3">
+
+                        <label>
+
+                            Procedure Fee
+
+                        </label>
+
+                        <input type="number"
+                            step="0.01"
+                            name="procedure_fee"
+                            class="form-control">
+
+                    </div>
+
                 </div>
 
+                <!-- PAYMENT -->
                 <div class="form-check mb-4">
 
                     {{ form.is_paid }}
@@ -74,6 +176,7 @@
 
                 </div>
 
+                <!-- TOTAL -->
                 {% if bill.total_amount %}
 
                 <div class="alert alert-success">
@@ -86,6 +189,7 @@
 
                 {% endif %}
 
+                <!-- BUTTON -->
                 <button type="submit"
                         class="btn btn-success">
 
