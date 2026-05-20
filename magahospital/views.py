@@ -522,7 +522,7 @@ def add_prescription(request, visit_id):
             visit.save()
 
             return redirect(
-                'cashier_queue'
+                'doctor_queue'
             )
 
     else:
