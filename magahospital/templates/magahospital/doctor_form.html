@@ -228,40 +228,35 @@
 
 </div>
 
-<!-- PROCEDURE -->
-<div class="mb-3">
+<!-- PROCEDURES -->
 
-    <label>
+<div class="mb-4">
 
-        Procedure
+    <label class="fw-bold">
+
+        Procedure Name
 
     </label>
 
-    {{ form.procedure_name }}
+    <input type="text"
+        name="procedure_name"
+        class="form-control"
+        placeholder="Enter procedure">
 
 </div>
 
-<div class="mb-3">
+<div class="mb-4">
 
-    <label>
+    <label class="fw-bold">
 
         Procedure Notes
 
     </label>
 
-    {{ form.procedure_notes }}
-
-</div>
-
-<div class="mb-3">
-
-    <label>
-
-        Next Step
-
-    </label>
-
-    {{ form.next_step }}
+    <textarea name="procedure_notes"
+            class="form-control"
+            rows="3"
+            placeholder="Procedure notes"></textarea>
 
 </div>
 

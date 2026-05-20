@@ -162,17 +162,7 @@ class Doctor(models.Model):
         null=True
     )
 
-    procedure_name = models.CharField(
-        max_length=200,
-        blank=True,
-        null=True
-    )
-
-    procedure_notes = models.TextField(
-        blank=True,
-        null=True
-    )
-
+    
     NEXT_STEP_CHOICES = [
 
         ('Lab', 'Send To Laboratory'),

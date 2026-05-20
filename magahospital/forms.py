@@ -102,7 +102,7 @@ class DoctorForm(forms.ModelForm):
 
     class Meta:
         model = Doctor
-        fields = ['history', 'diagnosis', 'procedure_name', 'procedure_notes', 'next_step']
+        fields = ['history', 'diagnosis', 'next_step']
 
         widgets = {
 
@@ -117,18 +117,11 @@ class DoctorForm(forms.ModelForm):
                 'rows': 4,
                 'placeholder': 'Enter diagnosis details...'
             }),
-
-            'procedure_name': forms.TextInput(attrs={
+            'next_step': forms.Textarea(attrs={
                 'class': 'form-control',
-                'placeholder': 'Enter procedure name...'
+                'rows': 3,
+                'placeholder': 'Enter next steps for patient care...'
             }),
-
-            'procedure_notes': forms.Textarea(attrs={
-                'class': 'form-control',
-                'rows': 4,
-                'placeholder': 'Enter procedure notes...'
-            }),
-
         }
 
 

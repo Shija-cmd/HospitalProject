@@ -73,7 +73,35 @@
 
                         <strong>
 
-                            {{ visit.doctor.procedure_name }}
+                            {% for procedure in visit.procedures.all %}
+
+                                <li class="list-group-item">
+
+                                <strong>
+
+                                {{ procedure.procedure_name }}
+
+                                </strong>
+
+                            <br>
+
+                    <small class="text-muted">
+
+                    {{ procedure.notes }}
+
+                    </small>
+
+                </li>
+
+                    {% empty %}
+
+                <li class="list-group-item">
+
+                No procedures added
+
+            </li>
+
+            {% endfor %}
 
                         </strong>
 

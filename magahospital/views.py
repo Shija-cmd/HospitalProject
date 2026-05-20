@@ -339,6 +339,28 @@ def add_doctor(request, visit_id):
             doctor.doctor = request.user
 
             doctor.save()
+            
+            procedure_name = request.POST.get(
+                'procedure_name'
+            )
+
+            procedure_notes = request.POST.get(
+                'procedure_notes'
+            )
+
+            if procedure_name:
+
+                Procedure.objects.create(
+
+                    visit=visit,
+
+                    procedure_name=procedure_name,
+
+                    notes=procedure_notes,
+
+                    performed_by=request.user
+
+                )
 
             log_action(
                 request.user,
