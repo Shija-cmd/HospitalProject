@@ -182,7 +182,10 @@ def dashboard(request):
 def doctor_queue(request):
 
     visits = Visit.objects.filter(
-        status='Waiting Doctor'
+        status__in=[
+            'Waiting Doctor',
+            'Doctor Review'
+        ]
     ).order_by('date')
 
     return render(
@@ -192,7 +195,6 @@ def doctor_queue(request):
             'visits': visits
         }
     )
-
 
 # =========================================
 # LAB QUEUE
@@ -448,7 +450,7 @@ def add_lab(request, visit_id):
             # SEND BACK TO DOCTOR
             # =========================
 
-            visit.status = 'Waiting Doctor'
+            visit.status = 'Doctor Review'
 
             visit.save()
 
