@@ -435,6 +435,10 @@ def add_lab(request, visit_id):
 
         if form.is_valid():
 
+            # =========================
+            # SAVE LAB RESULTS
+            # =========================
+
             lab = form.save(
                 commit=False
             )
@@ -444,18 +448,10 @@ def add_lab(request, visit_id):
             lab.save()
 
             # =========================
-            # VISIT STATUS LOGIC
+            # SEND BACK TO DOCTOR
             # =========================
 
-            if Procedure.objects.filter(
-                visit=visit
-            ).exists():
-
-                visit.status = 'Waiting Cashier'
-
-            else:
-
-                visit.status = 'Prescription'
+            visit.status = 'Waiting Doctor'
 
             visit.save()
 
@@ -467,6 +463,10 @@ def add_lab(request, visit_id):
                 request.user,
                 f"Added lab results for Visit #{visit.id}"
             )
+
+            # =========================
+            # REDIRECT
+            # =========================
 
             return redirect(
                 'lab_queue'
