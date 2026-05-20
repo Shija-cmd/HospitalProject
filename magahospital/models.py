@@ -23,15 +23,16 @@ LAB = [
 ]
 
 VISIT_STATUS = [
-    ('Vitals', 'Vitals'),
 
-    ('Doctor', 'Doctor'),
+    ('Waiting Vital', 'Waiting Vital'),
 
-    ('Lab', 'Lab'),
+    ('Waiting Doctor', 'Waiting Doctor'),
 
-    ('Prescription', 'Prescription'),
+    ('Waiting Lab', 'Waiting Lab'),
 
-    ('Cashier', 'Cashier'),
+    ('Doctor Review', 'Doctor Review'),
+
+    ('Waiting Cashier', 'Waiting Cashier'),
 
     ('Dispense', 'Dispense'),
 
@@ -122,7 +123,7 @@ class Visit(models.Model):
     status = models.CharField(
         max_length=20,
         choices=VISIT_STATUS,
-        default='Doctor'
+        default='Waiting Vital'
     )
 
     class Meta:
