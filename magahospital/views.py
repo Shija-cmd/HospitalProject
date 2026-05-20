@@ -181,12 +181,14 @@ def dashboard(request):
 @role_required('Doctor')
 def doctor_queue(request):
 
-    visits = Visit.objects.filter(
-        status__in=[
-            'Waiting Doctor',
-            'Doctor Review'
-        ]
-    ).order_by('date')
+    visits = Visit.objects.all().order_by('date')
+
+    for visit in visits:
+
+        print(
+            visit.id,
+            visit.status
+        )
 
     return render(
         request,
@@ -195,7 +197,6 @@ def doctor_queue(request):
             'visits': visits
         }
     )
-
 # =========================================
 # LAB QUEUE
 # =========================================
