@@ -330,6 +330,10 @@ def add_doctor(request, visit_id):
 
         if form.is_valid():
 
+            # =========================
+            # SAVE DOCTOR CONSULTATION
+            # =========================
+
             doctor = form.save(
                 commit=False
             )
@@ -341,7 +345,7 @@ def add_doctor(request, visit_id):
             doctor.save()
 
             # =========================
-            # PROCEDURE HANDLING
+            # SAVE PROCEDURE (OPTIONAL)
             # =========================
 
             procedure_name = request.POST.get(
@@ -367,7 +371,7 @@ def add_doctor(request, visit_id):
                 )
 
             # =========================
-            # VISIT STATUS LOGIC
+            # VISIT FLOW LOGIC
             # =========================
 
             if doctor.next_step == 'Lab':
@@ -381,13 +385,17 @@ def add_doctor(request, visit_id):
             visit.save()
 
             # =========================
-            # ACTIVITY LOG
+            # SYSTEM LOG
             # =========================
 
             log_action(
                 request.user,
                 f"Added doctor consultation for Visit #{visit.id}"
             )
+
+            # =========================
+            # REDIRECT
+            # =========================
 
             return redirect(
                 'doctor_queue'
