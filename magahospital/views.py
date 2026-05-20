@@ -518,7 +518,7 @@ def add_prescription(request, visit_id):
                 f"Added prescription for Visit #{visit.id}"
             )
 
-            visit.status = 'Cashier'
+            visit.status = 'Waiting Cashier'
             visit.save()
 
             return redirect(
