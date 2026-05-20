@@ -5,7 +5,9 @@
 <div class="container mt-4">
 
     <h2 class="mb-4 text-success">
+
         Doctor Queue
+
     </h2>
 
     <div class="card shadow-sm border-0">
@@ -17,11 +19,17 @@
                 <thead class="table-dark">
 
                     <tr>
+
                         <th>Patient ID</th>
+
                         <th>Patient</th>
+
                         <th>Visit Date</th>
+
                         <th>Status</th>
+
                         <th>Action</th>
+
                     </tr>
 
                 </thead>
@@ -33,57 +41,43 @@
                     <tr>
 
                         <td>
+
                             {{ visit.patient.idno }}
+
                         </td>
 
                         <td>
+
                             {{ visit.patient.firstname }}
+
                             {{ visit.patient.secondname }}
+
                         </td>
 
                         <td>
+
                             {{ visit.date }}
-                        </td>
-
-                        <td>
-
-                            {% if visit.status == "Doctor" %}
-
-                                <span class="badge bg-primary">
-                                    Doctor Consultation
-                                </span>
-
-                            {% elif visit.status == "Prescription" %}
-
-                                <span class="badge bg-info text-dark">
-                                    Prescription Review
-                                </span>
-
-                            {% endif %}
 
                         </td>
 
                         <td>
 
-                            {% if visit.status == "Doctor" %}
+                            <span class="badge bg-primary">
 
-                                <a href="{% url 'add_doctor' visit.id %}"
-                                   class="btn btn-primary btn-sm">
+                                {{ visit.status }}
 
-                                   Open Consultation
+                            </span>
 
-                                </a>
+                        </td>
 
-                            {% elif visit.status == "Prescription" %}
+                        <td>
 
-                                <a href="{% url 'add_prescription' visit.id %}"
-                                   class="btn btn-info btn-sm">
+                            <a href="{% url 'add_doctor' visit.id %}"
+                               class="btn btn-primary btn-sm">
 
-                                   Add Prescription
+                               Open Consultation
 
-                                </a>
-
-                            {% endif %}
+                            </a>
 
                         </td>
 
@@ -93,7 +87,8 @@
 
                     <tr>
 
-                        <td colspan="5" class="text-center text-muted">
+                        <td colspan="5"
+                            class="text-center text-muted">
 
                             No patients waiting for doctor.
 
