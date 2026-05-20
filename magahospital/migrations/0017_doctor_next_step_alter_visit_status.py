@@ -10,12 +10,7 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
-        migrations.AddField(
-            model_name='doctor',
-            name='next_step',
-            field=models.CharField(choices=[('Lab', 'Laboratory'), ('Cashier', 'Cashier')], default='Cashier', max_length=20),
-            preserve_default=False,
-        ),
+    
         migrations.AlterField(
             model_name='visit',
             name='status',
