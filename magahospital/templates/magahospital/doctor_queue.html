@@ -60,24 +60,51 @@
 
                         </td>
 
+                        <!-- STATUS -->
                         <td>
 
-                            <span class="badge bg-primary">
+                            {% if visit.status == 'Doctor Review' %}
 
-                                {{ visit.status }}
+                                <span class="badge bg-success">
 
-                            </span>
+                                    Ready For Prescription
+
+                                </span>
+
+                            {% else %}
+
+                                <span class="badge bg-primary">
+
+                                    {{ visit.status }}
+
+                                </span>
+
+                            {% endif %}
 
                         </td>
 
+                        <!-- ACTION -->
                         <td>
 
-                            <a href="{% url 'add_doctor' visit.id %}"
-                               class="btn btn-primary btn-sm">
+                            {% if visit.status == 'Doctor Review' %}
 
-                               Open Consultation
+                                <a href="{% url 'add_prescription' visit.id %}"
+                                   class="btn btn-success btn-sm">
 
-                            </a>
+                                    Add Prescription
+
+                                </a>
+
+                            {% else %}
+
+                                <a href="{% url 'add_doctor' visit.id %}"
+                                   class="btn btn-primary btn-sm">
+
+                                    Open Consultation
+
+                                </a>
+
+                            {% endif %}
 
                         </td>
 
