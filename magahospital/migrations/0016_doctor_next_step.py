@@ -10,9 +10,5 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
-        migrations.AddField(
-            model_name='doctor',
-            name='next_step',
-            field=models.CharField(choices=[('Lab', 'Send To Laboratory'), ('Cashier', 'Send To Cashier')], default='Cashier', max_length=20),
-        ),
+    
     ]
