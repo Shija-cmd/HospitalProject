@@ -522,8 +522,7 @@ def add_prescription(request, visit_id):
             visit.save()
 
             return redirect(
-                'visit_detail',
-                visit_id=visit.id
+                'cashier_queue'
             )
 
     else:
