@@ -165,9 +165,9 @@ class Doctor(models.Model):
     
     NEXT_STEP_CHOICES = [
 
-        ('Lab', 'Yes - Send To Laboratory'),
+        ('Lab', 'Laboratory'),
 
-        ('Cashier', 'No - Continue To Cashier'),
+        ('Cashier', 'Cashier'),
 
     ]
 
