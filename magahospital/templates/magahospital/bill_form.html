@@ -107,27 +107,7 @@
 
             </ul>
 
-            <!-- BILL FORM -->
-            <form method="POST">
-
-                {% csrf_token %}
-
-                <div class="row g-3">
-
-                    <!-- CONSULTATION -->
-                    <div class="col-md-6 col-lg-3">
-
-                        <label class="form-label fw-semibold">
-
-                            Consultation Fee
-
-                        </label>
-
-                        {{ form.consultation_fee }}
-
-                    </div>
-
-                    <!-- LAB INVESTIGATIONS -->
+            <!-- LAB INVESTIGATIONS -->
 
                     <h5 class="mb-3">
 
@@ -168,6 +148,26 @@
     {% endfor %}
 
 </ul>
+
+            <!-- BILL FORM -->
+            <form method="POST">
+
+                {% csrf_token %}
+
+                <div class="row g-3">
+
+                    <!-- CONSULTATION -->
+                    <div class="col-md-6 col-lg-3">
+
+                        <label class="form-label fw-semibold">
+
+                            Consultation Fee
+
+                        </label>
+
+                        {{ form.consultation_fee }}
+
+                    </div>
 
                     <!-- LAB -->
                     <div class="col-md-6 col-lg-3">
