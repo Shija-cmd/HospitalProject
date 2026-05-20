@@ -435,14 +435,30 @@ def add_lab(request, visit_id):
 
             lab.save()
 
+            # =========================
+            # VISIT STATUS LOGIC
+            # =========================
+
+            if Procedure.objects.filter(
+                visit=visit
+            ).exists():
+
+                visit.status = 'Waiting Cashier'
+
+            else:
+
+                visit.status = 'Prescription'
+
+            visit.save()
+
+            # =========================
+            # ACTIVITY LOG
+            # =========================
+
             log_action(
                 request.user,
                 f"Added lab results for Visit #{visit.id}"
             )
-
-            visit.status = 'Prescription'
-
-            visit.save()
 
             return redirect(
                 'lab_queue'
@@ -881,7 +897,7 @@ def custom_403(request, exception):
 def cashier_queue(request):
 
     visits = Visit.objects.filter(
-        status='Cashier'
+        status='Waiting Cashier'
     ).order_by('date')
 
     return render(
