@@ -101,29 +101,54 @@ class PatientForm(forms.ModelForm):
 class DoctorForm(forms.ModelForm):
 
     class Meta:
+
         model = Doctor
-        fields = ['history', 'diagnosis', 'next_step']
+
+        fields = [
+
+            'history',
+
+            'diagnosis',
+
+            'next_step'
+
+        ]
+
+        labels = {
+
+            'history': 'Patient History',
+
+            'diagnosis': 'Diagnosis',
+
+            'next_step': 'Send Patient To'
+
+        }
 
         widgets = {
 
-            'history': forms.Textarea(attrs={
-                'class': 'form-control',
-                'rows': 5,
-                'placeholder': 'Enter patient history...'
-            }),
+            'history': forms.Textarea(
+                attrs={
+                    'class': 'form-control',
+                    'rows': 5,
+                    'placeholder': 'Enter patient history...'
+                }
+            ),
 
-            'diagnosis': forms.Textarea(attrs={
-                'class': 'form-control',
-                'rows': 4,
-                'placeholder': 'Enter diagnosis details...'
-            }),
-            'next_step': forms.Textarea(attrs={
-                'class': 'form-control',
-                'rows': 3,
-                'placeholder': 'Enter next steps for patient care...'
-            }),
+            'diagnosis': forms.Textarea(
+                attrs={
+                    'class': 'form-control',
+                    'rows': 4,
+                    'placeholder': 'Enter diagnosis details...'
+                }
+            ),
+
+            'next_step': forms.Select(
+                attrs={
+                    'class': 'form-select'
+                }
+            ),
+
         }
-
 
 # =========================
 # 3. LAB FORM

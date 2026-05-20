@@ -165,16 +165,15 @@ class Doctor(models.Model):
     
     NEXT_STEP_CHOICES = [
 
-        ('Lab', 'Send To Laboratory'),
+        ('Lab', 'Yes - Send To Laboratory'),
 
-        ('Cashier', 'Send To Cashier'),
+        ('Cashier', 'No - Continue To Cashier'),
 
     ]
 
     next_step = models.CharField(
         max_length=20,
-        choices=NEXT_STEP_CHOICES,
-        default='Cashier'
+        choices=NEXT_STEP_CHOICES
     )
 
     created_at = models.DateTimeField(
