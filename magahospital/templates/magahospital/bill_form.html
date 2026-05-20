@@ -36,13 +36,21 @@
 
                 {% for prescription in visit.prescriptions.all %}
 
-                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                    <li class="list-group-item">
 
-                        <span>
+                        <strong>
 
-                            {{ prescription.medicine_name }}
+                            {{ prescription.medication }}
 
-                        </span>
+                        </strong>
+
+                        <br>
+
+                        <small class="text-muted">
+
+                            {{ prescription.notes }}
+
+                        </small>
 
                     </li>
 
@@ -67,41 +75,13 @@
 
             <ul class="list-group mb-4">
 
-                {% if visit.doctor.procedure_name %}
+                {% for procedure in visit.procedures.all %}
 
                     <li class="list-group-item">
 
                         <strong>
 
-                            {% for procedure in visit.procedures.all %}
-
-                                <li class="list-group-item">
-
-                                <strong>
-
-                                {{ procedure.procedure_name }}
-
-                                </strong>
-
-                            <br>
-
-                    <small class="text-muted">
-
-                    {{ procedure.notes }}
-
-                    </small>
-
-                </li>
-
-                    {% empty %}
-
-                <li class="list-group-item">
-
-                No procedures added
-
-            </li>
-
-            {% endfor %}
+                            {{ procedure.procedure_name }}
 
                         </strong>
 
@@ -109,13 +89,13 @@
 
                         <small class="text-muted">
 
-                            {{ visit.doctor.procedure_notes }}
+                            {{ procedure.notes }}
 
                         </small>
 
                     </li>
 
-                {% else %}
+                {% empty %}
 
                     <li class="list-group-item">
 
@@ -123,7 +103,7 @@
 
                     </li>
 
-                {% endif %}
+                {% endfor %}
 
             </ul>
 
