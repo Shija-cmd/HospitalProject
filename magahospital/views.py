@@ -335,11 +335,15 @@ def add_doctor(request, visit_id):
             )
 
             doctor.visit = visit
-            
+
             doctor.doctor = request.user
 
             doctor.save()
-            
+
+            # =========================
+            # PROCEDURE HANDLING
+            # =========================
+
             procedure_name = request.POST.get(
                 'procedure_name'
             )
@@ -362,14 +366,76 @@ def add_doctor(request, visit_id):
 
                 )
 
+            # =========================
+            # VISIT STATUS LOGIC
+            # =========================
+
+            if doctor.next_step == 'Lab':
+
+                visit.status = 'Waiting Lab'
+
+            else:
+
+                visit.status = 'Waiting Cashier'
+
+            visit.save()
+
+            # =========================
+            # ACTIVITY LOG
+            # =========================
+
             log_action(
                 request.user,
                 f"Added doctor consultation for Visit #{visit.id}"
             )
 
-            visit.status = doctor.next_step
+            return redirect(
+                'doctor_queue'
+            )
+
+    else:
+
+        form = DoctorForm(
+            instance=doctor
+        )
+
+    return render(
+        request,
+        'magahospital/doctor_form.html',
+        {
+            'form': form,
+            'visit': visit
+        }
+    )
+
+            # =========================
+            # VISIT STATUS LOGIC
+            # =========================
+
+            if Procedure.objects.filter(
+                visit=visit
+            ).exists():
+
+                visit.status = 'Waiting Procedure'
+
+            elif doctor.next_step == 'Lab':
+
+                visit.status = 'Waiting Lab'
+
+            else:
+
+                visit.status = 'Waiting Cashier'
 
             visit.save()
+
+            # =========================
+            # ACTIVITY LOG
+            # =========================
+
+            log_action(
+                request.user,
+                f"Added doctor consultation for Visit #{visit.id}"
+            )
 
             return redirect(
                 'doctor_queue'
