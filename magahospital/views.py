@@ -182,10 +182,7 @@ def dashboard(request):
 def doctor_queue(request):
 
     visits = Visit.objects.filter(
-        status__in=[
-            'Doctor',
-            'Prescription'
-        ]
+        status='Waiting Doctor'
     ).order_by('date')
 
     return render(
@@ -205,7 +202,7 @@ def doctor_queue(request):
 def lab_queue(request):
 
     visits = Visit.objects.filter(
-        status='Lab'
+        status='Waiting Lab'
     ).order_by('date')
 
     return render(
