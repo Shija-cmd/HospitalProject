@@ -1026,7 +1026,7 @@ def add_vital(request, visit_id):
 
             vital.save()
 
-            visit.status = 'Doctor'
+            visit.status = 'Waiting Doctor'
 
             visit.save()
 
