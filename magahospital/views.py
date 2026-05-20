@@ -140,21 +140,25 @@ def dashboard(request):
 
         # DASHBOARD STATISTICS
         'total_patients': Patient.objects.count(),
-        
+
         'vitals_waiting': Visit.objects.filter(
             status='Vitals'
         ).count(),
 
         'doctor_waiting': Visit.objects.filter(
-            status='Doctor'
+            status='Waiting Doctor'
         ).count(),
 
         'lab_waiting': Visit.objects.filter(
-            status='Lab'
+            status='Waiting Lab'
         ).count(),
 
         'prescription_waiting': Visit.objects.filter(
-            status='Prescription'
+            status='Doctor Review'
+        ).count(),
+
+        'cashier_waiting': Visit.objects.filter(
+            status='Waiting Cashier'
         ).count(),
 
         'dispense_waiting': Visit.objects.filter(
