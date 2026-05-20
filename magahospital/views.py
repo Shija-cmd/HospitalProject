@@ -591,8 +591,7 @@ def add_dispense(request, visit_id):
             visit.save()
 
             return redirect(
-                'visit_detail',
-                visit_id=visit.id
+                'dispense_queue'
             )
 
     else:
@@ -1087,8 +1086,7 @@ def add_procedure(request, visit_id):
             )
 
             return redirect(
-                'visit_detail',
-                visit_id=visit.id
+                'doctor_queue'
             )
 
     else:
