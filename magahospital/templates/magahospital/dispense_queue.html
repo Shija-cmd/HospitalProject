@@ -14,13 +14,18 @@
 
             <table class="table table-hover">
 
-                <thead>
+                <thead class="table-dark">
 
                     <tr>
+
                         <th>Patient</th>
+
                         <th>Visit Date</th>
+
                         <th>Status</th>
-                        <th>Action</th>
+
+                        <th>Actions</th>
+
                     </tr>
 
                 </thead>
@@ -32,12 +37,17 @@
                     <tr>
 
                         <td>
+
                             {{ visit.patient.firstname }}
+
                             {{ visit.patient.secondname }}
+
                         </td>
 
                         <td>
+
                             {{ visit.date }}
+
                         </td>
 
                         <td>
@@ -50,12 +60,21 @@
 
                         </td>
 
-                        <td>
+                        <td class="d-flex gap-2">
 
-                            <a href="{% url 'visit_detail' visit.id %}"
+                            <!-- DISPENSE ACTION -->
+                            <a href="{% url 'add_dispense' visit.id %}"
                                class="btn btn-danger btn-sm">
 
-                               Open
+                                Dispense
+
+                            </a>
+
+                            <!-- VIEW VISIT -->
+                            <a href="{% url 'visit_detail' visit.id %}"
+                               class="btn btn-secondary btn-sm">
+
+                                View Visit
 
                             </a>
 
@@ -67,7 +86,8 @@
 
                     <tr>
 
-                        <td colspan="4" class="text-center text-muted">
+                        <td colspan="4"
+                            class="text-center text-muted">
 
                             No patients waiting for dispense.
 

@@ -127,6 +127,48 @@
 
                     </div>
 
+                    <!-- LAB INVESTIGATIONS -->
+
+                    <h5 class="mb-3">
+
+                    🧪 Laboratory Investigations
+
+            </h5>
+
+        <ul class="list-group mb-4">
+
+        {% for lab in visit.labs.all %}
+
+        <li class="list-group-item">
+
+            <strong>
+
+                {{ lab.get_lab_type_display }}
+
+            </strong>
+
+            <br>
+
+            <small class="text-muted">
+
+                {{ lab.results }}
+
+            </small>
+
+        </li>
+
+    {% empty %}
+
+        <li class="list-group-item">
+
+            No laboratory investigations
+
+        </li>
+
+    {% endfor %}
+
+</ul>
+
                     <!-- LAB -->
                     <div class="col-md-6 col-lg-3">
 
