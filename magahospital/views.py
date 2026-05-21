@@ -1123,15 +1123,22 @@ def add_procedure(request, visit_id):
 
         form = ProcedureForm()
 
-    return render(
-        request,
-        'magahospital/procedure_form.html',
-        {
-            'form': form,
-            'visit': visit,
-            'procedures': visit.procedures.all()
-        }
+    
+    doctor_notes = getattr(
+        visit,
+        'doctor',
+        None
     )
+
+    return render(
+    request,
+    'magahospital/procedure_form.html',
+    {
+        'form': form,
+        'visit': visit,
+        'doctor_notes': doctor_notes
+    }
+)
 
 # =====================================
 # STOCK LIST
