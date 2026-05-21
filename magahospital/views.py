@@ -560,7 +560,8 @@ def add_prescription(request, visit_id):
         'magahospital/prescription_form.html',
         {
             'form': form,
-            'visit': visit
+            'visit': visit,
+            'procedures': visit.procedures.all()
         }
     )
 
