@@ -12,182 +12,112 @@
 
         <!-- RECEPTION -->
         {% if is_reception or is_admin %}
-
         <li>
-
             <a href="{% url 'patient_list' %}"
             class="{% if request.resolver_match.url_name == 'patient_list' %}active{% endif %}">
-
                 <i class="bi bi-people-fill me-2"></i>
-
                 Register Patients
-
             </a>
-
         </li>
-
         {% endif %}
 
         <!-- VITALS -->
         {% if is_vitals or is_admin %}
-
         <li>
-
             <a href="{% url 'vital_queue' %}"
-            class="{% if request.resolver_match.url_name == 'vital_queue' %}active{% endif %}">
-
+            class="{% if request.resolver_match.url_name == 'vital_queue' or request.resolver_match.url_name == 'add_vital' %}active{% endif %}">
                 <i class="bi bi-heart-pulse me-2"></i>
-
                 Vitals Queue
-
             </a>
-
         </li>
-
         {% endif %}
 
         <!-- DOCTOR -->
         {% if is_doctor or is_admin %}
-
         <li>
-
             <a href="{% url 'doctor_queue' %}"
-            class="{% if request.resolver_match.url_name == 'doctor_queue' %}active{% endif %}">
-
+            class="{% if request.resolver_match.url_name == 'doctor_queue' or request.resolver_match.url_name == 'add_doctor' or request.resolver_match.url_name == 'add_prescription' %}active{% endif %}">
                 <i class="bi bi-heart-pulse-fill me-2"></i>
-
                 Review Patients
-
             </a>
-
         </li>
-
         {% endif %}
 
         <!-- LAB -->
         {% if is_lab or is_admin %}
-
         <li>
-
             <a href="{% url 'lab_queue' %}"
-            class="{% if request.resolver_match.url_name == 'lab_queue' %}active{% endif %}">
-
+            class="{% if request.resolver_match.url_name == 'lab_queue' or request.resolver_match.url_name == 'add_lab' %}active{% endif %}">
                 <i class="bi bi-eyedropper me-2"></i>
-
                 Process Lab Tests
-
             </a>
-
         </li>
-
         {% endif %}
 
         <!-- PROCEDURE -->
         {% if is_procedure or is_admin %}
-
         <li>
-
             <a href="{% url 'procedure_queue' %}"
-            class="{% if request.resolver_match.url_name == 'procedure_queue' %}active{% endif %}">
-
+            class="{% if request.resolver_match.url_name == 'procedure_queue' or request.resolver_match.url_name == 'add_procedure' %}active{% endif %}">
                 <i class="bi bi-hospital me-2"></i>
-
                 Procedure Queue
-
             </a>
-
         </li>
-
         {% endif %}
 
         <!-- CASHIER -->
         {% if is_cashier or is_admin %}
-
         <li>
-
             <a href="{% url 'cashier_queue' %}"
-            class="{% if request.resolver_match.url_name == 'cashier_queue' %}active{% endif %}">
-
+            class="{% if request.resolver_match.url_name == 'cashier_queue' or request.resolver_match.url_name == 'add_bill' %}active{% endif %}">
                 <i class="bi bi-cash-stack me-2"></i>
-
                 Cashier Queue
-
             </a>
-
         </li>
-
         {% endif %}
 
         <!-- DISPENSE -->
         {% if is_dispense or is_admin %}
-
         <li>
-
             <a href="{% url 'dispense_queue' %}"
-            class="{% if request.resolver_match.url_name == 'dispense_queue' %}active{% endif %}">
-
+            class="{% if request.resolver_match.url_name == 'dispense_queue' or request.resolver_match.url_name == 'add_dispense' %}active{% endif %}">
                 <i class="bi bi-capsule-pill me-2"></i>
-
                 Dispense Medication
-
             </a>
-
         </li>
-
         {% endif %}
 
         <!-- PHARMACY STOCK -->
         {% if is_dispense or is_admin %}
-
         <li>
-
             <a href="{% url 'stock_list' %}"
             class="{% if request.resolver_match.url_name == 'stock_list' %}active{% endif %}">
-
                 <i class="bi bi-box-seam me-2"></i>
-
                 Pharmacy Stock
-
             </a>
-
         </li>
-
         {% endif %}
 
         <!-- APPOINTMENTS -->
         {% if is_reception or is_doctor or is_admin %}
-
         <li>
-
             <a href="{% url 'appointment_list' %}"
-            class="{% if request.resolver_match.url_name == 'appointment_list' %}active{% endif %}">
-
+            class="{% if request.resolver_match.url_name == 'appointment_list' or request.resolver_match.url_name == 'add_appointment' %}active{% endif %}">
                 <i class="bi bi-calendar-check me-2"></i>
-
                 Appointments
-
             </a>
-
         </li>
-
         {% endif %}
 
         <!-- STAFF MANAGEMENT -->
         {% if request.user.is_superuser %}
-
         <li>
-
             <a href="{% url 'staff_management' %}"
             class="{% if request.resolver_match.url_name == 'staff_management' %}active{% endif %}">
-
                 <i class="bi bi-person-gear me-2"></i>
-
                 Manage Staff
-
             </a>
-
         </li>
-
         {% endif %}
 
     </ul>
