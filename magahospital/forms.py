@@ -110,7 +110,9 @@ class DoctorForm(forms.ModelForm):
 
             'diagnosis',
 
-            'next_step'
+            'next_step',
+
+            'requested_procedure'
 
         ]
 
