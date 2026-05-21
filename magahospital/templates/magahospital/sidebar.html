@@ -15,7 +15,8 @@
 
         <li>
 
-            <a href="{% url 'patient_list' %}">
+            <a href="{% url 'patient_list' %}"
+            class="{% if request.resolver_match.url_name == 'patient_list' %}active{% endif %}">
 
                 <i class="bi bi-people-fill me-2"></i>
 
@@ -32,7 +33,8 @@
 
         <li>
 
-            <a href="{% url 'vital_queue' %}">
+            <a href="{% url 'vital_queue' %}"
+            class="{% if request.resolver_match.url_name == 'vital_queue' %}active{% endif %}">
 
                 <i class="bi bi-heart-pulse me-2"></i>
 
@@ -49,7 +51,8 @@
 
         <li>
 
-            <a href="{% url 'doctor_queue' %}">
+            <a href="{% url 'doctor_queue' %}"
+            class="{% if request.resolver_match.url_name == 'doctor_queue' %}active{% endif %}">
 
                 <i class="bi bi-heart-pulse-fill me-2"></i>
 
@@ -66,7 +69,8 @@
 
         <li>
 
-            <a href="{% url 'lab_queue' %}">
+            <a href="{% url 'lab_queue' %}"
+            class="{% if request.resolver_match.url_name == 'lab_queue' %}active{% endif %}">
 
                 <i class="bi bi-eyedropper me-2"></i>
 
@@ -79,29 +83,30 @@
         {% endif %}
 
         <!-- PROCEDURE -->
-{% if is_procedure or is_admin %}
+        {% if is_procedure or is_admin %}
 
-<li>
+        <li>
 
-    <a href="{% url 'procedure_queue' %}"
-        class="{% if request.resolver_match.url_name == 'procedure_queue' %}active{% endif %}">
+            <a href="{% url 'procedure_queue' %}"
+            class="{% if request.resolver_match.url_name == 'procedure_queue' %}active{% endif %}">
 
-        <i class="bi bi-hospital me-2"></i>
+                <i class="bi bi-hospital me-2"></i>
 
-        Procedure Queue
+                Procedure Queue
 
-    </a>
+            </a>
 
-</li>
+        </li>
 
-{% endif %}
+        {% endif %}
 
         <!-- CASHIER -->
         {% if is_cashier or is_admin %}
 
         <li>
 
-            <a href="{% url 'cashier_queue' %}">
+            <a href="{% url 'cashier_queue' %}"
+            class="{% if request.resolver_match.url_name == 'cashier_queue' %}active{% endif %}">
 
                 <i class="bi bi-cash-stack me-2"></i>
 
@@ -118,7 +123,8 @@
 
         <li>
 
-            <a href="{% url 'dispense_queue' %}">
+            <a href="{% url 'dispense_queue' %}"
+            class="{% if request.resolver_match.url_name == 'dispense_queue' %}active{% endif %}">
 
                 <i class="bi bi-capsule-pill me-2"></i>
 
@@ -135,7 +141,8 @@
 
         <li>
 
-            <a href="{% url 'stock_list' %}">
+            <a href="{% url 'stock_list' %}"
+            class="{% if request.resolver_match.url_name == 'stock_list' %}active{% endif %}">
 
                 <i class="bi bi-box-seam me-2"></i>
 
@@ -148,28 +155,30 @@
         {% endif %}
 
         <!-- APPOINTMENTS -->
-{% if is_reception or is_doctor or is_admin %}
+        {% if is_reception or is_doctor or is_admin %}
 
-<li>
+        <li>
 
-    <a href="{% url 'appointment_list' %}">
+            <a href="{% url 'appointment_list' %}"
+            class="{% if request.resolver_match.url_name == 'appointment_list' %}active{% endif %}">
 
-        <i class="bi bi-calendar-check me-2"></i>
+                <i class="bi bi-calendar-check me-2"></i>
 
-        Appointments
+                Appointments
 
-    </a>
+            </a>
 
-</li>
+        </li>
 
-{% endif %}
+        {% endif %}
 
         <!-- STAFF MANAGEMENT -->
         {% if request.user.is_superuser %}
 
         <li>
 
-            <a href="{% url 'staff_management' %}">
+            <a href="{% url 'staff_management' %}"
+            class="{% if request.resolver_match.url_name == 'staff_management' %}active{% endif %}">
 
                 <i class="bi bi-person-gear me-2"></i>
 
