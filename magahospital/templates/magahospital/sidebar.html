@@ -78,6 +78,23 @@
 
         {% endif %}
 
+        <!-- PROCEDURE -->
+{% if is_procedure or is_admin %}
+
+<li>
+
+    <a href="{% url 'procedure_queue' %}">
+
+        <i class="bi bi-hospital me-2"></i>
+
+        Procedure Queue
+
+    </a>
+
+</li>
+
+{% endif %}
+
         <!-- CASHIER -->
         {% if is_cashier or is_admin %}
 

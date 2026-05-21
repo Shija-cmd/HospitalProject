@@ -132,6 +132,11 @@ def dashboard(request):
             user,
             'Lab'
         ),
+        
+        'is_procedure': user_in_group(
+            user,
+            'Procedure'
+        ),
 
         'is_dispense': user_in_group(
             user,
