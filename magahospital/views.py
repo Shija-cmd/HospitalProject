@@ -133,6 +133,16 @@ def dashboard(request):
             'Lab'
         ),
         
+        'is_vitals': user_in_group(
+            user,
+            'Vitals'
+        ),
+
+        'is_cashier': user_in_group(
+            user,
+            'Cashier'
+        ),
+        
         'is_procedure': user_in_group(
             user,
             'Procedure'
