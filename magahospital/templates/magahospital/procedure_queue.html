@@ -44,12 +44,14 @@
 
                     <tr>
 
+                        <!-- PATIENT ID -->
                         <td>
 
                             {{ visit.patient.idno }}
 
                         </td>
 
+                        <!-- PATIENT NAME -->
                         <td>
 
                             {{ visit.patient.firstname }}
@@ -58,17 +60,19 @@
 
                         </td>
 
+                        <!-- VISIT DATE -->
                         <td>
 
                             {{ visit.date }}
 
                         </td>
 
+                        <!-- PROCEDURES -->
                         <td>
 
                             {% for procedure in visit.procedures.all %}
 
-                                <span class="badge bg-info text-dark me-1">
+                                <span class="badge bg-info text-dark me-1 mb-1">
 
                                     {{ procedure.procedure_name }}
 
@@ -86,36 +90,46 @@
 
                         </td>
 
-                        <td>
+                        <!-- DOCTOR NOTES -->
+                        <td style="min-width:250px;">
 
-                    {% if visit.doctor %}
+                            {% if visit.doctor %}
 
-                <strong>Diagnosis:</strong>
+                                <strong>
 
-            <br>
+                                    Diagnosis:
 
-        {{ visit.doctor.diagnosis }}
+                                </strong>
 
-        <br><br>
+                                <br>
 
-        <strong>History:</strong>
+                                {{ visit.doctor.diagnosis|default:"No diagnosis" }}
 
-        <br>
+                                <br><br>
 
-        {{ visit.doctor.history }}
+                                <strong>
 
-    {% else %}
+                                    History:
 
-        <span class="text-muted">
+                                </strong>
 
-            No doctor notes
+                                <br>
 
-        </span>
+                                {{ visit.doctor.history|default:"No history" }}
 
-    {% endif %}
+                            {% else %}
 
-    </td>
+                                <span class="text-muted">
 
+                                    No doctor notes
+
+                                </span>
+
+                            {% endif %}
+
+                        </td>
+
+                        <!-- STATUS -->
                         <td>
 
                             <span class="badge bg-primary">
@@ -126,16 +140,16 @@
 
                         </td>
 
-                        <td class="d-flex gap-2">
+                        <!-- ACTION -->
+                        <td>
 
-                            <!-- PERFORM PROCEDURE -->
                             <a href="{% url 'add_procedure' visit.id %}"
                             class="btn btn-primary btn-sm">
 
                                 Perform Procedure
 
                             </a>
-                            
+
                         </td>
 
                     </tr>
@@ -144,7 +158,7 @@
 
                     <tr>
 
-                        <td colspan="6"
+                        <td colspan="7"
                             class="text-center text-muted">
 
                             No patients waiting for procedures.
