@@ -191,70 +191,75 @@
 
             {% for procedure in procedures %}
 
-            <div class="border rounded p-3 mb-4">
+                {% if procedure.notes or procedure.image %}
 
-                <!-- PROCEDURE NAME -->
-                <h5 class="text-primary fw-bold">
+                <div class="border rounded p-4 mb-4 bg-light">
 
-                    {{ procedure.procedure_name }}
+                    <!-- PROCEDURE TYPE -->
+                    <h5 class="text-primary fw-bold mb-3">
 
-                </h5>
+                        {{ procedure.procedure_name }}
 
-                <hr>
+                    </h5>
 
-                <!-- TECHNICIAN NOTES -->
-                {% if procedure.notes %}
+                    <!-- TECHNICIAN FINDINGS -->
+                    {% if procedure.notes %}
 
-                    <p>
+                        <div class="mb-4">
 
-                        <strong>
+                            <strong class="text-dark">
 
-                            Technician Findings:
+                                Technician Findings:
 
-                        </strong>
+                            </strong>
 
-                    </p>
+                            <hr>
 
-                    <p>
+                            <p class="mb-0">
 
-                        {{ procedure.notes }}
+                                {{ procedure.notes }}
 
-                    </p>
+                            </p>
+
+                        </div>
+
+                    {% endif %}
+
+                    <!-- IMAGE PREVIEW -->
+                    {% if procedure.image %}
+
+                        <div class="mb-3">
+
+                            <strong class="text-dark">
+
+                                Uploaded Scan/Image:
+
+                            </strong>
+
+                            <br><br>
+
+                            <img src="{{ procedure.image.url }}"
+                                class="img-fluid rounded shadow shadow-sm border"
+                                style="max-height:350px;">
+
+                        </div>
+
+                        <!-- VIEW / DOWNLOAD -->
+                        <a href="{{ procedure.image.url }}"
+                        target="_blank"
+                        class="btn btn-outline-primary btn-sm">
+
+                            <i class="bi bi-download me-1"></i>
+
+                            View / Download Image
+
+                        </a>
+
+                    {% endif %}
+
+                </div>
 
                 {% endif %}
-
-                <!-- IMAGE -->
-                {% if procedure.image %}
-
-                    <p>
-
-                        <strong>
-
-                            Uploaded Image:
-
-                        </strong>
-
-                    </p>
-
-                    <img src="{{ procedure.image.url }}"
-                        class="img-fluid rounded shadow-sm mb-3"
-                        style="max-height:300px;">
-
-                    <br>
-
-                    <a href="{{ procedure.image.url }}"
-                    target="_blank"
-                    class="btn btn-outline-primary btn-sm">
-
-                        <i class="bi bi-download me-1"></i>
-
-                        View / Download Image
-
-                    </a>
-
-                {% endif %}
-
-            </div>
 
             {% endfor %}
 
