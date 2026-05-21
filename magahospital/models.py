@@ -30,6 +30,8 @@ VISIT_STATUS = [
 
     ('Waiting Lab', 'Waiting Lab'),
 
+    ('Waiting Procedure', 'Waiting Procedure'),
+
     ('Doctor Review', 'Doctor Review'),
 
     ('Waiting Cashier', 'Waiting Cashier'),
