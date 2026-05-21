@@ -112,6 +112,22 @@ urlpatterns = [
         views.add_lab,
         name='add_lab'
     ),
+    
+    # =========================
+    # PROCEDURE
+    # =========================
+
+    path(
+        'procedure/queue/',
+        views.procedure_queue,
+        name='procedure_queue'
+    ),
+
+    path(
+        'add-procedure/<int:visit_id>/',
+        views.add_procedure,
+        name='add_procedure'
+    ),
 
 
     # =========================
