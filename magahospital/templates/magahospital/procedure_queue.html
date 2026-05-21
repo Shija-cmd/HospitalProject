@@ -89,46 +89,7 @@
                             {% endfor %}
 
                         </td>
-
-                        <!-- DOCTOR NOTES -->
-                        <td style="min-width:250px;">
-
-                            {% if visit.doctor %}
-
-                                <strong>
-
-                                    Diagnosis:
-
-                                </strong>
-
-                                <br>
-
-                                {{ visit.doctor.diagnosis|default:"No diagnosis" }}
-
-                                <br><br>
-
-                                <strong>
-
-                                    History:
-
-                                </strong>
-
-                                <br>
-
-                                {{ visit.doctor.history|default:"No history" }}
-
-                            {% else %}
-
-                                <span class="text-muted">
-
-                                    No doctor notes
-
-                                </span>
-
-                            {% endif %}
-
-                        </td>
-
+                        
                         <!-- STATUS -->
                         <td>
 

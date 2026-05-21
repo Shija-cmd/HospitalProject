@@ -14,7 +14,40 @@
 
             </h2>
 
-            <form method="POST" enctype="multipart/form-data">
+            <!-- DOCTOR NOTES -->
+        <div class="alert alert-info mb-4">
+
+    <h5 class="mb-3">
+
+        Doctor Notes
+
+    </h5>
+
+            {% if visit.doctor %}
+
+                <strong>Diagnosis:</strong>
+
+                    <br>
+
+                        {{ visit.doctor.diagnosis }}
+
+                    <br><br>
+
+                <strong>History:</strong>
+
+            <br>
+
+        {{ visit.doctor.history }}
+
+    {% else %}
+
+        No doctor notes available.
+
+            {% endif %}
+
+                </div>
+
+                <form method="POST" enctype="multipart/form-data">
 
                 {% csrf_token %}
 
