@@ -530,7 +530,6 @@ class ProcedureForm(forms.ModelForm):
         fields = [
             'procedure_name',
             'notes',
-            'cost'
         ]
 
         widgets = {

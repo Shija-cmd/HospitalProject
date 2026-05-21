@@ -376,8 +376,7 @@ def add_doctor(request, visit_id):
                     performed_by=request.user
 
                 )
-
-            # =========================
+            #=========================
             # VISIT FLOW LOGIC
             # =========================
 
@@ -393,7 +392,7 @@ def add_doctor(request, visit_id):
 
                 visit.status = 'Waiting Cashier'
 
-                visit.save()
+            visit.save()
 
             # =========================
             # SYSTEM LOG
