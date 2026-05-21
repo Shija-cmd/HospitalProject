@@ -1221,6 +1221,13 @@ def procedure_queue(request):
         request,
         'magahospital/procedure_queue.html',
         {
-            'visits': visits
+            'visits': visits,
+
+            'is_procedure': user_in_group(
+                request.user,
+                'Procedure'
+            ),
+
+            'is_admin': request.user.is_superuser,
         }
     )                        
