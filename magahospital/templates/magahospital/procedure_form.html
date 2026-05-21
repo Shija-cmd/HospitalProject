@@ -15,37 +15,80 @@
             </h2>
 
             <!-- DOCTOR NOTES -->
-        <div class="alert alert-info mb-4">
+<div class="alert alert-info shadow-sm mb-4">
 
     <h5 class="mb-3">
 
-        Doctor Notes
+        <i class="bi bi-journal-medical me-2"></i>
+
+        Doctor Request & Notes
 
     </h5>
 
-            {% if visit.doctor %}
+    {% if visit.doctor %}
 
-                <strong>Diagnosis:</strong>
+        <!-- REQUESTED NEXT STEP -->
+        <p>
 
-                    <br>
+            <strong>
 
-                        {{ visit.doctor.diagnosis }}
+                Requested Department:
 
-                    <br><br>
+            </strong>
 
-                <strong>History:</strong>
+            {{ visit.doctor.next_step }}
 
-            <br>
+        </p>
 
-        {{ visit.doctor.history }}
+        <!-- DIAGNOSIS -->
+        {% if visit.doctor.diagnosis %}
+
+            <p>
+
+                <strong>
+
+                    Diagnosis:
+
+                </strong>
+
+                <br>
+
+                {{ visit.doctor.diagnosis }}
+
+            </p>
+
+        {% endif %}
+
+        <!-- HISTORY -->
+        {% if visit.doctor.history %}
+
+            <p>
+
+                <strong>
+
+                    Clinical History:
+
+                </strong>
+
+                <br>
+
+                {{ visit.doctor.history }}
+
+            </p>
+
+        {% endif %}
 
     {% else %}
 
-        No doctor notes available.
+        <p class="text-muted">
 
-            {% endif %}
+            No doctor notes available.
 
-                </div>
+        </p>
+
+    {% endif %}
+
+</div>
 
                 <form method="POST" enctype="multipart/form-data">
 
