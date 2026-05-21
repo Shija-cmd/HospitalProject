@@ -27,18 +27,18 @@
 
     {% if visit.doctor %}
 
-        <!-- REQUESTED NEXT STEP -->
-        <p>
+        <!-- REQUESTED PROCEDURE -->
+            <p>
 
-            <strong>
+                <strong>
 
-                Requested Department:
+                    Requested Procedure:
 
-            </strong>
+                        </strong>
 
-            {{ visit.doctor.next_step }}
+                    {{ visit.doctor.requested_procedure }}
 
-        </p>
+            </p>
 
         <!-- DIAGNOSIS -->
         {% if visit.doctor.diagnosis %}
