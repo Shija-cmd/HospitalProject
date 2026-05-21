@@ -1125,7 +1125,7 @@ def add_procedure(request, visit_id):
 
     return render(
         request,
-        'magahospital/add_procedure.html'
+        'magahospital/add_procedure.html',
         {
             'form': form,
             'visit': visit,
