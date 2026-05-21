@@ -83,7 +83,8 @@
 
 <li>
 
-    <a href="{% url 'procedure_queue' %}">
+    <a href="{% url 'procedure_queue' %}"
+        class="{% if request.resolver_match.url_name == 'procedure_queue' %}active{% endif %}">
 
         <i class="bi bi-hospital me-2"></i>
 
