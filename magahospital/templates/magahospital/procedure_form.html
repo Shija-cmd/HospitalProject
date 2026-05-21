@@ -21,11 +21,39 @@
 
         <i class="bi bi-journal-medical me-2"></i>
 
-        Doctor Request & Notes
+        Doctor Notes
 
     </h5>
 
-    {% if visit.doctor_id %}
+    <p>
+
+        <strong>
+
+            Diagnosis:
+
+        </strong>
+
+        <br>
+
+        {{ visit.doctor.diagnosis|default:"No diagnosis" }}
+
+    </p>
+
+    <p>
+
+        <strong>
+
+            Clinical History:
+
+        </strong>
+
+        <br>
+
+        {{ visit.doctor.history|default:"No history" }}
+
+    </p>
+
+</div>
 
         <!-- DIAGNOSIS -->
         {% if visit.doctor.diagnosis %}
