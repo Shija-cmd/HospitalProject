@@ -14,105 +14,16 @@
 
             </h2>
 
-            <!-- DOCTOR NOTES -->
-<div class="alert alert-info shadow-sm mb-4">
-
-    <h5 class="mb-3">
-
-        <i class="bi bi-journal-medical me-2"></i>
-
-        Doctor Notes
-
-    </h5>
-
-    <p>
-
-        <strong>
-
-            Diagnosis:
-
-        </strong>
-
-        <br>
-
-        {{ visit.doctor.diagnosis|default:"No diagnosis" }}
-
-    </p>
-
-    <p>
-
-        <strong>
-
-            Clinical History:
-
-        </strong>
-
-        <br>
-
-        {{ visit.doctor.history|default:"No history" }}
-
-    </p>
-
-</div>
-
-        <!-- DIAGNOSIS -->
-        {% if visit.doctor.diagnosis %}
-
-            <p>
-
-                <strong>
-
-                    Diagnosis:
-
-                </strong>
-
-                <br>
-
-                {{ visit.doctor.diagnosis }}
-
-            </p>
-
-        {% endif %}
-
-        <!-- HISTORY -->
-        {% if visit.doctor.history %}
-
-            <p>
-
-                <strong>
-
-                    Clinical History:
-
-                </strong>
-
-                <br>
-
-                {{ visit.doctor.history }}
-
-            </p>
-
-        {% endif %}
-
-    {% else %}
-
-        <p class="text-muted">
-
-            No doctor notes available.
-
-        </p>
-
-    {% endif %}
-
-</div>
-
-                <form method="POST" enctype="multipart/form-data">
+            <form method="POST" enctype="multipart/form-data">
 
                 {% csrf_token %}
 
                 <div class="mb-3">
 
-                    <label>
+                    <label class="form-label">
+
                         Procedure Name
+
                     </label>
 
                     {{ form.procedure_name }}
@@ -121,28 +32,27 @@
 
                 <div class="mb-3">
 
-    <label>
-        Notes
-    </label>
+                    <label class="form-label">
 
-    {{ form.notes }}
+                        Notes
 
-</div>
+                    </label>
 
-<!-- IMAGE UPLOAD -->
-<div class="mb-3">
+                    {{ form.notes }}
 
-    <label class="form-label">
+                </div>
 
-        Upload Procedure Image
+                <div class="mb-3">
 
-    </label>
+                    <label class="form-label">
 
-    {{ form.image }}
+                        Upload Procedure Image
 
-</div>
+                    </label>
 
+                    {{ form.image }}
 
+                </div>
 
                 <button type="submit"
                         class="btn btn-primary">
