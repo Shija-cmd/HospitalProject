@@ -112,8 +112,6 @@ class DoctorForm(forms.ModelForm):
 
             'next_step',
 
-            'requested_procedure'
-
         ]
 
         labels = {
