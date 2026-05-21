@@ -500,7 +500,8 @@
 
         <li class="list-group-item">
 
-            <strong>
+            <!-- PROCEDURE NAME -->
+            <strong class="fs-5 text-primary">
 
                 {{ procedure.procedure_name }}
 
@@ -508,13 +509,39 @@
 
             <br><br>
 
-            {{ procedure.notes }}
+            <!-- PROCEDURE NOTES -->
+            {% if procedure.notes %}
 
-            <br><br>
+                <strong>
 
-            Cost:
+                    Procedure Notes:
 
-            {{ procedure.cost }}
+                </strong>
+
+                <br>
+
+                {{ procedure.notes }}
+
+                <br><br>
+
+            {% endif %}
+
+            <!-- PROCEDURE IMAGE -->
+            {% if procedure.image %}
+
+                <strong>
+
+                    Uploaded Image:
+
+                </strong>
+
+                <br><br>
+
+                <img src="{{ procedure.image.url }}"
+                    class="img-fluid rounded shadow-sm"
+                    style="max-height:300px;">
+
+            {% endif %}
 
         </li>
 
@@ -531,6 +558,7 @@
     </ul>
 
 </div>
+
 {% endif %}
 
 <!-- PRESCRIPTIONS -->

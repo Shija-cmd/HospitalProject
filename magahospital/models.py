@@ -653,6 +653,12 @@ class Procedure(models.Model):
         blank=True,
         null=True
     )
+    
+    image = models.ImageField(
+        upload_to='procedure_images/',
+        blank=True,
+        null=True
+    )
 
     cost = models.DecimalField(
         max_digits=10,

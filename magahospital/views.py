@@ -1092,7 +1092,8 @@ def add_procedure(request, visit_id):
     if request.method == 'POST':
 
         form = ProcedureForm(
-            request.POST
+            request.POST,
+            request.FILES
         )
 
         if form.is_valid():

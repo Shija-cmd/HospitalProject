@@ -28,6 +28,8 @@
 
                         <th>Procedures</th>
 
+                        <th>Doctor Notes</th>
+
                         <th>Status</th>
 
                         <th>Actions</th>
@@ -83,6 +85,36 @@
                             {% endfor %}
 
                         </td>
+
+                        <td>
+
+                    {% if visit.doctor %}
+
+                <strong>Diagnosis:</strong>
+
+            <br>
+
+        {{ visit.doctor.diagnosis }}
+
+        <br><br>
+
+        <strong>History:</strong>
+
+        <br>
+
+        {{ visit.doctor.history }}
+
+    {% else %}
+
+        <span class="text-muted">
+
+            No doctor notes
+
+        </span>
+
+    {% endif %}
+
+    </td>
 
                         <td>
 

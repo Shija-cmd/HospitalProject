@@ -2,6 +2,8 @@ from django.contrib import admin
 from django.urls import path
 from magahospital import views
 from .views import chatbot_response
+from django.conf import settings
+from django.conf.urls.static import static
 
 
 urlpatterns = [
@@ -229,3 +231,11 @@ urlpatterns = [
 # =========================
 
 handler403 = 'magahospital.views.custom_403'
+
+# =========================
+# MEDIA FILES
+# =========================
+urlpatterns += static(
+    settings.MEDIA_URL,
+    document_root=settings.MEDIA_ROOT
+)
