@@ -152,6 +152,10 @@ def dashboard(request):
         'lab_waiting': Visit.objects.filter(
             status='Waiting Lab'
         ).count(),
+        
+        'procedure_waiting': Visit.objects.filter(
+            status='Waiting Procedure'
+        ).count(),
 
         'prescription_waiting': Visit.objects.filter(
             status='Doctor Review'

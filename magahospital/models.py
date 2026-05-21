@@ -615,6 +615,25 @@ class Appointment(models.Model):
 # PROCEDURES
 # =====================================
 
+PROCEDURE_TYPES = [
+
+    ('Ultrasound', 'Ultrasound'),
+
+    ('X-Ray', 'X-Ray'),
+
+    ('ECG', 'ECG'),
+
+    ('Physiotherapy', 'Physiotherapy'),
+
+    ('Injection', 'Injection'),
+
+    ('Dressing', 'Dressing'),
+
+    ('Endoscopy', 'Endoscopy'),
+
+    ('Minor Surgery', 'Minor Surgery'),
+
+]
 class Procedure(models.Model):
 
     visit = models.ForeignKey(
@@ -624,7 +643,8 @@ class Procedure(models.Model):
     )
 
     procedure_name = models.CharField(
-        max_length=200
+        max_length=100,
+        choices=PROCEDURE_TYPES
     )
 
     notes = models.TextField(

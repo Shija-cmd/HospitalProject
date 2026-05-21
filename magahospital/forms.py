@@ -528,38 +528,27 @@ class ProcedureForm(forms.ModelForm):
         model = Procedure
 
         fields = [
-
             'procedure_name',
-
             'notes',
-
             'cost'
-
         ]
 
         widgets = {
 
-            'procedure_name': forms.TextInput(
-                attrs={
-                    'class': 'form-control',
-                    'placeholder': 'Procedure name'
-                }
-            ),
+            'procedure_name': forms.Select(attrs={
+                'class': 'form-select'
+            }),
 
-            'notes': forms.Textarea(
-                attrs={
-                    'class': 'form-control',
-                    'rows': 4,
-                    'placeholder': 'Procedure notes'
-                }
-            ),
+            'notes': forms.Textarea(attrs={
+                'class': 'form-control',
+                'rows': 4,
+                'placeholder': 'Enter procedure notes...'
+            }),
 
-            'cost': forms.NumberInput(
-                attrs={
-                    'class': 'form-control',
-                    'placeholder': 'Procedure cost'
-                }
-            ),
+            'cost': forms.NumberInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'Enter procedure cost'
+            }),
 
         }
 
