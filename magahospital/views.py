@@ -1,3 +1,5 @@
+from urllib import request
+
 from django import template
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import login, logout
@@ -954,11 +956,19 @@ def add_bill(request, visit_id):
                 f"Processed payment for Visit #{visit.id}"
             )
 
-            if bill.is_paid:
+            # =========================
+            # MOVE TO DISPENSE
+            # =========================
+
+            if 'is_paid' in request.POST:
 
                 visit.status = 'Dispense'
 
-                visit.save()
+            else:
+
+                visit.status = 'Waiting Cashier'
+
+            visit.save()
 
             return redirect(
                 'cashier_queue'
