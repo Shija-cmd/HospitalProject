@@ -195,57 +195,6 @@
 
                     </div>
 
-                    <!-- PROCEDURES -->
-                    <h5 class="mb-3">
-
-                🏥 Procedures
-
-            </h5>
-
-        <ul class="list-group mb-4">
-
-    {% for procedure in visit.procedures.all %}
-
-        <li class="list-group-item d-flex justify-content-between align-items-center">
-
-            <div>
-
-                <strong>
-
-                    {{ procedure.procedure_name }}
-
-                </strong>
-
-                <br>
-
-                <small class="text-muted">
-
-                    {{ procedure.notes }}
-
-                </small>
-
-            </div>
-
-            <span class="badge bg-primary">
-
-                Tsh {{ procedure.cost }}
-
-            </span>
-
-        </li>
-
-    {% empty %}
-
-        <li class="list-group-item">
-
-            No procedures added
-
-        </li>
-
-    {% endfor %}
-
-</ul>
-
                 <!-- PAYMENT -->
                 <div class="form-check mt-4 mb-4">
 
