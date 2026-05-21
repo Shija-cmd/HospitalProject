@@ -377,7 +377,11 @@ def add_doctor(request, visit_id):
             # VISIT FLOW LOGIC
             # =========================
 
-            if doctor.next_step == 'Lab':
+            if procedure_name:
+
+                visit.status = 'Waiting Procedure'
+
+            elif doctor.next_step == 'Lab':
 
                 visit.status = 'Waiting Lab'
 
@@ -385,7 +389,7 @@ def add_doctor(request, visit_id):
 
                 visit.status = 'Waiting Cashier'
 
-            visit.save()
+                visit.save()
 
             # =========================
             # SYSTEM LOG
@@ -1085,13 +1089,29 @@ def add_procedure(request, visit_id):
 
             procedure.save()
 
+            # =========================
+            # SEND BACK TO DOCTOR
+            # =========================
+
+            visit.status = 'Doctor Review'
+
+            visit.save()
+
+            # =========================
+            # ACTIVITY LOG
+            # =========================
+
             log_action(
                 request.user,
                 f"Added procedure for Visit #{visit.id}"
             )
 
+            # =========================
+            # REDIRECT
+            # =========================
+
             return redirect(
-                'doctor_queue'
+                'procedure_queue'
             )
 
     else:
@@ -1178,5 +1198,23 @@ def add_appointment(request):
         'magahospital/appointment_form.html',
         {
             'form': form
+        }
+    )
+
+# =====================================
+# PROCEDURE QUEUE
+# =====================================    
+@role_required('Procedure')
+def procedure_queue(request):
+
+    visits = Visit.objects.filter(
+        status='Waiting Procedure'
+    ).order_by('date')
+
+    return render(
+        request,
+        'magahospital/procedure_queue.html',
+        {
+            'visits': visits
         }
     )                        
