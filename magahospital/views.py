@@ -366,36 +366,11 @@ def add_doctor(request, visit_id):
 
             doctor.save()
 
-            # =========================
-            # SAVE PROCEDURE (OPTIONAL)
-            # =========================
-
-            procedure_name = request.POST.get(
-                'procedure_name'
-            )
-
-            procedure_notes = request.POST.get(
-                'procedure_notes'
-            )
-
-            if procedure_name:
-
-                Procedure.objects.create(
-
-                    visit=visit,
-
-                    procedure_name=procedure_name,
-
-                    notes=procedure_notes,
-
-                    performed_by=request.user
-
-                )
             #=========================
             # VISIT FLOW LOGIC
             # =========================
 
-            if procedure_name:
+            if doctor.next_step == 'Procedure':
 
                 visit.status = 'Waiting Procedure'
 
@@ -406,8 +381,6 @@ def add_doctor(request, visit_id):
             else:
 
                 visit.status = 'Waiting Cashier'
-
-            visit.save()
 
             # =========================
             # SYSTEM LOG
