@@ -382,7 +382,7 @@ def add_doctor(request, visit_id):
 
                 visit.status = 'Waiting Cashier'
 
-                visit.save()
+            visit.save()
 
             # =========================
             # SYSTEM LOG
