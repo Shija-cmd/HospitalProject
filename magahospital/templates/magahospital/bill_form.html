@@ -204,7 +204,10 @@
 
         </label>
 
-        {{ form.procedure_fee }}
+        <input type="number"
+            name="procedure_fee"
+            class="form-control"
+            value="{{ bill.procedure_fee|default:'0' }}">
 
     </div>
 
