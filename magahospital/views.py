@@ -521,7 +521,26 @@ def add_prescription(request, visit_id):
                 f"Added prescription for Visit #{visit.id}"
             )
 
-            visit.status = 'Waiting Cashier'
+            # =====================================
+            # WORKFLOW LOGIC
+            # =====================================
+
+            next_step = request.POST.get(
+                'next_step'
+            )
+
+            if next_step == 'Lab':
+
+                visit.status = 'Waiting Lab'
+
+            elif next_step == 'Procedure':
+
+                visit.status = 'Waiting Procedure'
+
+            else:
+
+                visit.status = 'Waiting Cashier'
+
             visit.save()
 
             return redirect(
