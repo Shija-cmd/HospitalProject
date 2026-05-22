@@ -598,24 +598,54 @@ def add_dispense(request, visit_id):
 
             dispense = form.save(
                 commit=False
+        )
+
+        dispense.visit = visit
+
+        # =====================================
+        # STOCK CHECK
+        # =====================================
+
+        medicine = dispense.medication_given
+
+        if dispense.dispensed_quantity > medicine.quantity:
+
+            messages.error(
+                request,
+                f"Only {medicine.quantity} items remaining in stock."
             )
-
-            dispense.visit = visit
-
-            dispense.save()
-
-            log_action(
-                request.user,
-                f"Dispensed medication for Visit #{visit.id}"
-            )
-
-            visit.status = 'Completed'
-
-            visit.save()
 
             return redirect(
-                'visit_detail',
+                'add_dispense',
                 visit_id=visit.id
+            )
+
+        # =====================================
+        # REDUCE STOCK
+        # =====================================
+
+        medicine.quantity -= dispense.dispensed_quantity
+
+        medicine.save()
+
+        # =====================================
+        # SAVE DISPENSE
+        # =====================================
+
+        dispense.save()
+
+        log_action(
+            request.user,
+            f"Dispensed medication for Visit #{visit.id}"
+            )
+
+        visit.status = 'Completed'
+
+        visit.save()
+
+        return redirect(
+            'visit_detail',
+            visit_id=visit.id
             )
 
     else:
