@@ -662,7 +662,7 @@ def add_dispense(request, visit_id):
         }
     )
     
-@role_required('Dispense')
+@role_required('Admin')
 def add_stock(request):
 
     if request.method == 'POST':
