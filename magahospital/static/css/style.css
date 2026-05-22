@@ -317,21 +317,6 @@ footer p{
 
 }
 
-.sidebar-links a {
-
-    display: block;
-
-    padding: 12px 15px;
-
-    color: white;
-
-    text-decoration: none;
-
-    border-radius: 8px;
-
-    transition: 0.3s;
-
-}
 
 .sidebar-links a:hover {
 
