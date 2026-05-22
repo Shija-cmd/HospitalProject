@@ -280,6 +280,67 @@
 
 <div class="form-container">
 
+<!-- PROCEDURE RESULTS -->
+<div class="card shadow-sm border-0 mb-4">
+
+    <div class="card-body">
+
+        <h5 class="text-warning mb-3">
+
+            <i class="bi bi-bandaid me-2"></i>
+
+            Procedure Results
+
+        </h5>
+
+        {% if visit.procedures.all %}
+
+            {% for procedure in visit.procedures.all %}
+
+                <div class="border rounded p-3 mb-3">
+
+                    <strong>
+
+                        {{ procedure.procedure_name }}
+
+                    </strong>
+
+                    <br><br>
+
+                    {{ procedure.notes }}
+
+                    {% if procedure.image %}
+
+                        <br><br>
+
+                        <a href="{{ procedure.image.url }}"
+                        target="_blank"
+                        class="btn btn-outline-primary btn-sm">
+
+                            View Uploaded Image
+
+                        </a>
+
+                    {% endif %}
+
+                </div>
+
+            {% endfor %}
+
+        {% else %}
+
+            <p class="text-muted">
+
+                No procedure results available.
+
+            </p>
+
+        {% endif %}
+
+    </div>
+
+</div>    
+
     <!-- TITLE -->
     <h2 class="form-title">
 
