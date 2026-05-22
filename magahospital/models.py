@@ -319,6 +319,48 @@ class Bill(models.Model):
 
         return f"Bill - Visit {self.visit.id}"    
 
+# =====================================
+# PHARMACY STOCK
+# =====================================
+
+class MedicineStock(models.Model):
+
+    medicine_name = models.CharField(
+        max_length=200
+    )
+
+    quantity = models.PositiveIntegerField(
+        default=0
+    )
+
+    unit_price = models.DecimalField(
+        max_digits=10,
+        decimal_places=2
+    )
+
+    expiry_date = models.DateField()
+
+    batch_number = models.CharField(
+        max_length=100,
+        blank=True,
+        null=True
+    )
+
+    low_stock_alert = models.PositiveIntegerField(
+        default=10
+    )
+
+    created_at = models.DateTimeField(
+        default=timezone.now
+    )
+
+    def is_low_stock(self):
+
+        return self.quantity <= self.low_stock_alert
+
+    def __str__(self):
+
+        return self.medicine_name
 
 # =====================================
 # DISPENSE MODEL
@@ -333,14 +375,19 @@ class Dispense(models.Model):
         related_name='dispenses'
     )
 
-    medication_given = models.CharField(
-    max_length=255
-)
+    medication_given = models.ForeignKey(
+        MedicineStock,
+        on_delete=models.CASCADE
+    )
 
     quantity = models.CharField(
         max_length=100,
         blank=True,
         null=True
+    )
+    
+    dispensed_quantity = models.PositiveIntegerField(
+        default=1
     )
 
     created_at = models.DateTimeField(
@@ -349,8 +396,7 @@ class Dispense(models.Model):
 
     def __str__(self):
         return f"Dispense - Visit {self.visit.id}"
-    
-from django.db import models
+
 
 #======================================
 # CHAT MESSAGE MODEL
@@ -524,50 +570,7 @@ class Vital(models.Model):
     def __str__(self):
 
         return f"Vitals - Visit {self.visit.id}"
-    
-# =====================================
-# PHARMACY STOCK
-# =====================================
-
-class MedicineStock(models.Model):
-
-    medicine_name = models.CharField(
-        max_length=200
-    )
-
-    quantity = models.PositiveIntegerField(
-        default=0
-    )
-
-    unit_price = models.DecimalField(
-        max_digits=10,
-        decimal_places=2
-    )
-
-    expiry_date = models.DateField()
-
-    batch_number = models.CharField(
-        max_length=100,
-        blank=True,
-        null=True
-    )
-
-    low_stock_alert = models.PositiveIntegerField(
-        default=10
-    )
-
-    created_at = models.DateTimeField(
-        default=timezone.now
-    )
-
-    def is_low_stock(self):
-
-        return self.quantity <= self.low_stock_alert
-
-    def __str__(self):
-
-        return self.medicine_name
-    
+        
 # =====================================
 # APPOINTMENTS
 # =====================================
