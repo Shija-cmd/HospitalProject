@@ -1,101 +1,224 @@
 # 🏥 Maga Hospital Management System (HMS)
 
-A modern and intelligent Hospital Management System built with Django to streamline patient workflow, clinical operations, and hospital administration.
+A modern, intelligent, and workflow-driven Hospital Management System built with Django to streamline hospital operations, patient management, and clinical workflows.
 
-Designed with scalability, security, and real hospital workflow in mind.
+Designed with real hospital workflow architecture, role-based access control, automation, and scalable healthcare engineering principles in mind.
 
 ---
 
-# 🌐 Live Demo
+# 🌐 Live System
 
-🚀 Live System:
-https://hospitalproject-3s82.onrender.com/
+🚀 Official Live System:  
+https://shijajuma.website
 
-For demo access or collaboration, feel free to contact me.
+For demo access, collaboration, or contributions, feel free to contact me.
+
+---
 
 # ✨ Core Features
 
-## 👨‍⚕️ Multi-Department Workflow
+## 👨‍⚕️ Multi-Department Workflow System
+
+The HMS supports complete hospital outpatient workflow management across multiple departments:
+
 - Reception Module
+- Vitals Module
 - Doctor Module
 - Laboratory Module
-- Dispense/Pharmacy Module
-- Admin Dashboard
+- Procedure / Imaging Module
+- Cashier Module
+- Dispense / Pharmacy Module
+- Administrative Dashboard
 
-## 📋 Patient Management
-- Register patients
+---
+
+# 📋 Patient Management
+
+- Patient registration system
+- Unique patient ID generation
 - Search and filter patients
-- Patient visit history
-- Real-time visit tracking
-- Automated workflow status updates
+- Visit history tracking
+- Real-time workflow status updates
+- Queue-based patient flow management
 
-## 🩺 Clinical Workflow
-- Doctor diagnosis and history
-- Laboratory test management
+---
+
+# 🩺 Intelligent Clinical Workflow
+
+## Doctor Consultation
+- Clinical history recording
+- Diagnosis management
+- Doctor review workflow
 - Prescription management
-- Dispensing workflow
-- Visit completion tracking
 
-## 📄 PDF Medical Reports
-Generate professional downloadable visit reports containing:
+## Laboratory Workflow
+- Lab request processing
+- Laboratory result management
+- Doctor review integration
+
+## Procedure / Imaging Workflow
+- Procedure requests
+- X-Ray / Ultrasound workflow
+- Technician findings and notes
+- Medical image uploads
+- Procedure review by doctors
+
+## Pharmacy & Dispensing
+- Prescription dispensing
+- Medication tracking
+- Pharmacy workflow management
+
+---
+
+# 💰 Billing & Cashier Module
+
+- Consultation billing
+- Laboratory billing
+- Procedure billing
+- Medication billing
+- Payment completion workflow
+- Automated transition to dispensing queue
+
+---
+
+# 📄 PDF Medical Reports
+
+Generate professional downloadable patient reports containing:
+
 - Patient information
-- Diagnosis
-- Lab results
+- Clinical diagnosis
+- Laboratory findings
+- Procedure findings
 - Prescriptions
 - Dispensed medications
 
-## 🤖 AI-Powered Features
-### 🧠 STDs Prediction AI Model
+---
+
+# 🤖 AI-Powered Features
+
+## 🧠 STDs Prediction AI Model
+
 Integrated Machine Learning model for:
-- STD risk analysis
-- Clinical prediction support
+
+- STD risk prediction
+- Clinical decision support
 - Intelligent healthcare assistance
 
-### 💬 AI Healthcare Chatbot
-Interactive chatbot capable of:
+## 💬 AI Healthcare Chatbot
+
+Interactive AI chatbot capable of:
+
 - Responding to hospital FAQs
 - Assisting visitors
-- Improving user interaction experience
+- Enhancing user interaction
+- Improving accessibility to healthcare information
 
-## 📊 Dashboard Analytics
+---
+
+# 📊 Dashboard & Analytics
+
 - Total patients
+- Waiting vitals queue
 - Waiting doctor queue
 - Waiting laboratory queue
-- Prescription queue
+- Waiting procedure queue
+- Cashier queue
 - Dispense queue
-- Completed visits
+- Completed visits analytics
 
-## 🔐 Authentication & Security
+---
+
+# 🔐 Authentication & Security
+
 - Django authentication system
-- Role-based access control
+- Role-Based Access Control (RBAC)
 - Group permissions
+- Secure department restrictions
 - CSRF protection
-- Secure workflow restrictions
-
-## 🎨 Modern User Interface
-- Responsive design
-- Bootstrap 5 interface
-- Professional hospital-style UI
-- Clean workflow navigation
+- Authentication-required workflows
 
 ---
 
-# 🚀 Technologies Used
+# 🧪 Automated System Testing
 
-- Python
-- Django
-- Bootstrap 5
-- HTML5
-- CSS3
-- SQLite / PostgreSQL
-- Machine Learning
-- xhtml2pdf
+The system includes Django automated unit testing for workflow stability and regression prevention.
 
----
+Currently tested workflows include:
 
-# ⚙️ Installation
+- Visit creation workflow
+- Vitals → Doctor transition
+- Procedure → Doctor Review workflow
+- Cashier → Dispense workflow
+- Doctor review queue validation
 
-## Clone Repository
+Testing framework powered by:
 
 ```bash
+python manage.py test
+```bash
 git clone https://github.com/your-username/your-repo-name.git
+
+🚀 Technologies Used
+Python
+Django
+Bootstrap 5
+HTML5
+CSS3
+JavaScript
+SQLite / PostgreSQL
+Machine Learning
+xhtml2pdf
+Pillow
+
+⚙️ Installation
+1️⃣ Clone Repository
+git clone <your-repository-url>
+
+2️⃣ Navigate Into Project
+cd project-folder
+
+3️⃣ Create Virtual Environment
+python -m venv venv
+
+Activate environment:
+
+Windows
+venv\Scripts\activate
+
+Linux / macOS
+source venv/bin/activate
+
+4️⃣ Install Dependencies
+pip install -r requirements.txt
+
+5️⃣ Run Migrations
+python manage.py makemigrations
+python manage.py migrate
+
+6️⃣ Start Development Server
+python manage.py runserver
+
+🧪 Run Automated Tests
+python manage.py test
+
+📌 Future Improvements
+Full IPD (Inpatient Department) module
+Bed and ward management
+Nurse workflow system
+Appointment reminders
+Email/SMS notifications
+Advanced analytics dashboard
+REST API integration
+Mobile application support
+
+👨‍💻 Developer
+
+Developed by Juma Shija
+
+Backend Engineer | Django Developer | AI & Healthcare Systems Enthusiast
+
+🌐 Website: https://shijajuma.website
+
+⭐ Project Vision
+
+This project aims to bridge healthcare operations and intelligent software engineering by providing scalable, workflow-oriented, and AI-enhanced hospital management solutions suitable for modern healthcare environments.
