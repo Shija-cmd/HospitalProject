@@ -163,42 +163,6 @@
 
 </div>
 
-<div class="form-container">
-
-    <!-- NEXT STEP -->
-<div class="card shadow-sm border-0 mb-4">
-
-    <div class="card-body">
-
-        <h5 class="text-primary mb-3">
-
-            Next Step
-
-        </h5>
-
-        <form method="POST">
-
-            {% csrf_token %}
-
-            <div class="mb-3">
-
-                {{ form.next_step }}
-
-            </div>
-
-            <button type="submit"
-                    class="btn btn-success">
-
-                Continue Workflow
-
-            </button>
-
-        </form>
-
-    </div>
-
-</div>
-
     <!-- TITLE -->
     <h2 class="form-title">
 
@@ -336,6 +300,46 @@
         <label>Prescription Notes</label>
 
         {{ form.notes }}
+
+    </div>
+
+</div>
+
+<!-- NEXT STEP -->  
+<div class="form-container">
+
+    <div class="row">
+
+    <div class="col-md-12 mb-4">
+
+        <label>
+
+            Next Step
+
+        </label>
+
+        <select name="next_step"
+                class="form-select">
+
+            <option value="Cashier">
+
+                Send to Cashier
+
+            </option>
+
+            <option value="Lab">
+
+                Send to Laboratory
+
+            </option>
+
+            <option value="Procedure">
+
+                Send to Procedure
+
+            </option>
+
+        </select>
 
     </div>
 
