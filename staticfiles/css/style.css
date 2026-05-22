@@ -331,3 +331,23 @@ footer p{
     color: white !important;
 
 }
+
+.custom-alert {
+
+    background: #fff3cd;
+
+    color: #856404;
+
+    border: none;
+
+    border-left: 5px solid #ffc107;
+
+    border-radius: 12px;
+
+    padding: 14px 18px;
+
+    font-weight: 500;
+
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+
+}
