@@ -214,6 +214,12 @@ urlpatterns = [
     ),
     
     path(
+        'stock/add/',
+        views.add_stock,
+        name='add_stock'
+    ),
+    
+    path(
         'appointments/',
         views.appointment_list,
         name='appointment_list'

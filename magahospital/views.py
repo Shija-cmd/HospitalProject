@@ -31,6 +31,7 @@ from .models import (
 )
 
 from .forms import (
+    MedicineStockForm,
     PatientForm,
     DoctorForm,
     LabForm,
@@ -658,6 +659,40 @@ def add_dispense(request, visit_id):
         {
             'form': form,
             'visit': visit
+        }
+    )
+    
+@role_required('Dispense')
+def add_stock(request):
+
+    if request.method == 'POST':
+
+        form = MedicineStockForm(
+            request.POST
+        )
+
+        if form.is_valid():
+
+            form.save()
+
+            messages.success(
+                request,
+                'Medicine stock added successfully.'
+            )
+
+            return redirect(
+                'stock_list'
+            )
+
+    else:
+
+        form = MedicineStockForm()
+
+    return render(
+        request,
+        'magahospital/add_stock.html',
+        {
+            'form': form
         }
     )
 
