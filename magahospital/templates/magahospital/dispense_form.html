@@ -336,10 +336,10 @@
 
         {% csrf_token %}
 
-        <div class="row">
+    <div class="row">
 
     <!-- MEDICATION -->
-    <div class="col-md-6 mb-4">
+    <div class="col-md-4 mb-4">
 
         <label class="form-label">
 
@@ -352,7 +352,7 @@
     </div>
 
     <!-- DISPENSED QUANTITY -->
-    <div class="col-md-6 mb-4">
+    <div class="col-md-4 mb-4">
 
         <label class="form-label">
 
@@ -364,18 +364,18 @@
 
     </div>
 
-</div>
+    <!-- DOSAGE -->
+    <div class="col-md-4 mb-4">
 
-<!-- DOSAGE -->
-<div class="col-md-6 mb-4">
+        <label class="form-label">
 
-    <label class="form-label">
+            Dosage Instructions
 
-        Dosage Instructions
+        </label>
 
-    </label>
+        {{ form.quantity }}
 
-    {{ form.quantity }}
+    </div>
 
 </div>
 
