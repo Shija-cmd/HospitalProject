@@ -355,46 +355,46 @@
 
         {% csrf_token %}
 
-        <div class="row">
+        <div class="row g-4">
 
-            <!-- MEDICATION -->
-            <div class="col-md-6 mb-4">
+    <!-- MEDICATION -->
+    <div class="col-md-6">
 
-                <label class="form-label">
+        <label class="form-label fw-semibold">
 
-                    Medication Given
+            Medication Given
 
-                </label>
+        </label>
 
-                {{ form.medication_given }}
+        {{ form.medication_given }}
 
-            </div>
+    </div>
 
-            <!-- DOSAGE -->
-            <div class="col-md-6 mb-4">
+    <!-- DISPENSED QUANTITY -->
+    <div class="col-md-6">
 
-                <label class="form-label">
+        <label class="form-label fw-semibold">
 
-                    Dosage Instructions
+            Dispensed Quantity
 
-                </label>
+        </label>
 
-                {{ form.quantity }}
+        {{ form.dispensed_quantity }}
 
-            </div>
+    </div>
 
-        </div>
+    <!-- DOSAGE -->
+    <div class="col-12">
 
-        <!-- DISPENSED QUANTITY -->
-<div class="col-md-6 mb-4">
+        <label class="form-label fw-semibold">
 
-    <label class="form-label">
+            Dosage Instructions
 
-        Dispensed Quantity
+        </label>
 
-    </label>
+        {{ form.quantity }}
 
-    {{ form.dispensed_quantity }}
+    </div>
 
 </div>
 
@@ -411,7 +411,7 @@
             </button>
 
             <a href="{% url 'visit_detail' visit.id %}"
-               class="btn btn-secondary back-btn">
+            class="btn btn-secondary back-btn">
 
                 <i class="bi bi-arrow-left me-1"></i>
 
