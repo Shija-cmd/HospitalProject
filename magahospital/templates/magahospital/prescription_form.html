@@ -313,42 +313,8 @@
 
 </h5>
 
-<!-- SEARCH FORM -->
-<form method="GET"
-    class="mb-3">
-
-    <div class="input-group">
-
-        <input
-            type="text"
-            name="q"
-            class="form-control"
-            placeholder="Search medicine stock..."
-
-            value="{{ query }}"
-        >
-
-        <button
-            class="btn btn-primary"
-            type="submit">
-
-            <i class="bi bi-search"></i>
-
-        </button>
-
-        <a href=""
-        class="btn btn-secondary">
-
-            Reset
-
-        </a>
-
-    </div>
-
-</form>
-
 <!-- MEDICINE STOCK PANEL -->
-<div class="card shadow-sm border-0 mt-4">
+<div class="card shadow-sm border-0 mt-3">
 
     <div class="card-header bg-primary text-white">
 
@@ -361,93 +327,52 @@
     <div class="card-body">
 
         <!-- SEARCH BAR -->
+        <form method="GET"
+            class="mb-3">
 
-<form method="GET"
-    class="mb-3">
+            <div class="input-group">
 
-    <div class="input-group">
+                <input
+                    type="text"
+                    name="q"
+                    class="form-control"
+                    placeholder="Search medicine stock..."
+                    value="{{ query }}">
 
-        <input
-            type="text"
-            name="q"
-            class="form-control"
-            placeholder="Search medicine stock..."
-            value="{{ query }}">
+                <button
+                    class="btn btn-primary"
+                    type="submit">
 
-        <!-- SEARCH BUTTON -->
+                    <i class="bi bi-search"></i>
 
-        <button
-            class="btn btn-primary"
-            type="submit">
+                </button>
 
-            <i class="bi bi-search"></i>
+                <a href="{% url 'add_prescription' visit.id %}"
+                class="btn btn-secondary">
 
-        </button>
+                    <i class="bi bi-arrow-clockwise"></i>
 
-        <!-- RESET ICON -->
+                </a>
 
-        <a href="{% url 'add_prescription' visit.id %}"
-        class="btn btn-secondary">
+            </div>
 
-            <i class="bi bi-arrow-clockwise"></i>
+        </form>
 
-        </a>
+        <!-- BEFORE SEARCH -->
+        {% if not query %}
 
-    </div>
+        <div class="alert alert-light text-muted">
 
-</form>
+            <i class="bi bi-search me-2"></i>
 
-{% if not query %}
+            Search medicine stock to view available medicines.
 
-<div class="alert alert-light text-muted">
+        </div>
 
-    <i class="bi bi-search me-2"></i>
+        {% endif %}
 
-    Search medicine stock to view available medicines.
-
-</div>
-
-{% endif %}
-
-{% if query %}
-
-<table class="table table-hover">
-
-    {% for medicine in available_medicines %}
-
-    <tr>
-
-        <td>
-
-            {{ medicine.medicine_name }}
-
-        </td>
-
-        <td>
-
-            {{ medicine.quantity }}
-
-        </td>
-
-    </tr>
-
-    {% empty %}
-
-    <tr>
-
-        <td class="text-muted">
-
-            No medicines found.
-
-        </td>
-
-    </tr>
-
-    {% endfor %}
-
-</table>
-
-{% endif %}
+        <!-- SEARCH RESULTS -->
+        {% if query %}
 
         <div class="table-responsive">
 
@@ -475,23 +400,19 @@
 
                         <td>
 
-                            <td>
+                            {{ medicine.medicine_name }}
 
-                                {{ medicine.medicine_name }}
+                            <button
+                                type="button"
+                                class="btn btn-sm btn-outline-primary ms-2"
 
-                                <button
-                                    type="button"
-                                    class="btn btn-sm btn-outline-primary ms-2"
+                                onclick="insertMedicine(
+                                    '{{ medicine.medicine_name|escapejs }}'
+                                )">
 
-                                    onclick="insertMedicine(
-                                        '{{ medicine.medicine_name|escapejs }}'
-                                    )">
+                                Use
 
-                                    Use
-
-                                </button>
-
-                            </td>
+                            </button>
 
                         </td>
 
@@ -540,7 +461,7 @@
                         <td colspan="3"
                             class="text-center text-muted">
 
-                            No medicines in inventory.
+                            No medicines found.
 
                         </td>
 
@@ -552,28 +473,41 @@
 
             </table>
 
-            <script>
+        </div>
 
-            function insertMedicine(name){
+        {% endif %}
 
-                const field =
-                    document.getElementById(
-                        'id_medication'
-                );
+    </div>
 
-                if(field.value.trim() !== ''){
+</div>
 
-                    field.value += ', ' + name;
+<script>
 
-                }else{
+function insertMedicine(name){
 
-                    field.value = name;
+    const field =
+        document.getElementById(
+            'id_medication'
+        );
 
-                }
+    let medicines =
+        field.value
+        .split(',')
+        .map(m => m.trim())
+        .filter(m => m !== '');
 
-            }
+    if(!medicines.includes(name)){
 
-            </script>
+        medicines.push(name);
+
+    }
+
+    field.value =
+        medicines.join(', ');
+
+}
+
+</script>
 
         </div>
 
