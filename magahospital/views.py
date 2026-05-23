@@ -1516,4 +1516,24 @@ def procedure_queue(request):
 
             'is_admin': request.user.is_superuser,
         }
-    )                        
+    )
+ 
+#====================================
+# AUDIT LOGS
+#====================================   
+@login_required
+def audit_logs(request):
+
+    logs = AuditLog.objects.select_related(
+        'user'
+    ).order_by(
+        '-timestamp'
+    )
+
+    return render(
+        request,
+        'magahospital/audit_logs.html',
+        {
+            'logs': logs
+        }
+    )                            

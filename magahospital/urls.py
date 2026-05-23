@@ -247,6 +247,12 @@ urlpatterns = [
         'add-appointment/',
         views.add_appointment,
         name='add_appointment'
+    ),
+    
+    path(
+        'audit-logs/',
+        views.audit_logs,
+        name='audit_logs'
     ), 
 ]
 
