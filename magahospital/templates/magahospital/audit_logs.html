@@ -4,63 +4,20 @@
 
 <div class="container mt-4">
 
-    <div class="row mb-4">
+    <!-- DASHBOARD CARDS -->
 
-        <div class="col-md-3">
+<!-- ROW 1 -->
+<div class="row mb-4">
 
-            <div class="card shadow-sm border-0 bg-primary text-white">
+    <div class="col-md-3 mb-3">
 
-                <div class="card-body text-center">
+        <div class="card shadow-sm border-0 bg-primary text-white">
 
-                    <h3>{{ total_logs }}</h3>
+            <div class="card-body text-center">
 
-                    <p class="mb-0">
+                <h3>{{ total_logs }}</h3>
 
-                        Total Logs
-
-                    </p>
-
-                </div>
-
-            </div>
-
-        </div>
-
-        <div class="col-md-3">
-
-            <div class="card shadow-sm border-0 bg-success text-white">
-
-                <div class="card-body text-center">
-
-                    <h3>{{ today_logs }}</h3>
-
-                    <p class="mb-0">
-
-                        Today's Logs
-
-                    </p>
-
-                </div>
-
-            </div>
-
-        </div>
-
-        <div class="col-md-3">
-
-            <div class="card shadow-sm border-0 bg-warning">
-
-                <div class="card-body text-center">
-
-                    <h3>{{ pharmacy_logs }}</h3>
-
-                    <p class="mb-0">
-
-                        Pharmacy Actions
-
-                    </p>
-
-                </div>
+                <p class="mb-0">Total Logs</p>
 
             </div>
 
@@ -68,7 +25,39 @@
 
     </div>
 
-    <div class="col-md-3">
+    <div class="col-md-3 mb-3">
+
+        <div class="card shadow-sm border-0 bg-success text-white">
+
+            <div class="card-body text-center">
+
+                <h3>{{ today_logs }}</h3>
+
+                <p class="mb-0">Today's Logs</p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="col-md-3 mb-3">
+
+        <div class="card shadow-sm border-0 bg-warning">
+
+            <div class="card-body text-center">
+
+                <h3>{{ pharmacy_logs }}</h3>
+
+                <p class="mb-0">Pharmacy</p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="col-md-3 mb-3">
 
         <div class="card shadow-sm border-0 bg-dark text-white">
 
@@ -76,11 +65,76 @@
 
                 <h3>{{ doctor_logs }}</h3>
 
-                <p class="mb-0">
+                <p class="mb-0">Doctor</p>
 
-                    Doctor Actions
+            </div>
 
-                </p>
+        </div>
+
+    </div>
+
+</div>
+
+<!-- ROW 2 -->
+<div class="row mb-4">
+
+    <div class="col-md-3 mb-3">
+
+        <div class="card shadow-sm border-0 bg-info text-white">
+
+            <div class="card-body text-center">
+
+                <h3>{{ lab_logs }}</h3>
+
+                <p class="mb-0">Lab</p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="col-md-3 mb-3">
+
+        <div class="card shadow-sm border-0 bg-secondary text-white">
+
+            <div class="card-body text-center">
+
+                <h3>{{ procedure_logs }}</h3>
+
+                <p class="mb-0">Procedure</p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="col-md-3 mb-3">
+
+        <div class="card shadow-sm border-0 bg-danger text-white">
+
+            <div class="card-body text-center">
+
+                <h3>{{ cashier_logs }}</h3>
+
+                <p class="mb-0">Cashier</p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="col-md-3 mb-3">
+
+        <div class="card shadow-sm border-0 bg-success text-white">
+
+            <div class="card-body text-center">
+
+                <h3>{{ dispense_logs }}</h3>
+
+                <p class="mb-0">Dispense</p>
 
             </div>
 
