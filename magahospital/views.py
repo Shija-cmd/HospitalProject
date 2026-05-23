@@ -555,6 +555,11 @@ def add_prescription(request, visit_id):
         'q',
         ''
     )
+    
+    medication_value = request.GET.get(
+        'medication',
+        ''
+    )
 
     available_medicines = MedicineStock.objects.none()
 
@@ -579,6 +584,8 @@ def add_prescription(request, visit_id):
             'available_medicines': available_medicines,
 
             'query': query,
+            
+            'medication_value': medication_value,
         }
     )
 

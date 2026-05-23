@@ -291,6 +291,11 @@
 
         <form method="GET">
 
+            <input
+                type="hidden"
+                name="medication"
+                id="search_medication">
+
             <div class="input-group">
 
                 <input
@@ -439,7 +444,12 @@
 
         <label>Medication</label>
 
-        {{ form.medication }}
+        <input
+            type="text"
+            name="medication"
+            id="id_medication"
+            class="form-control"
+            value="{{ medication_value }}">
 
     </div>
 
@@ -533,17 +543,38 @@ function insertMedicine(name){
             'id_medication'
         );
 
-    if(field.value.trim() !== ''){
+    let medicines =
+        field.value
+        .split(',')
+        .map(m => m.trim())
+        .filter(m => m !== '');
 
-        field.value += ', ' + name;
+    if(!medicines.includes(name)){
 
-    }else{
-
-        field.value = name;
+        medicines.push(name);
 
     }
 
+    field.value =
+        medicines.join(', ');
+
 }
+
+document.querySelector(
+    'form[method="GET"]'
+).addEventListener(
+    'submit',
+    function(){
+
+        document.getElementById(
+            'search_medication'
+        ).value =
+            document.getElementById(
+                'id_medication'
+            ).value;
+
+    }
+);
 
 </script>
 {% endblock %}
