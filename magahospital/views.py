@@ -661,7 +661,10 @@ def add_dispense(request, visit_id):
             'visit': visit
         }
     )
-    
+
+# =========================================
+# ADD MEDICINE STOCK
+# =========================================    
 @role_required('Admin')
 def add_stock(request):
 
@@ -695,6 +698,51 @@ def add_stock(request):
             'form': form
         }
     )
+
+# =========================================
+# EDIT MEDICINE STOCK
+# =========================================    
+@role_required('Admin')
+def edit_stock(request, stock_id):
+
+    medicine = get_object_or_404(
+        MedicineStock,
+        id=stock_id
+    )
+
+    if request.method == 'POST':
+
+        form = MedicineStockForm(
+            request.POST,
+            instance=medicine
+        )
+
+        if form.is_valid():
+
+            form.save()
+
+            messages.success(
+                request,
+                'Stock updated successfully.'
+            )
+
+            return redirect(
+                'stock_list'
+            )
+
+    else:
+
+        form = MedicineStockForm(
+            instance=medicine
+        )
+
+    return render(
+        request,
+        'magahospital/add_stock.html',
+        {
+            'form': form
+        }
+    )    
 
 # =========================================
 # STAFF MANAGEMENT

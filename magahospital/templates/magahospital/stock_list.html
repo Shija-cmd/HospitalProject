@@ -42,6 +42,7 @@
                         <th>Expiry</th>
 
                         <th>Status</th>
+                        <th>Actions</th>
 
                     </tr>
 
@@ -98,6 +99,19 @@
                             {% endif %}
 
                         </td>
+
+                <td>
+
+    <a href="{% url 'edit_stock' medicine.id %}"
+    class="btn btn-sm btn-primary">
+
+        <i class="bi bi-pencil-square"></i>
+
+        Edit
+
+    </a>
+
+</td> 
 
                     </tr>
 

@@ -220,6 +220,12 @@ urlpatterns = [
     ),
     
     path(
+        'stock/edit/<int:stock_id>/',
+        views.edit_stock,
+        name='edit_stock'
+    ),
+    
+    path(
         'appointments/',
         views.appointment_list,
         name='appointment_list'
