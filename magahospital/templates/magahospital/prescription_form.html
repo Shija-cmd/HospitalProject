@@ -319,53 +319,25 @@
 
     <div class="card-header bg-primary text-white">
 
-        <i class="bi bi-box-seam me-2"></i>
-
         Medicine Stock Search
 
     </div>
 
     <div class="card-body">
 
-        <!-- SEARCH FORM -->
+        <input
+            type="text"
+            id="medicineSearch"
+            class="form-control mb-3"
+            placeholder="Search medicine stock...">
 
-        <form method="GET">
-
-            <div class="input-group">
-
-                <input
-                    type="text"
-                    name="q"
-                    class="form-control"
-                    placeholder="Search medicine stock..."
-                    value="{{ query }}">
-
-                <button
-                    class="btn btn-primary"
-                    type="submit">
-
-                    <i class="bi bi-search"></i>
-
-                </button>
-
-                <a href="{% url 'add_prescription' visit.id %}"
-                class="btn btn-secondary">
-
-                    <i class="bi bi-arrow-clockwise"></i>
-
-                </a>
-
-            </div>
-
-        </form>
-
-        {% if query %}
-
-        <div class="mt-3">
+        <div id="medicineResults">
 
             {% for medicine in available_medicines %}
 
-            <div class="d-flex justify-content-between
+            <div class="medicine-item
+                        d-flex
+                        justify-content-between
                         align-items-center
                         border rounded p-2 mb-2">
 
@@ -397,19 +369,9 @@
 
             </div>
 
-            {% empty %}
-
-            <p class="text-muted mb-0">
-
-                No medicines found.
-
-            </p>
-
             {% endfor %}
 
         </div>
-
-        {% endif %}
 
     </div>
 
@@ -500,6 +462,38 @@ function insertMedicine(name){
     }
 
 }
+
+document
+.getElementById(
+    'medicineSearch'
+)
+.addEventListener(
+    'keyup',
+    function(){
+
+        let value =
+            this.value.toLowerCase();
+
+        let medicines =
+            document.querySelectorAll(
+                '.medicine-item'
+            );
+
+        medicines.forEach(function(item){
+
+            item.style.display =
+                item.innerText
+                .toLowerCase()
+                .includes(value)
+
+                ? ''
+
+                : 'none';
+
+        });
+
+    }
+);
 
 </script>
 
