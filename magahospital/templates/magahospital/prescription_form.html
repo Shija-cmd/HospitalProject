@@ -515,66 +515,75 @@ function insertMedicine(name){
 
 </div>
 
-<!-- NEXT STEP -->  
+<!-- NEXT STEP -->
+
+<div class="form-container">
 
     <div class="row">
 
-    <div class="col-md-12 mb-4">
+        <div class="col-md-12 mb-4">
 
-        <label>
+            <label>
 
-            Next Step
+                Next Step
 
-        </label>
+            </label>
 
-        <select name="next_step"
+            <select
+                name="next_step"
                 class="form-select">
 
-            <option value="Cashier">
+                <option value="Cashier">
 
-                Send to Cashier
+                    Send to Cashier
 
-            </option>
+                </option>
 
-            <option value="Lab">
+                <option value="Lab">
 
-                Send to Laboratory
+                    Send to Laboratory
 
-            </option>
+                </option>
 
-            <option value="Procedure">
+                <option value="Procedure">
 
-                Send to Procedure
+                    Send to Procedure
 
-            </option>
+                </option>
 
-        </select>
+            </select>
+
+        </div>
+
+    </div>
+
+    <!-- BUTTONS -->
+
+    <div class="button-group">
+
+        <button
+            type="submit"
+            class="btn btn-warning save-btn">
+
+            <i class="bi bi-check-circle me-1"></i>
+
+            Save Prescription
+
+        </button>
+
+        <a href="{% url 'visit_detail' visit.id %}"
+        class="btn btn-secondary back-btn">
+
+            <i class="bi bi-arrow-left me-1"></i>
+
+            Back
+
+        </a>
 
     </div>
 
 </div>
 
-        <!-- BUTTONS -->
-        <div class="button-group">
-
-            <button type="submit"
-                    class="btn btn-warning save-btn">
-
-                <i class="bi bi-check-circle me-1"></i>
-                Save Prescription
-
-            </button>
-
-            <a href="{% url 'visit_detail' visit.id %}"
-            class="btn btn-secondary back-btn">
-
-                <i class="bi bi-arrow-left me-1"></i>
-                Back
-
-            </a>
-
-        </div>
-
-    </form>
+</form>
 
 {% endblock %}
