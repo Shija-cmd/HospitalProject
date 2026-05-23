@@ -313,6 +313,40 @@
 
 </h5>
 
+<!-- SEARCH FORM -->
+<form method="GET"
+    class="mb-3">
+
+    <div class="input-group">
+
+        <input
+            type="text"
+            name="q"
+            class="form-control"
+            placeholder="Search medicine stock..."
+
+            value="{{ query }}"
+        >
+
+        <button
+            class="btn btn-primary"
+            type="submit">
+
+            <i class="bi bi-search"></i>
+
+        </button>
+
+        <a href=""
+        class="btn btn-secondary">
+
+            Reset
+
+        </a>
+
+    </div>
+
+</form>
+
 <!-- MEDICINE STOCK PANEL -->
 <div class="card shadow-sm border-0 mt-4">
 
@@ -352,7 +386,23 @@
 
                         <td>
 
-                            {{ medicine.medicine_name }}
+                            <td>
+
+                                {{ medicine.medicine_name }}
+
+                                <button
+                                    type="button"
+                                    class="btn btn-sm btn-outline-primary ms-2"
+
+                                    onclick="insertMedicine(
+                                        '{{ medicine.medicine_name|escapejs }}'
+                                    )">
+
+                                    Use
+
+                                </button>
+
+                            </td>
 
                         </td>
 
@@ -412,6 +462,29 @@
                 </tbody>
 
             </table>
+
+            <script>
+
+            function insertMedicine(name){
+
+                const field =
+                    document.getElementById(
+                        'id_medication'
+                );
+
+                if(field.value.trim() !== ''){
+
+                    field.value += ', ' + name;
+
+                }else{
+
+                    field.value = name;
+
+                }
+
+            }
+
+            </script>
 
         </div>
 

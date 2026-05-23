@@ -551,9 +551,20 @@ def add_prescription(request, visit_id):
         form = PrescriptionForm()
 
     # DOCTOR GET AVAILABLE MEDICINES FOR SELECTION
-    available_medicines = MedicineStock.objects.order_by(
-    'medicine_name'
+    query = request.GET.get(
+        'q',
+        ''
     )
+
+    available_medicines = MedicineStock.objects.order_by(
+        'medicine_name'
+    )
+
+    if query:
+
+        available_medicines = available_medicines.filter(
+            medicine_name__icontains=query
+        )
 
     return render(
         request,
@@ -565,7 +576,9 @@ def add_prescription(request, visit_id):
 
             'procedures': visit.procedures.all(),
 
-            'available_medicines': available_medicines
+            'available_medicines': available_medicines,
+            
+            'query': query,
         }
     )
 
