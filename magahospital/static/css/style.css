@@ -469,9 +469,18 @@ footer p{
 
 .dashboard-divider{
 
-    border:0;
+    border:none;
 
-    border-top:1px solid #dbe1ea;
+    height:2px;
+
+    background:linear-gradient(
+        to right,
+        transparent,
+        #cbd5e1,
+        transparent
+    );
+
+    opacity:1;
 
     margin:28px 0;
 
