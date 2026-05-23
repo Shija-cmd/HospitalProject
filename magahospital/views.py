@@ -15,6 +15,7 @@ import time
 from django.contrib.auth.models import User, Group
 from django.contrib.auth.hashers import make_password
 from django.contrib import messages
+from django.utils import timezone
 
 from .models import (
     Patient,
@@ -1521,6 +1522,7 @@ def procedure_queue(request):
 #====================================
 # AUDIT LOGS
 #====================================   
+
 @login_required
 def audit_logs(request):
 
@@ -1541,11 +1543,34 @@ def audit_logs(request):
             action__icontains=query
         )
 
+    total_logs = logs.count()
+
+    today_logs = logs.filter(
+        timestamp__date=timezone.now().date()
+    ).count()
+
+    pharmacy_logs = logs.filter(
+        action__icontains='stock'
+    ).count()
+
+    doctor_logs = logs.filter(
+        action__icontains='prescription'
+    ).count()
+
     return render(
         request,
         'magahospital/audit_logs.html',
         {
             'logs': logs,
-            'query': query
+
+            'query': query,
+
+            'total_logs': total_logs,
+
+            'today_logs': today_logs,
+
+            'pharmacy_logs': pharmacy_logs,
+
+            'doctor_logs': doctor_logs,
         }
     )                            
