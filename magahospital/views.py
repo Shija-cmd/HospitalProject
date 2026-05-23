@@ -523,10 +523,7 @@ def add_prescription(request, visit_id):
                 f"Added prescription for Visit #{visit.id}"
             )
 
-            # =====================================
             # WORKFLOW LOGIC
-            # =====================================
-
             next_step = request.POST.get(
                 'next_step'
             )
@@ -553,13 +550,22 @@ def add_prescription(request, visit_id):
 
         form = PrescriptionForm()
 
+    # DOCTOR GET AVAILABLE MEDICINES FOR SELECTION
+    available_medicines = MedicineStock.objects.order_by(
+    'medicine_name'
+    )
+
     return render(
         request,
         'magahospital/prescription_form.html',
         {
             'form': form,
+
             'visit': visit,
-            'procedures': visit.procedures.all()
+
+            'procedures': visit.procedures.all(),
+
+            'available_medicines': available_medicines
         }
     )
 

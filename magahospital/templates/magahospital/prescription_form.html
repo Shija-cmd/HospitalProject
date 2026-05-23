@@ -305,6 +305,120 @@
 
 </div>
 
+<h5 class="fw-bold text-secondary mt-4 mb-3">
+
+    <i class="bi bi-capsule-pill me-2"></i>
+
+    Inventory Reference
+
+</h5>
+
+<!-- MEDICINE STOCK PANEL -->
+<div class="card shadow-sm border-0 mt-4">
+
+    <div class="card-header bg-primary text-white">
+
+        <i class="bi bi-box-seam me-2"></i>
+
+        Available Medicine Stock
+
+    </div>
+
+    <div class="card-body">
+
+        <div class="table-responsive">
+
+            <table class="table table-hover align-middle">
+
+                <thead class="table-light">
+
+                    <tr>
+
+                        <th>Medicine</th>
+
+                        <th>Quantity</th>
+
+                        <th>Status</th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                    {% for medicine in available_medicines %}
+
+                    <tr>
+
+                        <td>
+
+                            {{ medicine.medicine_name }}
+
+                        </td>
+
+                        <td>
+
+                            {{ medicine.quantity }}
+
+                        </td>
+
+                        <td>
+
+                            {% if medicine.is_expired %}
+
+                                <span class="badge bg-danger">
+
+                                    Expired
+
+                                </span>
+
+                            {% elif medicine.is_low_stock %}
+
+                                <span class="badge bg-warning text-dark">
+
+                                    Low Stock
+
+                                </span>
+
+                            {% else %}
+
+                                <span class="badge bg-success">
+
+                                    Available
+
+                                </span>
+
+                            {% endif %}
+
+                        </td>
+
+                    </tr>
+
+                    {% empty %}
+
+                    <tr>
+
+                        <td colspan="3"
+                            class="text-center text-muted">
+
+                            No medicines in inventory.
+
+                        </td>
+
+                    </tr>
+
+                    {% endfor %}
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</div>
+
 <!-- NEXT STEP -->  
 <div class="form-container">
 
