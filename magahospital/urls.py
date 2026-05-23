@@ -232,6 +232,12 @@ urlpatterns = [
     ),
     
     path(
+        'stock/adjust/<int:stock_id>/',
+        views.adjust_stock,
+        name='adjust_stock'
+    ),
+    
+    path(
         'appointments/',
         views.appointment_list,
         name='appointment_list'

@@ -765,7 +765,61 @@ def delete_stock(request, stock_id):
 
     return redirect(
         'stock_list'
-    )        
+    )
+
+# =========================================
+# ADJUST MEDICINE STOCK
+# =========================================    
+@role_required('Admin')
+def adjust_stock(request, stock_id):
+
+    medicine = get_object_or_404(
+        MedicineStock,
+        id=stock_id
+    )
+
+    if request.method == 'POST':
+
+        adjustment = int(
+            request.POST.get(
+                'adjustment',
+                0
+            )
+        )
+
+        new_quantity = (
+            medicine.quantity + adjustment
+        )
+
+        if new_quantity < 0:
+
+            messages.error(
+                request,
+                'Stock cannot become negative.'
+            )
+
+        else:
+
+            medicine.quantity = new_quantity
+
+            medicine.save()
+
+            messages.success(
+                request,
+                'Stock adjusted successfully.'
+            )
+
+        return redirect(
+            'stock_list'
+        )
+
+    return render(
+        request,
+        'magahospital/adjust_stock.html',
+        {
+            'medicine': medicine
+        }
+    )            
 
 # =========================================
 # STAFF MANAGEMENT

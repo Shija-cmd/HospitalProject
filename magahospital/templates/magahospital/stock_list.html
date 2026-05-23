@@ -105,18 +105,20 @@
     <a href="{% url 'edit_stock' medicine.id %}"
     class="btn btn-sm btn-primary">
 
-        <i class="bi bi-pencil-square"></i>
-
         Edit
+
+    </a>
+
+    <a href="{% url 'adjust_stock' medicine.id %}"
+    class="btn btn-sm btn-warning">
+
+        Adjust
 
     </a>
 
     <a href="{% url 'delete_stock' medicine.id %}"
     class="btn btn-sm btn-danger"
-
     onclick="return confirm('Delete this medicine from stock?')">
-
-        <i class="bi bi-trash"></i>
 
         Delete
 
