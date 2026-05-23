@@ -1556,6 +1556,26 @@ def audit_logs(request):
     doctor_logs = logs.filter(
         action__icontains='prescription'
     ).count()
+    
+    lab_logs = logs.filter(
+        action__icontains='lab'
+    ).count()
+
+    procedure_logs = logs.filter(
+        action__icontains='procedure'
+    ).count()
+
+    cashier_logs = logs.filter(
+        action__icontains='payment'
+    ).count()
+
+    dispense_logs = logs.filter(
+        action__icontains='dispensed'
+    ).count()
+
+    admin_logs = logs.filter(
+        action__icontains='stock'
+    ).count()
 
     return render(
         request,
@@ -1572,5 +1592,15 @@ def audit_logs(request):
             'pharmacy_logs': pharmacy_logs,
 
             'doctor_logs': doctor_logs,
+            
+            'lab_logs': lab_logs,
+            
+            'procedure_logs': procedure_logs,
+            
+            'cashier_logs': cashier_logs,
+            
+            'dispense_logs': dispense_logs,
+            
+            'admin_logs': admin_logs,
         }
     )                            
