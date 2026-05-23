@@ -357,6 +357,18 @@ class MedicineStock(models.Model):
     def is_low_stock(self):
 
         return self.quantity <= self.low_stock_alert
+    
+    def is_expired(self):
+
+        return self.expiry_date < timezone.now().date()
+
+
+    def expiring_soon(self):
+
+        return (
+            self.expiry_date -
+            timezone.now().date()
+        ).days <= 30 
 
     def __str__(self):
 

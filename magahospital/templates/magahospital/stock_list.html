@@ -78,27 +78,43 @@
 
                         </td>
 
-                        <td>
+                    <td>
 
-                            {% if medicine.is_low_stock %}
+                {% if medicine.is_expired %}
 
-                                <span class="badge bg-danger">
+        <span class="badge bg-dark">
 
-                                    Low Stock
+    Expired
 
-                                </span>
+        </span>
 
-                            {% else %}
+            {% elif medicine.expiring_soon %}
 
-                                <span class="badge bg-success">
+                <span class="badge bg-warning text-dark">
 
-                                    Available
+                    Expiring Soon
 
-                                </span>
+            </span>
 
-                            {% endif %}
+        {% elif medicine.is_low_stock %}
 
-                        </td>
+    <span class="badge bg-danger">
+
+        Low Stock
+
+            </span>
+
+                {% else %}
+
+                    <span class="badge bg-success">
+
+                Available
+
+            </span>
+
+        {% endif %}
+
+    </td>
 
                 <td>
 
