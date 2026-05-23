@@ -742,7 +742,30 @@ def edit_stock(request, stock_id):
         {
             'form': form
         }
-    )    
+    )
+ 
+ 
+# =========================================
+# DELETE MEDICINE STOCK
+# =========================================    
+@role_required('Admin')
+def delete_stock(request, stock_id):
+
+    medicine = get_object_or_404(
+        MedicineStock,
+        id=stock_id
+    )
+
+    medicine.delete()
+
+    messages.success(
+        request,
+        'Medicine deleted successfully.'
+    )
+
+    return redirect(
+        'stock_list'
+    )        
 
 # =========================================
 # STAFF MANAGEMENT

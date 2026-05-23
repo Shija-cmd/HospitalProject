@@ -226,6 +226,12 @@ urlpatterns = [
     ),
     
     path(
+        'stock/delete/<int:stock_id>/',
+        views.delete_stock,
+        name='delete_stock'
+    ),
+    
+    path(
         'appointments/',
         views.appointment_list,
         name='appointment_list'
