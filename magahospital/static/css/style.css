@@ -207,15 +207,39 @@ footer p{
 
 
 /* TITLE */
-.sidebar-title {
+.sidebar-title{
 
-    font-size: 28px;
+    font-size:1.45rem;
 
-    font-weight: 700;
+    font-weight:700;
 
-    margin-bottom: 35px;
+    margin-bottom:28px;
 
-    color: #ffffff;
+    color:#ffffff;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:8px;
+
+}
+
+.sidebar-title i{
+
+    font-size:1.2rem;
+
+    color:#0d6efd;
+
+}
+
+.sidebar-divider{
+
+    border:none;
+
+    border-top:1px solid rgba(255,255,255,0.12);
+
+    margin:18px 0 22px;
 
 }
 
