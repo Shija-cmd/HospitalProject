@@ -305,273 +305,69 @@
 
 </div>
 
-<h5 class="fw-bold text-secondary mt-4 mb-3">
+<!-- NEXT STEP -->  
+<div class="form-container">
 
-    <i class="bi bi-capsule-pill me-2"></i>
+    <div class="row">
 
-    Inventory Reference
+    <div class="col-md-12 mb-4">
 
-</h5>
+        <label>
 
-<!-- MEDICINE STOCK PANEL -->
-<div class="card shadow-sm border-0 mt-3">
+            Next Step
 
-    <div class="card-header bg-primary text-white">
+        </label>
 
-        <i class="bi bi-box-seam me-2"></i>
+        <select name="next_step"
+                class="form-select">
 
-        Available Medicine Stock
+            <option value="Cashier">
 
-    </div>
+                Send to Cashier
 
-    <div class="card-body">
+            </option>
 
-        <!-- SEARCH BAR -->
-        <form method="GET"
-            class="mb-3">
+            <option value="Lab">
 
-            <div class="input-group">
+                Send to Laboratory
 
-                <input
-                    type="text"
-                    name="q"
-                    class="form-control"
-                    placeholder="Search medicine stock..."
-                    value="{{ query }}">
+            </option>
 
-                <button
-                    class="btn btn-primary"
-                    type="submit">
+            <option value="Procedure">
 
-                    <i class="bi bi-search"></i>
+                Send to Procedure
 
-                </button>
+            </option>
 
-                <a href="{% url 'add_prescription' visit.id %}"
-                class="btn btn-secondary">
-
-                    <i class="bi bi-arrow-clockwise"></i>
-
-                </a>
-
-            </div>
-
-        </form>
-
-        <!-- BEFORE SEARCH -->
-        {% if not query %}
-
-        <div class="alert alert-light text-muted">
-
-            <i class="bi bi-search me-2"></i>
-
-            Search medicine stock to view available medicines.
-
-        </div>
-
-        {% endif %}
-
-        <!-- SEARCH RESULTS -->
-        {% if query %}
-
-        <div class="table-responsive">
-
-            <table class="table table-hover align-middle">
-
-                <thead class="table-light">
-
-                    <tr>
-
-                        <th>Medicine</th>
-
-                        <th>Quantity</th>
-
-                        <th>Status</th>
-
-                    </tr>
-
-                </thead>
-
-                <tbody>
-
-                    {% for medicine in available_medicines %}
-
-                    <tr>
-
-                        <td>
-
-                            {{ medicine.medicine_name }}
-
-                            <button
-                                type="button"
-                                class="btn btn-sm btn-outline-primary ms-2"
-
-                                onclick="insertMedicine(
-                                    '{{ medicine.medicine_name|escapejs }}'
-                                )">
-
-                                Use
-
-                            </button>
-
-                        </td>
-
-                        <td>
-
-                            {{ medicine.quantity }}
-
-                        </td>
-
-                        <td>
-
-                            {% if medicine.is_expired %}
-
-                                <span class="badge bg-danger">
-
-                                    Expired
-
-                                </span>
-
-                            {% elif medicine.is_low_stock %}
-
-                                <span class="badge bg-warning text-dark">
-
-                                    Low Stock
-
-                                </span>
-
-                            {% else %}
-
-                                <span class="badge bg-success">
-
-                                    Available
-
-                                </span>
-
-                            {% endif %}
-
-                        </td>
-
-                    </tr>
-
-                    {% empty %}
-
-                    <tr>
-
-                        <td colspan="3"
-                            class="text-center text-muted">
-
-                            No medicines found.
-
-                        </td>
-
-                    </tr>
-
-                    {% endfor %}
-
-                </tbody>
-
-            </table>
-
-        </div>
-
-        {% endif %}
+        </select>
 
     </div>
 
 </div>
 
-<script>
+        <!-- BUTTONS -->
+        <div class="button-group">
 
-function insertMedicine(name){
+            <button type="submit"
+                    class="btn btn-warning save-btn">
 
-    const field =
-        document.getElementById(
-            'id_medication'
-        );
+                <i class="bi bi-check-circle me-1"></i>
+                Save Prescription
 
-    let medicines =
-        field.value
-        .split(',')
-        .map(m => m.trim())
-        .filter(m => m !== '');
+            </button>
 
-    if(!medicines.includes(name)){
+            <a href="{% url 'visit_detail' visit.id %}"
+            class="btn btn-secondary back-btn">
 
-        medicines.push(name);
+                <i class="bi bi-arrow-left me-1"></i>
+                Back
 
-    }
-
-    field.value =
-        medicines.join(', ');
-
-}
-
-</script>
-
-<!-- NEXT STEP -->
-
-<div class="row">
-
-        <label class="form-label fw-semibold">
-
-            Next Step
-
-            </label>
-
-            <select
-                name="next_step"
-                class="form-select">
-
-                <option value="Cashier">
-
-                    Send to Cashier
-
-                </option>
-
-                <option value="Lab">
-
-                    Send to Laboratory
-
-                </option>
-
-                <option value="Procedure">
-
-                    Send to Procedure
-
-                </option>
-
-            </select>
+            </a>
 
         </div>
 
-    </div>
+    </form>
 
-    <!-- BUTTONS -->
-
-    <div class="button-group">
-
-        <button
-            type="submit"
-            class="btn btn-warning save-btn">
-
-            <i class="bi bi-check-circle me-1"></i>
-
-            Save Prescription
-
-        </button>
-
-        <a href="{% url 'visit_detail' visit.id %}"
-        class="btn btn-secondary back-btn">
-
-            <i class="bi bi-arrow-left me-1"></i>
-
-            Back
-
-        </a>
-
-    </div>
-
-</form>
+</div>
 
 {% endblock %}
