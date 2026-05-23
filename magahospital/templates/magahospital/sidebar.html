@@ -98,6 +98,20 @@
         </li>
         {% endif %}
 
+        <!-- AUDIT LOGS -->
+        {% if is_admin %}
+            <li>
+                <a href="{% url 'audit_logs' %}"
+                    class="{% if request.resolver_match.url_name == 'audit_logs' %}active{% endif %}">
+
+                    <i class="bi bi-clipboard-data me-2"></i>
+
+                Audit Logs
+
+            </a>
+        </li>
+    {% endif %}
+
         <!-- APPOINTMENTS -->
         {% if is_reception or is_doctor or is_admin %}
         <li>
