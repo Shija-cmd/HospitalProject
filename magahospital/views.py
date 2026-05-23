@@ -1388,11 +1388,37 @@ def stock_list(request):
 
     medicines = MedicineStock.objects.all()
 
+    total_medicines = medicines.count()
+
+    low_stock_count = sum(
+        1 for medicine in medicines
+        if medicine.is_low_stock()
+    )
+
+    expiring_soon_count = sum(
+        1 for medicine in medicines
+        if medicine.expiring_soon()
+        and not medicine.is_expired()
+    )
+
+    expired_count = sum(
+        1 for medicine in medicines
+        if medicine.is_expired()
+    )
+
     return render(
         request,
         'magahospital/stock_list.html',
         {
-            'medicines': medicines
+            'medicines': medicines,
+
+            'total_medicines': total_medicines,
+
+            'low_stock_count': low_stock_count,
+
+            'expiring_soon_count': expiring_soon_count,
+
+            'expired_count': expired_count,
         }
     )
     
