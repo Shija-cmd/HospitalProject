@@ -1386,7 +1386,18 @@ def add_procedure(request, visit_id):
 @login_required
 def stock_list(request):
 
+    query = request.GET.get(
+        'q',
+        ''
+    )
+
     medicines = MedicineStock.objects.all()
+
+    if query:
+
+        medicines = medicines.filter(
+            medicine_name__icontains=query
+        )
 
     total_medicines = medicines.count()
 
@@ -1411,6 +1422,8 @@ def stock_list(request):
         'magahospital/stock_list.html',
         {
             'medicines': medicines,
+            
+            'query': query,
 
             'total_medicines': total_medicines,
 
