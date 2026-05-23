@@ -599,54 +599,85 @@ def add_dispense(request, visit_id):
 
             dispense = form.save(
                 commit=False
-        )
-
-        dispense.visit = visit
-
-        # =====================================
-        # STOCK CHECK
-        # =====================================
-
-        medicine = dispense.medication_given
-
-        if dispense.dispensed_quantity > medicine.quantity:
-
-            messages.error(
-                request,
-                f"Only {medicine.quantity} items remaining in stock."
             )
+
+            dispense.visit = visit
+
+            # =====================================
+            # STOCK CHECK
+            # =====================================
+
+            medicine = dispense.medication_given
+
+            # =====================================
+            # EXPIRY CHECK
+            # =====================================
+
+            if medicine.is_expired():
+
+                messages.error(
+                    request,
+                    f"{medicine.medicine_name} has expired and cannot be dispensed."
+                )
+
+                return redirect(
+                    'add_dispense',
+                    visit_id=visit.id
+                )
+
+            # =====================================
+            # EXPIRING SOON WARNING
+            # =====================================
+
+            if medicine.expiring_soon():
+
+                messages.warning(
+                    request,
+                    f"{medicine.medicine_name} is expiring soon."
+                )
+
+            # =====================================
+            # QUANTITY CHECK
+            # =====================================
+
+            if dispense.dispensed_quantity > medicine.quantity:
+
+                messages.error(
+                    request,
+                    f"Only {medicine.quantity} items remaining in stock."
+                )
+
+                return redirect(
+                    'add_dispense',
+                    visit_id=visit.id
+                )
+
+            # =====================================
+            # REDUCE STOCK
+            # =====================================
+
+            medicine.quantity -= dispense.dispensed_quantity
+
+            medicine.save()
+
+            # =====================================
+            # SAVE DISPENSE
+            # =====================================
+
+            dispense.save()
+
+            log_action(
+                request.user,
+                f"Dispensed medication for Visit #{visit.id}"
+            )
+
+            visit.status = 'Completed'
+
+            visit.save()
 
             return redirect(
-                'add_dispense',
+                'visit_detail',
                 visit_id=visit.id
-            )
-
-        # =====================================
-        # REDUCE STOCK
-        # =====================================
-
-        medicine.quantity -= dispense.dispensed_quantity
-
-        medicine.save()
-
-        # =====================================
-        # SAVE DISPENSE
-        # =====================================
-
-        dispense.save()
-
-        log_action(
-            request.user,
-            f"Dispensed medication for Visit #{visit.id}"
-            )
-
-        visit.status = 'Completed'
-
-        visit.save()
-
-        return redirect(
-            'visit_detail',
-            visit_id=visit.id
             )
 
     else:
