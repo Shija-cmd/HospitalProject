@@ -667,7 +667,9 @@ def add_stock(request):
 
     if request.method == 'POST':
 
-        form = MedicineStockForm(request.POST)
+        form = MedicineStockForm(
+            request.POST
+        )
 
         if form.is_valid():
 
@@ -678,15 +680,8 @@ def add_stock(request):
                 'Medicine stock added successfully.'
             )
 
-            return redirect('stock_list')
-
-        else:
-
-            print(form.errors)
-
-            messages.error(
-                request,
-                f"{form.errors}"
+            return redirect(
+                'stock_list'
             )
 
     else:
