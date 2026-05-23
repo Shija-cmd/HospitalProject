@@ -283,13 +283,17 @@ footer p{
 
 }
 
-.stat-card {
+.stat-card{
 
-    border-radius: 18px;
+    border-radius:18px;
 
-    transition: 0.3s ease;
+    padding:12px;
 
-    background: #ffffff;
+    box-shadow:0 8px 22px rgba(0,0,0,0.06);
+
+    transition:.3s;
+
+    min-height:100px;
 
 }
 
@@ -372,5 +376,81 @@ footer p{
     border-color: #0d6efd;
 
     box-shadow: 0 0 0 0.15rem rgba(13,110,253,0.15);
+
+}
+
+/* DASHBOARD */
+
+.dashboard-header{
+
+    margin-bottom:22px;
+
+}
+
+.dashboard-title{
+
+    font-size:2.1rem;
+
+    font-weight:750;
+
+    color:#0f172a;
+
+    margin-bottom:6px;
+
+}
+
+.dashboard-subtitle{
+
+    color:#64748b;
+
+    font-size:15px;
+
+}
+
+.stat-label{
+
+    font-size:14px;
+
+    color:#64748b;
+
+    font-weight:600;
+
+}
+
+.stat-number{
+
+    font-size:1.9rem;
+
+    font-weight:700;
+
+    color:#0f172a;
+
+}
+
+.role-badge{
+
+    padding:6px 14px;
+
+    border-radius:24px;
+
+    font-size:13px;
+
+    font-weight:600;
+
+}
+
+.stat-icon{
+
+    width:55px;
+
+    height:55px;
+
+    border-radius:14px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
 
 }

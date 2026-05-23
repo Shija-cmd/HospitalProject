@@ -3,85 +3,6 @@
 
 {% block content %}
 
-<style>
-
-    body{
-        background:#f1f5f9;
-    }
-
-    /* HEADER */
-    .dashboard-header{
-        margin-bottom:35px;
-    }
-
-    .dashboard-title{
-        font-size:2.6rem;
-        font-weight:800;
-        color:#0f172a;
-        margin-bottom:10px;
-    }
-
-    .dashboard-subtitle{
-        color:#64748b;
-        font-size:16px;
-    }
-
-    /* TOP INFO CARDS */
-    .top-card{
-        background:#fff;
-        border:none;
-        border-radius:20px;
-        padding:22px;
-        box-shadow:0 8px 25px rgba(0,0,0,0.05);
-        transition:0.3s;
-        height:100%;
-    }
-
-    .top-card:hover{
-        transform:translateY(-4px);
-    }
-
-    .top-card h6{
-        color:#64748b;
-        font-size:14px;
-        margin-bottom:10px;
-    }
-
-    .top-card h3{
-        font-weight:800;
-        color:#0f172a;
-        margin:0;
-    }
-
-    /* USER BADGE */
-    .role-badge{
-        display:inline-block;
-        padding:8px 16px;
-        border-radius:30px;
-        background:#0d6efd;
-        color:#fff;
-        font-size:14px;
-        font-weight:600;
-        margin-top:10px;
-    }
-
-    /* CLOCK */
-    .clock{
-        font-size:1.1rem;
-        font-weight:700;
-        color:#0f172a;
-    }
-
-    @media(max-width:768px){
-
-        .dashboard-title{
-            font-size:2rem;
-        }
-
-    }
-
-</style>
-
 <!-- HEADER -->
 <div class="dashboard-header">
 
@@ -127,7 +48,7 @@
         Hospital Statistics
     </h4>
 
-    <div class="row g-4">
+    <div class="row g-3">
 
         <!-- TOTAL PATIENTS -->
         <div class="col-md-3">
@@ -138,13 +59,13 @@
 
                     <div>
 
-                        <h6 class="text-muted mb-2">
+                        <h6 class="stat-label mb-1">
 
                             Total Patients
 
                         </h6>
 
-                        <h2 class="fw-bold mb-0">
+                        <h2 class="stat-number mb-0">
 
                             {{ total_patients }}
 
@@ -154,7 +75,7 @@
 
                     <div class="stat-icon bg-primary-subtle text-primary">
 
-                        <i class="bi bi-people-fill fs-3"></i>
+                        <i class="bi bi-people-fill fs-4"></i>
 
                     </div>
 
@@ -173,13 +94,13 @@
 
                     <div>
 
-                        <h6 class="text-muted mb-2">
+                        <h6 class="stat-label mb-1">
 
                             Waiting Vitals
 
                         </h6>
 
-                        <h2 class="fw-bold mb-0">
+                        <h2 class="stat-number mb-0">
 
                             {{ vitals_waiting }}
 
@@ -214,7 +135,7 @@
 
                         </h6>
 
-                        <h2 class="fw-bold mb-0">
+                        <h2 class="stat-number mb-0">
 
                             {{ doctor_waiting }}
 
@@ -243,13 +164,13 @@
 
                     <div>
 
-                        <h6 class="text-muted mb-2">
+                        <h6 class="stat-label mb-1">
 
                             Waiting Lab
 
                         </h6>
 
-                        <h2 class="fw-bold mb-0">
+                        <h2 class="stat-number mb-0">
 
                             {{ lab_waiting }}
 
@@ -278,13 +199,13 @@
 
             <div>
 
-                <h6 class="text-muted mb-2">
+                <h6 class="stat-label mb-1">
 
                     Waiting Procedure
 
                 </h6>
 
-                <h2 class="fw-bold mb-0">
+                <h2 class="stat-number mb-0">
 
                     {{ procedure_waiting }}
 
@@ -319,7 +240,7 @@
 
                         </h6>
 
-                        <h2 class="fw-bold mb-0">
+                        <h2 class="stat-number mb-0">
 
                             {{ prescription_waiting }}
 
@@ -348,13 +269,13 @@
 
             <div>
 
-                <h6 class="text-muted mb-2">
+                <h6 class="stat-label mb-1">
 
                     Waiting Cashier
 
                 </h6>
 
-                <h2 class="fw-bold mb-0">
+                <h2 class="stat-number mb-0">
 
                     {{ cashier_waiting }}
 
@@ -383,13 +304,13 @@
 
                     <div>
 
-                        <h6 class="text-muted mb-2">
+                        <h6 class="stat-label mb-1">
 
                             Waiting Dispense
 
                         </h6>
 
-                        <h2 class="fw-bold mb-0">
+                        <h2 class="stat-number mb-0">
 
                             {{ dispense_waiting }}
 
@@ -418,13 +339,13 @@
 
                     <div>
 
-                        <h6 class="text-muted mb-2">
+                        <h6 class="stat-label mb-1">
 
                             Completed Visits
 
                         </h6>
 
-                        <h2 class="fw-bold mb-0">
+                        <h2 class="stat-number mb-0">
 
                             {{ completed_visits }}
 
@@ -460,13 +381,13 @@
 
                 <div>
 
-                    <h6 class="text-muted mb-2">
+                    <h6 class="stat-label mb-1">
 
                         Logged In User
 
                     </h6>
 
-                    <h3 class="fw-bold mb-0 text-dark">
+                    <h3 class="stat-number mb-0 text-dark">
 
                         {{ request.user.username }}
 
@@ -495,13 +416,13 @@
 
                 <div>
 
-                    <h6 class="text-muted mb-2">
+                    <h6 class="stat-label mb-1">
 
                         Today's Date
 
                     </h6>
 
-                    <h3 class="fw-bold mb-0 text-dark"
+                    <h3 class="stat-number mb-0 text-dark"
                         id="today-date">
 
                     </h3>
@@ -529,7 +450,7 @@
 
                 <div>
 
-                    <h6 class="text-muted mb-2">
+                    <h6 class="stat-label mb-1">
 
                         Current Time
 
