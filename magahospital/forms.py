@@ -567,7 +567,14 @@ class MedicineStockForm(forms.ModelForm):
 
         model = MedicineStock
 
-        fields = '__all__'
+        fields = [
+            'medicine_name',
+            'quantity',
+            'unit_price',
+            'expiry_date',
+            'batch_number',
+            'low_stock_alert'
+        ]
 
         widgets = {
 
