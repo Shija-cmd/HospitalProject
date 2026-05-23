@@ -1524,16 +1524,28 @@ def procedure_queue(request):
 @login_required
 def audit_logs(request):
 
+    query = request.GET.get(
+        'q',
+        ''
+    )
+
     logs = AuditLog.objects.select_related(
         'user'
     ).order_by(
         '-timestamp'
     )
 
+    if query:
+
+        logs = logs.filter(
+            action__icontains=query
+        )
+
     return render(
         request,
         'magahospital/audit_logs.html',
         {
-            'logs': logs
+            'logs': logs,
+            'query': query
         }
     )                            
