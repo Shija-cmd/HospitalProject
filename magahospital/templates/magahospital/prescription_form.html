@@ -360,6 +360,83 @@
 
     <div class="card-body">
 
+        <!-- SEARCH BAR -->
+
+<form method="GET" class="mb-3">
+
+    <div class="input-group">
+
+        <input
+            type="text"
+            name="q"
+            class="form-control"
+            placeholder="Search medicine stock..."
+            value="{{ query }}">
+
+        <button
+            class="btn btn-primary"
+            type="submit">
+
+            <i class="bi bi-search"></i>
+
+        </button>
+
+    </div>
+
+</form>
+
+{% if not query %}
+
+<div class="alert alert-light text-muted">
+
+    <i class="bi bi-search me-2"></i>
+
+    Search medicine stock to view available medicines.
+
+</div>
+
+{% endif %}
+
+{% if query %}
+
+<table class="table table-hover">
+
+    {% for medicine in available_medicines %}
+
+    <tr>
+
+        <td>
+
+            {{ medicine.medicine_name }}
+
+        </td>
+
+        <td>
+
+            {{ medicine.quantity }}
+
+        </td>
+
+    </tr>
+
+    {% empty %}
+
+    <tr>
+
+        <td class="text-muted">
+
+            No medicines found.
+
+        </td>
+
+    </tr>
+
+    {% endfor %}
+
+</table>
+
+{% endif %}
+
         <div class="table-responsive">
 
             <table class="table table-hover align-middle">

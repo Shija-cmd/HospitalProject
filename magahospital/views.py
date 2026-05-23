@@ -556,15 +556,15 @@ def add_prescription(request, visit_id):
         ''
     )
 
-    available_medicines = MedicineStock.objects.order_by(
-        'medicine_name'
-    )
+    available_medicines = MedicineStock.objects.none()
 
     if query:
 
-        available_medicines = available_medicines.filter(
+        available_medicines = MedicineStock.objects.filter(
             medicine_name__icontains=query
-        )
+        ).order_by(
+            'medicine_name'
+        )[:5]
 
     return render(
         request,
@@ -577,11 +577,10 @@ def add_prescription(request, visit_id):
             'procedures': visit.procedures.all(),
 
             'available_medicines': available_medicines,
-            
+
             'query': query,
         }
     )
-
 
 # =========================================
 # ADD DISPENSE
