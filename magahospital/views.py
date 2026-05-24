@@ -661,6 +661,22 @@ def add_dispense(request, visit_id):
                     request,
                     f"{medicine.medicine_name} is expiring soon."
                 )
+                
+            #=====================================
+            # OUT OF STOCK CHECK
+            # =====================================
+            
+            if medicine.quantity <= 0:
+
+                messages.error(
+                    request,
+                    f"{medicine.medicine_name} is out of stock."
+                )
+
+                return redirect(
+                    'add_dispense',
+                    visit_id=visit.id
+                )    
 
             # =====================================
             # QUANTITY CHECK
@@ -677,6 +693,22 @@ def add_dispense(request, visit_id):
                     'add_dispense',
                     visit_id=visit.id
                 )
+                
+            # =====================================
+            # ZERO QUANTITY CHECK
+            # =====================================
+            
+            if dispense.dispensed_quantity <= 0:
+
+                messages.error(
+                    request,
+                    'Dispensed quantity must be greater than zero.'
+                )
+
+                return redirect(
+                    'add_dispense',
+                    visit_id=visit.id
+                )    
 
             # =====================================
             # REDUCE STOCK
@@ -694,7 +726,7 @@ def add_dispense(request, visit_id):
 
             log_action(
                 request.user,
-                f"Dispensed medication for Visit #{visit.id}"
+                f"Dispensed {dispense.dispensed_quantity} units of {medicine.medicine_name} for Visit #{visit.id}"
             )
 
             visit.status = 'Completed'
