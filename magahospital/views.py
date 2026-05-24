@@ -1,5 +1,4 @@
 from urllib import request
-
 from django import template
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import login, logout
@@ -16,6 +15,7 @@ from django.contrib.auth.models import User, Group
 from django.contrib.auth.hashers import make_password
 from django.contrib import messages
 from django.utils import timezone
+from datetime import date
 
 from .models import (
     Patient,
@@ -190,6 +190,10 @@ def dashboard(request):
 
         'completed_visits': Visit.objects.filter(
             status='Completed'
+        ).count(),
+        
+        'todays_appointments': Appointment.objects.filter(
+            appointment_date=date.today()
         ).count(),
 
     }
