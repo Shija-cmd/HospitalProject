@@ -354,17 +354,32 @@
 
                     {{ medicine.medicine_name }}
 
+                    {% if medicine.is_expired %}
+
                     <button
-                        type="button"
-                        class="btn btn-sm btn-outline-primary ms-2"
+                    type="button"
+                    class="btn btn-sm btn-danger"
+                    disabled>
 
-                        onclick="insertMedicine(
-                            '{{ medicine.medicine_name|escapejs }}'
-                        )">
+                    Expired
 
-                        Use
+                </button>
 
-                    </button>
+            {% else %}
+
+        <button
+    type="button"
+    class="btn btn-sm btn-outline-primary"
+
+        onclick="insertMedicine(
+        '{{ medicine.medicine_name|escapejs }}'
+            )">
+
+        Use
+
+    </button>
+
+            {% endif %}
 
                 </td>
 
