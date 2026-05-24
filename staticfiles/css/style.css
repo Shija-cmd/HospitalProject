@@ -455,7 +455,7 @@ footer p{
     font-size:13px;
 
     font-weight:600;
-
+}
 
 
 .clock{
@@ -526,11 +526,16 @@ footer p{
     height:42px;
 
     border-radius:10px;
+}    
+
+.quick-info-card{
+
+    min-height:58px !important;
 
 }
 
-.quick-info-card .quick-info-number{
+.card-body{
 
-    font-size:.95rem !important;
+    padding:.65rem .85rem !important;
 
 }
