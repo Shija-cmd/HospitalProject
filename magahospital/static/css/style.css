@@ -517,3 +517,29 @@ footer p{
     color:#0f172a;
 
 }
+
+/* QUICK INFO CARDS */
+
+.quick-info-card{
+
+    min-height:72px !important;
+
+    padding:8px 12px !important;
+
+}
+
+.quick-info-card .stat-icon{
+
+    width:42px;
+
+    height:42px;
+
+    border-radius:10px;
+
+}
+
+.quick-info-card .quick-info-number{
+
+    font-size:.95rem !important;
+
+}
