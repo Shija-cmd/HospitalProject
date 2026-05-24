@@ -311,15 +311,15 @@ footer p{
 
 .stat-card{
 
-    border-radius:18px;
+    border-radius:16px;
 
-    padding:12px;
+    padding:10px 14px;
 
-    box-shadow:0 8px 22px rgba(0,0,0,0.06);
+    box-shadow:0 6px 18px rgba(0,0,0,0.05);
 
     transition:.3s;
 
-    min-height:100px;
+    min-height:85px;
 
 }
 
@@ -333,11 +333,11 @@ footer p{
 
 .stat-icon {
 
-    width: 60px;
+    width: 48px;
 
-    height: 60px;
+    height: 48px;
 
-    border-radius: 15px;
+    border-radius: 12px;
 
     display: flex;
 
