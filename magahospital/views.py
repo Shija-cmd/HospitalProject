@@ -1611,7 +1611,13 @@ def audit_logs(request):
     ).count()
 
     pharmacy_logs = logs.filter(
-        action__icontains='stock'
+
+        Q(action__icontains='dispensed') |
+
+        Q(action__icontains='stock') |
+
+        Q(action__icontains='medicine')
+
     ).count()
 
     doctor_logs = logs.filter(
