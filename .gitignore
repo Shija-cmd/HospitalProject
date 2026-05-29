@@ -1,0 +1,29 @@
+# ENVIRONMENT
+.env
+
+# PYTHON
+__pycache__/
+*.py[cod]
+*.pyo
+
+# DATABASES
+db.sqlite3
+
+# DJANGO
+media/
+staticfiles/
+
+# VIRTUAL ENV
+venv/
+env/
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+Thumbs.db
+.DS_Store
+
+# LOGS
+*.log
