@@ -2,7 +2,7 @@ from django import forms
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth.models import User
 
-from .models import Patient, Doctor, Lab, Prescription, Dispense, Bill, Vital, Procedure, MedicineStock, Appointment
+from .models import Patient, Doctor, Lab, Prescription, Dispense, Bill, Vital, Procedure, MedicineStock, Appointment, Test
 
 
 # =========================
@@ -100,6 +100,16 @@ class PatientForm(forms.ModelForm):
 
 class DoctorForm(forms.ModelForm):
 
+    tests = forms.ModelMultipleChoiceField(
+
+        queryset=Test.objects.all(),
+
+        required=False,
+
+        widget=forms.CheckboxSelectMultiple
+
+    )
+
     class Meta:
 
         model = Doctor
@@ -110,6 +120,8 @@ class DoctorForm(forms.ModelForm):
 
             'diagnosis',
 
+            'tests',
+
             'next_step',
 
         ]
@@ -119,6 +131,8 @@ class DoctorForm(forms.ModelForm):
             'history': 'Patient History',
 
             'diagnosis': 'Diagnosis',
+
+            'tests': 'Requested Tests',
 
             'next_step': 'Send Patient To'
 
@@ -139,6 +153,12 @@ class DoctorForm(forms.ModelForm):
                     'class': 'form-control',
                     'rows': 4,
                     'placeholder': 'Enter diagnosis details...'
+                }
+            ),
+
+            'tests': forms.SelectMultiple(
+                attrs={
+                    'class': 'form-select'
                 }
             ),
 

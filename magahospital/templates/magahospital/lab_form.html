@@ -130,6 +130,55 @@
                 <br>
                 {{ visit.doctor.diagnosis }}
             </p>
+            <!-- REQUESTED TESTS -->
+
+<p>
+
+    <strong>
+
+        Requested Tests:
+
+    </strong>
+
+</p>
+
+{% if visit.doctor.tests.all %}
+
+    <ul class="list-group mb-4">
+
+        {% for test in visit.doctor.tests.all %}
+
+        <li class="list-group-item">
+
+            <strong>
+
+                {{ test.name }}
+
+            </strong>
+
+            <br>
+
+            <small class="text-muted">
+
+                {{ test.description }}
+
+            </small>
+
+        </li>
+
+        {% endfor %}
+
+    </ul>
+
+{% else %}
+
+    <p class="text-muted">
+
+        No requested tests.
+
+    </p>
+
+{% endif %}
 
         {% else %}
 
@@ -189,7 +238,7 @@
             </button>
 
             <a href="{% url 'visit_detail' visit.id %}"
-               class="btn btn-secondary back-btn">
+            class="btn btn-secondary back-btn">
 
                 <i class="bi bi-arrow-left me-1"></i>
                 Back

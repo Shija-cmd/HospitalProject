@@ -164,6 +164,11 @@ class Doctor(models.Model):
         blank=True,
         null=True
     )
+    
+    tests = models.ManyToManyField(
+        'Test',
+        blank=True
+    )
 
     
     NEXT_STEP_CHOICES = [
@@ -651,6 +656,35 @@ PROCEDURE_TYPES = [
     ('Minor Surgery', 'Minor Surgery'),
 
 ]
+# =====================================
+# TEST MODEL
+# =====================================
+
+class Test(models.Model):
+
+    name = models.CharField(
+        max_length=150,
+        unique=True
+    )
+
+    description = models.TextField(
+        blank=True,
+        null=True
+    )
+
+    created_at = models.DateTimeField(
+        auto_now_add=True
+    )
+
+    def __str__(self):
+
+        return self.name
+
+
+# =====================================
+# PROCEDURES
+# =====================================
+
 class Procedure(models.Model):
 
     visit = models.ForeignKey(
@@ -668,7 +702,7 @@ class Procedure(models.Model):
         blank=True,
         null=True
     )
-    
+
     image = models.ImageField(
         upload_to='procedure_images/',
         blank=True,

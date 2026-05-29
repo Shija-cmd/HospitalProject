@@ -373,6 +373,8 @@ def add_doctor(request, visit_id):
             doctor.doctor = request.user
 
             doctor.save()
+            
+            form.save_m2m()
 
             # =========================
             # VISIT FLOW LOGIC

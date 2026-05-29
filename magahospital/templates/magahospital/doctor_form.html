@@ -232,18 +232,60 @@
 
         </div>
 
-        <!-- NEXT STEP -->
-        <div class="mb-4">
+        <!-- TESTS -->
 
-            <label>
+<div class="mb-4">
 
-                Next Step
+    <label>
 
-            </label>
+        Requested Tests
 
-            {{ form.next_step }}
+    </label>
+
+    <div class="border rounded p-3 bg-light">
+
+        {% for checkbox in form.tests %}
+
+        <div class="card mb-3 p-3 shadow-sm border-0">
+
+            <div class="form-check">
+
+                {{ checkbox.tag }}
+
+                <label class="form-check-label fw-bold">
+
+                    {{ checkbox.choice_label }}
+
+                </label>
+
+            </div>
+
+            <small class="text-muted d-block mt-2">
+
+                {{ checkbox.data.value.instance.description }}
+
+            </small>
 
         </div>
+
+        {% endfor %}
+
+    </div>
+
+</div>
+
+<!-- NEXT STEP -->
+<div class="mb-4">
+
+    <label>
+
+        Next Step
+
+    </label>
+
+    {{ form.next_step }}
+
+</div>
 
         <!-- BUTTONS -->
         <div class="button-group">
