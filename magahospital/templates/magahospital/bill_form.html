@@ -38,21 +38,48 @@
 
                     <li class="list-group-item">
 
-                        <strong>
+    <strong>
 
-                            {{ prescription.medication }}
+        {{ prescription.medication }}
 
-                        </strong>
+    </strong>
 
-                        <br>
+    <br>
 
-                        <small class="text-muted">
+    <small class="text-muted">
 
-                            {{ prescription.notes }}
+        {{ prescription.notes }}
 
-                        </small>
+    </small>
 
-                    </li>
+    <br>
+
+    {% for item in medication_details %}
+
+    {% if item.name == prescription.medication %}
+
+        <span class="badge bg-success">
+
+            Unit:
+            {{ item.unit_price }} TZS
+
+            |
+
+            Qty:
+            {{ item.quantity }}
+
+            |
+
+            Total:
+            {{ item.total }} TZS
+
+        </span>
+
+    {% endif %}
+
+{% endfor %}
+
+</li>
 
                 {% empty %}
 
@@ -92,6 +119,14 @@
                             {{ procedure.notes }}
 
                         </small>
+
+                            <br>
+
+                                    <span class="badge bg-warning text-dark">
+
+                                {{ procedure.cost }} TZS
+
+                        </span>
 
                     </li>
 

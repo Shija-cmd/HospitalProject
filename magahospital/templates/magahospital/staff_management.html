@@ -107,6 +107,7 @@
                     <th>Username</th>
                     <th>Role</th>
                     <th>Status</th>
+                    <th>Actions</th>
 
                 </tr>
 
@@ -136,17 +137,75 @@
 
                         <td>
 
-                            {% if user.is_active %}
+    {% if user.is_active %}
 
-                                Active
+        <span class="badge bg-success">
 
-                            {% else %}
+            Active
 
-                                Disabled
+        </span>
 
-                            {% endif %}
+    {% else %}
 
-                        </td>
+        <span class="badge bg-danger">
+
+            Disabled
+
+        </span>
+
+    {% endif %}
+
+</td>
+
+<td>
+
+    {% if not user.is_superuser %}
+
+        <a
+            href="{% url 'toggle_staff_status' user.id %}"
+
+            class="btn btn-sm
+            {% if user.is_active %}
+                btn-warning
+            {% else %}
+                btn-success
+            {% endif %}"
+
+            onclick="return confirm(
+                'Are you sure?'
+            )">
+
+            {% if user.is_active %}
+
+                Disable
+
+            {% else %}
+
+                Activate
+
+            {% endif %}
+
+        </a>
+
+        <a
+            href="{% url 'change_staff_role' user.id %}"
+            class="btn btn-info btn-sm">
+
+            Change Role
+
+        </a>
+
+    {% else %}
+
+        <span class="text-muted">
+
+            Protected
+
+        </span>
+
+    {% endif %}
+
+</td>
 
                     </tr>
 

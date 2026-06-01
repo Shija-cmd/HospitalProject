@@ -1,0 +1,62 @@
+{% extends 'magahospital/base.html' %}
+
+{% block content %}
+
+<div class="container mt-4">
+
+    <div class="card p-4">
+
+        <h3>
+
+            Change Role:
+            {{ user_obj.username }}
+
+        </h3>
+
+        <form method="POST">
+
+            {% csrf_token %}
+
+            <div class="mb-3">
+
+                <label>
+
+                    Select Role
+
+                </label>
+
+                <select
+                    name="group"
+                    class="form-control"
+                    required>
+
+                    {% for group in groups %}
+
+                    <option
+                        value="{{ group.name }}">
+
+                        {{ group.name }}
+
+                    </option>
+
+                    {% endfor %}
+
+                </select>
+
+            </div>
+
+            <button
+                type="submit"
+                class="btn btn-primary">
+
+                Update Role
+
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+
+{% endblock %}

@@ -106,7 +106,7 @@ class DoctorForm(forms.ModelForm):
 
         required=False,
 
-        widget=forms.CheckboxSelectMultiple
+        widget=forms.CheckboxSelectMultiple()
 
     )
 
@@ -142,29 +142,21 @@ class DoctorForm(forms.ModelForm):
 
             'history': forms.Textarea(
                 attrs={
-                    'class': 'form-control',
-                    'rows': 5,
-                    'placeholder': 'Enter patient history...'
+                    'class':'form-control',
+                    'rows':5
                 }
             ),
 
             'diagnosis': forms.Textarea(
                 attrs={
-                    'class': 'form-control',
-                    'rows': 4,
-                    'placeholder': 'Enter diagnosis details...'
-                }
-            ),
-
-            'tests': forms.SelectMultiple(
-                attrs={
-                    'class': 'form-select'
+                    'class':'form-control',
+                    'rows':4
                 }
             ),
 
             'next_step': forms.Select(
                 attrs={
-                    'class': 'form-select'
+                    'class':'form-select'
                 }
             ),
 
@@ -203,7 +195,19 @@ class PrescriptionForm(forms.ModelForm):
 
     class Meta:
         model = Prescription
-        fields = ['medication', 'notes']
+        fields = [
+
+    'medication',
+
+    'dose',
+
+    'frequency',
+
+    'days',
+
+    'notes'
+
+]
 
         widgets = {
 
@@ -216,6 +220,18 @@ class PrescriptionForm(forms.ModelForm):
                 'class': 'form-control',
                 'rows': 3,
                 'placeholder': 'Additional prescription notes...'
+            }),
+            
+            'dose': forms.NumberInput(attrs={
+                'class':'form-control'
+            }),
+
+            'frequency': forms.NumberInput(attrs={
+                'class':'form-control'
+            }),
+
+            'days': forms.NumberInput(attrs={
+                'class':'form-control'
             }),
 
         }

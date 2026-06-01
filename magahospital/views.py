@@ -978,6 +978,118 @@ def staff_management(request):
     )
     
 # =========================================
+# TOGGLE STAFF STATUS
+# =========================================
+
+@login_required
+def toggle_staff_status(
+    request,
+    user_id
+    ):
+
+    if not request.user.is_superuser:
+
+        return render(
+            request,
+            'magahospital/not_allowed.html',
+            status=403
+        )
+
+    user = get_object_or_404(
+        User,
+        id=user_id
+    )
+
+    if user.is_superuser:
+
+        messages.error(
+            request,
+            'Superuser account is protected.'
+        )
+
+        return redirect(
+            'staff_management'
+        )
+
+    user.is_active = (
+        not user.is_active
+    )
+
+    user.save()
+
+    status = (
+        'activated'
+        if user.is_active
+        else 'disabled'
+    )
+
+    messages.success(
+        request,
+        f'{user.username} has been {status}.'
+    )
+
+    return redirect(
+        'staff_management'
+    )
+    
+# =========================================
+# CHANGE STAFF ROLE
+# =========================================
+
+@login_required
+def change_staff_role(
+    request,
+    user_id
+):
+
+    if not request.user.is_superuser:
+
+        return render(
+            request,
+            'magahospital/not_allowed.html',
+            status=403
+        )
+
+    user = get_object_or_404(
+        User,
+        id=user_id
+    )
+
+    groups = Group.objects.all()
+
+    if request.method == 'POST':
+
+        new_group = request.POST.get(
+            'group'
+        )
+
+        user.groups.clear()
+
+        group = Group.objects.get(
+            name=new_group
+        )
+
+        user.groups.add(group)
+
+        messages.success(
+            request,
+            f'{user.username} role updated successfully.'
+        )
+
+        return redirect(
+            'staff_management'
+        )
+
+    return render(
+        request,
+        'magahospital/change_role.html',
+        {
+            'user_obj': user,
+            'groups': groups
+        }
+    )        
+    
+# =========================================
 # PATIENT HISTORY
 # =========================================
 
@@ -1237,11 +1349,102 @@ def add_bill(request, visit_id):
     bill, created = Bill.objects.get_or_create(
         visit=visit
     )
+    
+    # =========================================
+    # AUTO POPULATE FEES
+    # =========================================
+
+    bill.consultation_fee = 10000
+
+    procedure_fee = sum(
+        procedure.cost
+        for procedure in visit.procedures.all()
+    )
+
+    bill.procedure_fee = procedure_fee
+
+    medication_fee = 0
+    
+
+    medication_fee = 0
+
+    medication_details = []
+
+    for prescription in visit.prescriptions.all():
+
+        medicine = MedicineStock.objects.filter(
+            medicine_name=prescription.medication
+        ).first()
+
+        if medicine:
+
+            try:
+
+                first, days = (
+                    prescription.notes.split('/')
+                )
+
+                dose, frequency = map(
+                    int,
+                    first.split('*')
+                )
+
+                days = int(days)
+
+                quantity = (
+                    dose *
+                    frequency *
+                    days
+                )
+
+            except:
+
+                quantity = 1
+
+            total = (
+                quantity *
+                medicine.unit_price
+            )
+
+            medication_fee += total
+
+            medication_details.append({
+
+                'name':
+                prescription.medication,
+
+                'unit_price':
+                medicine.unit_price,
+
+                'quantity':
+                quantity,
+
+                'total':
+                total
+
+            })
+
+    bill.medication_fee = medication_fee
+
+    lab_fee = 0
+
+    if hasattr(
+        visit,
+        'doctor'
+    ):
+
+        for test in visit.doctor.tests.all():
+
+            lab_fee += test.price
+
+    bill.lab_fee = lab_fee
+
+    bill.save()
 
     if request.method == 'POST':
 
         form = BillForm(
-            request.POST,
+        request.POST,
             instance=bill
         )
 
@@ -1290,7 +1493,10 @@ def add_bill(request, visit_id):
         {
             'form': form,
             'visit': visit,
-            'bill': bill
+            'bill': bill,
+            'medicines': MedicineStock.objects.all(),
+            'medication_details': 
+            medication_details,
         }
     )
     

@@ -242,6 +242,18 @@ class Prescription(models.Model):
         max_length=255
     )
 
+    dose = models.PositiveIntegerField(
+        default=1
+    )
+
+    frequency = models.PositiveIntegerField(
+        default=1
+    )
+
+    days = models.PositiveIntegerField(
+        default=1
+    )
+
     notes = models.TextField(
         blank=True,
         null=True
@@ -670,6 +682,12 @@ class Test(models.Model):
     description = models.TextField(
         blank=True,
         null=True
+    )
+    
+    price = models.DecimalField(
+        max_digits=10,
+        decimal_places=2,
+        default=0
     )
 
     created_at = models.DateTimeField(

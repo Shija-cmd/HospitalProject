@@ -167,10 +167,26 @@ urlpatterns = [
     # 7. STAFF MANAGEMENT
     #=========================
     
+    #=========================
+# STAFF MANAGEMENT
+#=========================
+
     path(
         'staff-management/',
         views.staff_management,
         name='staff_management'
+    ),
+
+    path(
+        'staff/toggle-status/<int:user_id>/',
+        views.toggle_staff_status,
+        name='toggle_staff_status'
+    ),
+    
+    path(
+        'staff/change-role/<int:user_id>/',
+        views.change_staff_role,
+        name='change_staff_role'
     ),
     
     #=========================
