@@ -307,6 +307,11 @@ class Bill(models.Model):
         decimal_places=2,
         default=0
     )
+    
+    adjusted_medications = models.JSONField(
+        default=list,
+        blank=True
+    )
 
     is_paid = models.BooleanField(
         default=False

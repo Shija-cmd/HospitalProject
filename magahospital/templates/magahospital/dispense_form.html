@@ -180,6 +180,40 @@
 
 </style>
 
+<!-- PAYMENT STATUS -->
+
+{% if bill.is_paid %}
+
+<div class="alert alert-success">
+
+    <h5>
+
+        💰 PAID
+
+    </h5>
+
+    <strong>Total Bill:</strong>
+
+    {{ bill.total_amount }} TZS
+
+    <br>
+
+    <strong>Medication Fee:</strong>
+
+    {{ bill.medication_fee }} TZS
+
+</div>
+
+{% else %}
+
+<div class="alert alert-danger">
+
+    ❌ Payment Pending
+
+</div>
+
+{% endif %}
+
 <!-- PRESCRIPTION DETAILS -->
 <div class="card shadow-sm border-0 mb-4">
 
@@ -331,6 +365,22 @@
 
     </h2>
 
+    <!-- DISPLAY MEDICATION DETAILS -->
+{% for item in medication_details %}
+
+<div class="badge bg-success">
+
+    {{ item.name }}
+
+    |
+
+    Qty:
+    {{ item.quantity }}
+
+</div>
+
+{% endfor %}
+
     <!-- FORM -->
     <form method="POST" class="custom-form-card">
 
@@ -378,6 +428,7 @@
     </div>
 
 </div>
+
 
         <!-- BUTTONS -->
         <div class="button-group">

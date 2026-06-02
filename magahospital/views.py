@@ -529,7 +529,6 @@ def add_prescription(request, visit_id):
                 f"Added prescription for Visit #{visit.id}"
             )
 
-            # WORKFLOW LOGIC
             next_step = request.POST.get(
                 'next_step'
             )
@@ -551,6 +550,10 @@ def add_prescription(request, visit_id):
             return redirect(
                 'doctor_queue'
             )
+
+            # =========================
+            # REDIRECT
+            # =========================
 
     else:
 
@@ -605,6 +608,16 @@ def add_dispense(request, visit_id):
     visit = get_object_or_404(
         Visit,
         id=visit_id
+    )
+    
+    bill = Bill.objects.filter(
+        visit=visit
+    ).first()
+    
+    medication_details = (
+        bill.adjusted_medications
+        if bill
+        else []
     )
 
     # CHECK PAYMENT
@@ -682,6 +695,7 @@ def add_dispense(request, visit_id):
                 return redirect(
                     'add_dispense',
                     visit_id=visit.id
+                    
                 )    
 
             # =====================================
@@ -753,7 +767,10 @@ def add_dispense(request, visit_id):
         'magahospital/dispense_form.html',
         {
             'form': form,
-            'visit': visit
+            'visit': visit,
+            'bill': bill,
+            'medication_details':
+            medication_details,
         }
     )
 
@@ -1364,67 +1381,104 @@ def add_bill(request, visit_id):
     bill.procedure_fee = procedure_fee
 
     medication_fee = 0
-    
-
-    medication_fee = 0
 
     medication_details = []
 
     for prescription in visit.prescriptions.all():
 
-        medicine = MedicineStock.objects.filter(
-            medicine_name=prescription.medication
-        ).first()
+        try:
 
-        if medicine:
+            entries = prescription.notes.split(',')
 
-            try:
+            for entry in entries:
 
-                first, days = (
-                    prescription.notes.split('/')
+                medicine_name, dosage = map(
+                    str.strip,
+                    entry.split('-')
                 )
 
-                dose, frequency = map(
-                    int,
-                    first.split('*')
-                )
+                medicine = MedicineStock.objects.filter(
+                    medicine_name__icontains=medicine_name
+                ).first()
 
-                days = int(days)
+                if medicine:
 
-                quantity = (
-                    dose *
-                    frequency *
-                    days
-                )
+                    first, prescribed_days = dosage.split('/')
 
-            except:
+                    dose, frequency = map(
+                        int,
+                        first.split('*')
+                    )
 
-                quantity = 1
+                    prescribed_days = int(
+                        prescribed_days
+                    )
 
-            total = (
-                quantity *
-                medicine.unit_price
-            )
+                    # CASHIER OVERRIDE
+                    dispense_days = int(
+                        request.POST.get(
+                            f'days_{medicine_name}',
+                            prescribed_days
+                        )
+                    )
+                    
 
-            medication_fee += total
+                    quantity = (
+                        dose *
+                        frequency *
+                        dispense_days
+                    )
+                    
 
-            medication_details.append({
+                    total = (
+                        quantity *
+                        medicine.unit_price
+                    )
 
-                'name':
-                prescription.medication,
+                    medication_fee += total
 
-                'unit_price':
-                medicine.unit_price,
+                    medication_details.append({
 
-                'quantity':
-                quantity,
+                        'name':
+                        medicine_name,
 
-                'total':
-                total
+                        'input_key':
+                        medicine_name,
 
-            })
+                        'unit_price':
+                        float(
+                        medicine.unit_price
+                        ),
+
+                        'quantity':
+                        quantity,
+
+                        'total':
+                        float(
+                        total
+                        ),
+
+                        'dose':
+                        dose,
+
+                        'frequency':
+                        frequency,
+
+                        'prescribed_days':
+                        prescribed_days,
+
+                        'dispense_days':
+                        dispense_days,
+
+                    })
+
+        except:
+
+            pass
 
     bill.medication_fee = medication_fee
+    
+    bill.adjusted_medications = medication_details
 
     lab_fee = 0
 
@@ -1438,7 +1492,7 @@ def add_bill(request, visit_id):
             lab_fee += test.price
 
     bill.lab_fee = lab_fee
-
+    
     bill.save()
 
     if request.method == 'POST':
@@ -1453,11 +1507,19 @@ def add_bill(request, visit_id):
             bill = form.save(
                 commit=False
             )
+            
+            bill.consultation_fee = 10000
 
+            bill.procedure_fee = procedure_fee
+
+            bill.medication_fee = medication_fee
+            
+            bill.lab_fee = lab_fee
+            
             bill.visit = visit
 
             bill.save()
-
+            
             log_action(
                 request.user,
                 f"Processed payment for Visit #{visit.id}"
@@ -1486,7 +1548,12 @@ def add_bill(request, visit_id):
         form = BillForm(
             instance=bill
         )
-
+        
+    print(
+        "MEDICATION DETAILS:",
+        medication_details
+    )
+        
     return render(
         request,
         'magahospital/bill_form.html',

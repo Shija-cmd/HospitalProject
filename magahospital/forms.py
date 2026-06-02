@@ -199,12 +199,6 @@ class PrescriptionForm(forms.ModelForm):
 
     'medication',
 
-    'dose',
-
-    'frequency',
-
-    'days',
-
     'notes'
 
 ]
@@ -222,18 +216,6 @@ class PrescriptionForm(forms.ModelForm):
                 'placeholder': 'Additional prescription notes...'
             }),
             
-            'dose': forms.NumberInput(attrs={
-                'class':'form-control'
-            }),
-
-            'frequency': forms.NumberInput(attrs={
-                'class':'form-control'
-            }),
-
-            'days': forms.NumberInput(attrs={
-                'class':'form-control'
-            }),
-
         }
         
 # =========================
