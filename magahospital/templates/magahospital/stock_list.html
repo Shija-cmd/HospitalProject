@@ -204,41 +204,39 @@
 
                     <td>
 
-                {% if medicine.is_expired %}
+    {% if medicine.is_expired %}
 
         <span class="badge bg-dark">
-
-    Expired
-
+            Expired
         </span>
 
-            {% elif medicine.expiring_soon %}
+    {% endif %}
 
-                <span class="badge bg-warning text-dark">
+    {% if medicine.expiring_soon and not medicine.is_expired %}
 
-                    Expiring Soon
+        <span class="badge bg-warning text-dark">
+            Expiring Soon
+        </span>
 
-            </span>
+    {% endif %}
 
-        {% elif medicine.is_low_stock %}
+    {% if medicine.is_low_stock %}
 
-    <span class="badge bg-danger">
+        <span class="badge bg-danger">
+            Low Stock
+        </span>
 
-        Low Stock
+    {% endif %}
 
-            </span>
+    {% if not medicine.is_expired and not medicine.expiring_soon and not medicine.is_low_stock %}
 
-                {% else %}
+        <span class="badge bg-success">
+            Available
+        </span>
 
-                    <span class="badge bg-success">
+    {% endif %}
 
-                Available
-
-            </span>
-
-        {% endif %}
-
-    </td>
+</td>
 
                 <td>
 

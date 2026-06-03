@@ -345,9 +345,14 @@ footer p{
 
 .sidebar-links a.active {
 
-    background-color: #0d6efd;
+    background:#0d6efd;
 
-    color: white !important;
+    color:#fff !important;
+
+    border-left:4px solid #38bdf8;
+
+    box-shadow:
+        0 4px 12px rgba(13,110,253,.25);
 
 }
 
@@ -424,17 +429,25 @@ footer p{
 
 .stat-label{
 
-    font-size:12px;
+    font-size:13px;
 
-    line-height:1.1;
+    font-weight:500;
+
+    color:#64748b;
+
+    line-height:1.2;
 
 }
 
 .stat-number{
 
-    font-size:1rem !important;
+    font-size:1.8rem !important;
 
-    line-height:1;
+    font-weight:700;
+
+    line-height:1.1;
+
+    color:#0f172a;
 
 }
 

@@ -12,8 +12,14 @@
     </h2>
 
     <p class="dashboard-subtitle">
-        Welcome back, {{ request.user.username }}
-    </p>
+
+    Welcome back, {{ request.user.username }}
+
+    <span id="header-date"
+    class="ms-2 text-muted">
+    </span>
+
+</p>
 
     {% if is_admin %}
         <span class="role-badge">Administrator</span>
@@ -62,7 +68,7 @@
     <div class="row g-2">
 
         <!-- TOTAL PATIENTS -->
-        <div class="col-md-3">
+        <div class="col-lg-3 col-md-6">
 
             <div class="card stat-card border-0 shadow-sm h-100">
 
@@ -98,11 +104,11 @@
         
 <!-- TODAY'S APPOINTMENTS -->
 
-<div class="col-md-3">
+<div class="col-lg-3 col-md-6">
 
     <div class="card stat-card border-0 shadow-sm h-100">
 
-        <div class="d-flex
+        <div class="card-body d-flex
                     justify-content-between
                     align-items-center">
 
@@ -112,13 +118,13 @@
 
                     Today's Appointments
 
-                    </h6>
+                </h6>
 
-                        <h2 class="stat-number mb-0">
+                <h2 class="stat-number mb-0">
 
-                            {{ todays_appointments }}
+                    {{ todays_appointments }}
 
-                        </h2>
+                </h2>
 
             </div>
 
@@ -137,7 +143,7 @@
 </div>
 
         <!-- WAITING VITALS -->
-        <div class="col-md-3">
+        <div class="col-lg-3 col-md-6">
 
             <div class="card stat-card border-0 shadow-sm h-100">
 
@@ -172,7 +178,7 @@
         </div>
 
         <!-- WAITING DOCTOR -->
-        <div class="col-md-3">
+        <div class="col-lg-3 col-md-6">
 
             <div class="card stat-card border-0 shadow-sm h-100">
 
@@ -207,7 +213,7 @@
         </div>
 
         <!-- WAITING LAB -->
-        <div class="col-md-3">
+        <div class="col-lg-3 col-md-6">
 
             <div class="card stat-card border-0 shadow-sm h-100">
 
@@ -242,7 +248,7 @@
         </div>
 
         <!-- WAITING PROCEDURE -->
-<div class="col-md-3">
+<div class="col-lg-3 col-md-6">
 
     <div class="card stat-card border-0 shadow-sm h-100">
 
@@ -277,7 +283,7 @@
 </div>
 
         <!-- WAITING PRESCRIPTION -->
-        <div class="col-md-4">
+        <div class="col-lg-4 col-md-6">
 
             <div class="card stat-card border-0 shadow-sm h-100">
 
@@ -312,7 +318,7 @@
         </div>
 
         <!-- WAITING CASHIER -->
-<div class="col-md-4">
+<div class="col-lg-4 col-md-6">
 
     <div class="card stat-card border-0 shadow-sm h-100">
 
@@ -347,7 +353,7 @@
 </div>
 
         <!-- WAITING DISPENSE -->
-        <div class="col-md-4">
+        <div class="col-lg-4 col-md-6">
 
             <div class="card stat-card border-0 shadow-sm h-100">
 
@@ -382,7 +388,7 @@
         </div>
 
         <!-- COMPLETED VISITS -->
-        <div class="col-md-4">
+        <div class="col-lg-4 col-md-6">
 
             <div class="card stat-card border-0 shadow-sm h-100">
 
@@ -434,7 +440,7 @@
 <div class="row g-4 mb-4">
 
     <!-- LOGGED IN USER -->
-    <div class="col-md-4">
+    <div class="col-lg-4 col-md-6">
 
         <div class="card stat-card quick-info-card border-0 shadow-sm h-100">
 
@@ -469,7 +475,7 @@
     </div>
 
     <!-- TODAY DATE -->
-    <div class="col-md-4">
+    <div class="col-lg-4 col-md-6">
 
         <div class="card stat-card quick-info-card border-0 shadow-sm h-100">
 
@@ -503,7 +509,7 @@
     </div>
 
     <!-- CURRENT TIME -->
-    <div class="col-md-4">
+    <div class="col-lg-4 col-md-6">
 
         <div class="card stat-card quick-info-card border-0 shadow-sm h-100">
 
@@ -538,22 +544,188 @@
 
 </div>
 
+<div class="row g-4 mt-2">
+
+    <!-- LOW STOCK -->
+
+    <div class="col-lg-6">
+
+        <div class="card
+            stat-card
+            alert-panel
+            border-0
+            shadow-sm">
+
+            <div class="card-body">
+
+                <h4 class="section-title">
+
+                    <i class="bi bi-exclamation-triangle-fill
+                        text-danger me-2"></i>
+
+                    Low Stock Alerts
+
+                </h4>
+
+                {% if low_stock_medicines %}
+
+                    {% for medicine in low_stock_medicines %}
+
+                    <div class="d-flex
+                                justify-content-between
+                                mb-2">
+
+                        <span>
+
+                            {{ medicine.medicine_name }}
+
+                        </span>
+
+                        <span class="badge
+                        rounded-pill
+                        bg-danger">
+
+                        {{ medicine.quantity }} left
+
+                        </span>
+
+                    </div>
+
+                    {% endfor %}
+
+                {% else %}
+
+                    <p class="text-success mb-0">
+
+                        No low stock medicines.
+
+                    </p>
+
+                {% endif %}
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- EXPIRING -->
+
+
+    <div class="col-lg-6">
+
+        <div class="card
+            stat-card
+            alert-panel
+            border-0
+            shadow-sm">
+
+            <div class="card-body">
+
+                <h4 class="section-title">
+
+                    <i class="bi bi-clock-history
+                        text-warning me-2"></i>
+
+                    Expiring Medicines
+
+                </h4>
+
+                {% if expiring_medicines %}
+
+                    {% for medicine in expiring_medicines %}
+
+                    <div class="d-flex
+                                justify-content-between
+                                mb-2">
+
+                        <span>
+
+                            {{ medicine.medicine_name }}
+
+                        </span>
+
+                        <span class="badge
+                        rounded-pill
+                        bg-warning
+                        text-dark">
+
+                        {{ medicine.expiry_date }}
+
+                        </span>
+
+                    </div>
+
+                    {% endfor %}
+
+                {% else %}
+
+                    <p class="text-success mb-0">
+
+                        No medicines expiring soon.
+
+                    </p>
+
+                {% endif %}
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
 <script>
 
     function updateClock(){
 
-        const now = new Date();
+    const now = new Date();
 
-        document.getElementById('clock').innerHTML =
-            now.toLocaleTimeString();
+    const formattedTime =
+        now.toLocaleTimeString(
+            [],
+            {
+                hour:'2-digit',
+                minute:'2-digit',
+                second:'2-digit'
+            }
+        );
 
-        document.getElementById('today-date').innerHTML =
-            now.toDateString();
-    }
+    const formattedDate =
+        now.toLocaleDateString(
+            'en-US',
+            {
+                weekday:'long',
+                year:'numeric',
+                month:'long',
+                day:'numeric'
+            }
+        );
 
-    setInterval(updateClock,1000);
+    const clock =
+        document.getElementById('clock');
 
-    updateClock();
+    const todayDate =
+        document.getElementById('today-date');
+
+    const headerDate =
+        document.getElementById('header-date');
+
+    if(clock)
+        clock.innerHTML = formattedTime;
+
+    if(todayDate)
+        todayDate.innerHTML = formattedDate;
+
+    if(headerDate)
+        headerDate.innerHTML =
+            "• " + formattedDate;
+}
+
+setInterval(updateClock,1000);
+
+updateClock();
 
 </script>
 

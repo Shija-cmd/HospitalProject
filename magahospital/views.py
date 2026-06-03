@@ -16,6 +16,7 @@ from django.contrib.auth.hashers import make_password
 from django.contrib import messages
 from django.utils import timezone
 from datetime import date
+from django.db.models import F
 
 from .models import (
     Patient,
@@ -116,6 +117,21 @@ def logout_view(request):
 def dashboard(request):
 
     user = request.user
+    
+    low_stock_medicines = MedicineStock.objects.filter(
+        quantity__lte=F('low_stock_alert')
+    )[:5]
+    
+    expiring_medicines = []
+
+    for medicine in MedicineStock.objects.all():
+
+        if medicine.expiring_soon and not medicine.is_expired:
+
+            expiring_medicines.append(medicine)
+
+    expiring_medicines = expiring_medicines[:5]
+
 
     context = {
 
@@ -195,6 +211,9 @@ def dashboard(request):
         'todays_appointments': Appointment.objects.filter(
             appointment_date=date.today()
         ).count(),
+        
+        'low_stock_medicines': low_stock_medicines,
+        'expiring_medicines': expiring_medicines,
 
     }
 
@@ -1743,18 +1762,18 @@ def stock_list(request):
 
     low_stock_count = sum(
         1 for medicine in medicines
-        if medicine.is_low_stock()
+        if medicine.is_low_stock
     )
 
     expiring_soon_count = sum(
         1 for medicine in medicines
-        if medicine.expiring_soon()
-        and not medicine.is_expired()
+        if medicine.expiring_soon
+        and not medicine.is_expired
     )
 
     expired_count = sum(
         1 for medicine in medicines
-        if medicine.is_expired()
+        if medicine.is_expired
     )
 
     return render(
