@@ -318,18 +318,44 @@ class DispenseForm(forms.ModelForm):
             'quantity': forms.TextInput(
                 attrs={
                     'class': 'form-control',
-                    'placeholder': 'e.g. 2×3 after meals'
+                    'placeholder':
+                    'e.g. 2×3 after meals'
                 }
             ),
 
-            'dispensed_quantity': forms.NumberInput(
+            'dispensed_quantity':
+            forms.NumberInput(
                 attrs={
                     'class': 'form-control',
-                    'placeholder': 'Number of tablets/capsules'
+                    'placeholder':
+                    'Number of tablets/capsules'
                 }
             ),
 
         }
+
+        def __init__(
+            self,
+            *args,
+            **kwargs
+            ):
+
+            super().__init__(
+                *args,
+                **kwargs
+            )
+
+            self.fields[
+                'medication_given'
+            ].required = False
+
+            self.fields[
+                'quantity'
+            ].required = False
+
+            self.fields[
+                'dispensed_quantity'
+            ].required = False
 
 #=========================================
 #Widgets for create_patient from .forms import 

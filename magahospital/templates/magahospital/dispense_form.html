@@ -386,7 +386,9 @@
 
         {% csrf_token %}
 
-    <div class="row">
+    {% if visit.prescriptions.exists %}
+
+<div class="row">
 
     <!-- MEDICATION -->
     <div class="col-md-4 mb-4">
@@ -429,6 +431,16 @@
 
 </div>
 
+{% else %}
+
+<div class="alert alert-warning">
+
+    No medication prescribed.
+    Procedure treatment can be completed directly.
+
+</div>
+
+{% endif %}
 
         <!-- BUTTONS -->
         <div class="button-group">

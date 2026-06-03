@@ -9,6 +9,7 @@ from .models import Procedure
 from .models import MedicineStock
 from .models import Appointment
 from .models import Test
+from .models import ProcedureCatalog
 
 
 
@@ -29,6 +30,7 @@ admin.site.register(Procedure)
 admin.site.register(MedicineStock)
 admin.site.register(Appointment)
 admin.site.register(Test)
+admin.site.register(ProcedureCatalog)
 
 admin.site.site_header = "Admin Panel"
 admin.site.site_title = "Maga Hospital Admin"

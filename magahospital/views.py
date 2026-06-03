@@ -653,90 +653,89 @@ def add_dispense(request, visit_id):
             # =====================================
 
             medicine = dispense.medication_given
-
-            # =====================================
-            # EXPIRY CHECK
-            # =====================================
-
-            if medicine.is_expired():
-
-                messages.error(
-                    request,
-                    f"{medicine.medicine_name} has expired and cannot be dispensed."
-                )
-
-                return redirect(
-                    'add_dispense',
-                    visit_id=visit.id
-                )
-
-            # =====================================
-            # EXPIRING SOON WARNING
-            # =====================================
-
-            if medicine.expiring_soon():
-
-                messages.warning(
-                    request,
-                    f"{medicine.medicine_name} is expiring soon."
-                )
-                
-            #=====================================
-            # OUT OF STOCK CHECK
-            # =====================================
             
-            if medicine.quantity <= 0:
+            print("MEDICINE:", medicine)
 
-                messages.error(
-                    request,
-                    f"{medicine.medicine_name} is out of stock."
-                )
-
-                return redirect(
-                    'add_dispense',
-                    visit_id=visit.id
-                    
-                )    
+            if medicine:
+                print("EXPIRY DATE:", medicine.expiry_date)
+                print("IS EXPIRED:", medicine.is_expired)
 
             # =====================================
-            # QUANTITY CHECK
+            # ONLY RUN MEDICINE LOGIC IF MEDICINE EXISTS
             # =====================================
 
-            if dispense.dispensed_quantity > medicine.quantity:
+            if medicine:
 
-                messages.error(
-                    request,
-                    f"Only {medicine.quantity} items remaining in stock."
-                )
+                # EXPIRY CHECK
 
-                return redirect(
-                    'add_dispense',
-                    visit_id=visit.id
-                )
-                
-            # =====================================
-            # ZERO QUANTITY CHECK
-            # =====================================
-            
-            if dispense.dispensed_quantity <= 0:
+                if medicine.is_expired:
 
-                messages.error(
-                    request,
-                    'Dispensed quantity must be greater than zero.'
-                )
+                    messages.error(
+                        request,
+                        f"{medicine.medicine_name} has expired and cannot be dispensed."
+                    )
 
-                return redirect(
-                    'add_dispense',
-                    visit_id=visit.id
-                )    
+                    return redirect(
+                        'add_dispense',
+                        visit_id=visit.id
+                    )
 
-            # =====================================
-            # REDUCE STOCK
-            # =====================================
+                # EXPIRING SOON WARNING
 
-            medicine.quantity -= dispense.dispensed_quantity
+                if medicine.expiring_soon:
 
-            medicine.save()
+                    messages.warning(
+                        request,
+                        f"{medicine.medicine_name} is expiring soon."
+                    )
+
+                # OUT OF STOCK CHECK
+
+                if medicine.quantity <= 0:
+
+                    messages.error(
+                        request,
+                        f"{medicine.medicine_name} is out of stock."
+                    )
+
+                    return redirect(
+                        'add_dispense',
+                        visit_id=visit.id
+                    )
+
+                # QUANTITY CHECK
+
+                if dispense.dispensed_quantity > medicine.quantity:
+
+                    messages.error(
+                        request,
+                        f"Only {medicine.quantity} items remaining in stock."
+                    )
+
+                    return redirect(
+                        'add_dispense',
+                        visit_id=visit.id
+                    )
+
+                # ZERO QUANTITY CHECK
+
+                if dispense.dispensed_quantity <= 0:
+
+                    messages.error(
+                        request,
+            '           Dispensed quantity must be greater than zero.'
+                    )
+
+                    return redirect(
+                        'add_dispense',
+                        visit_id=visit.id
+                    )
+
+                # REDUCE STOCK
+
+                medicine.quantity -= dispense.dispensed_quantity
+
+                medicine.save()
 
             # =====================================
             # SAVE DISPENSE
@@ -744,10 +743,19 @@ def add_dispense(request, visit_id):
 
             dispense.save()
 
-            log_action(
-                request.user,
-                f"Dispensed {dispense.dispensed_quantity} units of {medicine.medicine_name} for Visit #{visit.id}"
-            )
+            if medicine:
+
+                log_action(
+                    request.user,
+                    f"Dispensed {dispense.dispensed_quantity} units of {medicine.medicine_name} for Visit #{visit.id}"
+                )
+
+            else:
+
+                log_action(
+                    request.user,
+                    f"Completed procedure treatment for Visit #{visit.id}"
+                )
 
             visit.status = 'Completed'
 
@@ -1548,12 +1556,7 @@ def add_bill(request, visit_id):
         form = BillForm(
             instance=bill
         )
-        
-    print(
-        "MEDICATION DETAILS:",
-        medication_details
-    )
-        
+            
     return render(
         request,
         'magahospital/bill_form.html',

@@ -104,12 +104,6 @@
             class="form-control form-control-sm"
             >
 
-            <small class="text-danger">
-                DEBUG NAME: days_{{ item.input_key }}
-                    </small>
-
-            <small class="text-muted">
-
             Prescribed:
             {{ item.prescribed_days }}
             day(s)
@@ -151,7 +145,7 @@
 
                         <strong>
 
-                            {{ procedure.procedure_name }}
+                            {{ procedure.procedure_name.name }}
 
                         </strong>
 

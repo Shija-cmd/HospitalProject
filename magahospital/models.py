@@ -376,15 +376,18 @@ class MedicineStock(models.Model):
         default=timezone.now
     )
 
+    @property
     def is_low_stock(self):
 
         return self.quantity <= self.low_stock_alert
     
+    @property
     def is_expired(self):
 
         return self.expiry_date < timezone.now().date()
 
 
+    @property
     def expiring_soon(self):
 
         return (
@@ -411,7 +414,9 @@ class Dispense(models.Model):
 
     medication_given = models.ForeignKey(
         MedicineStock,
-        on_delete=models.CASCADE
+        on_delete=models.CASCADE,
+        null=True,
+        blank=True
     )
 
     quantity = models.CharField(
@@ -419,9 +424,10 @@ class Dispense(models.Model):
         blank=True,
         null=True
     )
-    
+
     dispensed_quantity = models.PositiveIntegerField(
-        default=1
+        null=True,
+        blank=True
     )
 
     created_at = models.DateTimeField(
@@ -703,6 +709,28 @@ class Test(models.Model):
 
         return self.name
 
+# =====================================
+# PROCEDURE CATALOG
+# =====================================
+class ProcedureCatalog(models.Model):
+
+    name = models.CharField(
+        max_length=100,
+        unique=True
+    )
+
+    price = models.DecimalField(
+        max_digits=10,
+        decimal_places=2
+    )
+
+    def __str__(self):
+
+        return (
+            f"{self.name} - "
+            f"{self.price}"
+        )
+
 
 # =====================================
 # PROCEDURES
@@ -716,9 +744,9 @@ class Procedure(models.Model):
         related_name='procedures'
     )
 
-    procedure_name = models.CharField(
-        max_length=100,
-        choices=PROCEDURE_TYPES
+    procedure_name = models.ForeignKey(
+        ProcedureCatalog,
+        on_delete=models.CASCADE
     )
 
     notes = models.TextField(
@@ -748,7 +776,18 @@ class Procedure(models.Model):
     created_at = models.DateTimeField(
         default=timezone.now
     )
+    
+    def save(self,*args,**kwargs):
+
+        self.cost = (
+            self.procedure_name.price
+        )
+
+        super().save(
+            *args,
+            **kwargs
+        )
 
     def __str__(self):
 
-        return self.procedure_name                   
+        return self.procedure_name                       
