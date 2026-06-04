@@ -354,11 +354,13 @@ footer p{
 
 .stat-icon {
 
-    width:44px;
+    width:58px;
 
-    height:44px;
+    height:58px;
 
-    border-radius:12px;
+    border-radius:16px;
+
+    font-size:1.4rem;
 
 }
 
@@ -438,15 +440,9 @@ footer p{
 
 .dashboard-title{
 
-    font-size:1.75rem;
+    font-size:2.2rem;
 
-    font-weight:700;
-
-    color:#0f172a;
-
-    margin-bottom:6px;
-
-    letter-spacing:.2px;
+    font-weight:500;
 
 }
 
@@ -474,7 +470,7 @@ footer p{
 
     font-size:1.8rem !important;
 
-    font-weight:700;
+    font-weight:500;
 
     line-height:1.1;
 
@@ -549,7 +545,7 @@ footer p{
 
     font-size:1.15rem !important;
 
-    font-weight:700;
+    font-weight:500;
 
     color:#0f172a;
 
@@ -592,9 +588,16 @@ footer p{
 
 .stat-card{
 
-    animation:fadeUp .45s ease;
+    border:none;
+
+    border-top:4px solid #0d6efd;
+
+    border-radius:18px;
+
+    background:#fff;
 
 }
+
 
 @keyframes fadeUp{
 
@@ -621,5 +624,131 @@ footer p{
 .alert-panel{
 
     min-height:220px;
+
+}
+
+.patient-card{
+    border-top:4px solid #3b82f6;
+}
+
+.doctor-card{
+    border-top:4px solid #10b981;
+}
+
+.lab-card{
+    border-top:4px solid #f59e0b;
+}
+
+.cashier-card{
+    border-top:4px solid #8b5cf6;
+}
+
+.stat-card:hover{
+
+    transform:
+        translateY(-8px)
+        scale(1.02);
+
+}
+
+.stat-card{
+
+    border:none;
+
+    border-top:4px solid #0d6efd;
+
+    border-radius:18px;
+
+    background:#fff;
+
+    transition:
+        transform .25s ease,
+        box-shadow .25s ease;
+
+}
+
+.patient-card{
+    border-top:4px solid #3b82f6;
+}
+
+.appointment-card{
+    border-top:4px solid #06b6d4;
+}
+
+.vitals-card{
+    border-top:4px solid #14b8a6;
+}
+
+.doctor-card{
+    border-top:4px solid #10b981;
+}
+
+.lab-card{
+    border-top:4px solid #f59e0b;
+}
+
+.procedure-card{
+    border-top:4px solid #0ea5e9;
+}
+
+.prescription-card{
+    border-top:4px solid #ef4444;
+}
+
+.cashier-card{
+    border-top:4px solid #8b5cf6;
+}
+
+.dispense-card{
+    border-top:4px solid #f97316;
+}
+
+.completed-card{
+    border-top:4px solid #22c55e;
+}
+
+.row.g-4{
+
+    row-gap:20px;
+
+}
+
+.waiting-doctor{
+    color:#16a34a;
+}
+
+.waiting-lab{
+    color:#f59e0b;
+}
+
+.waiting-cashier{
+    color:#8b5cf6;
+}
+
+.waiting-dispense{
+    color:#ef4444;
+}
+
+.dashboard-header{
+
+    background:
+        linear-gradient(
+        135deg,
+        #ffffff,
+        #f8fafc
+    );
+
+    padding:20px;
+
+    border-radius:18px;
+
+}
+
+.stat-card:hover{
+
+    transform:translateY(-6px);
+
+    box-shadow:
+        0 12px 28px rgba(0,0,0,.10);
 
 }
