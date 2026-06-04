@@ -555,22 +555,34 @@ footer p{
 
 .quick-info-card .stat-icon{
 
-    width:42px;
+    width:52px;
 
-    height:42px;
+    height:52px;
 
-    border-radius:10px;
+    border-radius:14px;
+
+    font-size:1.2rem;
+
 }
 
 /* QUICK INFO CARDS */
 
 .quick-info-card{
 
-    min-height:82px;
+    min-height:90px;
 
-    padding:12px 14px;
+    padding:14px 16px;
 
-    background:#ffffff;
+    background:#fff;
+
+    border:none;
+
+    border-left:5px solid #0d6efd;
+
+    border-radius:16px;
+
+    box-shadow:
+        0 4px 14px rgba(0,0,0,.05);
 
 }
 
@@ -750,5 +762,36 @@ footer p{
 
     box-shadow:
         0 12px 28px rgba(0,0,0,.10);
+
+}
+
+.quick-info-label{
+
+    font-size:13px;
+
+    color:#64748b;
+
+    font-weight:500;
+
+    text-transform:uppercase;
+
+    letter-spacing:.5px;
+
+}
+
+.quick-info-card{
+
+    transition:
+        transform .25s ease,
+        box-shadow .25s ease;
+
+}
+
+.quick-info-card:hover{
+
+    transform:translateY(-4px);
+
+    box-shadow:
+        0 12px 24px rgba(0,0,0,.08);
 
 }
