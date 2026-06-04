@@ -17,6 +17,7 @@ from django.contrib import messages
 from django.utils import timezone
 from datetime import date
 from django.db.models import F
+import re
 
 from .models import (
     Patient,
@@ -673,12 +674,6 @@ def add_dispense(request, visit_id):
 
             medicine = dispense.medication_given
             
-            print("MEDICINE:", medicine)
-
-            if medicine:
-                print("EXPIRY DATE:", medicine.expiry_date)
-                print("IS EXPIRED:", medicine.is_expired)
-
             # =====================================
             # ONLY RUN MEDICINE LOGIC IF MEDICINE EXISTS
             # =====================================
@@ -742,7 +737,7 @@ def add_dispense(request, visit_id):
 
                     messages.error(
                         request,
-            '           Dispensed quantity must be greater than zero.'
+                        'Dispensed quantity must be greater than zero.'
                     )
 
                     return redirect(
@@ -882,7 +877,6 @@ def edit_stock(request, stock_id):
             'form': form
         }
     )
- 
  
 # =========================================
 # DELETE MEDICINE STOCK
@@ -1414,6 +1408,7 @@ def add_bill(request, visit_id):
     for prescription in visit.prescriptions.all():
 
         try:
+            
 
             entries = prescription.notes.split(',')
 
@@ -1427,10 +1422,17 @@ def add_bill(request, visit_id):
                 medicine = MedicineStock.objects.filter(
                     medicine_name__icontains=medicine_name
                 ).first()
+                
 
                 if medicine:
 
                     first, prescribed_days = dosage.split('/')
+                    
+                    first = re.sub(
+                        r'[xX×]',
+                        '*',
+                    first
+                    )
 
                     dose, frequency = map(
                         int,
@@ -1498,6 +1500,7 @@ def add_bill(request, visit_id):
                         dispense_days,
 
                     })
+                    
 
         except:
 
