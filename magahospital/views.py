@@ -1271,8 +1271,10 @@ def chatbot_response(request):
         faqs = ChatFAQ.objects.all()
 
         response = (
-            'Sorry, I could not find an answer '
-            'to your question.'
+            "I'm sorry, I couldn't find information about that. 😊 "
+            "Please try rephrasing your question or ask about our "
+            "services, departments, appointments, visiting hours, "
+            "or contact information."
         )
 
         for faq in faqs:
