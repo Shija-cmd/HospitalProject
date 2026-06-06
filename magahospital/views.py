@@ -1279,14 +1279,11 @@ def chatbot_response(request):
 
         for faq in faqs:
 
-            faq_words = faq.question.lower().split()
-            message_words = user_message.lower().split()
-
-            if any(word in faq_words for word in message_words):
+            if user_message.lower() in faq.question.lower():
 
                 response = faq.answer
 
-                break
+            break
 
         return JsonResponse({
             'response': response
