@@ -1277,7 +1277,7 @@ def chatbot_response(request):
 
         for faq in faqs:
 
-            if faq.question.lower() in user_message.lower():
+            if user_message.lower() in faq.question.lower():
 
                 response = faq.answer
 
