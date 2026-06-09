@@ -1283,7 +1283,7 @@ def chatbot_response(request):
 
                 response = faq.answer
 
-            break
+                break
 
         return JsonResponse({
             'response': response

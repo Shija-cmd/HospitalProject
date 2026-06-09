@@ -170,6 +170,11 @@ if (sendBtn && chatInput && chatBody) {
 
             console.log("CHATBOT RESPONSE:", data);
 
+            /* SHOW TYPING FOR 1 SECOND */
+            await new Promise(resolve =>
+            setTimeout(resolve, 1000)
+            );
+
             botDiv.innerText = data.response;
 
         }
