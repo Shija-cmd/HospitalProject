@@ -90,7 +90,19 @@ def login_view(request):
 
             login(request, user)
 
+            messages.success(
+                request,
+                f'Welcome back, {user.username}!'
+            )
+
             return redirect('dashboard')
+
+        else:
+
+            messages.error(
+                request,
+                'Invalid username or password.'
+            )
 
     else:
 
@@ -106,6 +118,11 @@ def login_view(request):
 def logout_view(request):
 
     logout(request)
+
+    messages.success(
+        request,
+        'You have been logged out successfully.'
+    )
 
     return redirect('login')
 

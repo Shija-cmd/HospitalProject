@@ -108,6 +108,7 @@ INSTALLED_APPS = [
     'magahospital',
     'widget_tweaks',
     'prediction',
+    'django.contrib.sitemaps',
 ]
 
 
