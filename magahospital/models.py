@@ -790,4 +790,67 @@ class Procedure(models.Model):
 
     def __str__(self):
 
-        return self.procedure_name                       
+        return self.procedure_name   
+    
+    #=====================================
+    # HOSPITAL SETTINGS
+    #=====================================
+class HospitalSettings(models.Model):
+
+    hospital_name = models.CharField(
+        max_length=255,
+        default="Maga Hospital"
+    )
+
+    logo = models.ImageField(
+        upload_to='hospital/',
+        blank=True,
+        null=True
+    )
+
+    address = models.TextField(
+        blank=True
+    )
+
+    phone = models.CharField(
+        max_length=50,
+        blank=True
+    )
+
+    email = models.EmailField(
+        blank=True
+    )
+
+    website = models.URLField(
+        blank=True
+    )
+
+    footer_text = models.CharField(
+        max_length=255,
+        blank=True,
+        default="All Rights Reserved."
+    )
+
+    currency = models.CharField(
+        max_length=10,
+        default="TZS"
+    )
+
+    updated_at = models.DateTimeField(
+        auto_now=True
+    )
+
+    def save(self, *args, **kwargs):
+
+        self.pk = 1
+
+        super().save(*args, **kwargs)
+
+    def __str__(self):
+
+        return self.hospital_name
+
+    class Meta:
+
+        verbose_name = "Hospital Settings"
+        verbose_name_plural = "Hospital Settings"                    

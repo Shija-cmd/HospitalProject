@@ -10,6 +10,7 @@ from .models import MedicineStock
 from .models import Appointment
 from .models import Test
 from .models import ProcedureCatalog
+from .models import HospitalSettings
 
 
 
@@ -31,6 +32,15 @@ admin.site.register(MedicineStock)
 admin.site.register(Appointment)
 admin.site.register(Test)
 admin.site.register(ProcedureCatalog)
+
+@admin.register(HospitalSettings)
+class HospitalSettingsAdmin(admin.ModelAdmin):
+
+    def has_add_permission(
+        self,
+        request
+    ):
+        return not HospitalSettings.objects.exists()
 
 admin.site.site_header = "Admin Panel"
 admin.site.site_title = "Maga Hospital Admin"

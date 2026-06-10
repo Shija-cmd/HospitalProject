@@ -1,7 +1,7 @@
 {% extends 'magahospital/base.html' %}
 
 {% block title %}
-Dashboard | Maga Hospital
+Dashboard | {{ hospital_settings.hospital_name }}
 {% endblock %}
 
 {% load static %}
@@ -187,6 +187,69 @@ Dashboard | Maga Hospital
 
 </div>
 
+<!-- SUMMARY CARDS -->
+<div class="row mb-4">
+
+    <div class="col-md-4">
+
+        <div class="custom-card text-center">
+
+            <h6 class="text-muted">
+                Total Visits
+            </h6>
+
+            <h2 class="fw-bold text-primary">
+                {{ total_visits }}
+            </h2>
+
+        </div>
+
+    </div>
+
+    <div class="col-md-4">
+
+        <div class="custom-card text-center">
+
+            <h6 class="text-muted">
+                Completed Visits
+            </h6>
+
+            <h2 class="fw-bold text-success">
+                {{ completed_visits }}
+            </h2>
+
+        </div>
+
+    </div>
+
+    <div class="col-md-4">
+
+        <div class="custom-card text-center">
+
+            <h6 class="text-muted">
+                Last Visit
+            </h6>
+
+            <h6 class="fw-bold">
+
+                {% if last_visit %}
+
+                    {{ last_visit.date }}
+
+                {% else %}
+
+                    No Visit
+
+                {% endif %}
+
+            </h6>
+
+        </div>
+
+    </div>
+
+</div>
+
 <!-- FILTER -->
 <div class="filter-card">
 
@@ -245,7 +308,9 @@ Dashboard | Maga Hospital
 <div class="custom-card">
 
     <!-- DATE -->
-    <div class="visit-date">
+    <div class="d-flex justify-content-between align-items-center">
+
+    <div class="visit-date mb-0">
 
         <i class="bi bi-calendar-event me-2 text-primary"></i>
 
@@ -253,6 +318,40 @@ Dashboard | Maga Hospital
         {{ visit.date }}
 
     </div>
+
+    {% if visit.status == 'Completed' %}
+
+        <span class="badge bg-success">
+            {{ visit.status }}
+        </span>
+
+    {% elif visit.status == 'Waiting Lab' %}
+
+        <span class="badge bg-warning text-dark">
+            {{ visit.status }}
+        </span>
+
+    {% elif visit.status == 'Waiting Doctor' %}
+
+        <span class="badge bg-info text-dark">
+            {{ visit.status }}
+        </span>
+
+    {% elif visit.status == 'Dispense' %}
+
+        <span class="badge bg-primary">
+            {{ visit.status }}
+        </span>
+
+    {% else %}
+
+        <span class="badge bg-secondary">
+            {{ visit.status }}
+        </span>
+
+    {% endif %}
+
+</div>
 
     <!-- DOCTOR -->
     <div class="detail-box">
@@ -368,7 +467,7 @@ Dashboard | Maga Hospital
 
     <!-- BUTTON -->
     <a href="{% url 'visit_detail' visit.id %}"
-       class="btn btn-primary action-btn">
+    class="btn btn-primary action-btn">
 
         <i class="bi bi-box-arrow-up-right me-1"></i>
         Open Visit
@@ -391,7 +490,7 @@ Dashboard | Maga Hospital
 
 <!-- BACK -->
 <a href="{% url 'patient_list' %}"
-   class="btn btn-secondary back-btn">
+class="btn btn-secondary back-btn">
 
     <i class="bi bi-arrow-left me-1"></i>
     Back to Patients

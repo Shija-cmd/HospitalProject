@@ -1,3 +1,5 @@
+from .models import HospitalSettings
+
 def user_roles(request):
 
     if not request.user.is_authenticated:
@@ -51,3 +53,11 @@ def user_roles(request):
         ).exists(),
 
     }
+    
+def hospital_settings(request):
+
+    settings = HospitalSettings.objects.first()
+
+    return {
+        'hospital_settings': settings
+    }    

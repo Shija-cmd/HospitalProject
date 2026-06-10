@@ -1,7 +1,7 @@
 {% extends 'magahospital/base.html' %}
 
 {% block title %}
-Dashboard | Maga Hospital
+Dashboard | {{ hospital_settings.hospital_name }}
 {% endblock %}
 
 {% load static %}
@@ -67,7 +67,7 @@ Dashboard | Maga Hospital
     </h2>
 
     <a href="{% url 'create_patient' %}"
-       class="btn btn-primary btn-custom">
+    class="btn btn-primary btn-custom">
 
         <i class="bi bi-plus-circle me-1"></i>
         Add Patient
@@ -84,10 +84,10 @@ Dashboard | Maga Hospital
         <div class="col-md-5">
 
             <input type="text"
-                   name="q"
-                   class="form-control"
-                   placeholder="Search patient name or ID"
-                   value="{{ request.GET.q }}">
+                name="q"
+                class="form-control"
+                placeholder="Search patient name or ID"
+                value="{{ request.GET.q }}">
 
         </div>
 
@@ -252,7 +252,7 @@ Dashboard | Maga Hospital
                 <td>
 
                     <a href="{% url 'create_visit' patient.id %}"
-                       class="btn btn-success btn-sm btn-custom">
+                    class="btn btn-success btn-sm btn-custom">
 
                         <i class="bi bi-plus-circle"></i>
                         Visit
@@ -260,7 +260,7 @@ Dashboard | Maga Hospital
                     </a>
 
                     <a href="{% url 'patient_history' patient.id %}"
-                       class="btn btn-info btn-sm btn-custom">
+                    class="btn btn-info btn-sm btn-custom">
 
                         <i class="bi bi-clock-history"></i>
                         History

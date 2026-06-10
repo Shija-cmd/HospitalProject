@@ -1,0 +1,3418 @@
+[
+{
+  "model": "admin.logentry",
+  "pk": 1,
+  "fields": {
+    "action_time": "2026-05-29T19:32:17.512Z",
+    "user": 1,
+    "content_type": 3,
+    "object_id": "1",
+    "object_repr": "Admin",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 2,
+  "fields": {
+    "action_time": "2026-05-29T19:32:31.859Z",
+    "user": 1,
+    "content_type": 3,
+    "object_id": "1",
+    "object_repr": "Admin",
+    "action_flag": 2,
+    "change_message": "[]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 3,
+  "fields": {
+    "action_time": "2026-05-29T19:35:06.690Z",
+    "user": 1,
+    "content_type": 3,
+    "object_id": "2",
+    "object_repr": "Doctor",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 4,
+  "fields": {
+    "action_time": "2026-05-29T19:35:17.191Z",
+    "user": 1,
+    "content_type": 3,
+    "object_id": "3",
+    "object_repr": "Nurse",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 5,
+  "fields": {
+    "action_time": "2026-05-29T19:35:44.991Z",
+    "user": 1,
+    "content_type": 3,
+    "object_id": "4",
+    "object_repr": "Reception",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 6,
+  "fields": {
+    "action_time": "2026-05-29T19:35:54.301Z",
+    "user": 1,
+    "content_type": 3,
+    "object_id": "5",
+    "object_repr": "Lab",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 7,
+  "fields": {
+    "action_time": "2026-05-29T19:36:03.960Z",
+    "user": 1,
+    "content_type": 3,
+    "object_id": "6",
+    "object_repr": "Cashier",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 8,
+  "fields": {
+    "action_time": "2026-05-29T19:39:04.018Z",
+    "user": 1,
+    "content_type": 3,
+    "object_id": "7",
+    "object_repr": "Dispense",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 9,
+  "fields": {
+    "action_time": "2026-05-29T19:39:18.453Z",
+    "user": 1,
+    "content_type": 3,
+    "object_id": "8",
+    "object_repr": "Pharmacy",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 10,
+  "fields": {
+    "action_time": "2026-05-29T19:55:09.573Z",
+    "user": 1,
+    "content_type": 22,
+    "object_id": "1",
+    "object_repr": "CBC",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 11,
+  "fields": {
+    "action_time": "2026-05-29T19:55:44.039Z",
+    "user": 1,
+    "content_type": 22,
+    "object_id": "2",
+    "object_repr": "Malaria Test",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 12,
+  "fields": {
+    "action_time": "2026-05-29T19:56:21.281Z",
+    "user": 1,
+    "content_type": 22,
+    "object_id": "3",
+    "object_repr": "Blood Sugar (RBS/FBS)",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 13,
+  "fields": {
+    "action_time": "2026-05-29T19:57:30.131Z",
+    "user": 1,
+    "content_type": 22,
+    "object_id": "4",
+    "object_repr": "HIV Test",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 14,
+  "fields": {
+    "action_time": "2026-05-29T19:58:07.987Z",
+    "user": 1,
+    "content_type": 22,
+    "object_id": "5",
+    "object_repr": "Urinalysis",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 15,
+  "fields": {
+    "action_time": "2026-05-29T19:58:42.628Z",
+    "user": 1,
+    "content_type": 22,
+    "object_id": "6",
+    "object_repr": "Pregnancy Test (HCG)",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 16,
+  "fields": {
+    "action_time": "2026-05-29T19:59:17.253Z",
+    "user": 1,
+    "content_type": 22,
+    "object_id": "7",
+    "object_repr": "Typhoid Test (Widal)",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 17,
+  "fields": {
+    "action_time": "2026-05-29T19:59:49.220Z",
+    "user": 1,
+    "content_type": 22,
+    "object_id": "8",
+    "object_repr": "Stool Examination",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 18,
+  "fields": {
+    "action_time": "2026-05-29T20:00:38.077Z",
+    "user": 1,
+    "content_type": 22,
+    "object_id": "9",
+    "object_repr": "TB Test / Sputum Test",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 19,
+  "fields": {
+    "action_time": "2026-05-29T20:13:08.442Z",
+    "user": 1,
+    "content_type": 3,
+    "object_id": "3",
+    "object_repr": "Vitals",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Name\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 20,
+  "fields": {
+    "action_time": "2026-05-29T20:13:56.410Z",
+    "user": 1,
+    "content_type": 3,
+    "object_id": "8",
+    "object_repr": "Pharmacy",
+    "action_flag": 3,
+    "change_message": ""
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 21,
+  "fields": {
+    "action_time": "2026-05-29T20:14:12.534Z",
+    "user": 1,
+    "content_type": 3,
+    "object_id": "4",
+    "object_repr": "Receptions",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Name\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 22,
+  "fields": {
+    "action_time": "2026-05-29T20:15:04.563Z",
+    "user": 1,
+    "content_type": 3,
+    "object_id": "3",
+    "object_repr": "Vitals",
+    "action_flag": 2,
+    "change_message": "[]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 23,
+  "fields": {
+    "action_time": "2026-05-29T20:15:25.530Z",
+    "user": 1,
+    "content_type": 4,
+    "object_id": "3",
+    "object_repr": "Nurse1",
+    "action_flag": 2,
+    "change_message": "[]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 24,
+  "fields": {
+    "action_time": "2026-05-29T20:15:38.962Z",
+    "user": 1,
+    "content_type": 4,
+    "object_id": "4",
+    "object_repr": "Reception1",
+    "action_flag": 2,
+    "change_message": "[]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 25,
+  "fields": {
+    "action_time": "2026-06-03T06:29:11.510Z",
+    "user": 1,
+    "content_type": 3,
+    "object_id": "9",
+    "object_repr": "Procedure",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 26,
+  "fields": {
+    "action_time": "2026-06-03T06:39:59.017Z",
+    "user": 1,
+    "content_type": 19,
+    "object_id": "1",
+    "object_repr": "X-Ray",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Cost\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 27,
+  "fields": {
+    "action_time": "2026-06-03T08:23:35.968Z",
+    "user": 1,
+    "content_type": 23,
+    "object_id": "1",
+    "object_repr": "Ultrasound - 20000",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 28,
+  "fields": {
+    "action_time": "2026-06-03T08:23:55.151Z",
+    "user": 1,
+    "content_type": 23,
+    "object_id": "2",
+    "object_repr": "X-Ray - 20000",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 29,
+  "fields": {
+    "action_time": "2026-06-03T08:24:18.366Z",
+    "user": 1,
+    "content_type": 23,
+    "object_id": "3",
+    "object_repr": "ECG - 20000",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 30,
+  "fields": {
+    "action_time": "2026-06-03T08:24:42.334Z",
+    "user": 1,
+    "content_type": 23,
+    "object_id": "4",
+    "object_repr": "Physiotherapy - 30000",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 31,
+  "fields": {
+    "action_time": "2026-06-03T08:24:59.941Z",
+    "user": 1,
+    "content_type": 23,
+    "object_id": "5",
+    "object_repr": "Injection - 5000",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 32,
+  "fields": {
+    "action_time": "2026-06-03T08:25:20.853Z",
+    "user": 1,
+    "content_type": 23,
+    "object_id": "6",
+    "object_repr": "Dressing - 5000",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 33,
+  "fields": {
+    "action_time": "2026-06-03T08:25:43.523Z",
+    "user": 1,
+    "content_type": 23,
+    "object_id": "7",
+    "object_repr": "Endoscopy - 7000",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 34,
+  "fields": {
+    "action_time": "2026-06-03T08:26:05.093Z",
+    "user": 1,
+    "content_type": 23,
+    "object_id": "8",
+    "object_repr": "Minor Surgery - 15000",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 35,
+  "fields": {
+    "action_time": "2026-06-09T09:39:01.690Z",
+    "user": 1,
+    "content_type": 14,
+    "object_id": "1",
+    "object_repr": "goodnight",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 36,
+  "fields": {
+    "action_time": "2026-06-09T09:39:28.777Z",
+    "user": 1,
+    "content_type": 14,
+    "object_id": "2",
+    "object_repr": "see you later",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 37,
+  "fields": {
+    "action_time": "2026-06-09T09:39:54.745Z",
+    "user": 1,
+    "content_type": 14,
+    "object_id": "3",
+    "object_repr": "i cannot sleep",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 38,
+  "fields": {
+    "action_time": "2026-06-09T09:40:22.359Z",
+    "user": 1,
+    "content_type": 14,
+    "object_id": "4",
+    "object_repr": "give me a health tip",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 39,
+  "fields": {
+    "action_time": "2026-06-09T09:40:49.223Z",
+    "user": 1,
+    "content_type": 14,
+    "object_id": "5",
+    "object_repr": "i need motivation",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 40,
+  "fields": {
+    "action_time": "2026-06-09T09:41:17.828Z",
+    "user": 1,
+    "content_type": 14,
+    "object_id": "6",
+    "object_repr": "can you diagnose me",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 41,
+  "fields": {
+    "action_time": "2026-06-09T09:41:46.723Z",
+    "user": 1,
+    "content_type": 14,
+    "object_id": "7",
+    "object_repr": "are you smart",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 42,
+  "fields": {
+    "action_time": "2026-06-09T09:42:17.328Z",
+    "user": 1,
+    "content_type": 14,
+    "object_id": "8",
+    "object_repr": "tell me a joke",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 43,
+  "fields": {
+    "action_time": "2026-06-09T09:42:46.745Z",
+    "user": 1,
+    "content_type": 14,
+    "object_id": "9",
+    "object_repr": "i feel stressed",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 44,
+  "fields": {
+    "action_time": "2026-06-09T09:43:20.234Z",
+    "user": 1,
+    "content_type": 14,
+    "object_id": "10",
+    "object_repr": "i am sad",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 45,
+  "fields": {
+    "action_time": "2026-06-09T09:43:46.760Z",
+    "user": 1,
+    "content_type": 14,
+    "object_id": "11",
+    "object_repr": "how are you",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 46,
+  "fields": {
+    "action_time": "2026-06-09T09:44:15.947Z",
+    "user": 1,
+    "content_type": 14,
+    "object_id": "12",
+    "object_repr": "hello",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 47,
+  "fields": {
+    "action_time": "2026-06-09T09:44:41.969Z",
+    "user": 1,
+    "content_type": 14,
+    "object_id": "13",
+    "object_repr": "hi",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 48,
+  "fields": {
+    "action_time": "2026-06-09T09:45:07.121Z",
+    "user": 1,
+    "content_type": 14,
+    "object_id": "14",
+    "object_repr": "services",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 49,
+  "fields": {
+    "action_time": "2026-06-09T09:45:33.471Z",
+    "user": 1,
+    "content_type": 14,
+    "object_id": "15",
+    "object_repr": "laboratory",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 50,
+  "fields": {
+    "action_time": "2026-06-09T09:46:00.439Z",
+    "user": 1,
+    "content_type": 14,
+    "object_id": "16",
+    "object_repr": "pharmacy",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 51,
+  "fields": {
+    "action_time": "2026-06-09T09:46:25.705Z",
+    "user": 1,
+    "content_type": 14,
+    "object_id": "17",
+    "object_repr": "appointment",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 52,
+  "fields": {
+    "action_time": "2026-06-09T09:46:51.292Z",
+    "user": 1,
+    "content_type": 14,
+    "object_id": "18",
+    "object_repr": "doctor",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 53,
+  "fields": {
+    "action_time": "2026-06-09T09:47:14.953Z",
+    "user": 1,
+    "content_type": 14,
+    "object_id": "19",
+    "object_repr": "location",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 54,
+  "fields": {
+    "action_time": "2026-06-09T09:47:40.396Z",
+    "user": 1,
+    "content_type": 14,
+    "object_id": "20",
+    "object_repr": "hours",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 55,
+  "fields": {
+    "action_time": "2026-06-09T09:48:07.795Z",
+    "user": 1,
+    "content_type": 14,
+    "object_id": "21",
+    "object_repr": "emergency",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 56,
+  "fields": {
+    "action_time": "2026-06-09T09:48:34.028Z",
+    "user": 1,
+    "content_type": 14,
+    "object_id": "22",
+    "object_repr": "payment",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 57,
+  "fields": {
+    "action_time": "2026-06-09T09:49:00.706Z",
+    "user": 1,
+    "content_type": 14,
+    "object_id": "23",
+    "object_repr": "bye",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 58,
+  "fields": {
+    "action_time": "2026-06-09T09:49:27.103Z",
+    "user": 1,
+    "content_type": 14,
+    "object_id": "24",
+    "object_repr": "who are you",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 59,
+  "fields": {
+    "action_time": "2026-06-10T12:17:35.916Z",
+    "user": 1,
+    "content_type": 24,
+    "object_id": "1",
+    "object_repr": "St. Mary's Hospital",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Hospital name\"]}}]"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 1,
+  "fields": {
+    "name": "Can add log entry",
+    "content_type": 1,
+    "codename": "add_logentry"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 2,
+  "fields": {
+    "name": "Can change log entry",
+    "content_type": 1,
+    "codename": "change_logentry"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 3,
+  "fields": {
+    "name": "Can delete log entry",
+    "content_type": 1,
+    "codename": "delete_logentry"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 4,
+  "fields": {
+    "name": "Can view log entry",
+    "content_type": 1,
+    "codename": "view_logentry"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 5,
+  "fields": {
+    "name": "Can add permission",
+    "content_type": 2,
+    "codename": "add_permission"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 6,
+  "fields": {
+    "name": "Can change permission",
+    "content_type": 2,
+    "codename": "change_permission"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 7,
+  "fields": {
+    "name": "Can delete permission",
+    "content_type": 2,
+    "codename": "delete_permission"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 8,
+  "fields": {
+    "name": "Can view permission",
+    "content_type": 2,
+    "codename": "view_permission"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 9,
+  "fields": {
+    "name": "Can add group",
+    "content_type": 3,
+    "codename": "add_group"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 10,
+  "fields": {
+    "name": "Can change group",
+    "content_type": 3,
+    "codename": "change_group"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 11,
+  "fields": {
+    "name": "Can delete group",
+    "content_type": 3,
+    "codename": "delete_group"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 12,
+  "fields": {
+    "name": "Can view group",
+    "content_type": 3,
+    "codename": "view_group"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 13,
+  "fields": {
+    "name": "Can add user",
+    "content_type": 4,
+    "codename": "add_user"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 14,
+  "fields": {
+    "name": "Can change user",
+    "content_type": 4,
+    "codename": "change_user"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 15,
+  "fields": {
+    "name": "Can delete user",
+    "content_type": 4,
+    "codename": "delete_user"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 16,
+  "fields": {
+    "name": "Can view user",
+    "content_type": 4,
+    "codename": "view_user"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 17,
+  "fields": {
+    "name": "Can add content type",
+    "content_type": 5,
+    "codename": "add_contenttype"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 18,
+  "fields": {
+    "name": "Can change content type",
+    "content_type": 5,
+    "codename": "change_contenttype"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 19,
+  "fields": {
+    "name": "Can delete content type",
+    "content_type": 5,
+    "codename": "delete_contenttype"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 20,
+  "fields": {
+    "name": "Can view content type",
+    "content_type": 5,
+    "codename": "view_contenttype"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 21,
+  "fields": {
+    "name": "Can add session",
+    "content_type": 6,
+    "codename": "add_session"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 22,
+  "fields": {
+    "name": "Can change session",
+    "content_type": 6,
+    "codename": "change_session"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 23,
+  "fields": {
+    "name": "Can delete session",
+    "content_type": 6,
+    "codename": "delete_session"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 24,
+  "fields": {
+    "name": "Can view session",
+    "content_type": 6,
+    "codename": "view_session"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 25,
+  "fields": {
+    "name": "Can add patient",
+    "content_type": 7,
+    "codename": "add_patient"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 26,
+  "fields": {
+    "name": "Can change patient",
+    "content_type": 7,
+    "codename": "change_patient"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 27,
+  "fields": {
+    "name": "Can delete patient",
+    "content_type": 7,
+    "codename": "delete_patient"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 28,
+  "fields": {
+    "name": "Can view patient",
+    "content_type": 7,
+    "codename": "view_patient"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 29,
+  "fields": {
+    "name": "Can add visit",
+    "content_type": 8,
+    "codename": "add_visit"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 30,
+  "fields": {
+    "name": "Can change visit",
+    "content_type": 8,
+    "codename": "change_visit"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 31,
+  "fields": {
+    "name": "Can delete visit",
+    "content_type": 8,
+    "codename": "delete_visit"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 32,
+  "fields": {
+    "name": "Can view visit",
+    "content_type": 8,
+    "codename": "view_visit"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 33,
+  "fields": {
+    "name": "Can add prescription",
+    "content_type": 9,
+    "codename": "add_prescription"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 34,
+  "fields": {
+    "name": "Can change prescription",
+    "content_type": 9,
+    "codename": "change_prescription"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 35,
+  "fields": {
+    "name": "Can delete prescription",
+    "content_type": 9,
+    "codename": "delete_prescription"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 36,
+  "fields": {
+    "name": "Can view prescription",
+    "content_type": 9,
+    "codename": "view_prescription"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 37,
+  "fields": {
+    "name": "Can add lab",
+    "content_type": 10,
+    "codename": "add_lab"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 38,
+  "fields": {
+    "name": "Can change lab",
+    "content_type": 10,
+    "codename": "change_lab"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 39,
+  "fields": {
+    "name": "Can delete lab",
+    "content_type": 10,
+    "codename": "delete_lab"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 40,
+  "fields": {
+    "name": "Can view lab",
+    "content_type": 10,
+    "codename": "view_lab"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 41,
+  "fields": {
+    "name": "Can add doctor",
+    "content_type": 11,
+    "codename": "add_doctor"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 42,
+  "fields": {
+    "name": "Can change doctor",
+    "content_type": 11,
+    "codename": "change_doctor"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 43,
+  "fields": {
+    "name": "Can delete doctor",
+    "content_type": 11,
+    "codename": "delete_doctor"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 44,
+  "fields": {
+    "name": "Can view doctor",
+    "content_type": 11,
+    "codename": "view_doctor"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 45,
+  "fields": {
+    "name": "Can add dispense",
+    "content_type": 12,
+    "codename": "add_dispense"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 46,
+  "fields": {
+    "name": "Can change dispense",
+    "content_type": 12,
+    "codename": "change_dispense"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 47,
+  "fields": {
+    "name": "Can delete dispense",
+    "content_type": 12,
+    "codename": "delete_dispense"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 48,
+  "fields": {
+    "name": "Can view dispense",
+    "content_type": 12,
+    "codename": "view_dispense"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 49,
+  "fields": {
+    "name": "Can add chat message",
+    "content_type": 13,
+    "codename": "add_chatmessage"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 50,
+  "fields": {
+    "name": "Can change chat message",
+    "content_type": 13,
+    "codename": "change_chatmessage"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 51,
+  "fields": {
+    "name": "Can delete chat message",
+    "content_type": 13,
+    "codename": "delete_chatmessage"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 52,
+  "fields": {
+    "name": "Can view chat message",
+    "content_type": 13,
+    "codename": "view_chatmessage"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 53,
+  "fields": {
+    "name": "Can add chat faq",
+    "content_type": 14,
+    "codename": "add_chatfaq"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 54,
+  "fields": {
+    "name": "Can change chat faq",
+    "content_type": 14,
+    "codename": "change_chatfaq"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 55,
+  "fields": {
+    "name": "Can delete chat faq",
+    "content_type": 14,
+    "codename": "delete_chatfaq"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 56,
+  "fields": {
+    "name": "Can view chat faq",
+    "content_type": 14,
+    "codename": "view_chatfaq"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 57,
+  "fields": {
+    "name": "Can add audit log",
+    "content_type": 15,
+    "codename": "add_auditlog"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 58,
+  "fields": {
+    "name": "Can change audit log",
+    "content_type": 15,
+    "codename": "change_auditlog"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 59,
+  "fields": {
+    "name": "Can delete audit log",
+    "content_type": 15,
+    "codename": "delete_auditlog"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 60,
+  "fields": {
+    "name": "Can view audit log",
+    "content_type": 15,
+    "codename": "view_auditlog"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 61,
+  "fields": {
+    "name": "Can add bill",
+    "content_type": 16,
+    "codename": "add_bill"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 62,
+  "fields": {
+    "name": "Can change bill",
+    "content_type": 16,
+    "codename": "change_bill"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 63,
+  "fields": {
+    "name": "Can delete bill",
+    "content_type": 16,
+    "codename": "delete_bill"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 64,
+  "fields": {
+    "name": "Can view bill",
+    "content_type": 16,
+    "codename": "view_bill"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 65,
+  "fields": {
+    "name": "Can add medicine stock",
+    "content_type": 17,
+    "codename": "add_medicinestock"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 66,
+  "fields": {
+    "name": "Can change medicine stock",
+    "content_type": 17,
+    "codename": "change_medicinestock"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 67,
+  "fields": {
+    "name": "Can delete medicine stock",
+    "content_type": 17,
+    "codename": "delete_medicinestock"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 68,
+  "fields": {
+    "name": "Can view medicine stock",
+    "content_type": 17,
+    "codename": "view_medicinestock"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 69,
+  "fields": {
+    "name": "Can add appointment",
+    "content_type": 18,
+    "codename": "add_appointment"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 70,
+  "fields": {
+    "name": "Can change appointment",
+    "content_type": 18,
+    "codename": "change_appointment"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 71,
+  "fields": {
+    "name": "Can delete appointment",
+    "content_type": 18,
+    "codename": "delete_appointment"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 72,
+  "fields": {
+    "name": "Can view appointment",
+    "content_type": 18,
+    "codename": "view_appointment"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 73,
+  "fields": {
+    "name": "Can add procedure",
+    "content_type": 19,
+    "codename": "add_procedure"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 74,
+  "fields": {
+    "name": "Can change procedure",
+    "content_type": 19,
+    "codename": "change_procedure"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 75,
+  "fields": {
+    "name": "Can delete procedure",
+    "content_type": 19,
+    "codename": "delete_procedure"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 76,
+  "fields": {
+    "name": "Can view procedure",
+    "content_type": 19,
+    "codename": "view_procedure"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 77,
+  "fields": {
+    "name": "Can add vital",
+    "content_type": 20,
+    "codename": "add_vital"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 78,
+  "fields": {
+    "name": "Can change vital",
+    "content_type": 20,
+    "codename": "change_vital"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 79,
+  "fields": {
+    "name": "Can delete vital",
+    "content_type": 20,
+    "codename": "delete_vital"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 80,
+  "fields": {
+    "name": "Can view vital",
+    "content_type": 20,
+    "codename": "view_vital"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 81,
+  "fields": {
+    "name": "Can add patient",
+    "content_type": 21,
+    "codename": "add_patient"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 82,
+  "fields": {
+    "name": "Can change patient",
+    "content_type": 21,
+    "codename": "change_patient"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 83,
+  "fields": {
+    "name": "Can delete patient",
+    "content_type": 21,
+    "codename": "delete_patient"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 84,
+  "fields": {
+    "name": "Can view patient",
+    "content_type": 21,
+    "codename": "view_patient"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 85,
+  "fields": {
+    "name": "Can add test",
+    "content_type": 22,
+    "codename": "add_test"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 86,
+  "fields": {
+    "name": "Can change test",
+    "content_type": 22,
+    "codename": "change_test"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 87,
+  "fields": {
+    "name": "Can delete test",
+    "content_type": 22,
+    "codename": "delete_test"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 88,
+  "fields": {
+    "name": "Can view test",
+    "content_type": 22,
+    "codename": "view_test"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 89,
+  "fields": {
+    "name": "Can add procedure catalog",
+    "content_type": 23,
+    "codename": "add_procedurecatalog"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 90,
+  "fields": {
+    "name": "Can change procedure catalog",
+    "content_type": 23,
+    "codename": "change_procedurecatalog"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 91,
+  "fields": {
+    "name": "Can delete procedure catalog",
+    "content_type": 23,
+    "codename": "delete_procedurecatalog"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 92,
+  "fields": {
+    "name": "Can view procedure catalog",
+    "content_type": 23,
+    "codename": "view_procedurecatalog"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 93,
+  "fields": {
+    "name": "Can add Hospital Settings",
+    "content_type": 24,
+    "codename": "add_hospitalsettings"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 94,
+  "fields": {
+    "name": "Can change Hospital Settings",
+    "content_type": 24,
+    "codename": "change_hospitalsettings"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 95,
+  "fields": {
+    "name": "Can delete Hospital Settings",
+    "content_type": 24,
+    "codename": "delete_hospitalsettings"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 96,
+  "fields": {
+    "name": "Can view Hospital Settings",
+    "content_type": 24,
+    "codename": "view_hospitalsettings"
+  }
+},
+{
+  "model": "auth.group",
+  "pk": 1,
+  "fields": {
+    "name": "Admin",
+    "permissions": []
+  }
+},
+{
+  "model": "auth.group",
+  "pk": 2,
+  "fields": {
+    "name": "Doctor",
+    "permissions": []
+  }
+},
+{
+  "model": "auth.group",
+  "pk": 3,
+  "fields": {
+    "name": "Vitals",
+    "permissions": []
+  }
+},
+{
+  "model": "auth.group",
+  "pk": 4,
+  "fields": {
+    "name": "Receptions",
+    "permissions": []
+  }
+},
+{
+  "model": "auth.group",
+  "pk": 5,
+  "fields": {
+    "name": "Lab",
+    "permissions": []
+  }
+},
+{
+  "model": "auth.group",
+  "pk": 6,
+  "fields": {
+    "name": "Cashier",
+    "permissions": []
+  }
+},
+{
+  "model": "auth.group",
+  "pk": 7,
+  "fields": {
+    "name": "Dispense",
+    "permissions": []
+  }
+},
+{
+  "model": "auth.group",
+  "pk": 9,
+  "fields": {
+    "name": "Procedure",
+    "permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 1,
+  "fields": {
+    "password": "pbkdf2_sha256$1000000$Wu3n7UVzNx1J2nKOosEKVG$zNXdbT0MimDCvzbJMRIFmJlxZs05dWgDGX+NC395S4Y=",
+    "last_login": "2026-06-10T13:21:41.315Z",
+    "is_superuser": true,
+    "username": "Shija",
+    "first_name": "",
+    "last_name": "",
+    "email": "shijajuma@pm.me",
+    "is_staff": true,
+    "is_active": true,
+    "date_joined": "2026-05-29T18:28:44.910Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 2,
+  "fields": {
+    "password": "pbkdf2_sha256$1000000$66RSYQwi9dKdhjfRsqYq0b$UNrCmWyonvsOgScCNcFlyf7PB6RF0dfiELMT3tA+K5c=",
+    "last_login": "2026-06-10T08:35:25.172Z",
+    "is_superuser": false,
+    "username": "Doctor1",
+    "first_name": "",
+    "last_name": "",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2026-05-29T19:40:25.221Z",
+    "groups": [
+      2
+    ],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 3,
+  "fields": {
+    "password": "pbkdf2_sha256$1000000$JoGTWsGnzXETwSH9UzCEKh$SYWEXPBUMVYrZ0krejjLszxGO8EwDLpd2ikQ+L8uXl4=",
+    "last_login": "2026-06-04T19:30:41.722Z",
+    "is_superuser": false,
+    "username": "Nurse1",
+    "first_name": "",
+    "last_name": "",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2026-05-29T19:41:11Z",
+    "groups": [
+      3
+    ],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 4,
+  "fields": {
+    "password": "pbkdf2_sha256$1000000$MLb5q1uvWjlDOCNMEOAL1m$T9bwN9EvVXKLmS2rIoKpIAQFogCTLwprApf814fsrA4=",
+    "last_login": "2026-06-10T13:17:13.235Z",
+    "is_superuser": false,
+    "username": "Reception1",
+    "first_name": "",
+    "last_name": "",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2026-05-29T19:41:44Z",
+    "groups": [
+      4
+    ],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 5,
+  "fields": {
+    "password": "pbkdf2_sha256$1000000$OhTkwWfEjaNgEYUirL0bGR$nCe/Y2ffTrbwwa9fN0ZcKpxrzWs2FXBe/NT6h++dGUU=",
+    "last_login": "2026-06-04T19:32:02.710Z",
+    "is_superuser": false,
+    "username": "Lab1",
+    "first_name": "",
+    "last_name": "",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2026-05-29T19:42:15.449Z",
+    "groups": [
+      5
+    ],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 6,
+  "fields": {
+    "password": "pbkdf2_sha256$1000000$iew8EMOuIddjRBdqzrrAmj$1eDBGhvZAA+x3/L4/7GW6Y2ZpYqx9R+WHnwm3/X0VTM=",
+    "last_login": "2026-06-04T19:34:17.703Z",
+    "is_superuser": false,
+    "username": "Cashier1",
+    "first_name": "",
+    "last_name": "",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2026-05-29T19:42:43.044Z",
+    "groups": [
+      6
+    ],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 7,
+  "fields": {
+    "password": "pbkdf2_sha256$1000000$kOUomWK0kD8BJTtFwJct21$iQFa7SYBaK0KGmceI+5eQh+HfQ73wSCQQUxp3s8dVjE=",
+    "last_login": "2026-06-04T19:35:11.332Z",
+    "is_superuser": false,
+    "username": "Pharmacy1",
+    "first_name": "",
+    "last_name": "",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2026-05-29T19:43:06.956Z",
+    "groups": [
+      7
+    ],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 8,
+  "fields": {
+    "password": "pbkdf2_sha256$1000000$vS8Mm712XtutqHTVmMHJ7H$jBXEEOPCd3zcRROw9eCRGWLam7AHNmcSdyUS4m4DzYc=",
+    "last_login": "2026-06-09T11:40:32.906Z",
+    "is_superuser": false,
+    "username": "Procedure1",
+    "first_name": "",
+    "last_name": "",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2026-06-03T06:28:32.041Z",
+    "groups": [
+      9
+    ],
+    "user_permissions": []
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 1,
+  "fields": {
+    "app_label": "admin",
+    "model": "logentry"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 2,
+  "fields": {
+    "app_label": "auth",
+    "model": "permission"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 3,
+  "fields": {
+    "app_label": "auth",
+    "model": "group"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 4,
+  "fields": {
+    "app_label": "auth",
+    "model": "user"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 5,
+  "fields": {
+    "app_label": "contenttypes",
+    "model": "contenttype"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 6,
+  "fields": {
+    "app_label": "sessions",
+    "model": "session"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 7,
+  "fields": {
+    "app_label": "magahospital",
+    "model": "patient"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 8,
+  "fields": {
+    "app_label": "magahospital",
+    "model": "visit"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 9,
+  "fields": {
+    "app_label": "magahospital",
+    "model": "prescription"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 10,
+  "fields": {
+    "app_label": "magahospital",
+    "model": "lab"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 11,
+  "fields": {
+    "app_label": "magahospital",
+    "model": "doctor"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 12,
+  "fields": {
+    "app_label": "magahospital",
+    "model": "dispense"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 13,
+  "fields": {
+    "app_label": "magahospital",
+    "model": "chatmessage"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 14,
+  "fields": {
+    "app_label": "magahospital",
+    "model": "chatfaq"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 15,
+  "fields": {
+    "app_label": "magahospital",
+    "model": "auditlog"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 16,
+  "fields": {
+    "app_label": "magahospital",
+    "model": "bill"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 17,
+  "fields": {
+    "app_label": "magahospital",
+    "model": "medicinestock"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 18,
+  "fields": {
+    "app_label": "magahospital",
+    "model": "appointment"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 19,
+  "fields": {
+    "app_label": "magahospital",
+    "model": "procedure"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 20,
+  "fields": {
+    "app_label": "magahospital",
+    "model": "vital"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 21,
+  "fields": {
+    "app_label": "prediction",
+    "model": "patient"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 22,
+  "fields": {
+    "app_label": "magahospital",
+    "model": "test"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 23,
+  "fields": {
+    "app_label": "magahospital",
+    "model": "procedurecatalog"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 24,
+  "fields": {
+    "app_label": "magahospital",
+    "model": "hospitalsettings"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "05ef6sqqur2chvistafc76ztsasrp13a",
+  "fields": {
+    "session_data": ".eJxVjEEOwiAQRe_C2pDOyFBw6b5nIDAMUjVtUtqV8e7apAvd_vfef6kQt7WGrckSxqwuitTpd0uRHzLtIN_jdJs1z9O6jEnvij5o08Oc5Xk93L-DGlv91uDEARCS7a0pVDxQkrMTxlwKMJjIOZtk0EZPyJ4SOu67zoNFKYDq_QHUuzd3:1wT4jT:F1qDN5MvMvri1NSt1PwRL7oL6unv57KRA7JfxPNEkgI",
+    "expire_date": "2026-05-29T21:57:07.078Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "0aoo6x908xdg2doo61myx1n08qu45bgh",
+  "fields": {
+    "session_data": ".eJxVjDsOwjAQBe_iGlnx-rMbSnrOEO3aDg4gR4qTCnF3iJQC2jcz76UG3tYybC0vw5TUWRl1-t2E4yPXHaQ719us41zXZRK9K_qgTV_nlJ-Xw_07KNzKt-4MoAsWLAmTB0gEYMWi75hAuA_ZYR4jYkeCvXFkxuD7mAk5eERR7w-lfTaX:1wV7IG:6lxr1YXt3AgG1dLiChnyes4QW5ncMH7su2Nxe2QfJq4",
+    "expire_date": "2026-06-04T13:05:28.639Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "35bm94cf1mhzr3y1pdaz85op1m7ej5lm",
+  "fields": {
+    "session_data": ".eJxVjMsOwiAQRf-FtSG8EZfu-w1kGAapGkhKuzL-uzbpQrf3nHNfLMK21rgNWuKc2YV5dvrdEuCD2g7yHdqtc-xtXebEd4UfdPCpZ3peD_fvoMKo3xqMNkhFhuKCLpKcSZQLammE0laACxkTupCSV4DKWVHgHLxFYbUw1rH3B_f3N9I:1wUiKx:PrZ9IQYMFaJIIho8z9_wP3kGcaWBwaPlPsSZhHSChr4",
+    "expire_date": "2026-06-03T10:26:35.093Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "6hfaelqq2l2juztnsh9oc7h1u8tj8l9d",
+  "fields": {
+    "session_data": ".eJxVjDsOwjAQBe_iGlnx-rMbSnrOEO3aDg4gR4qTCnF3iJQC2jcz76UG3tYybC0vw5TUWRl1-t2E4yPXHaQ719us41zXZRK9K_qgTV_nlJ-Xw_07KNzKt-4MoAsWLAmTB0gEYMWi75hAuA_ZYR4jYkeCvXFkxuD7mAk5eERR7w-lfTaX:1wU6bu:krFIucE0CIMm2ZjxD18gKa_vsTETtvF1B5AtHJrtRkQ",
+    "expire_date": "2026-06-01T18:09:34.912Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "6uh2a8jeimv8sy9rh4h6iwq4vm8dyyxe",
+  "fields": {
+    "session_data": ".eJxVjMsOwiAQRf-FtSG8EZfu-w1kGAapGkhKuzL-uzbpQrf3nHNfLMK21rgNWuKc2YV5dvrdEuCD2g7yHdqtc-xtXebEd4UfdPCpZ3peD_fvoMKo3xqMNkhFhuKCLpKcSZQLammE0laACxkTupCSV4DKWVHgHLxFYbUw1rH3B_f3N9I:1wUhBC:BXMQ2gTWgYyW-wqgDb2oXYyzqBe70r9bEPCCsB62XEg",
+    "expire_date": "2026-06-03T09:12:26.352Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "7dr3xrl0xp29irgxy97ge9k2i8b6ac9h",
+  "fields": {
+    "session_data": ".eJxVjMsOwiAQRf-FtSEUkIdL9_0GMjMwUjU0Ke3K-O_apAvd3nPOfYkE21rT1suSpiwuwonT74ZAj9J2kO_QbrOkua3LhHJX5EG7HOdcntfD_Tuo0Ou3JhU8MeiY0YNRXJziwHrw1uhsETVHZ2J2Mdqg4qAIPJJVwMaiPhcv3h_t4Tfa:1wUANX:eZWGz-NBef1kYUsDXN4XgqII3SjR2uO5NJZB-TSuf7c",
+    "expire_date": "2026-06-01T22:10:59.493Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "84yi3k6itsky8cr099542wvxv2trbbwf",
+  "fields": {
+    "session_data": ".eJxVjEEOwiAQRe_C2hCYTsPg0r1nIAwDUjU0Ke3KeHdt0oVu_3vvv1SI21rD1vMSJlFnBer0u3FMj9x2IPfYbrNOc1uXifWu6IN2fZ0lPy-H-3dQY6_fuhQkK1gIAROT8USIxWUi8Bacjc57GACFs4xJEMmnwXg0bCKMLOr9Acf1Nyk:1wU8Yj:8iipx9JgOcXaC-VS6bVkVwZrEaZQ5nYI1UhyIx_22jI",
+    "expire_date": "2026-06-01T20:14:25.994Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "9bblpthdrn9zbbtppp56wplkx9ghlg0f",
+  "fields": {
+    "session_data": ".eJxVjMsOwiAQRf-FtSEUkIdL9_0GMjMwUjU0Ke3K-O_apAvd3nPOfYkE21rT1suSpiwuwonT74ZAj9J2kO_QbrOkua3LhHJX5EG7HOdcntfD_Tuo0Ou3JhU8MeiY0YNRXJziwHrw1uhsETVHZ2J2Mdqg4qAIPJJVwMaiPhcv3h_t4Tfa:1wU98n:83Rx-lpG-VL58fNVg1AFiUvM89D-3wan-jkCu4iLAa8",
+    "expire_date": "2026-06-01T20:51:41.787Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "9ghejxl8c6iiinmxg0pwmbn6yffe9qcu",
+  "fields": {
+    "session_data": ".eJxVjMsOwiAQRf-FtSEUkIdL9_0GMjMwUjU0Ke3K-O_apAvd3nPOfYkE21rT1suSpiwuwonT74ZAj9J2kO_QbrOkua3LhHJX5EG7HOdcntfD_Tuo0Ou3JhU8MeiY0YNRXJziwHrw1uhsETVHZ2J2Mdqg4qAIPJJVwMaiPhcv3h_t4Tfa:1wU7NV:gLxLQmf-rq9GqoFXm9hFnZxiki-diTVyYMJwt37A0lA",
+    "expire_date": "2026-06-01T18:58:45.364Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "c1pdkznnkhiokz3ztm5mvu2kb5bhhfv1",
+  "fields": {
+    "session_data": ".eJxVjDsOwjAQBe_iGlnx-rMbSnrOEO3aDg4gR4qTCnF3iJQC2jcz76UG3tYybC0vw5TUWRl1-t2E4yPXHaQ719us41zXZRK9K_qgTV_nlJ-Xw_07KNzKt-4MoAsWLAmTB0gEYMWi75hAuA_ZYR4jYkeCvXFkxuD7mAk5eERR7w-lfTaX:1wUrhp:-DbsVgDvwTyvtf2nH5s7qqJVTk53NnLvjFNtXIZLhvQ",
+    "expire_date": "2026-06-03T20:26:49.724Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "c4f25f7yny6a7ly7yly2g04zsdo07yej",
+  "fields": {
+    "session_data": ".eJxVjMsOwiAUBf-FtSGF0gIu3fsN5L6QqqFJHyvjvytJF7o9M3NeKsG-lbSvsqSJ1VkZdfrdEOghtQG-Q73Nmua6LRPqpuiDrvo6szwvh_t3UGAtrXbBMYUhmsGRd51FYexpABDkkLs-iIFIfnRfbBHBZdNDiGTJ55FFvT_3AjjD:1wXK0b:cIsUEBNAlzezvFkyOTRWORVOfm6vRBNQ-FTcDYYGH6w",
+    "expire_date": "2026-06-10T15:04:21.961Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "cvkfvl2ajg6haclw5yoheewi5iwwkwaa",
+  "fields": {
+    "session_data": ".eJxVjEEOwiAQRe_C2hA6QB1cuvcMZIBBqgaS0q6Md7dNutDtf-_9t_C0LsWvnWc_JXERRpx-t0DxyXUH6UH13mRsdZmnIHdFHrTLW0v8uh7u30GhXrZaK6OBbQ4uACflUDmDpCFi3sBgowXAbNGionFkk5BBqzBYY87EkMXnC768NuU:1wXDIz:ns0kv2layYpZADTesVqSlBIV7HZCK-b5WJlBW1Y1rHI",
+    "expire_date": "2026-06-10T07:54:53.486Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "ehcu3zenjr7xxm8m5l3daeg38vf1p8vs",
+  "fields": {
+    "session_data": ".eJxVjMsOwiAQRf-FtSG8EZfu-w1kGAapGkhKuzL-uzbpQrf3nHNfLMK21rgNWuKc2YV5dvrdEuCD2g7yHdqtc-xtXebEd4UfdPCpZ3peD_fvoMKo3xqMNkhFhuKCLpKcSZQLammE0laACxkTupCSV4DKWVHgHLxFYbUw1rH3B_f3N9I:1wUjUh:NIkhaDor7Spv-G2cJ4uA3Zuig_Vj91EResiobkvJvfI",
+    "expire_date": "2026-06-03T11:40:43.125Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "fnsyoyxujshhsvmt9ick0p75k00qpz2f",
+  "fields": {
+    "session_data": ".eJxVjMsOwiAQRf-FtSEUkIdL9_0GMjMwUjU0Ke3K-O_apAvd3nPOfYkE21rT1suSpiwuwonT74ZAj9J2kO_QbrOkua3LhHJX5EG7HOdcntfD_Tuo0Ou3JhU8MeiY0YNRXJziwHrw1uhsETVHZ2J2Mdqg4qAIPJJVwMaiPhcv3h_t4Tfa:1wULoq:roGntgUiXMdC7xhA08GQjwTnqjF3KdYageai5zJb5QA",
+    "expire_date": "2026-06-02T10:23:56.223Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "iw76pdqfs1afgr0h2lhrpn1z5puc7pga",
+  "fields": {
+    "session_data": ".eJxVjMsOwiAQRf-FtSG8EZfu-w1kGAapGkhKuzL-uzbpQrf3nHNfLMK21rgNWuKc2YV5dvrdEuCD2g7yHdqtc-xtXebEd4UfdPCpZ3peD_fvoMKo3xqMNkhFhuKCLpKcSZQLammE0laACxkTupCSV4DKWVHgHLxFYbUw1rH3B_f3N9I:1wUTIj:_KTAUyqW1zdTTrZt682iW8Q88kIiHKiWabVSjXOkZBs",
+    "expire_date": "2026-06-02T18:23:17.750Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "izpnpgatnu6p7fvuo052ux06cru15bw1",
+  "fields": {
+    "session_data": ".eJxVjMsOwiAQRf-FtSEUkIdL9_0GMjMwUjU0Ke3K-O_apAvd3nPOfYkE21rT1suSpiwuwonT74ZAj9J2kO_QbrOkua3LhHJX5EG7HOdcntfD_Tuo0Ou3JhU8MeiY0YNRXJziwHrw1uhsETVHZ2J2Mdqg4qAIPJJVwMaiPhcv3h_t4Tfa:1wUAs8:NK_ynAr3w3j-c_Y3TCrnDmSTZ1xQQbu3Uvbk7jjaOr8",
+    "expire_date": "2026-06-01T22:42:36.916Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "k3v65aii4nk950yrfdc98g355lokdruv",
+  "fields": {
+    "session_data": ".eJxVjDsOwjAQBe_iGlnx-rMbSnrOEO3aDg4gR4qTCnF3iJQC2jcz76UG3tYybC0vw5TUWRl1-t2E4yPXHaQ719us41zXZRK9K_qgTV_nlJ-Xw_07KNzKt-4MoAsWLAmTB0gEYMWi75hAuA_ZYR4jYkeCvXFkxuD7mAk5eERR7w-lfTaX:1wXFJx:IgkAT7YzcnZeDCjf0Rng7qgONdFWg5PlG2SEMgPHA-k",
+    "expire_date": "2026-06-10T10:04:01.220Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "l0xd50lguf79ar250a13nhjhgeagksvn",
+  "fields": {
+    "session_data": ".eJxVjDsOwjAQBe_iGlnx-rMbSnrOEO3aDg4gR4qTCnF3iJQC2jcz76UG3tYybC0vw5TUWRl1-t2E4yPXHaQ719us41zXZRK9K_qgTV_nlJ-Xw_07KNzKt-4MoAsWLAmTB0gEYMWi75hAuA_ZYR4jYkeCvXFkxuD7mAk5eERR7w-lfTaX:1wV7Hp:gwRtquBp0F8E4c_lExt5buzlhhMaXD4BdtdTjVTN4qM",
+    "expire_date": "2026-06-04T13:05:01.950Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "mq5z8cilqxwfru0rh6vg7gpi8yburboh",
+  "fields": {
+    "session_data": ".eJxVjMsOwiAQRf-FtSEUkIdL9_0GMjMwUjU0Ke3K-O_apAvd3nPOfYkE21rT1suSpiwuwonT74ZAj9J2kO_QbrOkua3LhHJX5EG7HOdcntfD_Tuo0Ou3JhU8MeiY0YNRXJziwHrw1uhsETVHZ2J2Mdqg4qAIPJJVwMaiPhcv3h_t4Tfa:1wVCjB:iBO5lVc98Vnt0xjMAycXO5emu29KBhO5kL--meCS6wE",
+    "expire_date": "2026-06-04T18:53:37.655Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "mujl1g4j0u1du0tyltnzsiqoesxgowun",
+  "fields": {
+    "session_data": ".eJxVjDsOwjAQBe_iGlnx-rMbSnrOEO3aDg4gR4qTCnF3iJQC2jcz76UG3tYybC0vw5TUWRl1-t2E4yPXHaQ719us41zXZRK9K_qgTV_nlJ-Xw_07KNzKt-4MoAsWLAmTB0gEYMWi75hAuA_ZYR4jYkeCvXFkxuD7mAk5eERR7w-lfTaX:1wT1xO:yt4tEICEEQuOQCMAnV1PFIQhG4Nur-wjzSD2Lag9li0",
+    "expire_date": "2026-05-29T18:59:18.055Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "nmzq2unl36un0b7qua5zajxv2pei29zg",
+  "fields": {
+    "session_data": ".eJxVjEEOwiAQRe_C2hCYTsPg0r1nIAwDUjU0Ke3KeHdt0oVu_3vvv1SI21rD1vMSJlFnBer0u3FMj9x2IPfYbrNOc1uXifWu6IN2fZ0lPy-H-3dQY6_fuhQkK1gIAROT8USIxWUi8Bacjc57GACFs4xJEMmnwXg0bCKMLOr9Acf1Nyk:1wUI9R:LnrZqzdR03Um2LfeHV7gQ_syVEoDDLrQemvUQGca_bw",
+    "expire_date": "2026-06-02T06:28:57.184Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "uwuet3srxitkwhslwqriz7tnx4fuq2ri",
+  "fields": {
+    "session_data": ".eJxVjMsOwiAUBf-FtSGF0gIu3fsN5L6QqqFJHyvjvytJF7o9M3NeKsG-lbSvsqSJ1VkZdfrdEOghtQG-Q73Nmua6LRPqpuiDrvo6szwvh_t3UGAtrXbBMYUhmsGRd51FYexpABDkkLs-iIFIfnRfbBHBZdNDiGTJ55FFvT_3AjjD:1wXGkl:bt0HzOxAW57ZE6nwGtDvuZlIrCYkKIB31WPbVpe51yM",
+    "expire_date": "2026-06-10T11:35:47.550Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "wwauxil915xphvje3d2idnck37stgwaf",
+  "fields": {
+    "session_data": ".eJxVjDsOwjAQBe_iGlnx-rMbSnrOEO3aDg4gR4qTCnF3iJQC2jcz76UG3tYybC0vw5TUWRl1-t2E4yPXHaQ719us41zXZRK9K_qgTV_nlJ-Xw_07KNzKt-4MoAsWLAmTB0gEYMWi75hAuA_ZYR4jYkeCvXFkxuD7mAk5eERR7w-lfTaX:1wUfGh:Yt9Zghx1mH8Fodn45bmdcry3ob9kM3jvDxh8enM8xUA",
+    "expire_date": "2026-06-03T07:09:59.118Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "xovz41xpx68qhy0r3u5iywdwk4o6ggl8",
+  "fields": {
+    "session_data": ".eJxVjMsOwiAQRf-FtSEUkIdL9_0GMjMwUjU0Ke3K-O_apAvd3nPOfYkE21rT1suSpiwuwonT74ZAj9J2kO_QbrOkua3LhHJX5EG7HOdcntfD_Tuo0Ou3JhU8MeiY0YNRXJziwHrw1uhsETVHZ2J2Mdqg4qAIPJJVwMaiPhcv3h_t4Tfa:1wUNks:Nvy_1eovEuTopzvDopwX2c62UItWOWqmPEmI9Lg5Oro",
+    "expire_date": "2026-06-02T12:27:58.828Z"
+  }
+},
+{
+  "model": "magahospital.patient",
+  "pk": 12,
+  "fields": {
+    "idno": "UKBANKSSH",
+    "firstname": "Juma",
+    "secondname": "Shija",
+    "age": 43,
+    "address": "MRCC",
+    "sex": "M",
+    "created_at": "2026-06-03T05:58:10.963Z"
+  }
+},
+{
+  "model": "magahospital.patient",
+  "pk": 13,
+  "fields": {
+    "idno": "2I633D8RA",
+    "firstname": "Jacob",
+    "secondname": "Shija",
+    "age": 43,
+    "address": "Kitangili",
+    "sex": "M",
+    "created_at": "2026-06-03T06:23:06.657Z"
+  }
+},
+{
+  "model": "magahospital.patient",
+  "pk": 14,
+  "fields": {
+    "idno": "9DQOD238A",
+    "firstname": "Mwinamila",
+    "secondname": "Makeja",
+    "age": 70,
+    "address": "Kianda",
+    "sex": "M",
+    "created_at": "2026-06-03T08:35:52.088Z"
+  }
+},
+{
+  "model": "magahospital.patient",
+  "pk": 15,
+  "fields": {
+    "idno": "LA9Y7TRG7",
+    "firstname": "Sophia",
+    "secondname": "Hamis",
+    "age": 23,
+    "address": "Mpui",
+    "sex": "F",
+    "created_at": "2026-06-03T09:43:49.469Z"
+  }
+},
+{
+  "model": "magahospital.patient",
+  "pk": 16,
+  "fields": {
+    "idno": "9ND48TD1Q",
+    "firstname": "Halima",
+    "secondname": "Usiga",
+    "age": 24,
+    "address": "Tinde",
+    "sex": "F",
+    "created_at": "2026-06-03T17:33:24.520Z"
+  }
+},
+{
+  "model": "magahospital.patient",
+  "pk": 17,
+  "fields": {
+    "idno": "0D4D0Q3BK",
+    "firstname": "Hamisi",
+    "secondname": "Juma",
+    "age": 12,
+    "address": "Kianda",
+    "sex": "M",
+    "created_at": "2026-06-03T18:16:40.994Z"
+  }
+},
+{
+  "model": "magahospital.patient",
+  "pk": 18,
+  "fields": {
+    "idno": "VU0LK3E2D",
+    "firstname": "Shema",
+    "secondname": "Nziku",
+    "age": 34,
+    "address": "Mjini",
+    "sex": "M",
+    "created_at": "2026-06-04T17:50:15.220Z"
+  }
+},
+{
+  "model": "magahospital.visit",
+  "pk": 22,
+  "fields": {
+    "patient": 12,
+    "date": "2026-06-03T05:58:13.283Z",
+    "status": "Completed"
+  }
+},
+{
+  "model": "magahospital.visit",
+  "pk": 23,
+  "fields": {
+    "patient": 13,
+    "date": "2026-06-03T06:23:09.175Z",
+    "status": "Completed"
+  }
+},
+{
+  "model": "magahospital.visit",
+  "pk": 24,
+  "fields": {
+    "patient": 14,
+    "date": "2026-06-03T08:35:58.906Z",
+    "status": "Completed"
+  }
+},
+{
+  "model": "magahospital.visit",
+  "pk": 25,
+  "fields": {
+    "patient": 15,
+    "date": "2026-06-03T09:43:52.619Z",
+    "status": "Completed"
+  }
+},
+{
+  "model": "magahospital.visit",
+  "pk": 26,
+  "fields": {
+    "patient": 16,
+    "date": "2026-06-03T17:33:27.198Z",
+    "status": "Completed"
+  }
+},
+{
+  "model": "magahospital.visit",
+  "pk": 27,
+  "fields": {
+    "patient": 17,
+    "date": "2026-06-03T18:16:44.343Z",
+    "status": "Completed"
+  }
+},
+{
+  "model": "magahospital.visit",
+  "pk": 28,
+  "fields": {
+    "patient": 18,
+    "date": "2026-06-04T17:50:18.115Z",
+    "status": "Dispense"
+  }
+},
+{
+  "model": "magahospital.visit",
+  "pk": 29,
+  "fields": {
+    "patient": 18,
+    "date": "2026-06-04T19:30:25.208Z",
+    "status": "Completed"
+  }
+},
+{
+  "model": "magahospital.doctor",
+  "pk": 21,
+  "fields": {
+    "visit": 22,
+    "doctor": 2,
+    "history": "Fever",
+    "diagnosis": "Acute malaria, urinalysis, and typhoid",
+    "next_step": "Lab",
+    "created_at": "2026-06-03T05:59:34.175Z",
+    "tests": [
+      2,
+      4,
+      5,
+      7
+    ]
+  }
+},
+{
+  "model": "magahospital.doctor",
+  "pk": 22,
+  "fields": {
+    "visit": 23,
+    "doctor": 2,
+    "history": "Injury and fever",
+    "diagnosis": "Check malaria and x-ray",
+    "next_step": "Lab",
+    "created_at": "2026-06-03T06:24:17.617Z",
+    "tests": [
+      2
+    ]
+  }
+},
+{
+  "model": "magahospital.doctor",
+  "pk": 23,
+  "fields": {
+    "visit": 24,
+    "doctor": 2,
+    "history": "Leg fracture",
+    "diagnosis": "Check X-ray",
+    "next_step": "Procedure",
+    "created_at": "2026-06-03T08:37:36.014Z",
+    "tests": []
+  }
+},
+{
+  "model": "magahospital.doctor",
+  "pk": 24,
+  "fields": {
+    "visit": 25,
+    "doctor": 2,
+    "history": "Hand injury",
+    "diagnosis": "Suspecting fracture, check X-ray",
+    "next_step": "Procedure",
+    "created_at": "2026-06-03T09:44:47.060Z",
+    "tests": []
+  }
+},
+{
+  "model": "magahospital.doctor",
+  "pk": 25,
+  "fields": {
+    "visit": 26,
+    "doctor": 2,
+    "history": "Fever",
+    "diagnosis": "Malaria and injury",
+    "next_step": "Lab",
+    "created_at": "2026-06-03T17:34:32.896Z",
+    "tests": [
+      2
+    ]
+  }
+},
+{
+  "model": "magahospital.doctor",
+  "pk": 26,
+  "fields": {
+    "visit": 27,
+    "doctor": 2,
+    "history": "Fever",
+    "diagnosis": "Malaria",
+    "next_step": "Lab",
+    "created_at": "2026-06-03T18:21:15.616Z",
+    "tests": [
+      2
+    ]
+  }
+},
+{
+  "model": "magahospital.doctor",
+  "pk": 27,
+  "fields": {
+    "visit": 28,
+    "doctor": 2,
+    "history": "Fever",
+    "diagnosis": "Acute malaria",
+    "next_step": "Lab",
+    "created_at": "2026-06-04T17:51:45.820Z",
+    "tests": [
+      2,
+      4,
+      5
+    ]
+  }
+},
+{
+  "model": "magahospital.doctor",
+  "pk": 28,
+  "fields": {
+    "visit": 29,
+    "doctor": 2,
+    "history": "Fever",
+    "diagnosis": "Acute malaria",
+    "next_step": "Lab",
+    "created_at": "2026-06-04T19:31:25.495Z",
+    "tests": [
+      2
+    ]
+  }
+},
+{
+  "model": "magahospital.lab",
+  "pk": 21,
+  "fields": {
+    "visit": 22,
+    "lab_type": 1,
+    "results": "Malaria seen",
+    "created_at": "2026-06-03T06:01:34.110Z"
+  }
+},
+{
+  "model": "magahospital.lab",
+  "pk": 22,
+  "fields": {
+    "visit": 23,
+    "lab_type": 1,
+    "results": "Malaria",
+    "created_at": "2026-06-03T06:25:54.070Z"
+  }
+},
+{
+  "model": "magahospital.lab",
+  "pk": 23,
+  "fields": {
+    "visit": 26,
+    "lab_type": 1,
+    "results": "Malaria",
+    "created_at": "2026-06-03T17:36:06.176Z"
+  }
+},
+{
+  "model": "magahospital.lab",
+  "pk": 24,
+  "fields": {
+    "visit": 27,
+    "lab_type": 1,
+    "results": "Malaria",
+    "created_at": "2026-06-03T18:21:59.883Z"
+  }
+},
+{
+  "model": "magahospital.lab",
+  "pk": 25,
+  "fields": {
+    "visit": 28,
+    "lab_type": 1,
+    "results": "Malaria seen, Urinalysis - negative and HIV - negative",
+    "created_at": "2026-06-04T17:53:02.589Z"
+  }
+},
+{
+  "model": "magahospital.lab",
+  "pk": 26,
+  "fields": {
+    "visit": 29,
+    "lab_type": 1,
+    "results": "Malaria seen",
+    "created_at": "2026-06-04T19:32:37.801Z"
+  }
+},
+{
+  "model": "magahospital.prescription",
+  "pk": 21,
+  "fields": {
+    "visit": 22,
+    "medication": "Artemether/Lumefantrine (ALU), Paracetamol 500mg",
+    "dose": 1,
+    "frequency": 1,
+    "days": 1,
+    "notes": "ALU - 2*3/6, Paracetamol - 2*3/4",
+    "created_at": "2026-06-03T06:02:38.154Z"
+  }
+},
+{
+  "model": "magahospital.prescription",
+  "pk": 22,
+  "fields": {
+    "visit": 23,
+    "medication": "Artemether/Lumefantrine (ALU), Paracetamol 500mg",
+    "dose": 1,
+    "frequency": 1,
+    "days": 1,
+    "notes": "ALU - 2*3/6, PCM - 2*3/4",
+    "created_at": "2026-06-03T06:27:14.701Z"
+  }
+},
+{
+  "model": "magahospital.prescription",
+  "pk": 23,
+  "fields": {
+    "visit": 23,
+    "medication": "PoP",
+    "dose": 1,
+    "frequency": 1,
+    "days": 1,
+    "notes": "Dress PoP on his handle as X-ray shown",
+    "created_at": "2026-06-03T06:31:35.034Z"
+  }
+},
+{
+  "model": "magahospital.prescription",
+  "pk": 24,
+  "fields": {
+    "visit": 24,
+    "medication": "Paracetamol 500mg",
+    "dose": 1,
+    "frequency": 1,
+    "days": 1,
+    "notes": "PCM - 2*3/6",
+    "created_at": "2026-06-03T08:40:00.298Z"
+  }
+},
+{
+  "model": "magahospital.prescription",
+  "pk": 25,
+  "fields": {
+    "visit": 25,
+    "medication": "No medication required",
+    "dose": 1,
+    "frequency": 1,
+    "days": 1,
+    "notes": "Dress PoP",
+    "created_at": "2026-06-03T09:54:31.713Z"
+  }
+},
+{
+  "model": "magahospital.prescription",
+  "pk": 26,
+  "fields": {
+    "visit": 26,
+    "medication": "Artemether/Lumefantrine (ALU)",
+    "dose": 1,
+    "frequency": 1,
+    "days": 1,
+    "notes": "ALU - 2*3/6",
+    "created_at": "2026-06-03T17:37:14.568Z"
+  }
+},
+{
+  "model": "magahospital.prescription",
+  "pk": 27,
+  "fields": {
+    "visit": 27,
+    "medication": "Artemether/Lumefantrine (ALU)",
+    "dose": 1,
+    "frequency": 1,
+    "days": 1,
+    "notes": "ALU - 2*3/6",
+    "created_at": "2026-06-03T18:23:18.346Z"
+  }
+},
+{
+  "model": "magahospital.prescription",
+  "pk": 28,
+  "fields": {
+    "visit": 28,
+    "medication": "Artemether/Lumefantrine (ALU), Paracetamol 500mg",
+    "dose": 1,
+    "frequency": 1,
+    "days": 1,
+    "notes": "ALU - 2*3/6, PCM - 2*3/4",
+    "created_at": "2026-06-04T17:58:33.892Z"
+  }
+},
+{
+  "model": "magahospital.prescription",
+  "pk": 29,
+  "fields": {
+    "visit": 29,
+    "medication": "Artemether/Lumefantrine (ALU), Paracetamol 500mg",
+    "dose": 1,
+    "frequency": 1,
+    "days": 1,
+    "notes": "Artemether/Lumefantrine (ALU) - 2x3/6, Paracetamol 500mg - 2x3/6",
+    "created_at": "2026-06-04T19:34:08.620Z"
+  }
+},
+{
+  "model": "magahospital.bill",
+  "pk": 21,
+  "fields": {
+    "visit": 22,
+    "consultation_fee": "10000.00",
+    "lab_fee": "22000.00",
+    "medication_fee": "31200.00",
+    "procedure_fee": "0.00",
+    "total_amount": "63200.00",
+    "adjusted_medications": [
+      {
+        "name": "ALU",
+        "input_key": "ALU",
+        "unit_price": 2500.0,
+        "quantity": 12,
+        "total": 30000.0,
+        "dose": 2,
+        "frequency": 3,
+        "prescribed_days": 6,
+        "dispense_days": 2
+      },
+      {
+        "name": "Paracetamol",
+        "input_key": "Paracetamol",
+        "unit_price": 100.0,
+        "quantity": 12,
+        "total": 1200.0,
+        "dose": 2,
+        "frequency": 3,
+        "prescribed_days": 4,
+        "dispense_days": 2
+      }
+    ],
+    "is_paid": true,
+    "created_at": "2026-06-03T06:02:59.590Z"
+  }
+},
+{
+  "model": "magahospital.bill",
+  "pk": 22,
+  "fields": {
+    "visit": 23,
+    "consultation_fee": "10000.00",
+    "lab_fee": "5000.00",
+    "medication_fee": "90000.00",
+    "procedure_fee": "0.00",
+    "total_amount": "105000.00",
+    "adjusted_medications": [
+      {
+        "name": "ALU",
+        "input_key": "ALU",
+        "unit_price": 2500.0,
+        "quantity": 36,
+        "total": 90000.0,
+        "dose": 2,
+        "frequency": 3,
+        "prescribed_days": 6,
+        "dispense_days": 6
+      }
+    ],
+    "is_paid": true,
+    "created_at": "2026-06-03T06:31:50.551Z"
+  }
+},
+{
+  "model": "magahospital.bill",
+  "pk": 23,
+  "fields": {
+    "visit": 24,
+    "consultation_fee": "10000.00",
+    "lab_fee": "0.00",
+    "medication_fee": "0.00",
+    "procedure_fee": "20000.00",
+    "total_amount": "30000.00",
+    "adjusted_medications": [],
+    "is_paid": true,
+    "created_at": "2026-06-03T08:40:18.388Z"
+  }
+},
+{
+  "model": "magahospital.bill",
+  "pk": 24,
+  "fields": {
+    "visit": 25,
+    "consultation_fee": "10000.00",
+    "lab_fee": "0.00",
+    "medication_fee": "0.00",
+    "procedure_fee": "20000.00",
+    "total_amount": "30000.00",
+    "adjusted_medications": [],
+    "is_paid": true,
+    "created_at": "2026-06-03T09:54:54.315Z"
+  }
+},
+{
+  "model": "magahospital.bill",
+  "pk": 25,
+  "fields": {
+    "visit": 26,
+    "consultation_fee": "10000.00",
+    "lab_fee": "5000.00",
+    "medication_fee": "30000.00",
+    "procedure_fee": "0.00",
+    "total_amount": "45000.00",
+    "adjusted_medications": [
+      {
+        "name": "ALU",
+        "input_key": "ALU",
+        "unit_price": 2500.0,
+        "quantity": 12,
+        "total": 30000.0,
+        "dose": 2,
+        "frequency": 3,
+        "prescribed_days": 6,
+        "dispense_days": 2
+      }
+    ],
+    "is_paid": true,
+    "created_at": "2026-06-03T17:37:48.822Z"
+  }
+},
+{
+  "model": "magahospital.bill",
+  "pk": 26,
+  "fields": {
+    "visit": 27,
+    "consultation_fee": "10000.00",
+    "lab_fee": "5000.00",
+    "medication_fee": "30000.00",
+    "procedure_fee": "0.00",
+    "total_amount": "45000.00",
+    "adjusted_medications": [
+      {
+        "name": "ALU",
+        "input_key": "ALU",
+        "unit_price": 2500.0,
+        "quantity": 12,
+        "total": 30000.0,
+        "dose": 2,
+        "frequency": 3,
+        "prescribed_days": 6,
+        "dispense_days": 2
+      }
+    ],
+    "is_paid": true,
+    "created_at": "2026-06-03T18:23:31.977Z"
+  }
+},
+{
+  "model": "magahospital.bill",
+  "pk": 27,
+  "fields": {
+    "visit": 28,
+    "consultation_fee": "10000.00",
+    "lab_fee": "12000.00",
+    "medication_fee": "90000.00",
+    "procedure_fee": "0.00",
+    "total_amount": "112000.00",
+    "adjusted_medications": [
+      {
+        "name": "ALU",
+        "input_key": "ALU",
+        "unit_price": 2500.0,
+        "quantity": 36,
+        "total": 90000.0,
+        "dose": 2,
+        "frequency": 3,
+        "prescribed_days": 6,
+        "dispense_days": 6
+      }
+    ],
+    "is_paid": true,
+    "created_at": "2026-06-04T17:58:46.036Z"
+  }
+},
+{
+  "model": "magahospital.bill",
+  "pk": 28,
+  "fields": {
+    "visit": 29,
+    "consultation_fee": "10000.00",
+    "lab_fee": "5000.00",
+    "medication_fee": "33600.00",
+    "procedure_fee": "0.00",
+    "total_amount": "48600.00",
+    "adjusted_medications": [
+      {
+        "name": "Artemether/Lumefantrine (ALU)",
+        "input_key": "Artemether/Lumefantrine (ALU)",
+        "unit_price": 2500.0,
+        "quantity": 12,
+        "total": 30000.0,
+        "dose": 2,
+        "frequency": 3,
+        "prescribed_days": 6,
+        "dispense_days": 2
+      },
+      {
+        "name": "Paracetamol 500mg",
+        "input_key": "Paracetamol 500mg",
+        "unit_price": 100.0,
+        "quantity": 36,
+        "total": 3600.0,
+        "dose": 2,
+        "frequency": 3,
+        "prescribed_days": 6,
+        "dispense_days": 6
+      }
+    ],
+    "is_paid": true,
+    "created_at": "2026-06-04T19:34:21.665Z"
+  }
+},
+{
+  "model": "magahospital.medicinestock",
+  "pk": 1,
+  "fields": {
+    "medicine_name": "Paracetamol 500mg",
+    "quantity": 880,
+    "unit_price": "100.00",
+    "expiry_date": "2027-12-31",
+    "batch_number": "PCM240501",
+    "low_stock_alert": 10,
+    "created_at": "2026-06-01T17:23:25.508Z"
+  }
+},
+{
+  "model": "magahospital.medicinestock",
+  "pk": 2,
+  "fields": {
+    "medicine_name": "Amoxicillin 500mg",
+    "quantity": 500,
+    "unit_price": "500.00",
+    "expiry_date": "2027-08-30",
+    "batch_number": "AMX240210",
+    "low_stock_alert": 10,
+    "created_at": "2026-06-01T17:24:49.883Z"
+  }
+},
+{
+  "model": "magahospital.medicinestock",
+  "pk": 3,
+  "fields": {
+    "medicine_name": "Metronidazole 400mg",
+    "quantity": 500,
+    "unit_price": "300.00",
+    "expiry_date": "2027-10-15",
+    "batch_number": "MTZ240415",
+    "low_stock_alert": 10,
+    "created_at": "2026-06-01T17:26:59.311Z"
+  }
+},
+{
+  "model": "magahospital.medicinestock",
+  "pk": 4,
+  "fields": {
+    "medicine_name": "Ibuprofen 400mg",
+    "quantity": 600,
+    "unit_price": "250.00",
+    "expiry_date": "2028-01-20",
+    "batch_number": "IBU240320",
+    "low_stock_alert": 20,
+    "created_at": "2026-06-01T17:28:47.174Z"
+  }
+},
+{
+  "model": "magahospital.medicinestock",
+  "pk": 5,
+  "fields": {
+    "medicine_name": "Artemether/Lumefantrine (ALU)",
+    "quantity": 76,
+    "unit_price": "2500.00",
+    "expiry_date": "2027-09-01",
+    "batch_number": "ALU240612",
+    "low_stock_alert": 20,
+    "created_at": "2026-06-01T17:31:46.155Z"
+  }
+},
+{
+  "model": "magahospital.medicinestock",
+  "pk": 6,
+  "fields": {
+    "medicine_name": "Coartem 20/120mg",
+    "quantity": 200,
+    "unit_price": "3000.00",
+    "expiry_date": "2027-11-11",
+    "batch_number": "COA240718",
+    "low_stock_alert": 15,
+    "created_at": "2026-06-01T17:32:58.290Z"
+  }
+},
+{
+  "model": "magahospital.medicinestock",
+  "pk": 7,
+  "fields": {
+    "medicine_name": "Omeprazole 20mg",
+    "quantity": 400,
+    "unit_price": "400.00",
+    "expiry_date": "2028-02-14",
+    "batch_number": "OMP240905",
+    "low_stock_alert": 20,
+    "created_at": "2026-06-01T17:34:22.025Z"
+  }
+},
+{
+  "model": "magahospital.medicinestock",
+  "pk": 8,
+  "fields": {
+    "medicine_name": "Ciprofloxacin 500mg",
+    "quantity": 350,
+    "unit_price": "700.00",
+    "expiry_date": "2027-12-01",
+    "batch_number": "CIP240222",
+    "low_stock_alert": 20,
+    "created_at": "2026-06-01T17:35:35.390Z"
+  }
+},
+{
+  "model": "magahospital.medicinestock",
+  "pk": 9,
+  "fields": {
+    "medicine_name": "Vitamin C Tablets",
+    "quantity": 180,
+    "unit_price": "4.00",
+    "expiry_date": "2026-06-01",
+    "batch_number": "BATCH-VTC-008",
+    "low_stock_alert": 15,
+    "created_at": "2026-06-03T18:20:19.537Z"
+  }
+},
+{
+  "model": "magahospital.medicinestock",
+  "pk": 10,
+  "fields": {
+    "medicine_name": "Salbutamol Syrup",
+    "quantity": 25,
+    "unit_price": "9.30",
+    "expiry_date": "2026-06-08",
+    "batch_number": "BATCH-SAL-009",
+    "low_stock_alert": 10,
+    "created_at": "2026-06-03T18:26:32.941Z"
+  }
+},
+{
+  "model": "magahospital.medicinestock",
+  "pk": 11,
+  "fields": {
+    "medicine_name": "Insulin Injection",
+    "quantity": 60,
+    "unit_price": "45.00",
+    "expiry_date": "2026-06-05",
+    "batch_number": "BATCH-INS-010",
+    "low_stock_alert": 10,
+    "created_at": "2026-06-03T18:28:09.077Z"
+  }
+},
+{
+  "model": "magahospital.dispense",
+  "pk": 7,
+  "fields": {
+    "visit": 22,
+    "medication_given": 5,
+    "quantity": "2*3/2",
+    "dispensed_quantity": 12,
+    "created_at": "2026-06-03T06:21:23.096Z"
+  }
+},
+{
+  "model": "magahospital.dispense",
+  "pk": 8,
+  "fields": {
+    "visit": 22,
+    "medication_given": 1,
+    "quantity": "2*3/2",
+    "dispensed_quantity": 12,
+    "created_at": "2026-06-03T06:21:49.766Z"
+  }
+},
+{
+  "model": "magahospital.dispense",
+  "pk": 9,
+  "fields": {
+    "visit": 24,
+    "medication_given": 1,
+    "quantity": "2*3/6",
+    "dispensed_quantity": 36,
+    "created_at": "2026-06-03T08:42:22.377Z"
+  }
+},
+{
+  "model": "magahospital.dispense",
+  "pk": 10,
+  "fields": {
+    "visit": 25,
+    "medication_given": null,
+    "quantity": null,
+    "dispensed_quantity": null,
+    "created_at": "2026-06-03T11:43:54.780Z"
+  }
+},
+{
+  "model": "magahospital.dispense",
+  "pk": 11,
+  "fields": {
+    "visit": 25,
+    "medication_given": null,
+    "quantity": null,
+    "dispensed_quantity": null,
+    "created_at": "2026-06-03T11:48:35.643Z"
+  }
+},
+{
+  "model": "magahospital.dispense",
+  "pk": 12,
+  "fields": {
+    "visit": 23,
+    "medication_given": 5,
+    "quantity": "2*3/6",
+    "dispensed_quantity": 36,
+    "created_at": "2026-06-03T12:23:27.698Z"
+  }
+},
+{
+  "model": "magahospital.dispense",
+  "pk": 13,
+  "fields": {
+    "visit": 26,
+    "medication_given": 5,
+    "quantity": "2*3/6",
+    "dispensed_quantity": 12,
+    "created_at": "2026-06-03T17:39:00.928Z"
+  }
+},
+{
+  "model": "magahospital.dispense",
+  "pk": 14,
+  "fields": {
+    "visit": 27,
+    "medication_given": 5,
+    "quantity": "2*3/6",
+    "dispensed_quantity": 12,
+    "created_at": "2026-06-03T18:24:31.311Z"
+  }
+},
+{
+  "model": "magahospital.dispense",
+  "pk": 15,
+  "fields": {
+    "visit": 29,
+    "medication_given": 5,
+    "quantity": "2x3/6",
+    "dispensed_quantity": 12,
+    "created_at": "2026-06-04T19:36:10.565Z"
+  }
+},
+{
+  "model": "magahospital.dispense",
+  "pk": 16,
+  "fields": {
+    "visit": 29,
+    "medication_given": 1,
+    "quantity": "2x3/6",
+    "dispensed_quantity": 36,
+    "created_at": "2026-06-04T19:36:34.674Z"
+  }
+},
+{
+  "model": "magahospital.chatmessage",
+  "pk": 1,
+  "fields": {
+    "user": null,
+    "user_message": "Hi",
+    "bot_response": "",
+    "created_at": "2026-06-09T09:16:19.064Z"
+  }
+},
+{
+  "model": "magahospital.chatmessage",
+  "pk": 2,
+  "fields": {
+    "user": null,
+    "user_message": "hello",
+    "bot_response": "",
+    "created_at": "2026-06-09T09:16:30.717Z"
+  }
+},
+{
+  "model": "magahospital.chatmessage",
+  "pk": 3,
+  "fields": {
+    "user": null,
+    "user_message": "hi",
+    "bot_response": "",
+    "created_at": "2026-06-09T09:16:35.221Z"
+  }
+},
+{
+  "model": "magahospital.chatmessage",
+  "pk": 4,
+  "fields": {
+    "user": null,
+    "user_message": "hello",
+    "bot_response": "",
+    "created_at": "2026-06-09T09:17:09.135Z"
+  }
+},
+{
+  "model": "magahospital.chatmessage",
+  "pk": 5,
+  "fields": {
+    "user": null,
+    "user_message": "hi",
+    "bot_response": "",
+    "created_at": "2026-06-09T09:17:59.532Z"
+  }
+},
+{
+  "model": "magahospital.chatmessage",
+  "pk": 6,
+  "fields": {
+    "user": null,
+    "user_message": "hello",
+    "bot_response": "",
+    "created_at": "2026-06-09T09:19:01.053Z"
+  }
+},
+{
+  "model": "magahospital.chatmessage",
+  "pk": 7,
+  "fields": {
+    "user": null,
+    "user_message": "exit",
+    "bot_response": "",
+    "created_at": "2026-06-09T09:19:04.447Z"
+  }
+},
+{
+  "model": "magahospital.chatmessage",
+  "pk": 8,
+  "fields": {
+    "user": null,
+    "user_message": "bye",
+    "bot_response": "",
+    "created_at": "2026-06-09T09:19:06.752Z"
+  }
+},
+{
+  "model": "magahospital.chatmessage",
+  "pk": 9,
+  "fields": {
+    "user": null,
+    "user_message": "bye",
+    "bot_response": "",
+    "created_at": "2026-06-09T09:23:17.978Z"
+  }
+},
+{
+  "model": "magahospital.chatmessage",
+  "pk": 10,
+  "fields": {
+    "user": null,
+    "user_message": "bye",
+    "bot_response": "",
+    "created_at": "2026-06-09T09:23:38.729Z"
+  }
+},
+{
+  "model": "magahospital.chatmessage",
+  "pk": 11,
+  "fields": {
+    "user": null,
+    "user_message": "hello",
+    "bot_response": "",
+    "created_at": "2026-06-09T09:36:41.959Z"
+  }
+},
+{
+  "model": "magahospital.chatmessage",
+  "pk": 12,
+  "fields": {
+    "user": null,
+    "user_message": "bye",
+    "bot_response": "",
+    "created_at": "2026-06-09T09:36:46.730Z"
+  }
+},
+{
+  "model": "magahospital.chatmessage",
+  "pk": 13,
+  "fields": {
+    "user": null,
+    "user_message": "hi",
+    "bot_response": "",
+    "created_at": "2026-06-09T09:49:52.258Z"
+  }
+},
+{
+  "model": "magahospital.chatmessage",
+  "pk": 14,
+  "fields": {
+    "user": null,
+    "user_message": "bye",
+    "bot_response": "",
+    "created_at": "2026-06-09T09:49:55.837Z"
+  }
+},
+{
+  "model": "magahospital.chatmessage",
+  "pk": 15,
+  "fields": {
+    "user": null,
+    "user_message": "hello",
+    "bot_response": "",
+    "created_at": "2026-06-09T09:55:45.755Z"
+  }
+},
+{
+  "model": "magahospital.chatmessage",
+  "pk": 16,
+  "fields": {
+    "user": null,
+    "user_message": "hello",
+    "bot_response": "",
+    "created_at": "2026-06-09T09:56:00.460Z"
+  }
+},
+{
+  "model": "magahospital.chatmessage",
+  "pk": 17,
+  "fields": {
+    "user": null,
+    "user_message": "hi",
+    "bot_response": "",
+    "created_at": "2026-06-09T09:56:06.160Z"
+  }
+},
+{
+  "model": "magahospital.chatmessage",
+  "pk": 18,
+  "fields": {
+    "user": null,
+    "user_message": "Bye",
+    "bot_response": "",
+    "created_at": "2026-06-09T09:56:09.845Z"
+  }
+},
+{
+  "model": "magahospital.chatmessage",
+  "pk": 19,
+  "fields": {
+    "user": null,
+    "user_message": "who are you",
+    "bot_response": "",
+    "created_at": "2026-06-09T09:56:17.565Z"
+  }
+},
+{
+  "model": "magahospital.chatfaq",
+  "pk": 1,
+  "fields": {
+    "question": "goodnight",
+    "answer": "Goodnight! Rest well and take care."
+  }
+},
+{
+  "model": "magahospital.chatfaq",
+  "pk": 2,
+  "fields": {
+    "question": "see you later",
+    "answer": "See you later! Take care and stay healthy."
+  }
+},
+{
+  "model": "magahospital.chatfaq",
+  "pk": 3,
+  "fields": {
+    "question": "i cannot sleep",
+    "answer": "Sleep difficulties may be influenced by stress, routines, environment, or health conditions.\r\n\r\nDisclaimer: Educational information only. Persistent sleep problems should be discussed with healthcare professionals."
+  }
+},
+{
+  "model": "magahospital.chatfaq",
+  "pk": 4,
+  "fields": {
+    "question": "give me a health tip",
+    "answer": "Health Tip: Drink adequate water, sleep well, stay active, and attend regular medical checkups."
+  }
+},
+{
+  "model": "magahospital.chatfaq",
+  "pk": 5,
+  "fields": {
+    "question": "i need motivation",
+    "answer": "Small steps matter. Taking care of your health, rest, and wellbeing is important. You are stronger than you think."
+  }
+},
+{
+  "model": "magahospital.chatfaq",
+  "pk": 6,
+  "fields": {
+    "question": "can you diagnose me",
+    "answer": "I can provide general health education, but I do not diagnose medical conditions.\r\n\r\nDisclaimer: Please consult qualified healthcare professionals for medical evaluation and diagnosis."
+  }
+},
+{
+  "model": "magahospital.chatfaq",
+  "pk": 7,
+  "fields": {
+    "question": "are you smart",
+    "answer": "I try my best to provide helpful information and guidance, but professional medical advice should come from qualified healthcare professionals."
+  }
+},
+{
+  "model": "magahospital.chatfaq",
+  "pk": 8,
+  "fields": {
+    "question": "tell me a joke",
+    "answer": 

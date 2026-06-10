@@ -1,10 +1,11 @@
 {% extends 'magahospital/base.html' %}
 
 {% block title %}
-Dashboard | Maga Hospital
+Dashboard | {{ hospital_settings.hospital_name }}
 {% endblock %}
 
 {% load static %}
+{% load humanize %}
 
 {% block content %}
 
@@ -431,6 +432,144 @@ Dashboard | Maga Hospital
 
 </div>
 
+<!-- PATIENTS PER MONTH CHART -->
+
+<div class="card shadow border-0 mt-4">
+
+    <div class="card-body">
+
+        <h5 class="card-title">
+            Patients Registered Per Month
+        </h5>
+
+        <div style="height:350px;">
+            <canvas id="patientChart"></canvas>
+        </div>
+
+    </div>
+
+</div>
+
+<!-- VISIT STATUS DISTRIBUTION CHART -->
+<div class="card shadow border-0 mt-4">
+
+    <div class="card-body">
+
+        <h5 class="card-title">
+            Visit Status Distribution
+        </h5>
+
+        <div style="height:450px;">
+            <canvas id="visitStatusChart"></canvas>
+        </div>
+
+    </div>
+
+</div>
+
+<!--Revenue Stats-->
+{% if is_admin %}
+
+<div class="row mt-4">
+
+    <div class="col-md-3 mb-3">
+
+        <div class="card border-0 shadow-sm">
+
+            <div class="card-body text-center">
+
+                <h6>Total Revenue</h6>
+
+                <h4>
+                    TZS {{ total_revenue|floatformat:0|intcomma }}
+                </h4>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="col-md-3 mb-3">
+
+        <div class="card border-0 shadow-sm">
+
+            <div class="card-body text-center">
+
+                <h6>Paid Bills</h6>
+
+                <h4>
+                    {{ paid_bills }}
+                </h4>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="col-md-3 mb-3">
+
+        <div class="card border-0 shadow-sm">
+
+            <div class="card-body text-center">
+
+                <h6>Unpaid Bills</h6>
+
+                <h4>
+                    {{ unpaid_bills }}
+                </h4>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="col-md-3 mb-3">
+
+        <div class="card border-0 shadow-sm">
+
+            <div class="card-body text-center">
+
+                <h6>Today's Revenue</h6>
+
+                <h4>
+                    TZS {{ today_revenue }}
+                </h4>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endif %}
+
+<!--Monthly Revenue Chart-->
+
+{% if is_admin %}
+
+<div class="card shadow border-0 mt-4">
+
+    <div class="card-body">
+
+        <h5 class="card-title">
+            Monthly Revenue (Paid Bills)
+        </h5>
+
+        <div style="height:350px;">
+            <canvas id="revenueChart"></canvas>
+        </div>
+
+    </div>
+
+</div>
+
+{% endif %}
+
         <hr class="dashboard-divider">
 
             <h4 class="section-title">
@@ -733,5 +872,223 @@ setInterval(updateClock,1000);
 updateClock();
 
 </script>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+
+const months = {{ months|safe }};
+const patientCounts = {{ patient_counts|safe }};
+
+const ctx = document.getElementById(
+    'patientChart'
+);
+
+new Chart(ctx, {
+
+    type: 'bar',
+
+    data: {
+
+        labels: months,
+
+        datasets: [{
+
+            label: 'Patients Registered',
+
+            data: patientCounts,
+
+            backgroundColor: 'rgba(13, 110, 253, 0.7)',
+
+            borderColor: 'rgba(13, 110, 253, 1)',
+
+            borderWidth: 2,
+
+            borderRadius: 8
+
+        }]
+
+    },
+
+    options: {
+
+        responsive: true,
+
+        plugins: {
+
+            legend: {
+
+                position: 'top'
+
+            }
+
+        },
+
+        scales: {
+
+            y: {
+
+                beginAtZero: true
+
+            }
+
+        }
+
+    }
+
+});
+
+</script>
+
+<script>
+
+const visitStatusData = {{ visit_status_data|safe }};
+
+const visitCtx = document.getElementById(
+    'visitStatusChart'
+);
+
+new Chart(visitCtx, {
+
+    type: 'pie',
+
+    data: {
+
+        labels: [
+
+            'Vitals',
+
+            'Waiting Doctor',
+
+            'Waiting Lab',
+
+            'Waiting Procedure',
+
+            'Doctor Review',
+
+            'Waiting Cashier',
+
+            'Dispense',
+
+            'Completed'
+
+        ],
+
+        datasets: [{
+
+            data: visitStatusData,
+
+            backgroundColor: [
+
+                '#0d6efd',
+
+                '#20c997',
+
+                '#ffc107',
+
+                '#fd7e14',
+
+                '#6610f2',
+
+                '#dc3545',
+
+                '#198754',
+
+                '#6c757d'
+
+            ],
+
+        }]
+
+    },
+
+    options: {
+
+        responsive: true,
+
+        plugins: {
+
+            legend: {
+
+                position: 'right'
+
+            }
+
+        }
+
+    }
+
+});
+
+</script>
+
+{% if is_admin %}
+
+<script>
+
+const revenueMonths = {{ revenue_months|safe }};
+
+const revenueAmounts = {{ revenue_amounts|safe }};
+
+const revenueCtx = document.getElementById(
+    'revenueChart'
+);
+
+new Chart(revenueCtx, {
+
+    type: 'line',
+
+    data: {
+
+        labels: revenueMonths,
+
+        datasets: [{
+
+            label: 'Revenue (TZS)',
+
+            data: revenueAmounts,
+
+            fill: true,
+
+            borderColor: '#198754',
+
+            backgroundColor: 'rgba(25,135,84,0.15)',
+
+            tension: 0.3
+
+        }]
+
+    },
+
+    options: {
+
+        responsive: true,
+
+        plugins: {
+
+            legend: {
+
+                position: 'top'
+
+            }
+
+        },
+
+        scales: {
+
+            y: {
+
+                beginAtZero: true
+
+            }
+
+        }
+
+    }
+
+});
+
+</script>
+
+{% endif %}
 
 {% endblock %}

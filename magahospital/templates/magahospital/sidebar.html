@@ -4,7 +4,7 @@
 
         <i class="bi bi-hospital me-2"></i>
 
-        Maga HMS
+        {{ hospital_settings.hospital_name }} HMS
 
     </h2>
 
@@ -135,6 +135,38 @@
             </a>
         </li>
         {% endif %}
+
+    {% if is_admin %}
+
+<li class="mt-4">
+    <hr>
+</li>
+
+<li class="text-uppercase small text-muted px-3">
+    System Management
+</li>
+
+<li>
+    <a href="{% url 'hospital_settings' %}"
+    class="{% if request.resolver_match.url_name == 'hospital_settings' %}active{% endif %}">
+
+        <i class="bi bi-hospital me-2"></i>
+        Hospital Settings
+
+    </a>
+</li>
+
+<li>
+    <a href="{% url 'backup_list' %}"
+    class="{% if request.resolver_match.url_name == 'backup_list' %}active{% endif %}">
+
+        <i class="bi bi-database-fill-down me-2"></i>
+        Database Backups
+
+    </a>
+</li>
+
+{% endif %}    
 
     </ul>
 

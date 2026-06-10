@@ -1,0 +1,53 @@
+{% extends 'magahospital/base.html' %}
+
+{% block title %}
+Restore Database
+{% endblock %}
+
+{% block content %}
+
+<div class="card shadow-sm">
+
+    <div class="card-header bg-danger text-white">
+
+        <h4 class="mb-0">
+
+            <i class="bi bi-arrow-clockwise me-2"></i>
+
+            Restore Database
+
+        </h4>
+
+    </div>
+
+    <div class="card-body">
+
+        <div class="alert alert-warning">
+
+            <strong>Warning:</strong>
+
+            Restoring a backup may overwrite existing data.
+
+        </div>
+
+        <form method="post"
+            enctype="multipart/form-data">
+
+            {% csrf_token %}
+
+            {{ form.as_p }}
+
+            <button type="submit"
+                    class="btn btn-danger">
+
+                Restore Backup
+
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+
+{% endblock %}

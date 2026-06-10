@@ -1,5 +1,5 @@
 {% block title %}
-Dashboard | Maga Hospital
+Dashboard | {{ hospital_settings.hospital_name }}
 {% endblock %}
 
 {% load static %}
@@ -9,7 +9,7 @@ Dashboard | Maga Hospital
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Staff Login | Magadulla Hospital</title>
+    <title>Staff Login | {{ hospital_settings.hospital_name }}</title>
 
     <!-- Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -164,7 +164,7 @@ Dashboard | Maga Hospital
     <h2 class="login-title">Staff Login</h2>
 
     <p class="login-subtitle">
-        Magadulla Hospital Management System
+        {{ hospital_settings.hospital_name }}
     </p>
 
     {% if messages %}
@@ -244,7 +244,11 @@ Dashboard | Maga Hospital
 
     <!-- FOOTER -->
     <div class="footer-text">
-        © 2026 Magadulla Hospital
+        <p>
+    &copy; {% now "Y" %}
+    {{ hospital_settings.hospital_name }}.
+    {{ hospital_settings.footer_text }}
+</p>
     </div>
 
 </div>

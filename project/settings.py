@@ -109,6 +109,7 @@ INSTALLED_APPS = [
     'widget_tweaks',
     'prediction',
     'django.contrib.sitemaps',
+    'django.contrib.humanize',
 ]
 
 
@@ -140,6 +141,7 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'magahospital.context_processors.user_roles',
+                'magahospital.context_processors.hospital_settings',
             ],
         },
     },

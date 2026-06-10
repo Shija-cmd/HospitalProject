@@ -18,6 +18,21 @@ from django.utils import timezone
 from datetime import date
 from django.db.models import F
 import re
+from django.db.models.functions import TruncMonth
+from django.db.models import Count, Sum
+import json
+from django.contrib.auth.forms import PasswordChangeForm
+from django.contrib.auth import update_session_auth_hash
+from .models import HospitalSettings
+from .forms import HospitalSettingsForm
+import subprocess
+import os
+from django.conf import settings
+from django.http import FileResponse
+from datetime import datetime
+import sys
+from .forms import RestoreBackupForm
+import tempfile
 
 from .models import (
     Patient,
@@ -150,6 +165,118 @@ def dashboard(request):
 
     expiring_medicines = expiring_medicines[:5]
 
+    patient_stats = (
+        Patient.objects
+        .annotate(month=TruncMonth('created_at'))
+        .values('month')
+        .annotate(total=Count('id'))
+        .order_by('month')
+    )
+
+    months = []
+    patient_counts = []
+
+    for stat in patient_stats:
+
+        months.append(
+            stat['month'].strftime('%b %Y')
+        )
+
+        patient_counts.append(
+            stat['total']
+        )
+        
+    total_revenue = (
+        Bill.objects.filter(
+            is_paid=True
+        ).aggregate(
+            total=Sum('total_amount')
+        )['total']
+        or 0
+    )
+
+    paid_bills = Bill.objects.filter(
+    is_paid=True
+        ).count()
+
+    unpaid_bills = Bill.objects.filter(
+        is_paid=False
+        ).count()
+
+    today_revenue = (
+        Bill.objects.filter(
+            is_paid=True,
+            created_at__date=date.today()
+        ).aggregate(
+            total=Sum('total_amount')
+        )['total']
+        or 0
+    )    
+    
+    total_patients = Patient.objects.count()
+    
+    vitals_waiting = Visit.objects.filter(
+        status='Vitals'
+    ).count()
+        
+    doctor_waiting = Visit.objects.filter(
+        status='Waiting Doctor'
+    ).count()
+
+    lab_waiting = Visit.objects.filter(
+        status='Waiting Lab'
+    ).count()
+    
+    procedure_waiting = Visit.objects.filter(
+        status='Waiting Procedure'
+    ).count()
+    
+    prescription_waiting = Visit.objects.filter(
+        status='Doctor Review'
+    ).count()
+
+    cashier_waiting = Visit.objects.filter(
+        status='Waiting Cashier'
+    ).count()
+
+    dispense_waiting = Visit.objects.filter(
+        status='Dispense'
+    ).count()
+
+    completed_visits = Visit.objects.filter(
+        status='Completed'
+    ).count()
+    
+    todays_appointments = Appointment.objects.filter(
+        appointment_date=date.today()
+    ).count()
+    
+    revenue_stats = (
+        Bill.objects.filter(
+            is_paid=True
+        )
+        .annotate(
+            month=TruncMonth('created_at')
+        )
+        .values('month')
+        .annotate(
+            revenue=Sum('total_amount')
+        )
+        .order_by('month')
+    )
+
+    revenue_months = []
+    revenue_amounts = []
+
+    for stat in revenue_stats:
+
+        revenue_months.append(
+            stat['month'].strftime('%b %Y')
+        )
+
+        revenue_amounts.append(
+            float(stat['revenue'])
+        )         
 
     context = {
 
@@ -192,46 +319,61 @@ def dashboard(request):
         ),
 
         # DASHBOARD STATISTICS
-        'total_patients': Patient.objects.count(),
+        'total_patients': total_patients,
 
-        'vitals_waiting': Visit.objects.filter(
-            status='Vitals'
-        ).count(),
+        'vitals_waiting': vitals_waiting,
 
-        'doctor_waiting': Visit.objects.filter(
-            status='Waiting Doctor'
-        ).count(),
+        'doctor_waiting': doctor_waiting,
 
-        'lab_waiting': Visit.objects.filter(
-            status='Waiting Lab'
-        ).count(),
+        'lab_waiting': lab_waiting,
         
-        'procedure_waiting': Visit.objects.filter(
-            status='Waiting Procedure'
-        ).count(),
+        'procedure_waiting': procedure_waiting,
 
-        'prescription_waiting': Visit.objects.filter(
-            status='Doctor Review'
-        ).count(),
+        'prescription_waiting': prescription_waiting,
 
-        'cashier_waiting': Visit.objects.filter(
-            status='Waiting Cashier'
-        ).count(),
+        'cashier_waiting': cashier_waiting,
 
-        'dispense_waiting': Visit.objects.filter(
-            status='Dispense'
-        ).count(),
+        'dispense_waiting': dispense_waiting,
 
-        'completed_visits': Visit.objects.filter(
-            status='Completed'
-        ).count(),
+        'completed_visits': completed_visits,
         
-        'todays_appointments': Appointment.objects.filter(
-            appointment_date=date.today()
-        ).count(),
+        'todays_appointments': todays_appointments,
         
         'low_stock_medicines': low_stock_medicines,
         'expiring_medicines': expiring_medicines,
+        
+        'months': json.dumps(months),
+
+        'patient_counts': json.dumps(
+            patient_counts
+        ),
+        
+        'visit_status_data': json.dumps([
+            vitals_waiting,
+            doctor_waiting,
+            lab_waiting,
+            procedure_waiting,
+            prescription_waiting,
+            cashier_waiting,
+            dispense_waiting,
+            completed_visits,
+        ]),
+        
+        'revenue_months': json.dumps(
+            revenue_months
+        ),
+
+        'revenue_amounts': json.dumps(
+            revenue_amounts
+        ),
+        
+        'total_revenue': total_revenue,
+
+        'paid_bills': paid_bills,
+
+        'unpaid_bills': unpaid_bills,
+
+        'today_revenue': today_revenue,
 
     }
 
@@ -1159,13 +1301,24 @@ def patient_history(request, patient_id):
     visits = Visit.objects.filter(
         patient=patient
     ).order_by('-date')
+    
+    total_visits = visits.count()
+
+    completed_visits = visits.filter(
+        status='Completed'
+    ).count()
+
+    last_visit = visits.first()
 
     return render(
         request,
         'magahospital/patient_history.html',
         {
             'patient': patient,
-            'visits': visits
+            'visits': visits,
+            'total_visits': total_visits,
+            'completed_visits': completed_visits,
+            'last_visit': last_visit,
         }
     )
 
@@ -1989,4 +2142,414 @@ def audit_logs(request):
             
             'admin_logs': admin_logs,
         }
-    )                            
+    )
+ 
+#====================================
+# CHANGE PASSWORD
+#====================================    
+@login_required
+def change_password(request):
+
+    if request.method == 'POST':
+
+        form = PasswordChangeForm(
+            request.user,
+            request.POST
+        )
+
+        if form.is_valid():
+
+            user = form.save()
+
+            update_session_auth_hash(
+                request,
+                user
+            )
+
+            messages.success(
+                request,
+                'Password changed successfully.'
+            )
+
+            return redirect(
+                'dashboard'
+            )
+
+    else:
+
+        form = PasswordChangeForm(
+            request.user
+        )
+        
+    for field in form.fields.values():
+
+        field.widget.attrs.update({
+            'class': 'form-control'
+        })
+
+    return render(
+        request,
+        'magahospital/change_password.html',
+        {
+            'form': form
+        }
+    )
+
+#====================================
+# HOSPITAL SETTINGS
+#====================================
+    
+@login_required
+def hospital_settings(request):
+
+    if not request.user.is_superuser:
+
+        return render(
+            request,
+            'magahospital/not_allowed.html',
+            status=403
+        )
+
+    settings_obj = HospitalSettings.objects.first()
+
+    if request.method == 'POST':
+
+        form = HospitalSettingsForm(
+            request.POST,
+            request.FILES,
+            instance=settings_obj
+        )
+
+        if form.is_valid():
+
+            form.save()
+
+            messages.success(
+                request,
+                'Hospital settings updated successfully.'
+            )
+
+            return redirect(
+                'hospital_settings'
+            )
+
+    else:
+
+        form = HospitalSettingsForm(
+            instance=settings_obj
+        )
+        
+    for field in form.fields.values():
+
+        field.widget.attrs.update({
+            'class': 'form-control'
+        })    
+
+    return render(
+        request,
+        'magahospital/hospital_settings.html',
+        {
+            'form': form
+        }
+    )
+
+#====================================
+# BACKUP DATABASE
+#====================================
+    
+@login_required
+def backup_database(request):
+
+    if not request.user.is_superuser:
+
+        return render(
+            request,
+            'magahospital/not_allowed.html',
+            status=403
+        )
+
+    timestamp = datetime.now().strftime(
+        '%Y%m%d_%H%M%S'
+    )
+
+    filename = (
+        f'backup_{timestamp}.json'
+    )
+
+    backup_dir = os.path.join(
+        settings.BASE_DIR,
+        'backups'
+    )
+
+    os.makedirs(
+        backup_dir,
+        exist_ok=True
+    )
+
+    backup_path = os.path.join(
+        backup_dir,
+        filename
+    )
+
+    subprocess.run([
+        sys.executable,
+        'manage.py',
+        'dumpdata',
+        '--indent',
+        '2',
+        '-o',
+        backup_path
+    ])
+    
+    if not os.path.exists(backup_path):
+
+        messages.error(
+            request,
+            'Backup file was not created.'
+        )
+
+        return redirect(
+            'backup_list'
+        )
+
+    log_action(
+        request.user,
+        f'Created database backup {filename}'
+    )
+
+    messages.success(
+        request,
+        f'Backup created successfully: {filename}'
+    )
+
+    return redirect(
+        'backup_list'
+    )
+
+#====================================
+# BACKUP LIST
+#====================================    
+@login_required
+def backup_list(request):
+
+    if not request.user.is_superuser:
+
+        return render(
+            request,
+            'magahospital/not_allowed.html',
+            status=403
+        )
+
+    backup_dir = os.path.join(
+        settings.BASE_DIR,
+        'backups'
+    )
+
+    os.makedirs(
+        backup_dir,
+        exist_ok=True
+    )
+
+    backups = []
+
+    for file in os.listdir(backup_dir):
+
+        if file.endswith('.json'):
+
+            backups.append(file)
+
+    backups.sort(
+        reverse=True
+    )
+
+    return render(
+        request,
+        'magahospital/backup_list.html',
+        {
+            'backups': backups
+        }
+    )
+
+#====================================
+# DOWNLOAD BACKUP
+#====================================    
+@login_required
+def download_backup(request, filename):
+
+    if not request.user.is_superuser:
+
+        return render(
+            request,
+            'magahospital/not_allowed.html',
+            status=403
+        )
+
+    backup_path = os.path.join(
+        settings.BASE_DIR,
+        'backups',
+        filename
+    )
+
+    if not os.path.exists(
+        backup_path
+    ):
+
+        messages.error(
+            request,
+            'Backup file not found.'
+        )
+
+        return redirect(
+            'backup_list'
+        )
+
+    return FileResponse(
+        open(
+            backup_path,
+            'rb'
+        ),
+        as_attachment=True,
+        filename=filename
+    )
+
+#====================================
+# DELETE BACKUP
+#====================================    
+@login_required
+def delete_backup(request, filename):
+
+    if not request.user.is_superuser:
+
+        return render(
+            request,
+            'magahospital/not_allowed.html',
+            status=403
+        )
+
+    backup_path = os.path.join(
+        settings.BASE_DIR,
+        'backups',
+        filename
+    )
+
+    if os.path.exists(
+        backup_path
+    ):
+
+        os.remove(
+            backup_path
+        )
+
+        log_action(
+            request.user,
+            f'Deleted backup {filename}'
+        )
+
+        messages.success(
+            request,
+            'Backup deleted successfully.'
+        )
+
+    else:
+
+        messages.error(
+            request,
+            'Backup file not found.'
+        )
+
+    return redirect(
+        'backup_list'
+    )
+    
+
+#====================================
+# RESTORE BACKUP
+#====================================    
+@login_required
+def restore_backup(request):
+
+    if not request.user.is_superuser:
+
+        return render(
+            request,
+            'magahospital/not_allowed.html',
+            status=403
+        )
+
+    if request.method == 'POST':
+
+        form = RestoreBackupForm(
+            request.POST,
+            request.FILES
+        )
+
+        if form.is_valid():
+
+            uploaded_file = request.FILES[
+                'backup_file'
+            ]
+
+            with tempfile.NamedTemporaryFile(
+                delete=False,
+                suffix='.json'
+            ) as temp_file:
+
+                for chunk in uploaded_file.chunks():
+
+                    temp_file.write(chunk)
+
+                temp_path = temp_file.name
+
+            try:
+
+                subprocess.run(
+                    [
+                        sys.executable,
+                        'manage.py',
+                        'loaddata',
+                        temp_path
+                    ],
+                    check=True
+                )
+
+                log_action(
+                    request.user,
+                    f"Restored database from {uploaded_file.name}"
+                )
+
+                messages.success(
+                    request,
+                    'Database restored successfully.'
+                )
+
+            except Exception as e:
+
+                messages.error(
+                    request,
+                    f'Restore failed: {e}'
+                )
+
+            finally:
+
+                if os.path.exists(
+                    temp_path
+                ):
+                    os.remove(
+                        temp_path
+                    )
+
+            return redirect(
+                'backup_list'
+            )
+
+    else:
+
+        form = RestoreBackupForm()
+
+    return render(
+        request,
+        'magahospital/restore_backup.html',
+        {
+            'form': form
+        }
+    )              

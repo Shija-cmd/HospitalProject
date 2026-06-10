@@ -2,7 +2,7 @@ from django import forms
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth.models import User
 
-from .models import Patient, Doctor, Lab, Prescription, Dispense, Bill, Vital, Procedure, MedicineStock, Appointment, Test
+from .models import Patient, Doctor, Lab, Prescription, Dispense, Bill, Vital, Procedure, MedicineStock, Appointment, Test, HospitalSettings
 
 
 # =========================
@@ -712,4 +712,32 @@ class AppointmentForm(forms.ModelForm):
                 }
             ),
 
-        }             
+        } 
+ 
+#=========================================
+#HOSPITAL SETTINGS FORM
+#=========================================        
+class HospitalSettingsForm(forms.ModelForm):
+
+    class Meta:
+
+        model = HospitalSettings
+
+        fields = [
+            'hospital_name',
+            'logo',
+            'address',
+            'phone',
+            'email',
+            'website',
+            'footer_text',
+            'currency',
+        ]
+
+
+#=========================================
+#RESTORE BACKUP FORM
+#=========================================        
+class RestoreBackupForm(forms.Form):
+
+    backup_file = forms.FileField()            

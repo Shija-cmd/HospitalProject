@@ -7,7 +7,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>{% block title %}Maga Hospital{% endblock %}</title>
+    <title>
+    {% block title %}
+    {{ hospital_settings.hospital_name }}
+    {% endblock %}
+    </title>
 
     <meta name="description"
     content="Maga Hospital provides quality healthcare services including patient management, appointments, laboratory services, pharmacy services, and AI-assisted healthcare solutions.">
@@ -51,7 +55,7 @@
         <!-- LOGO -->
         <a class="navbar-brand" href="{% url 'index' %}">
             <i class="bi bi-hospital me-2"></i>
-            Maga Hospital
+            {{ hospital_settings.hospital_name }}
         </a>
 
         <!-- TOGGLE -->
@@ -95,6 +99,64 @@
 
                     </div>
 
+                    <div class="dropdown ms-3">
+
+                    <button class="btn btn-light dropdown-toggle fw-semibold"
+                    type="button"
+                    data-bs-toggle="dropdown"
+                    aria-expanded="false">
+
+                    <i class="bi bi-person-circle me-1"></i>
+                    Account
+
+            </button>
+
+    <ul class="dropdown-menu dropdown-menu-end">
+
+        <li>
+
+            <a class="dropdown-item"
+            href="{% url 'dashboard' %}">
+
+                <i class="bi bi-speedometer2 me-2"></i>
+                Dashboard
+
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="dropdown-item"
+            href="{% url 'change_password' %}">
+
+                <i class="bi bi-key-fill me-2"></i>
+                Change Password
+
+            </a>
+
+        </li>
+
+        <li>
+            <hr class="dropdown-divider">
+        </li>
+
+        <li>
+
+            <a class="dropdown-item text-danger"
+            href="{% url 'logout' %}">
+
+                <i class="bi bi-box-arrow-right me-2"></i>
+                Logout
+
+            </a>
+
+        </li>
+
+    </ul>
+
+</div>
+
                     <!-- ROLE -->
                     {% if is_admin %}
                         <span class="badge bg-danger role-badge">
@@ -124,24 +186,6 @@
 
                 </div>
 
-                <!-- DASHBOARD -->
-                <a href="{% url 'dashboard' %}" 
-                class="btn btn-outline-light nav-btn">
-
-                    <i class="bi bi-speedometer2 me-1"></i>
-                    Dashboard
-
-                </a>
-
-                <!-- LOGOUT -->
-                <a href="{% url 'logout' %}" 
-                class="btn btn-danger nav-btn">
-
-                    <i class="bi bi-box-arrow-right me-1"></i>
-                    Logout
-
-                </a>
-
                 {% endif %}
 
             </div>
@@ -151,6 +195,7 @@
     </div>
 
 </nav>
+
 
 <!-- MAIN LAYOUT -->
 <div class="main-layout">
@@ -195,13 +240,17 @@
 
 </div>
 
+
 <!-- FOOTER -->
 <footer>
 
     <div class="container">
 
         <p>
-            © 2026 Maga Hospital Management System. All Rights Reserved.
+            © {% now "Y" %}
+            {{ hospital_settings.hospital_name }}
+
+            {{ hospital_settings.footer_text }}
         </p>
 
     </div>

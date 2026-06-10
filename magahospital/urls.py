@@ -291,6 +291,48 @@ urlpatterns = [
         {'sitemaps': sitemaps},
         name='django.contrib.sitemaps.views.sitemap'
     ),
+    
+    path(
+        'change-password/',
+        views.change_password,
+        name='change_password'
+    ),
+    
+    path(
+        'hospital-settings/',
+        views.hospital_settings,
+        name='hospital_settings'
+    ),
+    
+    path(
+        'backup-database/',
+        views.backup_database,
+        name='backup_database'
+    ),
+    
+    path(
+        'backups/',
+        views.backup_list,
+        name='backup_list'
+    ),
+    
+    path(
+        'backups/download/<str:filename>/',
+        views.download_backup,
+        name='download_backup'
+    ),
+    
+    path(
+        'backups/delete/<str:filename>/',
+        views.delete_backup,
+        name='delete_backup'
+    ),
+    
+    path(
+    'backups/restore/',
+        views.restore_backup,
+        name='restore_backup'
+    ),
 ]
 
 # =========================
