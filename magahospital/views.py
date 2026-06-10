@@ -33,6 +33,7 @@ from datetime import datetime
 import sys
 from .forms import RestoreBackupForm
 import tempfile
+from django.contrib.auth.hashers import check_password
 
 from .models import (
     Patient,
@@ -2158,6 +2159,24 @@ def change_password(request):
         )
 
         if form.is_valid():
+            
+            new_password = form.cleaned_data[
+                'new_password1'
+            ]
+
+            if check_password(
+                new_password,
+                request.user.password
+            ):
+
+                messages.error(
+                    request,
+                    'New password must be different from the current password.'
+                )
+
+                return redirect(
+                    'change_password'
+                )
 
             user = form.save()
 
