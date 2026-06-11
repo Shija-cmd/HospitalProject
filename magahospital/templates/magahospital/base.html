@@ -163,6 +163,16 @@
                             ADMIN
                         </span>
 
+                    {% elif is_reception %}
+                        <span class="badge bg-info role-badge">
+                            RECEPTION
+                        </span>
+
+                    {% elif is_vitals %}
+                        <span class="badge bg-secondary role-badge">
+                            VITALS
+                        </span>
+
                     {% elif is_doctor %}
                         <span class="badge bg-success role-badge">
                             DOCTOR
@@ -171,6 +181,16 @@
                     {% elif is_lab %}
                         <span class="badge bg-warning text-dark role-badge">
                             LAB
+                        </span>
+
+                    {% elif is_procedure %}
+                        <span class="badge bg-dark role-badge">
+                            PROCEDURE
+                        </span>
+
+                    {% elif is_cashier %}
+                        <span class="badge bg-primary role-badge">
+                            CASHIER
                         </span>
 
                     {% elif is_dispense %}

@@ -28,7 +28,9 @@ Dashboard | {{ hospital_settings.hospital_name }}
 </p>
 
     {% if is_admin %}
-        <span class="role-badge">Administrator</span>
+        <span class="role-badge">
+        Administrator
+        </span>
 
     {% elif is_doctor %}
         <span class="role-badge bg-success">
@@ -38,11 +40,21 @@ Dashboard | {{ hospital_settings.hospital_name }}
     {% elif is_vitals %}
         <span class="role-badge bg-info">
             Vitals Department
-        </span>    
+        </span>
 
     {% elif is_lab %}
         <span class="role-badge bg-warning text-dark">
             Laboratory Department
+        </span>
+
+    {% elif is_procedure %}
+        <span class="role-badge bg-dark">
+            Procedure Department
+        </span>
+
+    {% elif is_cashier %}
+        <span class="role-badge bg-primary">
+            Cashier Department
         </span>
 
     {% elif is_dispense %}
@@ -51,7 +63,7 @@ Dashboard | {{ hospital_settings.hospital_name }}
         </span>
 
     {% elif is_reception %}
-        <span class="role-badge bg-primary">
+        <span class="role-badge bg-secondary">
             Reception Department
         </span>
     {% endif %}

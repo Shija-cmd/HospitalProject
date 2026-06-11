@@ -1,0 +1,158 @@
+{% extends 'magahospital/base.html' %}
+
+{% block title %}
+Billing History | {{ hospital_settings.hospital_name }}
+{% endblock %}
+
+{% block content %}
+
+<div class="container mt-4">
+
+    <h2 class="mb-4">
+        📄 Billing History
+    </h2>
+
+    <form method="GET" class="mb-4">
+
+    <div class="input-group">
+
+        <input
+            type="text"
+            name="q"
+            value="{{ query }}"
+            class="form-control"
+            placeholder="Search by patient name, or invoice number">
+
+        <button
+            type="submit"
+            class="btn btn-primary">
+
+            <i class="bi bi-search"></i>
+            Search
+
+        </button>
+
+    </div>
+
+</form>
+
+    <div class="card shadow-sm border-0">
+
+        <div class="card-body">
+
+            <table class="table table-hover">
+
+                <thead class="table-dark">
+
+                    <tr>
+
+                        <th>Invoice</th>
+
+                        <th>Patient</th>
+
+                        <th>Amount</th>
+
+                        <th>Status</th>
+
+                        <th>Date</th>
+
+                        <th>Actions</th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                    {% for bill in bills %}
+
+                    <tr>
+
+                        <td>
+                            INV-{{ bill.id }}
+                        </td>
+
+                        <td>
+                            {{ bill.visit.patient.firstname }}
+                            {{ bill.visit.patient.secondname }}
+                        </td>
+
+                        <td>
+                            TZS {{ bill.total_amount|floatformat:0 }}
+                        </td>
+
+                        <td>
+
+                            {% if bill.is_paid %}
+
+                            <span class="badge bg-success">
+
+                                Paid
+
+                            </span>
+
+                            {% else %}
+
+                            <span class="badge bg-warning text-dark">
+
+                                Unpaid
+
+                            </span>
+
+                            {% endif %}
+
+                        </td>
+
+                        <td>
+                            {{ bill.created_at|date:"d-M-Y H:i" }}
+                        </td>
+
+                        <td>
+
+                            <a href="{% url 'invoice_pdf' bill.id %}"
+                            class="btn btn-primary btn-sm">
+
+                                Invoice
+
+                            </a>
+
+                            {% if bill.is_paid %}
+
+                            <a href="{% url 'receipt_pdf' bill.id %}"
+                            class="btn btn-success btn-sm">
+
+                                Receipt
+
+                            </a>
+
+                            {% endif %}
+
+                        </td>
+
+                    </tr>
+
+                    {% empty %}
+
+                    <tr>
+
+                        <td colspan="6">
+
+                            No bills found.
+
+                        </td>
+
+                    </tr>
+
+                    {% endfor %}
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

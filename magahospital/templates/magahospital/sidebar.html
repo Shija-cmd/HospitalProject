@@ -76,6 +76,14 @@
                 Cashier Queue
             </a>
         </li>
+
+        <li>
+    <a href="{% url 'billing_history' %}"
+    class="{% if request.resolver_match.url_name == 'billing_history' %}active{% endif %}">
+        <i class="bi bi-receipt me-2"></i>
+        Billing History
+    </a>
+</li>
         {% endif %}
 
         <!-- DISPENSE -->

@@ -320,6 +320,11 @@ class Bill(models.Model):
     created_at = models.DateTimeField(
         default=timezone.now
     )
+    
+    payment_date = models.DateTimeField(
+        null=True,
+        blank=True
+    )
 
     def save(self, *args, **kwargs):
 

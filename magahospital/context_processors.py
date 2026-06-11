@@ -19,6 +19,8 @@ def user_roles(request):
             'is_dispense': False,
             
             'is_vitals': False,
+            
+            'is_procedure': False,
 
         }
 
@@ -38,6 +40,10 @@ def user_roles(request):
 
         'is_lab': user.groups.filter(
             name='Lab'
+        ).exists(),
+        
+        'is_procedure': user.groups.filter(
+            name='Procedure'
         ).exists(),
 
         'is_cashier': user.groups.filter(

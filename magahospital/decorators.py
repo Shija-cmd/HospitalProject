@@ -1,12 +1,14 @@
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
+from functools import wraps
 
 
-def role_required(group_name):
+def role_required(*group_names):
 
     def decorator(view_func):
 
         @login_required
+        @wraps(view_func)
         def wrapper(request, *args, **kwargs):
 
             if request.user.is_superuser:
@@ -18,7 +20,7 @@ def role_required(group_name):
                 )
 
             if request.user.groups.filter(
-                name=group_name
+                name__in=group_names
             ).exists():
 
                 return view_func(

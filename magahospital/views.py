@@ -34,6 +34,9 @@ import sys
 from .forms import RestoreBackupForm
 import tempfile
 from django.contrib.auth.hashers import check_password
+from reportlab.pdfgen import canvas
+from .models import Bill
+from django.utils.timezone import localtime
 
 from .models import (
     Patient,
@@ -1291,7 +1294,7 @@ def change_staff_role(
 # PATIENT HISTORY
 # =========================================
 
-@login_required
+@role_required('Doctor', 'Receptions')
 def patient_history(request, patient_id):
 
     patient = get_object_or_404(
@@ -1362,7 +1365,7 @@ def visit_detail(request, visit_id):
 # PDF GENERATION
 # =========================================
 
-@login_required
+@role_required('Doctor', 'Receptions')
 def visit_report_pdf(request, visit_id):
 
     visit = get_object_or_404(
@@ -1734,6 +1737,13 @@ def add_bill(request, visit_id):
 
             if 'is_paid' in request.POST:
 
+                bill.is_paid = True
+
+                if not bill.payment_date:
+                    bill.payment_date = timezone.now()
+
+                bill.save()
+
                 visit.status = 'Dispense'
 
             else:
@@ -1743,7 +1753,8 @@ def add_bill(request, visit_id):
             visit.save()
 
             return redirect(
-                'cashier_queue'
+                'payment_success',
+                bill_id=bill.id
             )
 
     else:
@@ -1842,7 +1853,7 @@ def add_vital(request, visit_id):
 # ADD PROCEDURE
 # =====================================
 
-@login_required
+@role_required('Procedure')
 def add_procedure(request, visit_id):
 
     visit = get_object_or_404(
@@ -1918,7 +1929,7 @@ def add_procedure(request, visit_id):
 # =====================================
 # STOCK LIST
 # =====================================    
-@login_required
+@role_required('Dispense')
 def stock_list(request):
 
     query = request.GET.get(
@@ -1974,7 +1985,7 @@ def stock_list(request):
 # APPOINTMENT LIST
 # =====================================
 
-@login_required
+@role_required('Doctor', 'Receptions')
 def appointment_list(request):
 
     appointments = Appointment.objects.all().order_by(
@@ -1994,7 +2005,7 @@ def appointment_list(request):
 # ADD APPOINTMENT
 # =====================================
 
-@login_required
+@role_required('Doctor', 'Receptions')
 def add_appointment(request):
 
     if request.method == 'POST':
@@ -2059,6 +2070,14 @@ def procedure_queue(request):
 
 @login_required
 def audit_logs(request):
+    
+    if not request.user.is_superuser:
+
+        return render(
+            request,
+            'magahospital/not_allowed.html',
+            status=403
+        )
 
     query = request.GET.get(
         'q',
@@ -2571,4 +2590,441 @@ def restore_backup(request):
         {
             'form': form
         }
-    )              
+    )
+    
+
+#====================================
+# INVOICE PDF   
+#====================================
+
+@login_required
+def invoice_pdf(request, bill_id):
+
+    bill = get_object_or_404(
+        Bill,
+        id=bill_id
+    )
+
+    hospital = HospitalSettings.objects.first()
+
+    response = HttpResponse(
+        content_type='application/pdf'
+    )
+
+    response[
+        'Content-Disposition'
+    ] = f'inline; filename="invoice_{bill.id}.pdf"'
+
+    p = canvas.Canvas(response)
+
+    y = 800
+
+    # HOSPITAL NAME
+    p.setFont(
+        "Helvetica-Bold",
+        16
+    )
+
+    p.drawString(
+        50,
+        y,
+        hospital.hospital_name
+    )
+
+    # ADDRESS (optional)
+    if hospital.address:
+
+        y -= 20
+
+        p.setFont(
+            "Helvetica",
+            10
+        )
+
+        p.drawString(
+            50,
+            y,
+            hospital.address
+        )
+
+    y -= 40
+
+    # TITLE
+    p.setFont(
+        "Helvetica-Bold",
+        14
+    )
+
+    p.drawString(
+        50,
+        y,
+        "INVOICE"
+    )
+
+    patient = bill.visit.patient
+
+    y -= 40
+
+    p.setFont(
+        "Helvetica",
+        12
+    )
+
+    p.drawString(
+        50,
+        y,
+        f"Patient: {patient.firstname} {patient.secondname}"
+    )
+
+    y -= 25
+
+    p.drawString(
+        50,
+        y,
+        f"Patient ID: {patient.idno}"
+    )
+
+    y -= 25
+
+    p.drawString(
+        50,
+        y,
+        f"Visit ID: {bill.visit.id}"
+    )
+
+    y -= 25
+
+    p.drawString(
+        50,
+        y,
+        f"Invoice Number: INV-{bill.id}"
+    )
+    
+    y -= 25
+
+    p.drawString(
+        50,
+        y,
+        f"Date: {bill.created_at.strftime('%d-%m-%Y %H:%M')}"
+    )
+    
+    y -= 20
+
+    p.line(
+        50,
+        y,
+        550,
+        y
+    )
+
+    y -= 40
+
+    # FEES
+    p.drawString(
+        50,
+        y,
+        f"Consultation Fee: TZS {bill.consultation_fee:,.0f}"
+    )
+
+    y -= 25
+
+    p.drawString(
+        50,
+        y,
+        f"Lab Fee: TZS {bill.lab_fee:,.0f}"
+    )
+
+    y -= 25
+
+    p.drawString(
+        50,
+        y,
+        f"Procedure Fee: TZS {bill.procedure_fee:,.0f}"
+    )
+
+    y -= 25
+
+    p.drawString(
+        50,
+        y,
+        f"Medication Fee: TZS {bill.medication_fee:,.0f}"
+    )
+
+    y -= 40
+
+    p.setFont(
+        "Helvetica-Bold",
+        12
+    )
+
+    p.drawString(
+        50,
+        y,
+        f"TOTAL AMOUNT: TZS {bill.total_amount:,.0f}"
+    )
+
+    y -= 30
+
+    p.drawString(
+        50,
+        y,
+        f"STATUS: {'PAID' if bill.is_paid else 'UNPAID'}"
+    )
+
+    p.showPage()
+
+    p.save()
+
+    return response
+
+#====================================
+# RECEIPT PDF
+#====================================
+@login_required
+def receipt_pdf(request, bill_id):
+
+    bill = get_object_or_404(
+        Bill,
+        id=bill_id
+    )
+
+    if not bill.is_paid:
+
+        messages.error(
+            request,
+            'Receipt can only be printed for paid bills.'
+        )
+
+        return redirect(
+            'cashier_queue'
+        )
+
+    hospital = HospitalSettings.objects.first()
+
+    response = HttpResponse(
+        content_type='application/pdf'
+    )
+
+    response[
+        'Content-Disposition'
+    ] = f'inline; filename="receipt_{bill.id}.pdf"'
+
+    p = canvas.Canvas(response)
+
+    y = 800
+
+    p.setFont(
+        "Helvetica-Bold",
+        16
+    )
+
+    p.drawString(
+        50,
+        y,
+        hospital.hospital_name
+    )
+    
+    if hospital.address:
+
+        y -= 20
+
+        p.setFont(
+        "Helvetica",
+        10
+    )
+
+    p.drawString(
+        50,
+        y,
+        hospital.address
+    )
+
+    y -= 40
+
+    p.drawString(
+        50,
+        y,
+        "OFFICIAL RECEIPT"
+    )
+
+    y -= 40
+
+    patient = bill.visit.patient
+
+    p.setFont(
+        "Helvetica",
+        12
+    )
+
+    p.drawString(
+        50,
+        y,
+        f"Patient: {patient.firstname} {patient.secondname}"
+    )
+
+    y -= 25
+
+    p.drawString(
+        50,
+        y,
+        f"Receipt Number: RCPT-{bill.id}"
+    )
+    
+    y -= 25
+
+    p.drawString(
+        50,
+        y,
+        f"Invoice Number: INV-{bill.id}"
+    )
+    
+    y -= 25
+
+    p.drawString(
+        50,
+        y,
+        f"Patient ID: {patient.idno}"
+    )
+    
+    y -= 25
+
+    p.drawString(
+        50,
+        y,
+        f"Visit ID: {bill.visit.id}"
+    )
+    
+    if bill.payment_date:
+
+        y -= 25
+
+        payment_time = localtime(
+        bill.payment_date
+        )
+
+        p.drawString(
+            50,
+            y,
+            f"Payment Date: {payment_time.strftime('%d-%m-%Y %H:%M')}"
+        )
+        
+    y -= 20
+
+    p.line(
+        50,
+        y,
+        550,
+        y
+    )
+
+    y -= 25
+
+    p.drawString(
+        50,
+        y,
+        f"Amount Paid: TZS {bill.total_amount:,.0f}"
+    )
+    
+    y -= 25
+
+    p.drawString(
+        50,
+        y,
+        "STATUS: PAID"
+    )
+    
+    y -= 40
+
+    p.drawString(
+        50,
+        y,
+        f"Authorized Cashier: {request.user.get_full_name() or request.user.username}"
+    )
+    
+    y -= 50
+
+    p.drawString(
+        50,
+        y,
+        "________________________"
+    )
+
+    y -= 20
+
+    p.drawString(
+        50,
+        y,
+        "Cashier Signature"
+    )
+
+    p.showPage()
+
+    p.save()
+
+    return response    
+
+#====================================
+# PAYMENT SUCCESS
+#====================================
+@login_required
+def payment_success(request, bill_id):
+
+    bill = get_object_or_404(
+        Bill,
+        id=bill_id
+    )
+
+    return render(
+        request,
+        'magahospital/payment_success.html',
+        {
+            'bill': bill
+        }
+    )
+
+
+#====================================
+# BILLING HISTORY
+#====================================    
+@role_required('Cashier')
+def billing_history(request):
+
+    query = request.GET.get(
+        'q',
+        ''
+    )
+
+    bills = Bill.objects.select_related(
+        'visit',
+        'visit__patient'
+    )
+
+    if query.isdigit():
+
+        bills = bills.filter(
+            Q(id=query) |
+            Q(visit__patient__firstname__icontains=query) |
+            Q(visit__patient__secondname__icontains=query) |
+            Q(visit__patient__idno__icontains=query)
+        )
+
+    else:
+
+        bills = bills.filter(
+            Q(visit__patient__firstname__icontains=query) |
+            Q(visit__patient__secondname__icontains=query) |
+            Q(visit__patient__idno__icontains=query)
+        )
+
+    bills = bills.order_by(
+        '-created_at'
+    )
+
+    return render(
+        request,
+        'magahospital/billing_history.html',
+        {
+            'bills': bills,
+            'query': query
+        }
+    )    

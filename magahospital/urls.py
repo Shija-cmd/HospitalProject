@@ -329,10 +329,34 @@ urlpatterns = [
     ),
     
     path(
-    'backups/restore/',
+        'backups/restore/',
         views.restore_backup,
         name='restore_backup'
     ),
+    
+    path(
+        'invoice/<int:bill_id>/',
+        views.invoice_pdf,
+        name='invoice_pdf'
+    ),
+
+path(
+    'receipt/<int:bill_id>/',
+    views.receipt_pdf,
+    name='receipt_pdf'
+),
+
+path(
+    'payment-success/<int:bill_id>/',
+    views.payment_success,
+    name='payment_success'
+),
+
+path(
+    'billing-history/',
+    views.billing_history,
+    name='billing_history'
+),
 ]
 
 # =========================
