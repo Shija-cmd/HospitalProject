@@ -37,6 +37,7 @@ from django.contrib.auth.hashers import check_password
 from reportlab.pdfgen import canvas
 from .models import Bill
 from django.utils.timezone import localtime
+from django.core.paginator import Paginator
 
 from .models import (
     Patient,
@@ -3018,6 +3019,19 @@ def billing_history(request):
 
     bills = bills.order_by(
         '-created_at'
+    )
+
+    paginator = Paginator(
+        bills,
+        20
+    )
+
+    page_number = request.GET.get(
+        'page'
+    )
+
+    bills = paginator.get_page(
+        page_number
     )
 
     return render(
