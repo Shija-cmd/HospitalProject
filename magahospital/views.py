@@ -2763,6 +2763,17 @@ def invoice_pdf(request, bill_id):
         12
     )
 
+    y -= 10
+
+    p.line(
+        50,
+        y,
+        300,
+        y
+    )
+
+    y -= 20
+    
     p.drawString(
         50,
         y,
@@ -2831,19 +2842,21 @@ def receipt_pdf(request, bill_id):
     )
     
     if hospital.address:
+        
+        for line in hospital.address.splitlines():
 
-        y -= 20
+            y -= 20
 
-        p.setFont(
-        "Helvetica",
-        10
-    )
+            p.setFont(
+            "Helvetica",
+            10
+        )
 
-    p.drawString(
-        50,
-        y,
-        hospital.address
-    )
+        p.drawString(
+            50,
+            y,
+            line
+        )
 
     y -= 40
 
