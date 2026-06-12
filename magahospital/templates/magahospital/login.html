@@ -27,17 +27,8 @@
 
         body{
             font-family:'Poppins', sans-serif;
-            background: linear-gradient(rgba(15,23,42,0.85), rgba(15,23,42,0.85)),
-            url('https://images.unsplash.com/photo-1586773860418-d37222d8fce3?q=80&w=1400&auto=format&fit=crop');
-
-            background-size:cover;
-            background-position:center;
+            background:#eef4ff;
             min-height:100vh;
-
-            display:flex;
-            justify-content:center;
-            align-items:center;
-            padding:20px;
         }
 
         .login-card{
@@ -62,18 +53,25 @@
         }
 
         .hospital-logo{
-            width:90px;
-            height:90px;
-            background:#e0edff;
-            color:#0d6efd;
+
+            width:110px;
+            height:110px;
+
+            background:#dbeafe;
+
+            border:3px solid #bfdbfe;
+
+            color:#2563eb;
 
             display:flex;
             justify-content:center;
             align-items:center;
 
             border-radius:50%;
-            margin:0 auto 20px;
-            font-size:40px;
+
+            margin:0 auto 25px;
+
+            font-size:45px;
         }
 
         .login-title{
@@ -86,8 +84,9 @@
         .login-subtitle{
             text-align:center;
             color:#6c757d;
-            margin-bottom:30px;
             font-size:14px;
+            max-width:280px;
+            margin:0 auto 30px;
         }
 
         .form-label{
@@ -143,100 +142,276 @@
             font-size:13px;
         }
 
+        .login-wrapper{
+            min-height:100vh;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            padding:20px;
+        }
+
+        .login-container{
+            width:100%;
+            max-width:1200px;
+            background:#fff;
+            border-radius:20px;
+            overflow:hidden;
+            box-shadow:0 15px 40px rgba(0,0,0,0.15);
+        }
+
+        .login-banner{
+            background:#dbeafe;
+            border-right:1px solid #cbd5e1;
+            color:#0f172a;
+            padding:40px;
+            height:100%;
+        }
+
+        .login-banner img{
+            width:100%;
+            height:300px;
+            object-fit:cover;
+            border-radius:15px;
+            box-shadow:0 10px 25px rgba(0,0,0,0.1);
+        }
+
+        .login-form-section{
+            padding:50px;
+        }
+
+        .feature-item{
+            margin-bottom:15px;
+            font-size:16px;
+        }
+
+        @media(max-width:992px){
+
+            .login-banner{
+                display:none;
+            }
+
+            .login-form-section{
+                padding:40px 50px;
+            }
+        }
+
+        .hospital-login-name{
+
+            color:#0f172a;
+
+            font-weight:700;
+
+            font-size:1.8rem;
+
+            margin-bottom:0;
+        }
+
+        .alert-primary{
+            padding:15px 20px;
+            border-radius:12px;
+        }
+
+        .login-form-section{
+            display:flex;
+            flex-direction:column;
+            justify-content:center;
+            height:100%;
+        }
     </style>
 
 </head>
 
 <body>
 
-<div class="login-card">
+<div class="login-wrapper">
 
-    <!-- ICON -->
-    <div class="hospital-logo">
-        <i class="bi bi-hospital"></i>
+    <div class="login-container">
+
+        <div class="row g-0">
+
+            <!-- LEFT SIDE -->
+
+            <div class="col-lg-7">
+
+                <div class="login-banner">
+
+                    <img
+                    src="{% static 'images/hospital-banner.png' %}"
+                    alt="Hospital">
+
+                    <h4>
+                    Hospital Management Information System
+                    </h4>
+
+                    <p class="mt-3">
+
+                        Delivering quality healthcare through digital innovation.
+
+                    </p>
+
+                    <div class="mt-4">
+
+                        <div class="feature-item">
+
+                            <i class="bi bi-check-circle-fill me-2"></i>
+                            Patient Registration
+
+                        </div>
+
+                        <div class="feature-item">
+
+                            <i class="bi bi-check-circle-fill me-2"></i>
+                            Laboratory Services
+
+                        </div>
+
+                        <div class="feature-item">
+
+                            <i class="bi bi-check-circle-fill me-2"></i>
+                            Pharmacy Management
+
+                        </div>
+
+                        <div class="feature-item">
+
+                            <i class="bi bi-check-circle-fill me-2"></i>
+                            Billing & Receipts
+
+                        </div>
+
+                        <div class="feature-item">
+
+                            <i class="bi bi-check-circle-fill me-2"></i>
+                            AI STD Diagnosis
+
+                        </div>
+
+                    </div>
+
+                    <div class="alert alert-primary mt-4">
+
+                    <strong>System Notice</strong>
+
+                    <br>
+
+                    Authorized hospital staff only.
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- RIGHT SIDE -->
+
+            <div class="col-lg-5">
+
+                <div class="login-form-section">
+
+                    <div class="text-center mb-4">
+
+                        <h3 class="hospital-login-name">
+
+                            {{ hospital_settings.hospital_name }}
+
+                        </h3>
+
+                        <hr class="w-50 mx-auto">
+
+                    </div>
+
+                    <div class="hospital-logo">
+
+                        <i class="bi bi-hospital"></i>
+
+                    </div>
+
+                    <h4 class="login-title">
+
+                        Welcome Back
+
+                    </h4>
+
+                    <p class="login-subtitle">
+
+                    Secure access for authorized staff.
+                    </p>
+
+                    {% if messages %}
+                        {% for message in messages %}
+                            <div class="alert {% if message.tags == 'error' %}alert-danger{% else %}alert-{{ message.tags }}{% endif %}">
+                                {{ message }}
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+
+                    <form method="post">
+
+                        {% csrf_token %}
+
+                        <div class="mb-3">
+
+                            <label class="form-label">
+
+                                Username
+
+                            </label>
+
+                            <input
+                            type="text"
+                            name="username"
+                            class="form-control"
+                            required>
+
+                        </div>
+
+                        <div class="mb-4">
+
+                            <label class="form-label">
+
+                                Password
+
+                            </label>
+
+                            <input
+                            type="password"
+                            name="password"
+                            class="form-control"
+                            required>
+
+                        </div>
+
+                        <button
+                        type="submit"
+                        class="btn btn-primary w-100 login-btn">
+
+                            Login
+
+                        </button>
+
+                    </form>
+
+                    <div class="back-home">
+
+                        <a href="{% url 'index' %}">
+
+                            <i class="bi bi-arrow-left"></i>
+
+                            Return to Hospital Website
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
     </div>
 
-    <!-- TITLE -->
-    <h2 class="login-title">Staff Login</h2>
-
-    <p class="login-subtitle">
-        {{ hospital_settings.hospital_name }}
-    </p>
-
-    {% if messages %}
-
-    {% for message in messages %}
-
-        <div class="alert {% if message.tags == 'error' %}alert-danger{% else %}alert-{{ message.tags }}{% endif %} alert-dismissible fade show">
-
-            {{ message }}
-
-            <button type="button"
-                    class="btn-close"
-                    data-bs-dismiss="alert">
-            </button>
-
-        </div>
-
-    {% endfor %}
-
-{% endif %}
-
-    <!-- FORM -->
-    <form method="post">
-
-        {% csrf_token %}
-
-        <div class="mb-3">
-
-            <label for="id_username" class="form-label">
-                Username
-            </label>
-
-            <input 
-                type="text" 
-                name="username" 
-                class="form-control" 
-                id="id_username"
-                placeholder="Enter your username"
-                required
-            >
-
-        </div>
-
-        <div class="mb-4">
-
-            <label for="id_password" class="form-label">
-                Password
-            </label>
-
-            <input 
-                type="password" 
-                name="password" 
-                class="form-control" 
-                id="id_password"
-                placeholder="Enter your password"
-                required
-            >
-
-        </div>
-
-        <button type="submit" class="btn btn-primary w-100 login-btn">
-
-            <i class="bi bi-box-arrow-in-right me-2"></i>
-            Login
-
-        </button>
-
-    </form>
-
-    <!-- BACK -->
-    <div class="back-home">
-        <a href="{% url 'index' %}">
-            <i class="bi bi-arrow-left"></i>
-            Back to Home
-        </a>
-    </div>
+</div>
 
     <!-- FOOTER -->
     <div class="footer-text">

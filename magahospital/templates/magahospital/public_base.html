@@ -1,0 +1,345 @@
+{% load static %}
+
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+    content="width=device-width, initial-scale=1.0">
+
+<title>
+    {% block title %}
+    {{ hospital_settings.hospital_name }}
+    {% endblock %}
+</title>
+
+<meta name="description"
+    content="Quality healthcare services and digital healthcare solutions.">
+
+<link rel="icon"
+    type="image/jpg"
+    href="{% static 'images/favicon.jpg' %}">
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+    rel="stylesheet">
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+    rel="stylesheet">
+
+<link rel="preconnect"
+    href="https://fonts.googleapis.com">
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet">
+
+<link rel="stylesheet"
+    href="{% static 'css/chatbot.css' %}">
+
+<style>
+
+    body{
+        font-family:'Poppins',sans-serif;
+        background:#f8fafc;
+    }
+
+    .navbar{
+        background:linear-gradient(
+            90deg,
+            #0f172a,
+            #1e293b
+        );
+    }
+
+    footer{
+        background:#0f172a;
+        color:#fff;
+        padding:20px 0;
+        margin-top:80px;
+        text-align:center;
+    }
+
+    footer{
+    background:#0f172a;
+    color:white;
+    padding:50px 0 20px;
+}
+
+footer a{
+    color:#cbd5e1;
+    text-decoration:none;
+}
+
+footer a:hover{
+    color:white;
+}
+
+.nav-link.active{
+    color:#ffffff !important;
+    font-weight:600;
+    border-bottom:2px solid #0d6efd;
+}
+
+.nav-link:hover{
+    color:#ffffff;
+}
+
+</style>
+
+
+</head>
+
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-dark">
+
+
+<div class="container">
+
+    <a class="navbar-brand"
+    href="{% url 'index' %}">
+
+        <i class="bi bi-hospital me-2"></i>
+
+        {{ hospital_settings.hospital_name }}
+
+    </a>
+
+    <button class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarContent">
+
+        <span class="navbar-toggler-icon"></span>
+
+    </button>
+
+    <div class="collapse navbar-collapse"
+        id="navbarContent">
+
+        <ul class="navbar-nav mx-auto">
+
+            <li class="nav-item">
+
+                <a class="nav-link {% if request.resolver_match.url_name == 'index' %}active{% endif %}"
+                href="{% url 'index' %}">
+
+                    Home
+
+                </a>
+
+            </li>
+
+            <li class="nav-item">
+
+                <a class="nav-link {% if request.resolver_match.url_name == 'about' %}active{% endif %}"
+                href="{% url 'about' %}">
+
+                    About Us
+
+                </a>
+
+            </li>
+
+            <li class="nav-item">
+
+                <a class="nav-link {% if request.resolver_match.url_name == 'services' %}active{% endif %}"
+                href="{% url 'services' %}">
+
+                    Services
+
+                </a>
+
+            </li>
+
+            <li class="nav-item">
+
+                <a class="nav-link {% if request.resolver_match.url_name == 'contact' %}active{% endif %}"
+                href="{% url 'contact' %}">
+
+                    Contact Us
+
+                </a>
+
+            </li>
+
+        </ul>
+
+        <div class="d-flex gap-2">
+
+            <a href="/predict/"
+            class="btn btn-primary">
+
+                🧠 AI STDs Diagnosis
+
+            </a>
+
+            <a href="{% url 'login' %}"
+            class="btn btn-outline-light">
+
+                <i class="bi bi-box-arrow-in-right me-1"></i>
+
+                Staff Login
+
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+</nav>
+
+{% if messages %}
+
+<div class="container mt-3">
+
+
+{% for message in messages %}
+
+    <div class="alert alert-{{ message.tags }}">
+
+        {{ message }}
+
+    </div>
+
+{% endfor %}
+
+
+</div>
+
+{% endif %}
+
+{% block content %}
+{% endblock %}
+
+<footer class="mt-5">
+
+    <div class="container">
+
+        <div class="row">
+
+            <!-- Hospital -->
+
+            <div class="col-md-4 mb-4">
+
+                <h5>
+
+                    {{ hospital_settings.hospital_name }}
+
+                </h5>
+
+                <p>
+
+                    Delivering quality healthcare through
+                    digital innovation.
+
+                </p>
+
+            </div>
+
+            <!-- Quick Links -->
+
+            <div class="col-md-4 mb-4">
+
+                <h5>
+
+                    Quick Links
+
+                </h5>
+
+                <ul class="list-unstyled">
+
+                    <li>
+                        <a href="{% url 'index' %}">
+                            Home
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="{% url 'about' %}">
+                            About Us
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="{% url 'services' %}">
+                            Services
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="{% url 'contact' %}">
+                            Contact Us
+                        </a>
+                    </li>
+
+                </ul>
+
+            </div>
+
+            <!-- Systems -->
+
+            <div class="col-md-4 mb-4">
+
+                <h5>
+
+                    Systems
+
+                </h5>
+
+                <ul class="list-unstyled">
+
+                    <li>
+
+                        <a href="/predict/">
+
+                            AI STDs Diagnosis
+
+                        </a>
+
+                    </li>
+
+                    <li>
+
+                        <a href="{% url 'login' %}">
+
+                            Staff Login
+
+                        </a>
+
+                    </li>
+
+                </ul>
+
+            </div>
+
+        </div>
+
+        <hr>
+
+        <div class="text-center">
+
+            © {% now "Y" %}
+            {{ hospital_settings.hospital_name }}
+
+            {{ hospital_settings.footer_text }}
+
+        </div>
+
+    </div>
+
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js">
+</script>
+
+</body>
+
+</html>

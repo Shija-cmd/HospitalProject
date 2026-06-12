@@ -1,0 +1,133 @@
+{% extends 'magahospital/public_base.html' %}
+
+{% block title %}
+Contact Us | {{ hospital_settings.hospital_name }}
+{% endblock %}
+
+{% block content %}
+
+<div class="container py-5">
+
+    <div class="text-center mb-5">
+
+        <h1 class="fw-bold">
+
+            Contact Us
+
+        </h1>
+
+        <p class="lead text-muted">
+
+            We are here to assist you.
+
+        </p>
+
+    </div>
+
+    <div class="row g-4">
+
+        <!-- Contact Information -->
+
+        <div class="col-md-6">
+
+            <div class="card shadow-sm border-0 h-100">
+
+                <div class="card-body p-4">
+
+                    <h3 class="mb-4">
+
+                        Hospital Information
+
+                    </h3>
+
+                    <p>
+
+                        <i class="bi bi-geo-alt-fill text-danger me-2"></i>
+
+                        {{ hospital_settings.address }}
+
+                    </p>
+
+                    <p>
+
+                        <i class="bi bi-telephone-fill text-success me-2"></i>
+
+                        +255 767 846 786
+
+                    </p>
+
+                    <p>
+
+                        <i class="bi bi-envelope-fill text-primary me-2"></i>
+
+                        info@stmaryshospital.co.tz
+
+                    </p>
+
+                    <p>
+
+                        <i class="bi bi-clock-fill text-warning me-2"></i>
+
+                        Open 24 Hours
+
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- ICT Support -->
+
+        <div class="col-md-6">
+
+            <div class="card shadow-sm border-0 h-100">
+
+                <div class="card-body p-4">
+
+                    <h3 class="mb-4">
+
+                        ICT Technical Support
+
+                    </h3>
+
+                    <p>
+
+                        Our ICT Department supports:
+
+                    </p>
+
+                    <ul>
+
+                        <li>Hospital Management Information System</li>
+
+                        <li>Network Infrastructure</li>
+
+                        <li>Cybersecurity</li>
+
+                        <li>Data Backup & Recovery</li>
+
+                        <li>Digital Healthcare Solutions</li>
+
+                    </ul>
+
+                    <p>
+
+                        <i class="bi bi-envelope-fill text-primary me-2"></i>
+
+                        ict@stmaryshospital.co.tz
+
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

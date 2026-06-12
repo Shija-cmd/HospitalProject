@@ -191,18 +191,50 @@
     }
 
     /* FOOTER */
-    footer{
-      margin-top:80px;
-      background:#0f172a;
-      color:#fff;
-      padding:25px 0;
-      text-align:center;
-    }
 
-    footer p{
-      margin:0;
-      font-size:15px;
-    }
+footer{
+    margin-top:80px;
+    background:#0f172a;
+    color:#fff;
+    padding:50px 0 20px;
+}
+
+footer h5{
+    font-weight:600;
+    margin-bottom:15px;
+}
+
+footer p{
+    font-size:15px;
+}
+
+footer ul{
+    padding-left:0;
+}
+
+footer li{
+    list-style:none;
+    margin-bottom:8px;
+}
+
+footer a{
+    color:#cbd5e1;
+    text-decoration:none;
+    transition:0.3s;
+}
+
+footer a:hover{
+    color:#ffffff;
+}
+
+footer hr{
+    border-color:rgba(255,255,255,0.15);
+}
+
+.footer-bottom{
+    text-align:center;
+    margin-top:20px;
+}
 
     /* RESPONSIVE */
     @media(max-width:768px){
@@ -257,6 +289,12 @@
     background: #0056d2;
 }
 
+.gallery img{
+    height:250px;
+    width:100%;
+    object-fit:cover;
+}
+
   </style>
   
 </head>
@@ -268,180 +306,294 @@
   
 <!-- NAVBAR -->
 <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
-  <div class="container">
 
-    <a class="navbar-brand" href="{% url 'index' %}">
-      <i class="bi bi-hospital me-2"></i>{{ hospital_settings.hospital_name }}
-    </a>
+    <div class="container">
 
-    <div class="ms-auto">
-      <a href="{% url 'login' %}" class="btn btn-outline-light btn-login">
-        <i class="bi bi-box-arrow-in-right me-1"></i>
-        Staff Login
-      </a>
+        <!-- LOGO -->
+        <a class="navbar-brand" href="{% url 'index' %}">
+
+            <i class="bi bi-hospital me-2"></i>
+
+            {{ hospital_settings.hospital_name }}
+
+        </a>
+
+        <!-- MOBILE TOGGLE -->
+        <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarContent">
+
+            <span class="navbar-toggler-icon"></span>
+
+        </button>
+
+        <!-- NAV CONTENT -->
+        <div class="collapse navbar-collapse"
+            id="navbarContent">
+
+            <!-- CENTER MENU -->
+            <ul class="navbar-nav mx-auto">
+
+                <li class="nav-item">
+
+                    <a class="nav-link"
+                    href="{% url 'index' %}">
+
+                        Home
+
+                    </a>
+
+                </li>
+
+                <li class="nav-item">
+
+                    <a class="nav-link"
+                    href="{% url 'about' %}">
+
+                        About Us
+
+                    </a>
+
+                </li>
+
+                <li class="nav-item">
+
+                    <a class="nav-link"
+                    href="{% url 'services' %}">
+
+                        Services
+
+                    </a>
+
+                </li>
+
+                <li class="nav-item">
+
+                    <a class="nav-link"
+                    href="{% url 'contact' %}">
+
+                        Contact Us
+
+                    </a>
+
+                </li>
+
+            </ul>
+
+            <!-- RIGHT BUTTONS -->
+            <div class="d-flex gap-2">
+
+                <a href="/predict/"
+                class="btn btn-primary btn-login">
+
+                    🧠 AI STDs Diagnosis
+
+                </a>
+
+                <a href="{% url 'login' %}"
+                class="btn btn-outline-light btn-login">
+
+                    <i class="bi bi-box-arrow-in-right me-1"></i>
+
+                    Staff Login
+
+                </a>
+
+            </div>
+
+        </div>
+
     </div>
 
-    <div class="ms-3">
-    <a href="/predict/" class="btn btn-outline-light btn-login">
-
-        🧠 AI STDs Diagnosis
-
-    </a>
-</div>
-  </div>
 </nav>
 
 <!-- HERO SECTION -->
 <section class="hero">
 
-  <div class="container">
+<div class="container">
 
     <h1>{{ hospital_settings.hospital_name }}</h1>
 
     <p>
-      Quality healthcare with compassion, innovation,
-      and professionalism for every patient.
+    Quality healthcare with compassion, innovation,
+    and professionalism for every patient.
     </p>
 
-    <a href="#" class="btn btn-primary hero-btn">
-      Explore Services
-    </a>
-
-  </div>
+</div>
 
 </section>
 
-<!-- MAIN CONTENT -->
-<div class="container">
+<!-- STATS SECTION -->
+<section class="py-5 bg-light">
 
-  <!-- ABOUT + CONTACT -->
-  <div class="row g-4">
+    <div class="container">
 
-    <div class="col-md-6">
-      <div class="card info-card shadow-sm h-100">
-        <div class="card-body p-4">
+        <div class="row text-center">
 
-          <h4 class="card-title">
-            <i class="bi bi-info-circle-fill text-primary me-2"></i>
-            About Us
-          </h4>
+            <div class="col-md-3">
 
-          <p class="text-muted">
-            {{ hospital_settings.hospital_name }} is a premier healthcare institution dedicated
-            to providing high-quality, compassionate, and affordable medical services.
-            We combine experienced doctors, skilled staff, and modern medical equipment
-            to deliver excellence in patient care and healthcare innovation.
-          </p>
+                <h2 class="fw-bold text-primary">
 
-        </div>
-      </div>
-    </div>
+                    10,000+
 
-    <div class="col-md-6">
-      <div class="card info-card shadow-sm h-100">
-        <div class="card-body p-4">
+                </h2>
 
-          <h4 class="card-title">
-            <i class="bi bi-telephone-fill text-success me-2"></i>
-            Contact Information
-          </h4>
+                <p>
 
-          <p class="mb-3">
-            <i class="bi bi-envelope-fill text-danger me-2"></i>
-            shijajuma@gmail.com
-          </p>
+                    Patients Served
 
-          <p>
-            <i class="bi bi-telephone-fill text-primary me-2"></i>
-            0767846786
-          </p>
+                </p>
 
-        </div>
-      </div>
-    </div>
+            </div>
 
-  </div>
+            <div class="col-md-3">
 
-  <!-- SERVICES -->
-  <div class="text-center mt-5 pt-5">
+                <h2 class="fw-bold text-success">
 
-    <h2 class="section-title">Our Services</h2>
+                    24/7
 
-    <div class="row g-4">
+                </h2>
 
-      <!-- Doctors -->
-      <div class="col-md-3">
-        <div class="service-card shadow-sm">
+                <p>
 
-          <div class="service-icon icon-blue">
-            <i class="bi bi-person-badge"></i>
-          </div>
+                    Healthcare Services
 
-          <h5 class="fw-semibold">Doctors</h5>
+                </p>
 
-          <p class="text-muted">
-            Professional and experienced healthcare specialists.
-          </p>
+            </div>
 
-        </div>
-      </div>
+            <div class="col-md-3">
 
-      <!-- Pharmacy -->
-      <div class="col-md-3">
-        <div class="service-card shadow-sm">
+                <h2 class="fw-bold text-danger">
 
-          <div class="service-icon icon-red">
-            <i class="bi bi-capsule"></i>
-          </div>
+                    15+
 
-          <h5 class="fw-semibold">Pharmacy</h5>
+                </h2>
 
-          <p class="text-muted">
-            Reliable medicines and pharmaceutical support services.
-          </p>
+                <p>
+
+                    Healthcare Professionals
+
+                </p>
+
+            </div>
+
+            <div class="col-md-3">
+
+                <h2 class="fw-bold text-warning">
+
+                    99%
+
+                </h2>
+
+                <p>
+
+                    Patient Satisfaction
+
+                </p>
+
+            </div>
 
         </div>
-      </div>
-
-      <!-- Laboratory -->
-      <div class="col-md-3">
-        <div class="service-card shadow-sm">
-
-          <div class="service-icon icon-yellow">
-            <i class="bi bi-flask"></i>
-          </div>
-
-          <h5 class="fw-semibold">Laboratory</h5>
-
-          <p class="text-muted">
-            Accurate diagnostics and modern laboratory testing.
-          </p>
-
-        </div>
-      </div>
-
-      <!-- IPD / OPD -->
-      <div class="col-md-3">
-        <div class="service-card shadow-sm">
-
-          <div class="service-icon icon-green">
-            <i class="bi bi-hospital"></i>
-          </div>
-
-          <h5 class="fw-semibold">IPD / OPD</h5>
-
-          <p class="text-muted">
-            Comprehensive inpatient and outpatient care services.
-          </p>
-
-        </div>
-      </div>
 
     </div>
 
-  </div>
+</section>
 
-</div>
+<!-- GALLERY SECTION -->
+<section class="py-5">
+
+    <div class="container">
+
+        <div class="text-center mb-5">
+
+            <h2 class="fw-bold">
+
+                Our Healthcare Environment
+
+            </h2>
+
+            <p class="text-muted">
+
+                Providing quality healthcare services in a professional environment.
+
+            </p>
+
+        </div>
+
+        <div class="row g-4">
+
+            <div class="col-md-4">
+
+                <img
+                    src="{% static 'images/gallery_1.png' %}"
+                    class="img-fluid rounded shadow-sm"
+                    alt="Hospital Building">
+
+            </div>
+
+            <div class="col-md-4">
+
+                <img
+                    src="{% static 'images/gallery_2.png' %}"
+                    class="img-fluid rounded shadow-sm"
+                    alt="Medical Staff">
+
+            </div>
+
+            <div class="col-md-4">
+
+                <img
+                    src="{% static 'images/gallery_3.png' %}"
+                    class="img-fluid rounded shadow-sm"
+                    alt="Patient Care">
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!--CTA SECTION-->
+
+<section class="py-5 text-center">
+
+    <div class="container">
+
+        <h2>
+
+            Need Medical Assistance?
+
+        </h2>
+
+        <p class="text-muted">
+
+            Access our healthcare services or use our AI-powered
+            screening tool.
+
+        </p>
+
+        <a href="/predict/"
+          class="btn btn-primary me-2">
+
+            AI STDs Diagnosis
+
+        </a>
+
+        <a href="{% url 'contact' %}"
+          class="btn btn-outline-primary">
+
+            Contact Us
+
+        </a>
+
+    </div>
+
+</section>
 
 <!-- DISCLAIMER -->
 <div class="container mt-5">
@@ -472,14 +624,139 @@
 
 <!-- FOOTER -->
 <footer>
-  <div class="container">
-    <p>
-    &copy; {% now "Y" %}
-    {{ hospital_settings.hospital_name }}.
-    {{ hospital_settings.footer_text }}
-  </p>
-  </div>
+
+<div class="container">
+
+    <div class="row text-start">
+
+        <!-- Hospital Info -->
+        <div class="col-md-4 mb-4">
+
+            <h5>
+
+                {{ hospital_settings.hospital_name }}
+
+            </h5>
+
+            <p>
+
+                Delivering quality healthcare through
+                digital innovation.
+
+            </p>
+
+        </div>
+
+        <!-- Quick Links -->
+        <div class="col-md-4 mb-4">
+
+            <h5>
+
+                Quick Links
+
+            </h5>
+
+            <ul class="list-unstyled">
+
+                <li>
+
+                    <a href="{% url 'index' %}">
+
+                        Home
+
+                    </a>
+
+                </li>
+
+                <li>
+
+                    <a href="{% url 'about' %}">
+
+                        About Us
+
+                    </a>
+
+                </li>
+
+                <li>
+
+                    <a href="{% url 'services' %}">
+
+                        Services
+
+                    </a>
+
+                </li>
+
+                <li>
+
+                    <a href="{% url 'contact' %}">
+
+                        Contact Us
+
+                    </a>
+
+                </li>
+
+            </ul>
+
+        </div>
+
+        <!-- Systems -->
+        <div class="col-md-4 mb-4">
+
+            <h5>
+
+                Systems
+
+            </h5>
+
+            <ul class="list-unstyled">
+
+                <li>
+
+                    <a href="/predict/">
+
+                        AI STDs Diagnosis
+
+                    </a>
+
+                </li>
+
+                <li>
+
+                    <a href="{% url 'login' %}">
+
+                        Staff Login
+
+                    </a>
+
+                </li>
+
+            </ul>
+
+        </div>
+
+    </div>
+
+    <hr>
+
+    <div class="footer-bottom">
+
+    <p class="mb-0">
+
+        &copy; {% now "Y" %}
+        {{ hospital_settings.hospital_name }}.
+        {{ hospital_settings.footer_text }}
+
+    </p>
+
+</div>
+
+</div>
+
 </footer>
+
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 

@@ -3059,4 +3059,26 @@ def billing_history(request):
             'bills': bills,
             'query': query
         }
-    )    
+    )
+    
+def about(request):
+
+    return render(
+        request,
+        'magahospital/about.html'
+    ) 
+    
+def services(request):
+
+    return render(
+        request,
+        'magahospital/services.html'
+    )
+
+
+def contact(request):
+
+    return render(
+        request,
+        'magahospital/contact.html'
+    )       

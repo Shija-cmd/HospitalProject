@@ -1,0 +1,245 @@
+{% extends 'magahospital/public_base.html' %}
+
+{% block title %}
+About Us | {{ hospital_settings.hospital_name }}
+{% endblock %}
+
+{% block content %}
+
+<div class="container py-5">
+
+    <div class="text-center mb-5">
+
+        <h1 class="fw-bold">
+
+            About Us
+
+        </h1>
+
+        <p class="lead text-muted">
+
+            Delivering quality healthcare through digital innovation.
+
+        </p>
+
+    </div>
+
+    <div class="card shadow-sm border-0">
+
+        <div class="card-body p-5">
+
+            <h3 class="mb-3">
+
+                {{ hospital_settings.hospital_name }}
+
+            </h3>
+
+            <p>
+
+                {{ hospital_settings.hospital_name }} is committed to
+                providing high-quality healthcare services through
+                professional medical care, modern technology,
+                and compassionate patient support.
+
+            </p>
+
+            <p>
+
+                Our goal is to improve community health by delivering
+                reliable, accessible, and affordable healthcare services.
+
+            </p>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- MISSION, VISION, CORE VALUES -->
+<div class="row mt-5">
+
+    <div class="col-md-4">
+
+        <div class="card shadow-sm border-0 h-100">
+
+            <div class="card-body">
+
+                <h4>
+                    Mission
+                </h4>
+
+                <p>
+                    To provide quality, affordable,
+                    and patient-centered healthcare services.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="col-md-4">
+
+        <div class="card shadow-sm border-0 h-100">
+
+            <div class="card-body">
+
+                <h4>
+                    Vision
+                </h4>
+
+                <p>
+                    To become a trusted leader in healthcare
+                    excellence and innovation.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="col-md-4">
+
+        <div class="card shadow-sm border-0 h-100">
+
+            <div class="card-body">
+
+                <h4>
+                    Core Values
+                </h4>
+
+                <p>
+                    Compassion, Integrity,
+                    Professionalism and Excellence.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<div class="mt-5">
+
+    <h2 class="section-title text-center">
+
+        Why Choose Us
+
+    </h2>
+
+    <div class="row g-4">
+
+        <div class="col-md-3">
+
+            <div class="card shadow-sm border-0 h-100 text-center">
+
+                <div class="card-body">
+
+                    <i class="bi bi-heart-pulse-fill fs-1 text-danger"></i>
+
+                    <h5 class="mt-3">
+
+                        Quality Care
+
+                    </h5>
+
+                    <p>
+
+                        Patient-centered healthcare services with compassion and professionalism.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-3">
+
+            <div class="card shadow-sm border-0 h-100 text-center">
+
+                <div class="card-body">
+
+                    <i class="bi bi-person-badge-fill fs-1 text-primary"></i>
+
+                    <h5 class="mt-3">
+
+                        Expert Team
+
+                    </h5>
+
+                    <p>
+
+                        Skilled healthcare professionals committed to excellence.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-3">
+
+            <div class="card shadow-sm border-0 h-100 text-center">
+
+                <div class="card-body">
+
+                    <i class="bi bi-cpu-fill fs-1 text-success"></i>
+
+                    <h5 class="mt-3">
+
+                        Digital Innovation
+
+                    </h5>
+
+                    <p>
+
+                        Modern healthcare solutions powered by technology.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-3">
+
+            <div class="card shadow-sm border-0 h-100 text-center">
+
+                <div class="card-body">
+
+                    <i class="bi bi-shield-check fs-1 text-warning"></i>
+
+                    <h5 class="mt-3">
+
+                        Trusted Service
+
+                    </h5>
+
+                    <p>
+
+                        Reliable healthcare focused on patient safety and satisfaction.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}
