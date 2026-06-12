@@ -2850,13 +2850,13 @@ def receipt_pdf(request, bill_id):
             p.setFont(
             "Helvetica",
             10
-        )
+            )
 
-        p.drawString(
-            50,
-            y,
-            line
-        )
+            p.drawString(
+                50,
+                y,
+                line
+            )
 
     y -= 40
 
