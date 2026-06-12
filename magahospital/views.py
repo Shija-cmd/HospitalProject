@@ -2634,19 +2634,21 @@ def invoice_pdf(request, bill_id):
 
     # ADDRESS (optional)
     if hospital.address:
+        
+        for line in hospital.address.splitlines():
 
-        y -= 20
+            y -= 20
 
-        p.setFont(
-            "Helvetica",
-            10
-        )
+            p.setFont(
+                "Helvetica",
+                10
+            )
 
-        p.drawString(
-            50,
-            y,
-            hospital.address
-        )
+            p.drawString(
+                50,
+                y,
+                line
+            )
 
     y -= 40
 
@@ -2701,12 +2703,15 @@ def invoice_pdf(request, bill_id):
         f"Invoice Number: INV-{bill.id}"
     )
     
+    invoice_time = localtime(
+        bill.created_at
+    )
     y -= 25
 
     p.drawString(
         50,
         y,
-        f"Date: {bill.created_at.strftime('%d-%m-%Y %H:%M')}"
+        f"Date: {invoice_time.strftime('%d-%m-%Y %H:%M')}"
     )
     
     y -= 20
